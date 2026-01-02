@@ -1,6 +1,6 @@
 # 🎬 江山北望
 
-> 《江山北望》互动影游网页版 | Mandate of Heaven FMV Interactive Web Game
+> 《江山北望》互动影游网页版 | Mandate Of Heaven FMV Interactive Web Game
 
 <div align="center">
   <img src="./preview/1.png" alt="江山北望" width="100%" style="border-radius: 8px;"/>
@@ -12,27 +12,27 @@
 
 ## 📋 项目简介
 
-本项目为 Html 或 Electron 互动影视作品创作提供代码参考。版权归原影视作品《江山北望》及其出品方所有。
+本项目为 Html 或 Tauri/Electron 互动影视作品创作提供代码参考。版权归原影视作品《江山北望》及其出品方所有。
 
 ## 🛠️ 技术栈
 
--   **框架**: Vue 3、Electron（预留）
--   **语言**: TypeScript
--   **构建工具**: Vite
+- **框架**: Vue 3、Tauri/Electron（预留）
+- **语言**: TypeScript
+- **构建工具**: Vite
 
 ## 🎭 主创团队
 
 ### 主要主创
 
--   **导演**: 帝皇今
--   **出品人**: 赵枳程、黄金笛、丁盛豪
+- **导演**: 帝皇今
+- **出品人**: 赵枳程、黄金笛、丁盛豪
 
 ### 出品单位
 
--   欢瑞世纪(北京)信息科技有限公司
--   FLEXVISION PTE.LTD.
--   上海木焱网络科技有限公司
--   上海柚衣科技有限公司
+- 欢瑞世纪(北京)信息科技有限公司
+- FLEXVISION PTE.LTD.
+- 上海木焱网络科技有限公司
+- 上海柚衣科技有限公司
 
 ## 🎪 演员表
 

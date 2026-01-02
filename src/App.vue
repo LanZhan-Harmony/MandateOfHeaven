@@ -6,47 +6,47 @@ const preventDefault = (event: Event) => event.preventDefault();
 
 // 尝试进入全屏
 const tryEnterFullscreen = () => {
-    if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch((err) => {
-            // 全屏请求失败通常是因为没有用户交互，或者用户拒绝了
-            console.log(`全屏请求失败: ${err.message}`);
-        });
-    }
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch((err) => {
+      // 全屏请求失败通常是因为没有用户交互，或者用户拒绝了
+      console.log(`全屏请求失败: ${err.message}`);
+    });
+  }
 };
 
 // 交互处理函数
 const handleInteraction = () => {
-    tryEnterFullscreen();
-    // 移除监听器，只尝试一次
-    window.removeEventListener("click", handleInteraction);
-    window.removeEventListener("keydown", handleInteraction);
-    window.removeEventListener("touchstart", handleInteraction);
+  tryEnterFullscreen();
+  // 移除监听器，只尝试一次
+  window.removeEventListener("click", handleInteraction);
+  window.removeEventListener("keydown", handleInteraction);
+  window.removeEventListener("touchstart", handleInteraction);
 };
 
 onMounted(() => {
-    window.addEventListener("contextmenu", preventDefault);
-    window.addEventListener("selectstart", preventDefault);
-    window.addEventListener("dragstart", preventDefault);
+  window.addEventListener("contextmenu", preventDefault);
+  window.addEventListener("selectstart", preventDefault);
+  window.addEventListener("dragstart", preventDefault);
 
-    // 监听用户交互以触发全屏
-    window.addEventListener("click", handleInteraction);
-    window.addEventListener("keydown", handleInteraction);
-    window.addEventListener("touchstart", handleInteraction);
+  // 监听用户交互以触发全屏
+  window.addEventListener("click", handleInteraction);
+  window.addEventListener("keydown", handleInteraction);
+  window.addEventListener("touchstart", handleInteraction);
 });
 
 onBeforeUnmount(() => {
-    window.removeEventListener("contextmenu", preventDefault);
-    window.removeEventListener("selectstart", preventDefault);
-    window.removeEventListener("dragstart", preventDefault);
+  window.removeEventListener("contextmenu", preventDefault);
+  window.removeEventListener("selectstart", preventDefault);
+  window.removeEventListener("dragstart", preventDefault);
 
-    window.removeEventListener("click", handleInteraction);
-    window.removeEventListener("keydown", handleInteraction);
-    window.removeEventListener("touchstart", handleInteraction);
+  window.removeEventListener("click", handleInteraction);
+  window.removeEventListener("keydown", handleInteraction);
+  window.removeEventListener("touchstart", handleInteraction);
 });
 </script>
 
 <template>
-    <RouterView />
+  <RouterView />
 </template>
 
 <style></style>

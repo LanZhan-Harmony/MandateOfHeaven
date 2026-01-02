@@ -1,5 +1,5 @@
 {
-  "name": "beifa",
+  "name": "mandate-of-heaven",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -20,6 +20,7 @@
     "vue-router": "^4.6.3"
   },
   "devDependencies": {
+    "@tauri-apps/cli": "^2.9.6",
     "@tsconfig/node24": "^24.0.3",
     "@types/node": "^24.10.1",
     "@vitejs/plugin-vue": "^6.0.2",
