@@ -10,7 +10,6 @@ const emit = defineEmits<{
   (e: "pointerenter"): void;
 }>();
 
-const backgroundImage = "/images/主界面按钮背景.png";
 const TOTAL_FRAMES = 15; // 精灵图总帧数
 const FRAME_DURATION = 30; // 每帧持续时间（毫秒）
 
@@ -26,7 +25,7 @@ const backgroundPositionY = computed(() => {
 
 const buttonStyle = computed(() => {
   return {
-    backgroundImage: `url(${backgroundImage})`,
+    backgroundImage: `url(/common/images/主界面按钮背景.png)`,
     backgroundPosition: `center ${backgroundPositionY.value}%`,
     backgroundSize: `100% ${TOTAL_FRAMES * 100}%`,
   };
@@ -90,7 +89,6 @@ onUnmounted(() => {
   color: inherit;
   vertical-align: middle;
   text-align: left;
-  appearance: none;
   aspect-ratio: 330/95;
   background-color: transparent;
   background-repeat: no-repeat;

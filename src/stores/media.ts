@@ -26,7 +26,7 @@ export const useMediaStore = defineStore("media", () => {
    */
   async function setBGMAudio(name: string, startSeconds: number = 0) {
     bgmAudio.pause();
-    bgmAudio.src = `/musics/${name}.opus`;
+    bgmAudio.src = `/common/musics/${name}.opus`;
     bgmAudio.currentTime = startSeconds;
     bgmAudio.loop = true;
     bgmAudio.volume = actualBgmVolume.value;
@@ -65,7 +65,7 @@ export const useMediaStore = defineStore("media", () => {
    * @param name 音效文件名（不含扩展名）
    */
   async function setEffectAudio(name: string) {
-    const effectAudio = new Audio(`/musics/${name}.opus`);
+    const effectAudio = new Audio(`/common/musics/${name}.opus`);
     effectAudio.volume = actualEffectVolume.value;
     try {
       await effectAudio.play();

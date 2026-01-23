@@ -10,7 +10,6 @@ const emit = defineEmits<{
   (e: "pointerenter"): void;
 }>();
 
-const shineImage = "/images/btn_shine.webp";
 const TOTAL_FRAMES = 12; // 精灵图总帧数
 const FRAME_DURATION = 30; // 每帧持续时间（毫秒）
 
@@ -26,7 +25,7 @@ const backgroundPositionY = computed(() => {
 
 const shineStyle = computed(() => {
   return {
-    backgroundImage: `url(${shineImage})`,
+    backgroundImage: `url(/common/images/btn_shine.webp)`,
     backgroundPosition: `center ${backgroundPositionY.value}%`,
     backgroundSize: `100% ${TOTAL_FRAMES * 100}%`,
   };
@@ -89,7 +88,7 @@ onUnmounted(() => {
   border: none;
   font-size: 20px;
   font-family: inherit;
-  transition: color 0.2s ease-in-out;
+  transition: color 0.36s;
   display: flex;
   flex-direction: column;
   align-items: center;

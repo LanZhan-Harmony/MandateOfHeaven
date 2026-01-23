@@ -26,7 +26,7 @@ body {
   padding: 0;
   overflow: hidden; /* 防止滚动条 */
   background-color: #000;
-  cursor: url("/images/鼠标.png"), auto !important;
+  cursor: url("/common/images/鼠标.png"), auto !important;
 }
 
 /* 强制所有元素继承鼠标样式，覆盖默认的 pointer */
@@ -44,20 +44,20 @@ button,
 a,
 .btn-navi,
 .btn-small-navi {
-  cursor: url("/images/鼠标.png"), auto !important;
+  cursor: url("/common/images/鼠标.png"), auto !important;
 }
 
 @font-face {
   font-family: KuangShanKaiShu;
-  src: url(/fonts/字酷堂匡山楷书.ttf) format("opentype");
+  src: url(/common/fonts/字酷堂匡山楷书.ttf) format("opentype");
 }
 
 @font-face {
   font-family: STSong;
-  src: url(/fonts/STSong.ttf) format("opentype");
+  src: url(/common/fonts/STSong.ttf) format("opentype");
 }
 
 @font-face {
   font-family: NanoOldSong;
-  src: url(/fonts/NanoOldSongA.ttf) format("opentype");
+  src: url(/common/fonts/NanoOldSongA.ttf) format("opentype");
 }
