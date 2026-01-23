@@ -1,0 +1,18 @@
+{
+    "menu": {
+        "startStory": "开始故事",
+        "continueStory": "继续故事",
+        "chapterSelection": "章节选择",
+        "portfolios": "人物档案",
+        "exitGame": "退出游戏"
+    },
+    "bottomBar": {
+        "copyright": "木焱工作室",
+        "demo": "试用版",
+        "settings": "设置",
+        "announcements": "公告",
+        "eula": "协议",
+        "achievements": "成就",
+        "credits": "创作者名单"
+    }
+}

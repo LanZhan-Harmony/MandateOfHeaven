@@ -1,0 +1,18 @@
+{
+    "menu": {
+        "startStory": "Start Story",
+        "continueStory": "Continue Story",
+        "chapterSelection": "Select Chapter",
+        "portfolios": "Portfolios",
+        "exitGame": "Exit"
+    },
+    "bottomBar": {
+        "copyright": "Muyan Studio",
+        "demo": "Demo",
+        "settings": "Settings",
+        "announcements": "Announcements",
+        "eula": "EULA",
+        "achievements": "Achievements",
+        "credits": "Credits"
+    }
+}
