@@ -14,5 +14,12 @@
         "eula": "EULA",
         "achievements": "Achievements",
         "credits": "Credits"
+    },
+    "button": {
+        "back": "Back"
+    },
+    "character": {
+        "characterIntroduction": "Character Introduction",
+        "characterStories": "Character Stories"
     }
 }

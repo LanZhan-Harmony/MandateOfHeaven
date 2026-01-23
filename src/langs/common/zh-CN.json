@@ -14,5 +14,12 @@
         "eula": "协议",
         "achievements": "成就",
         "credits": "创作者名单"
+    },
+    "button": {
+        "back": "返回"
+    },
+    "character": {
+        "characterIntroduction": "人物介绍",
+        "characterStories": "人物故事"
     }
 }

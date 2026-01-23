@@ -12,13 +12,13 @@ const appVersion = computed(() => `v${import.meta.env.VITE_APP_VERSION} | ${t("b
 
 onMounted(async () => {
   try {
-    await mediaStore.setBGMAudio("main_bgm", 20);
+    await mediaStore.setBGMAudioAsync("main_bgm", 20);
   } catch (error) {
     let retryTimer: number | null = null;
 
     async function retry() {
       try {
-        await mediaStore.resumeBGMAudio();
+        await mediaStore.resumeBGMAudioAsync();
         document.removeEventListener("click", retry);
         document.removeEventListener("keydown", retry);
         document.removeEventListener("touchstart", retry);
@@ -36,12 +36,12 @@ onMounted(async () => {
 });
 
 async function navigateTo(path: string) {
-  await mediaStore.setEffectAudio("音效3");
+  await mediaStore.setEffectAudioAsync("音效3");
   router.push(path);
 }
 
 async function playHoverSound() {
-  await mediaStore.setEffectAudio("音效4");
+  await mediaStore.setEffectAudioAsync("音效4");
 }
 </script>
 <template>

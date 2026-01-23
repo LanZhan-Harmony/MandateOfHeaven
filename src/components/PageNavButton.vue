@@ -16,7 +16,7 @@ const mediaStore = useMediaStore();
 
 async function handleClick() {
   emit("click");
-  await mediaStore.setEffectAudio("音效3");
+  await mediaStore.setEffectAudioAsync("音效3");
   if (props.path) {
     router.push(props.path);
   } else {
@@ -25,7 +25,7 @@ async function handleClick() {
 }
 </script>
 <template>
-  <ArrowButton class="nav-btn" :text="text || '返回'" direction="left" @click="handleClick" />
+  <ArrowButton class="nav-btn" :text="text || $t('button.back')" direction="left" @click="handleClick" />
 </template>
 <style scoped>
 .nav-btn {

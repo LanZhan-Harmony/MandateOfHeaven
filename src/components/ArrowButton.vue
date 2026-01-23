@@ -10,8 +10,7 @@ const emit = defineEmits<{
 </script>
 <template>
   <button :class="['btn', { right: direction === 'right' }]" @click="$emit('click')">
-    <img class="arrow-default" src="/common/images/箭头按钮.webp" />
-    <img class="arrow-highlighted" src="/common/images/箭头按钮高亮.webp" />
+    <div class="arrow"></div>
     <span>{{ text }}</span>
   </button>
 </template>
@@ -25,35 +24,30 @@ const emit = defineEmits<{
   color: inherit;
   font-family: inherit;
   font-size: 30px;
+  transition: color 0.3s, filter 0.3s;
 }
 .btn:hover,
 .btn:focus {
   color: #fff;
   filter: drop-shadow(0 0 5px #edb26b);
 }
-.arrow-default,
-.arrow-highlighted {
+.arrow {
+  width: 30px;
   height: 30px;
+  background-image: url("/common/images/箭头按钮.webp");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: background-image 0.3s;
 }
-.arrow-default {
-  display: block;
-}
-.arrow-highlighted {
-  display: none;
-}
-.btn:hover .arrow-default,
-.btn:focus .arrow-default {
-  display: none;
-}
-.btn:hover .arrow-highlighted,
-.btn:focus .arrow-highlighted {
-  display: block;
+.btn:hover .arrow,
+.btn:focus .arrow {
+  background-image: url("/common/images/箭头按钮高亮.webp");
 }
 .right {
   flex-direction: row-reverse;
 }
-.right .arrow-default,
-.right .arrow-highlighted {
+.right .arrow {
   rotate: 180deg;
 }
 </style>
