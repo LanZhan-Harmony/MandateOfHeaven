@@ -18,6 +18,13 @@
     "button": {
         "back": "返回"
     },
+    "setting": {
+        "mainVolume": "整体音量",
+        "videoVolume": "视频音量",
+        "bgmVolume": "背景音乐音量",
+        "effectsVolume": "音效音量",
+        "language": "界面语言"
+    },
     "character": {
         "characterIntroduction": "人物介绍",
         "characterStories": "人物故事"

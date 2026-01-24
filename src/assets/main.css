@@ -20,7 +20,7 @@ body {
     color 0.5s,
     background-color 0.5s;
   line-height: 1.6;
-  font-family: "KuangShanKaiShu", "NanoOldSong", "STSong", "Songti SC", sans-serif;
+  font-family: "KuangShanKaiShu", "TsangErJinKai", "NanoOldSong", "STSong", "Songti SC", sans-serif;
   font-size: 20px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -62,6 +62,11 @@ a,
 @font-face {
   font-family: KuangShanKaiShu;
   src: url(/common/fonts/字酷堂匡山楷书.ttf) format("opentype");
+}
+
+@font-face {
+  font-family: TsangErJinKai;
+  src: url(/common/fonts/TsangErJinKai03.ttf) format("opentype");
 }
 
 @font-face {

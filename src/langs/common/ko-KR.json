@@ -1,0 +1,32 @@
+{
+    "menu": {
+        "startStory": "이야기 시작",
+        "continueStory": "이야기 계속",
+        "chapterSelection": "챕터 선택",
+        "portfolios": "캐릭터 프로필",
+        "exitGame": "게임 종료"
+    },
+    "bottomBar": {
+        "copyright": "목염 스튜디오",
+        "demo": "체험판",
+        "settings": "설정",
+        "announcements": "공지",
+        "eula": "이용 약관",
+        "achievements": "업적",
+        "credits": "제작진 명단"
+    },
+    "button": {
+        "back": "뒤로가기"
+    },
+    "setting": {
+        "mainVolume": "전체 음량",
+        "videoVolume": "영상 음량",
+        "bgmVolume": "BGM 음량",
+        "effectsVolume": "효과음 음량",
+        "language": "인터페이스 언어"
+    },
+    "character": {
+        "characterIntroduction": "캐릭터 소개",
+        "characterStories": "캐릭터 이야기"
+    }
+}

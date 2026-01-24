@@ -1,0 +1,32 @@
+{
+    "menu": {
+        "startStory": "物語を始める",
+        "continueStory": "物語を続ける",
+        "chapterSelection": "章選択",
+        "portfolios": "キャラクタープロフィール",
+        "exitGame": "ゲームを終了する"
+    },
+    "bottomBar": {
+        "copyright": "木焱スタジオ",
+        "demo": "体験版",
+        "settings": "設定",
+        "announcements": "お知らせ",
+        "eula": "利用規約",
+        "achievements": "実績",
+        "credits": "スタッフ一覧"
+    },
+    "button": {
+        "back": "戻る"
+    },
+    "setting": {
+        "mainVolume": "全体音量",
+        "videoVolume": "動画音量",
+        "bgmVolume": "BGM音量",
+        "effectsVolume": "効果音音量",
+        "language": "インターフェース言語"
+    },
+    "character": {
+        "characterIntroduction": "キャラクター紹介",
+        "characterStories": "キャラクター物語"
+    }
+}

@@ -26,7 +26,7 @@ mergeMessages(characterFiles, "characters");
 
 const i18n = createI18n({
   legacy: false, // 使用 Composition API 模式
-  locale: "zh-CN", // 默认语言
+  locale: localStorage.getItem("locale") || "zh-CN", // 初始化时优先读取 localStorage
   fallbackLocale: "en-US", // 备用语言
   messages,
 });

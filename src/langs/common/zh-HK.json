@@ -1,0 +1,32 @@
+{
+    "menu": {
+        "startStory": "開始故事",
+        "continueStory": "繼續故事",
+        "chapterSelection": "章節選擇",
+        "portfolios": "人物檔案",
+        "exitGame": "退出遊戲"
+    },
+    "bottomBar": {
+        "copyright": "木焱工作室",
+        "demo": "試用版",
+        "settings": "設置",
+        "announcements": "公告",
+        "eula": "協議",
+        "achievements": "成就",
+        "credits": "創作者名單"
+    },
+    "button": {
+        "back": "返回"
+    },
+    "setting": {
+        "mainVolume": "整體音量",
+        "videoVolume": "視頻音量",
+        "bgmVolume": "背景音樂音量",
+        "effectsVolume": "音效音量",
+        "language": "介面語言"
+    },
+    "character": {
+        "characterIntroduction": "人物介紹",
+        "characterStories": "人物故事"
+    }
+}

@@ -111,7 +111,7 @@ async function playHoverSound() {
     </div>
 
     <!-- 中间人物图片 -->
-    <div class="image-panel" @wheel="handleWheel">
+    <div class="image-panel" @wheel="handleWheel" @touchstart="handleTouchStart" @touchend="handleTouchEnd">
       <img class="moon" src="/common/images/月亮底纹.webp" />
       <img
         class="character-image"
@@ -134,7 +134,7 @@ async function playHoverSound() {
         <h3 class="character-title">{{ $t("character.characterIntroduction") }}</h3>
         <p class="character-introduction">{{ currentCharacter.description }}</p>
 
-        <template v-if="currentCharacter.stories && currentCharacter.stories.length > 0">
+        <template v-if="currentCharacter.stories.length > 0">
           <span class="divider"></span>
           <h3 class="character-title">{{ $t("character.characterStories") }}</h3>
           <div v-for="(story, idx) in currentCharacter.stories" :key="idx" class="character-story">
@@ -147,14 +147,6 @@ async function playHoverSound() {
   </div>
 </template>
 <style scoped>
-.container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-}
 .background {
   position: absolute;
   width: 100%;

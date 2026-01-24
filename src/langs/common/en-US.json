@@ -18,6 +18,13 @@
     "button": {
         "back": "Back"
     },
+    "setting": {
+        "mainVolume": "Main Volume",
+        "videoVolume": "Video Volume",
+        "bgmVolume": "Background Music Volume",
+        "effectsVolume": "Effects Volume",
+        "language": "Language"
+    },
     "character": {
         "characterIntroduction": "Character Introduction",
         "characterStories": "Character Stories"

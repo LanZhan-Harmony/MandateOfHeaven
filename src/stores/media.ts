@@ -4,11 +4,23 @@ import { computed, ref, watch } from "vue";
 export const useMediaStore = defineStore("media", () => {
   const bgmAudio = new Audio();
 
-  // 音量设置，范围从 0.0 到 1.0
-  const mainVolume = ref(1.0);
-  const playerVolume = ref(1.0);
-  const bgmVolume = ref(1.0);
-  const effectVolume = ref(1.0);
+  // 辅助函数：从 localStorage 获取数字
+  const getStoredNum = (key: string, defaultValue: number) => {
+    const val = localStorage.getItem(key);
+    return val !== null ? parseFloat(val) : defaultValue;
+  };
+
+  // 音量设置，初始化时从 localStorage 读取
+  const mainVolume = ref(getStoredNum("mainVolume", 1.0));
+  const playerVolume = ref(getStoredNum("playerVolume", 1.0));
+  const bgmVolume = ref(getStoredNum("bgmVolume", 0.5));
+  const effectVolume = ref(getStoredNum("effectVolume", 1.0));
+
+  // 实时保存到 localStorage
+  watch(mainVolume, (val) => localStorage.setItem("mainVolume", val.toString()));
+  watch(playerVolume, (val) => localStorage.setItem("playerVolume", val.toString()));
+  watch(bgmVolume, (val) => localStorage.setItem("bgmVolume", val.toString()));
+  watch(effectVolume, (val) => localStorage.setItem("effectVolume", val.toString()));
 
   // 计算实际音量
   const actualBgmVolume = computed(() => mainVolume.value * bgmVolume.value);

@@ -47,7 +47,7 @@ async function playHoverSound() {
 <template>
   <div class="container">
     <!-- 背景视频 -->
-    <video class="video" src="/common/videos/main.mp4" autoplay muted loop loading="lazy"></video>
+    <video class="video" src="/common/videos/main.mp4" autoplay muted loop></video>
 
     <div class="overlay">
       <!-- 左侧菜单按钮 -->
@@ -83,14 +83,6 @@ async function playHoverSound() {
   </div>
 </template>
 <style scoped>
-.container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-}
 .video {
   position: absolute;
   width: 100%;
