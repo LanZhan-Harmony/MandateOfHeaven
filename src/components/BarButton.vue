@@ -106,4 +106,15 @@ onUnmounted(() => {
   pointer-events: none;
   background-repeat: no-repeat;
 }
+
+/* 移动端适配 */
+@media (max-width: 1024px) {
+  .shine {
+    width: 24px;
+    height: 24px;
+  }
+  .btn {
+    font-size: 14px;
+  }
+}
 </style>

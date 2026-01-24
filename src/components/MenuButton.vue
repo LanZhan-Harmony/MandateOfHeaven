@@ -108,4 +108,12 @@ onUnmounted(() => {
 .btn:focus {
   outline: none;
 }
+
+@media (max-width: 1024px) {
+  .btn {
+    height: 30px;
+    font-size: 18px;
+    padding-left: 12px;
+  }
+}
 </style>

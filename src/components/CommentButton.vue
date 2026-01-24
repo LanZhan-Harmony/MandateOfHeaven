@@ -51,4 +51,15 @@ const emit = defineEmits<{
 .btn:focus .image.dislike {
   background-image: url("/common/images/贬按钮高亮.webp");
 }
+
+/* 移动端适配 */
+@media (max-width: 1024px) {
+  .image {
+    width: 30px;
+    height: 30px;
+  }
+  .btn {
+    font-size: 14px;
+  }
+}
 </style>

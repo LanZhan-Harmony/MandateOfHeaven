@@ -147,6 +147,14 @@ async function playHoverSound() {
   </div>
 </template>
 <style scoped>
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
 .background {
   position: absolute;
   width: 100%;
@@ -321,5 +329,35 @@ async function playHoverSound() {
   line-height: 1.5;
   color: #f0e6d2;
   white-space: pre-wrap;
+}
+
+/* 移动端适配 */
+@media (max-width: 1024px) {
+  .list-item {
+    width: 150px;
+    height: 36px;
+    margin-top: -18px;
+    transform-origin: 660px 50%;
+  }
+  .item-text {
+    font-size: 15px;
+  }
+  .character-name {
+    font-size: 24px;
+  }
+  .title-icon {
+    width: 24px;
+    height: 24px;
+  }
+  .character-title {
+    font-size: 18px;
+  }
+  .character-introduction,
+  .story-content {
+    font-size: 14px;
+  }
+  .story-title {
+    font-size: 16px;
+  }
 }
 </style>

@@ -83,6 +83,14 @@ async function playHoverSound() {
   </div>
 </template>
 <style scoped>
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
 .video {
   position: absolute;
   width: 100%;
@@ -123,5 +131,11 @@ async function playHoverSound() {
 .bottom-btn {
   display: flex;
   gap: 15px;
+}
+
+@media (max-width: 1024px) {
+  .bottom-btn {
+    gap: 0px;
+  }
 }
 </style>
