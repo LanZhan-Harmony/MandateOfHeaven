@@ -1,4 +1,4 @@
-interface characterType {
+export interface characterType {
   id: string;
   name: string;
   description: string;
@@ -8,4 +8,3 @@ interface characterType {
     content: string;
   }[];
 }
-export type { characterType };

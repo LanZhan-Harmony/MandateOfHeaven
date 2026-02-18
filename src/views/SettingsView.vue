@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import PageNavButton from "@/components/PageNavButton.vue";
-import VolumeSlider from "@/components/VolumeSlider.vue";
-import { useMediaStore } from "@/stores/media";
-import { useUIStore } from "@/stores/ui";
 import { storeToRefs } from "pinia";
+import PageNavButton from "../components/PageNavButton.vue";
+import VolumeSlider from "../components/VolumeSlider.vue";
+import { useMediaStore } from "../stores/media";
+import { useUIStore } from "../stores/ui";
 
 const mediaStore = useMediaStore();
 const { mainVolume, playerVolume, bgmVolume, effectVolume } = storeToRefs(mediaStore);

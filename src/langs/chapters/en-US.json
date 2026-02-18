@@ -1,0 +1,52 @@
+{
+    "chapters": [
+        {
+            "id": "0",
+            "chapterDisplayId": "Prologue",
+            "description": "Since its founding, the Xuan Kingdom has suffered a string of incompetent rulers. Court factions tore the realm apart, and the Wunu (a northern barbarian tribe) seized the opportunity to invade, swiftly capturing Guanzhong. The capital city of Yong'an soon fell. Royals were taken captive, and countless civilians were massacred. Only the natural defense of the Tianhe River allowed half the kingdom to survive. Sikong Jing, Prince of Langya and a distant member of the royal bloodline, was raised to the throne by the Imperial Chancellor Chen Dao and the powerful noble families, carrying on the imperial legacy south of the Tianhe River. You are Sikong Yao, the emperor's second son, ennobled as the Prince of Jin. In this age of turmoil, what path will you choose? What fate awaits the realm? History lies in your hands.",
+            "title": "Rising Gale"
+        },
+        {
+            "id": "1",
+            "chapterDisplayId": "Chapter One",
+            "description": "The Director of the Imperial Academy, Yu Gong, has provided you with considerable support in court politics, but the Chen family falsely accused him of inciting rebellion, leading to his imprisonment. You urgently discussed countermeasures with your two trusted advisors, Chu Huan and Xie Jian'an, and then sought an audience with the Emperor to find a way to resolve the crisis.\nNow that the immediate danger has passed, your elder brother has grown hostile toward you. Even if only for self-preservation, it is crucial to quickly consolidate your own foundation.",
+            "title": "Falling Rain"
+        },
+        {
+            "id": "2",
+            "chapterDisplayId": "Chapter Two",
+            "description": "Chen Dao used Chen Wan'er's rebellious nature to set a trap, seeking to eliminate you before your influence was fully grown. After narrowly escaping death during your harrowing imprisonment, you capitalized on the Emperor's suspicions to cleverly maneuver your way out of the crisis—yet at an exceedingly heavy cost.\nCompared to your elder brother, who enjoys the support of the noble families, advocating for the northern expedition remains your most effective means of gaining backing. Now that General Zu Kun has returned to the capital, you must act swiftly to turn the tide in your favor.",
+            "title": "Sea Dragon"
+        },
+        {
+            "id": "3",
+            "chapterDisplayId": "Chapter Three",
+            "description": "At the banquet, Zu Kun seized upon your dispute with Sikong Zheng to propose to the Emperor a gradual recovery of the northern territories. You, in turn, leveraged Zu Kun's influence to successfully extricate yourself from the capital. \nNow, with the imperial troops marching north, you are like a dragon returning to the sea. This is your moment to hone your abilities and accumulate military achievements.",
+            "title": "Drawn Blade"
+        },
+        {
+            "id": "4",
+            "chapterDisplayId": "Chapter Four",
+            "description": "Shi Lang's army has besieged the city, and you have led your troops in a grueling defense for several days. Can everyone hold out until reinforcements arrive? Will reinforcements truly come? You don't know, but the incorporated volunteer army has brought you new hope.\nLead everyone to survive. Every extra day you hold the city is another chance to turn the tide of battle.",
+            "title": "Broken Peak"
+        },
+        {
+            "id": "5",
+            "chapterDisplayId": "Chapter Five",
+            "description": "After seven days of fierce and bloody defense at Yiyang, Shi Lang's forces were finally repelled, and news also arrived of the successful capture of the Northern Frontier Pass at the front lines. However, as the situation evolved, Zu Kun repeatedly advanced his troops in defiance of court orders, giving rise to widespread rumors and drawing considerable criticism within the court.\nAs Chen Ying's army withdraws southward, new turmoil is about to unfold.",
+            "title": "Heaven's Will"
+        },
+        {
+            "id": "6",
+            "chapterDisplayId": "Chapter Six",
+            "description": "With Zu Kun's departure, the Northern Shuo Army marched south, and a new emperor ascended the throne, marking the beginning of the Longwu era in Xuan. \nOver the next decade, winds of change swept through the land, and the Xuan of today is no longer the nation it once was.",
+            "title": "Peace Dream"
+        },
+        {
+            "id": "7",
+            "chapterDisplayId": "Chapter Seven",
+            "description": "Strengthen the military, revitalize the state, and implement reforms\nNow, as the Wuyou advance south in full force, the decision to attack or defend, to stand firm or retreat, rests in your hands.",
+            "title": "Ninefold Unity"
+        }
+    ]
+}

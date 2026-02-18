@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import CommentButton from "@/components/CommentButton.vue";
-import PageNavButton from "@/components/PageNavButton.vue";
-import { useMediaStore } from "@/stores/media";
-import type { characterType } from "@/types/characterType";
 import { computed, onMounted, onUnmounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
+import CommentButton from "../components/CommentButton.vue";
+import PageNavButton from "../components/PageNavButton.vue";
+import { useMediaStore } from "../stores/media";
+import type { characterType } from "../types/characterType";
 
 const { tm } = useI18n();
 const mediaStore = useMediaStore();

@@ -1,37 +1,42 @@
 <script setup lang="ts">
-import BarButton from "@/components/BarButton.vue";
-import MenuButton from "@/components/MenuButton.vue";
-import router from "@/router";
-import { useMediaStore } from "@/stores/media";
-import { onMounted, computed } from "vue";
+import { useGameStore } from "@/stores/game";
+import BarButton from "../components/BarButton.vue";
+import MenuButton from "../components/MenuButton.vue";
+import router from "../router";
+import { useMediaStore } from "../stores/media";
+import { onMounted, computed, onUnmounted } from "vue";
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
 const mediaStore = useMediaStore();
+const gameStore = useGameStore();
 const appVersion = computed(() => `v${import.meta.env.VITE_APP_VERSION} | ${t("bottomBar.demo")}`);
 
 onMounted(async () => {
   try {
     await mediaStore.setBGMAudioAsync("main_bgm", 20);
   } catch (error) {
-    let retryTimer: number | null = null;
-
     async function retry() {
       try {
         await mediaStore.resumeBGMAudioAsync();
-        document.removeEventListener("click", retry);
-        document.removeEventListener("keydown", retry);
-        document.removeEventListener("touchstart", retry);
-        if (retryTimer) {
-          clearInterval(retryTimer);
-        }
-      } catch {}
+        cleanup();
+      } catch (e) {
+        // 播放失败（通常是因为用户还未交互），重试逻辑保持
+      }
+    }
+
+    function cleanup() {
+      document.removeEventListener("click", retry);
+      document.removeEventListener("keydown", retry);
+      document.removeEventListener("touchstart", retry);
     }
 
     document.addEventListener("click", retry);
     document.addEventListener("keydown", retry);
     document.addEventListener("touchstart", retry);
-    retryTimer = window.setInterval(retry, 500);
+
+    // 组件卸载时清理监听器
+    onUnmounted(cleanup);
   }
 });
 

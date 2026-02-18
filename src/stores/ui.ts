@@ -1,6 +1,6 @@
-import i18n from "@/langs";
 import { defineStore } from "pinia";
 import { ref, watch } from "vue";
+import i18n from "../langs";
 
 export const useUIStore = defineStore("ui", () => {
   // 从 localStorage 读取语言，默认为 'zh-CN'

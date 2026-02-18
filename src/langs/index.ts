@@ -2,6 +2,7 @@ import { createI18n } from "vue-i18n";
 
 // 自动导入 common 和 characters 文件夹下的所有 JSON 文件
 const commonFiles = import.meta.glob("./common/*.json", { eager: true, import: "default" });
+const chapterFiles = import.meta.glob("./chapters/*.json", { eager: true, import: "default" });
 const characterFiles = import.meta.glob("./characters/*.json", { eager: true, import: "default" });
 
 const messages: Record<string, any> = {};
@@ -23,6 +24,7 @@ const mergeMessages = (files: Record<string, any>, prefix: string) => {
 
 mergeMessages(commonFiles, "common");
 mergeMessages(characterFiles, "characters");
+mergeMessages(chapterFiles, "chapters");
 
 const i18n = createI18n({
   legacy: false, // 使用 Composition API 模式

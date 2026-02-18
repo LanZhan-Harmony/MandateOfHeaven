@@ -37,6 +37,9 @@ export const useMediaStore = defineStore("media", () => {
    * @param startSeconds 从指定秒数开始播放
    */
   async function setBGMAudioAsync(name: string, startSeconds: number = 0) {
+    if (bgmAudio.src.endsWith(`${name}.opus`)) {
+      return;
+    }
     bgmAudio.pause();
     bgmAudio.src = `/common/musics/${name}.opus`;
     bgmAudio.currentTime = startSeconds;
@@ -64,11 +67,7 @@ export const useMediaStore = defineStore("media", () => {
    */
   async function resumeBGMAudioAsync() {
     if (bgmAudio.paused) {
-      try {
-        await bgmAudio.play();
-      } catch (error) {
-        console.error("无法恢复播放BGM:", error);
-      }
+      await bgmAudio.play();
     }
   }
 

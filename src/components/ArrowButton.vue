@@ -24,7 +24,9 @@ const emit = defineEmits<{
   color: inherit;
   font-family: inherit;
   font-size: 30px;
-  transition: color 0.3s, filter 0.3s;
+  transition:
+    color 0.3s,
+    filter 0.3s;
 }
 .btn:hover,
 .btn:focus {
@@ -49,5 +51,16 @@ const emit = defineEmits<{
 }
 .right .arrow {
   rotate: 180deg;
+}
+
+@media (max-width: 1024px) {
+  .btn {
+    font-size: 24px;
+    gap: 6px;
+  }
+  .arrow {
+    width: 24px;
+    height: 24px;
+  }
 }
 </style>
