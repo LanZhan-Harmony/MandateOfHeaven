@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import ChapterLineItem from "@/components/ChapterLineItem.vue";
-import type { chapterType } from "@/types/chapterType";
+import ChapterLineItem from "../components/ChapterLineItem.vue";
+import type { chapterType } from "../types/chapterType";
 import { computed, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import PageNavButton from "../components/PageNavButton.vue";
 import { useGameStore } from "../stores/game";
 import { useMediaStore } from "../stores/media";
-import ChapterDescription from "@/components/ChapterDescription.vue";
+import ChapterDescription from "../components/ChapterDescription.vue";
 
 const { tm } = useI18n();
 const mediaStore = useMediaStore();

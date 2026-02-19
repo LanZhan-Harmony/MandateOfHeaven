@@ -4,6 +4,8 @@ import { createI18n } from "vue-i18n";
 const commonFiles = import.meta.glob("./common/*.json", { eager: true, import: "default" });
 const chapterFiles = import.meta.glob("./chapters/*.json", { eager: true, import: "default" });
 const characterFiles = import.meta.glob("./characters/*.json", { eager: true, import: "default" });
+const storylineFiles = import.meta.glob("./storylines/*.json", { eager: true, import: "default" });
+const endingFiles = import.meta.glob("./endings/*.json", { eager: true, import: "default" });
 
 const messages: Record<string, any> = {};
 
@@ -25,8 +27,10 @@ const mergeMessages = (files: Record<string, any>, prefix: string) => {
 mergeMessages(commonFiles, "common");
 mergeMessages(characterFiles, "characters");
 mergeMessages(chapterFiles, "chapters");
+mergeMessages(storylineFiles, "storylines");
+mergeMessages(endingFiles, "endings");
 
-// 获取初始语言：优先读取本地缓存，其次匹配浏览器/系统语言，最后兜底 en-US
+// 获取初始语言：优先读取本地缓存，其次匹配浏览器语言
 const getInitialLocale = (): string => {
   const savedLocale = localStorage.getItem("locale");
   if (savedLocale) return savedLocale;

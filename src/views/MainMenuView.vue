@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useGameStore } from "@/stores/game";
+import { useGameStore } from "../stores/game";
 import BarButton from "../components/BarButton.vue";
 import MenuButton from "../components/MenuButton.vue";
 import router from "../router";

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import router from "@/router";
-import { useMediaStore } from "@/stores/media";
+import router from "../router";
+import { useMediaStore } from "../stores/media";
 import ArrowButton from "./ArrowButton.vue";
 
 const props = defineProps<{

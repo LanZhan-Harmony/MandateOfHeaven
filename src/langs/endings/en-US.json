@@ -1,0 +1,312 @@
+{
+    "endings": [
+        {
+            "id": "a00_a009_abe001",
+            "description": "Thunder and dew alike are signs of divine favor; a suspicious emperor trusts only two kinds of people: the simple-minded who lack cunning, and the forthright who speak without guile",
+            "help": "[Prologue] Two approaches → Act according to Minister Xie’s suggestion\n[Prologue] Relationship with Yu Gong → There is some private acquaintance\n[Prologue] Presence at the scene → Present\n[Prologue] Reason for sparing Yu Gong → I wanted to catch more traitors\n*Not the only way to clear the game; explore other approaches yourself",
+            "title": "The emperor's will is hard to predict"
+        },
+        {
+            "id": "a01_a028_a007a021_abe001",
+            "description": "If Wan'er gets anxious, you'll have no way out",
+            "title": "Sudden disaster"
+        },
+        {
+            "id": "a01_a032_a032033034035036_ahe001",
+            "description": "Destiny calls—you are the Chosen One!",
+            "title": "The Chosen One"
+        },
+        {
+            "id": "a01_a053_a012a",
+            "description": "Every decision here rests in your hands. Try to discern your father's thoughts—speak what he wishes to hear, act as he expects you to",
+            "title": "Attain enlightenment and become immortal"
+        },
+        {
+            "id": "a01_a054_a012b053054",
+            "description": "If it benefits my country, I would give my life — how could I choose to avoid it because of personal weal or woe",
+            "title": "My surname is Sikong"
+        },
+        {
+            "id": "a01_a056_a047048_abe003",
+            "description": "Emotion, too, is a form of power play. Bowing appropriately now may very well be the patience that fuels your future resurgence",
+            "help": "[Prologue] Prince Ning’s warning → I never intended to contend with my elder brother\n[Chapter 1] The Empress’s pastry → Elder brother, you have worked hard these years; please have some\n[Chapter 1] Falling into prison → Silent\n[Chapter 1] Sikong Zheng’s framing → Brother, do you think I would do such a thing?\n[Chapter 1] Chance to clear your name → Brother, please spare me this once\n*Not the only way to clear the game; explore other approaches yourself",
+            "title": "Dwindling imperial heirs"
+        },
+        {
+            "id": "a01_a070_a015c_abe006",
+            "description": "Hint: Try returning to the Prologue and rewrite Guo Xuan's fate",
+            "title": "Even I, the emperor, have greed?"
+        },
+        {
+            "id": "a01_a075_a064_abe007",
+            "description": "I suspect you have a brother named Smoking Ascendancy",
+            "help": "[Prologue] The Emperor’s gambit → Lose this game\n[Prologue] Elder brother who erred → Reduce his privileges and order him to make amends\n[Chapter 1] An arriving army → Lay down arms and surrender\n[Chapter 1] A word from your son → I will support my elder brother and yield the way to him\n[Chapter 1] Why mobilize the troops → I have a selfish motive\n*Not the only way to clear the game; explore other approaches yourself",
+            "title": "Decipher the emperor's will"
+        },
+        {
+            "id": "a01_a079_a057_abe004",
+            "description": "Had Guo Xuan lived, today's outcome might have been different.\nHint: Try returning to the [Prologue] and rewrite Guo Xuan's fate",
+            "help": "[Prologue] The scapegoat → Expose her intentions\n[Prologue] The pawn seeking rescue → Save Guo Xuan\n[Chapter 1] The path to break the stalemate → The Empress",
+            "title": "The Butterfly Effect"
+        },
+        {
+            "id": "a01_a080_a029_abe002",
+            "description": "If Wan'er panics, you panic too",
+            "title": "Such is fate"
+        },
+        {
+            "id": "a02_a052_a038_abe001",
+            "description": "our martial arts skills could use some honing",
+            "title": "Swords and spears have no eyes"
+        },
+        {
+            "id": "a02_a071_a044045046047_abe002",
+            "description": "Battles cannot be fought with solitary courage alone — it would be wise to find a way to join forces with seasoned veterans",
+            "help": "If you do not give Xie Ruoyu the jade comb, the branching scene is triggered from Chapter 2 “How many taels?”\n[Chapter 2] Zu Yue’s challenge → Spar with Zu Yue to demonstrate your skill and defeat him\n[Chapter 2] Discussion of the northern campaign → Whether to launch a northern campaign is already settled in His Majesty’s mind\n[Chapter 2] The crux of the northern campaign → With your elder brother present, such a thing likely would not happen\n[Chapter 2] Responsibility for defeat → In my view, our dynasty will not be defeated\n*Not the only way to clear the game; explore other approaches yourself",
+            "title": "Lone Brave"
+        },
+        {
+            "id": "a03_a034_a007a017018_abe001",
+            "description": "In war, all is fair — deception is never despised",
+            "title": "The Imperial Seal of a fallen dynasty"
+        },
+        {
+            "id": "a03_a046_a009a034_abe002",
+            "description": "War is cruel. Ten deaths are a number; a hundred thousand deaths are also a number — and you must face them with a cold heart to make decisions",
+            "title": "He's a real man"
+        },
+        {
+            "id": "a03_a057_a045046_abe005",
+            "description": "To fall before his triumph was won— / Has left a wound in all hearts under sun.' A daring raid with a hundred riders is no feat just anyone can achieve",
+            "help": "[Chapter 3] Wu Pu’s main force → East\n[Chapter 3] Night attack arrangements → Send Zhu Yuanzhi",
+            "title": "Poor judgment in appointments"
+        },
+        {
+            "id": "a03_a060_a012a054_abe006",
+            "description": "In turbulent times, human hearts are hard to fathom — it is always wise to tread with caution",
+            "title": "Seditious schemes of spies"
+        },
+        {
+            "id": "a03_a064_a013a_abe007",
+            "description": "In turbulent times, human hearts are hard to fathom — it is always wise to tread with caution",
+            "title": "Meet one's end due to carelessness"
+        },
+        {
+            "id": "a03_a088_a044_abe004",
+            "description": "Endure humiliation without surrender. Survive in obscurity while awaiting opportunity — bide your time with patience, and let death, if it comes, proclaim your resolve",
+            "help": "[Chapter 3] Wu Pu’s main force → East\n[Chapter 3] Night attack arrangements → Send Zhu Yuanzhi",
+            "title": "Emperor Wu of Xuan"
+        },
+        {
+            "id": "a04_a003_a001a003_abe001",
+            "description": "All is fair in war, yet careful thought remains essential",
+            "title": "A sudden backward thrust"
+        },
+        {
+            "id": "a04_a008_a002a010_abe002",
+            "description": "Fear not being outnumbered, but fear the collapse of morale",
+            "title": "The Carefree Prince"
+        },
+        {
+            "id": "a04_a010_a002c011_abe003",
+            "description": "Two legs, after all, can never outrun four",
+            "title": "Frequent Running Champion"
+        },
+        {
+            "id": "a04_a011_a002d_abe004",
+            "description": "All provisions have been transferred to the storehouses south of the city",
+            "title": "A fire broke out in the southern part of the city"
+        },
+        {
+            "id": "a04_a012_a035_a1_abe013",
+            "description": "Your martial skills require further refinement",
+            "title": "Unskilled in martial arts"
+        },
+        {
+            "id": "a04_a015_a014015016_abe005",
+            "description": "At this critical moment, after much deliberation, Liu Dadao still finds you untrustworthy",
+            "help": "[Chapter 3] Suspicion of the militia → Today the people of Wu Pu did not launch an attack\n[Chapter 3] Acceptance of the militia → Order the militia to break formation and place their divisions under our officers’ control\n[Chapter 4] Left short, right lacking → Immediately send reinforcements to the southern city",
+            "title": "Better you than me"
+        },
+        {
+            "id": "a04_a018_a003a020021022_abe006",
+            "description": "Having signed the military pledge, there is no turning back",
+            "title": "The fault lies with this subject"
+        },
+        {
+            "id": "a04_a023_a005a029030031_abe007",
+            "description": "Wait, Shi Lang is tougher than expected",
+            "title": "Outmatched in skill"
+        },
+        {
+            "id": "a04_a028_a036_abe008",
+            "description": "Your martial skills require further refinement",
+            "title": "Less skilled"
+        },
+        {
+            "id": "a04_a031_a038_abe009",
+            "description": "Your martial skills require further refinement",
+            "title": "Showy but impractical martial arts skills"
+        },
+        {
+            "id": "a04_a034_a040_abe010",
+            "description": "Your martial skills require further refinement",
+            "title": "The longer the weapon, the greater the advantage"
+        },
+        {
+            "id": "a04_a037_a006a042_abe012",
+            "description": "Even good deeds may go uncredited—let alone misdeeds",
+            "title": "So close, yet so far"
+        },
+        {
+            "id": "a04_a042_a040_a1be011",
+            "description": "Your martial skills require further refinement",
+            "title": "Backed the wrong horse"
+        },
+        {
+            "id": "a05_a012_a003a010_abe001",
+            "description": "You know there are tigers in the mountains, yet you insist on going?",
+            "title": "Brotherly affection and respect"
+        },
+        {
+            "id": "a05_a016_a004a012_abe002",
+            "description": "Can eternal slumber underground also be considered a form of 'long life'?",
+            "title": "A fleeting illusion"
+        },
+        {
+            "id": "a05_a022_a005b016_abe003",
+            "description": "Achieving great deeds requires favorable timing, geographical advantage, and popular support. You must pay attention to the timing",
+            "title": "Act rashly and alert the enemy"
+        },
+        {
+            "id": "a05_a025_a006b_abe004",
+            "description": "In some matters, either don't act, or act decisively without leaving room for recourse. There can only be one Crown Prince in this world",
+            "title": "Hesitation leads to defeat"
+        },
+        {
+            "id": "a05_a042_a010a_abe005",
+            "description": "Lack of patience in small matters can ruin great plans",
+            "title": "Refuse to collaborate with"
+        },
+        {
+            "id": "a05_a048_a012a_abe006",
+            "description": "Shi Lang does business with you, but you treat Shi Lang as a brother",
+            "title": "Money is no issue"
+        },
+        {
+            "id": "a05_a051_a013a_abe007",
+            "description": "Shi Lang knows the days ahead will be difficult, but you have no 'days ahead' to speak of",
+            "title": "Negotiations broke down"
+        },
+        {
+            "id": "a05_a055_a037_abe008",
+            "description": "Cao Biaozhi secured the realm with a single arrow",
+            "title": "A single arrow decides the victory"
+        },
+        {
+            "id": "a05_a071_a016a050051052053054",
+            "description": "He loved his realm, but loved his beauty even more. From then on, the empire was divided into three, and who would ultimately emerge victorious remained unknown.",
+            "title": "The wheel of history turns"
+        },
+        {
+            "id": "a05_a075_a056_abe009",
+            "description": "Your prestige within the army is insufficient",
+            "help": "[Chapter 3] Request to enter the city → Let him into the city\n[Chapter 3] The imperial jade seal → Host a banquet to receive it\n[Chapter 3] Northward and return south → When did I ever say I would trade with Shi Lang?\n[Chapter 5] Heaven’s mandate is with me → The treacherous minister Chen Dao deceived the sovereign; he must be purged and the court must rise against him\n[Chapter 5] Breaching the city → Flood the city by diverting water\n[Chapter 5] Evidence of collusion with the enemy → Burn it\n*Not the only way to clear the game; explore other approaches yourself",
+            "title": "Divide and conquer"
+        },
+        {
+            "id": "a05_a082_a018a_abe010",
+            "description": "He who strikes first gains the upper hand; he who delays is controlled by others",
+            "title": "Surrounded and annihilated"
+        },
+        {
+            "id": "a05_a095_a021b_abe011",
+            "description": "A sincere heart is truly precious, but that's not what the Chen family wants",
+            "title": "Emperor Min of Xuan"
+        },
+        {
+            "id": "a06_a032_a007a_abe001",
+            "description": "Lost in an endless dream, reveling in fleeting pleasures",
+            "title": "Emperor You of Xuan"
+        },
+        {
+            "id": "a06_a033_a007b_abe002",
+            "description": "Wine is a poison that corrodes the gut; lust is a blade that scrapes the bone",
+            "title": "Emperor Zong of Xuan"
+        },
+        {
+            "id": "a06_a034_a049_a1be005",
+            "description": "The fortune-teller said General Zhu bears the divine aura of kingship",
+            "help": "[Chapter 6] Request to grant a teacher → Approved\n[Chapter 6] The overbearing general → Heavily reward Zhu Yuanzhi\n[Chapter 6] Rumors in the streets → Find that fortune-teller\n[Chapter 6] Employing people → Let Zhu Yuanzhi continue to lead the troops",
+            "title": "The Imperial Star grows dim"
+        },
+        {
+            "id": "a06_a083_a055_abe003",
+            "description": "Why did Sikong Zheng fail? Was it not because his heart was too soft.",
+            "help": "[Chapter 5] Winners and losers → Bring Sikong Zheng down\n[Chapter 5] Disposal → From now on, do not let me see him again\n*Not the only way to clear the game; explore other approaches yourself",
+            "title": "Emperor Fei of Xuan"
+        },
+        {
+            "id": "a06_a086_a018a_abe004",
+            "description": "Either negotiate with your fists, or listen to the nobles set the terms",
+            "title": "Emperor Shang of Xuan"
+        },
+        {
+            "id": "a07_a006_a005006007_abe001",
+            "description": "Long I know in death all turns to dust, yet grieve not to see our lands unite",
+            "help": "[Chapter 6] Visit the Marquis of Yongning → Nothing important; he said it was only family matters\n[Chapter 6] Counsel → Ruolan is a hero of Da Xuan\n[Chapter 6] Reform obstructed → Grant Xie Xuan Shangfang’s precious sword",
+            "title": "Emperor Huai of Xuan"
+        },
+        {
+            "id": "a07_a007_a008009010_a010_a1_abe002",
+            "description": "The Son of Heaven guards the nation's gates; the sovereign dies for the ancestral altars",
+            "help": "[Chapter 6] Visit the Marquis of Yongning → Nothing important; he said it was only family matters\n[Chapter 6] Counsel → Ruolan is a hero of Da Xuan\n[Chapter 6] Reform obstructed → Grant Xie Xuan Shangfang’s precious sword",
+            "title": "Emperor Ai of Xuan"
+        },
+        {
+            "id": "a07_a012_a012013014_abe003",
+            "description": "When the imperial army reclaims the heartland, do not forget to tell your father at the family shrine",
+            "title": "Emperor Kang of Xuan"
+        },
+        {
+            "id": "a07_a016_a030031",
+            "description": "",
+            "title": "Emperor Ming of Xuan"
+        },
+        {
+            "id": "a07_a021_a003a039_abe004",
+            "description": "He who underestimates the enemy meets defeat; he who fears the enemy faces destruction",
+            "title": "The tides of war have shifted once again"
+        },
+        {
+            "id": "a07_a034_a008bbe005",
+            "description": "Unless resolved to fight with your back to the river, do not burn your boats behind you",
+            "title": "Emperor Zhuang of Xuan"
+        },
+        {
+            "id": "a07_a053_a071072073074",
+            "description": "",
+            "title": "Emperor Jing of Xuan"
+        },
+        {
+            "id": "a07_a054_a075075_a1075_a2075_a3075_a4075_a5075_a6",
+            "description": "",
+            "title": "Emperor Cheng of Xuan"
+        },
+        {
+            "id": "a07_a055_a076077",
+            "description": "",
+            "title": "Emperor Wen of Xuan"
+        },
+        {
+            "id": "a07_a056_a078079080081",
+            "description": "",
+            "title": "Emperor Guangwu of Xuan"
+        },
+        {
+            "id": "a07_a057_a082083084085",
+            "description": "",
+            "title": "Emperor Zhao of Xuan"
+        }
+    ]
+}

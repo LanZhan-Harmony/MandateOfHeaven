@@ -1,0 +1,1155 @@
+{
+    "storylines": [
+        {
+            "id": "a00_a001_a001",
+            "description": "This is destined to be an unrestful night",
+            "title": "Prince of Jin of Xuan"
+        },
+        {
+            "id": "a00_a002_a001loop",
+            "description": "Xie Ruolan gives you a precious jade comb",
+            "title": "The Costly Jade"
+        },
+        {
+            "id": "a00_a006_a002loop",
+            "description": "Xie Jian'an and Chu Huan differ in their approaches to handling Yu Gong's anti-imperial poem incident",
+            "title": "Two Possible Methods"
+        },
+        {
+            "id": "a00_a009_abe001",
+            "description": "The Emperor is very disappointed with your handling of matters and decides to send you out of the capital",
+            "title": "The Emperor's Will is Unfathomable"
+        },
+        {
+            "id": "a00_a010_a003loop",
+            "description": "Should you grease the wheels with a court attendant close to the Emperor to gather intelligence?",
+            "title": "The Emperor's Close Attendant"
+        },
+        {
+            "id": "a00_a014_a004loop",
+            "description": "Do you know why I summoned you here?",
+            "title": "The Emperor's Summons"
+        },
+        {
+            "id": "a00_a018_a005loop",
+            "description": "What is your relationship with the traitor Yu Gong?",
+            "title": "Relationship with Yu Gong"
+        },
+        {
+            "id": "a00_a023_a006loop",
+            "description": "Were you present when Yu Gong wrote the anti-imperial poem?",
+            "title": "Whether Present or Not"
+        },
+        {
+            "id": "a00_a030_a007loop",
+            "description": "Since you were present, why did you not punish the traitor who wrote the anti-imperial poem?",
+            "title": "Reason for Sparing Yu Gong"
+        },
+        {
+            "id": "a00_a037_a008loop",
+            "description": "Should you grease the wheels with a court attendant close to the Emperor to gather intelligence?",
+            "title": "The Emperor's Inner Servant"
+        },
+        {
+            "id": "a00_a041_a009loop",
+            "description": "At this late hour, what brings you hastily into the palace?",
+            "title": "Entering the Palace Late at Night"
+        },
+        {
+            "id": "a00_a044_a010loop",
+            "description": "How can you diffuse the Emperor's anger so you can spare Yu Gong?",
+            "title": "Method of Pleading for Mercy"
+        },
+        {
+            "id": "a00_a047_a011loop",
+            "description": "How do you think I should treat a traitor like Yu Gong who disrespects the Son of Heaven?",
+            "title": "Dealing with the Treacherous Official"
+        },
+        {
+            "id": "a00_a054_a012loop",
+            "description": "How can you go further and truly move the Emperor?",
+            "title": "The Emperor's Thoughts"
+        },
+        {
+            "id": "a00_a058_a013loop",
+            "description": "You are one move away from beating the Emperor; do you want to win this game?",
+            "title": "The Emperor's Chess Game"
+        },
+        {
+            "id": "a00_a062_a014loop",
+            "description": "The Emperor asks your opinion about your elder brother Prince Ning's poor performance in Qingzhou",
+            "title": "The Erring Elder Brother"
+        },
+        {
+            "id": "a00_a068_a015loop",
+            "description": "Chen Wan'er claims the truth has been uncovered, but actually the gentry want to sacrifice a pawn to cover Prince Ning's faults",
+            "title": "The Scapegoat"
+        },
+        {
+            "id": "a00_a072_a016loop",
+            "description": "At the brink of life and death, Guo Xuan was probably panicked and mistakenly sought help from your political enemy, Prince Ning",
+            "title": "The Pleading Chess Piece"
+        },
+        {
+            "id": "a00_a078_a017loop",
+            "description": "Your elder brother Prince Ning asks if your consolidation of influence means you intend to contend with him",
+            "title": "Prince of Ning's Warning"
+        },
+        {
+            "id": "a00_a081_a037038039040041",
+            "description": "You stop and watch your brother's retreating back as he strides away alone",
+            "title": "Walking the Path Alone"
+        },
+        {
+            "id": "a01_a001_a001",
+            "description": "The court is a battlefield without swords",
+            "title": "Deliberations in the Imperial Court"
+        },
+        {
+            "id": "a01_a002_a001loop",
+            "description": "Sikong Zheng is proposing to take a Chen family woman as a consort in court",
+            "title": "The Marriage Alliance of the Prince of Ning"
+        },
+        {
+            "id": "a01_a006_a002loop",
+            "description": "You and Prince Ning visit the Empress; only one pastry remains",
+            "title": "The Empress's Pastries"
+        },
+        {
+            "id": "a01_a011_a003loop",
+            "description": "To foil the marriage between Prince Ning and the Chen family, Xie Jian'an suggests you meet Chen Wan'er",
+            "title": "Chen Wan'er's Thoughts"
+        },
+        {
+            "id": "a01_a014_a004loop",
+            "description": "To seek cooperation with you, Chen Wan'er confesses the difficulties of her position in the Chen household",
+            "title": "The Eldest Daughter of the Chen Family"
+        },
+        {
+            "id": "a01_a019_a005loop",
+            "description": "According to Chen Wan'er, Chu Huan found the warehouse where the Chen family hoarded misappropriated supplies; it's up to you to decide whether to deploy troops",
+            "title": "Embezzled Supplies"
+        },
+        {
+            "id": "a01_a023_a006loop",
+            "description": "The warehouse is full of arms; you realize you've been set up and an elite force arrives, surrounding you",
+            "title": "The Suddenly Arrived Army"
+        },
+        {
+            "id": "a01_a027_a007loop",
+            "description": "On Prince Ning's wedding night, an unforgivable mistake occurred; if only there were a potion of regret",
+            "title": "Let the Mistake Stand"
+        },
+        {
+            "id": "a01_a028_a007a021_abe001",
+            "description": "Chen Wan'er's instigation is utterly untrustworthy! You rush to the palace to explain things to the Emperor; better late than never",
+            "title": "A Sudden Misfortune"
+        },
+        {
+            "id": "a01_a031_a028",
+            "description": "Forced to act, you lead your loyalists into armed revolt and break into the palace",
+            "title": "Chaos in the Imperial Palace"
+        },
+        {
+            "id": "a01_a032_a032033034035036_ahe001",
+            "description": "Heaven favored you and you succeeded; thereafter you govern earnestly and lead Da Xuan to hegemonic glory",
+            "title": "The Chosen One"
+        },
+        {
+            "id": "a01_a034_a008loop",
+            "description": "You were imprisoned due to the Chen family's plot, and your judge is Prince Ning Sikong Zheng",
+            "title": "Thrown Into Prison"
+        },
+        {
+            "id": "a01_a039_a009loop",
+            "description": "In prison, Sikong Zheng distorts the facts and frames you as treasonous",
+            "title": "Sikong Zheng's False Accusation"
+        },
+        {
+            "id": "a01_a043_a010loop",
+            "description": "Sikong Zheng urges you to pin everything on Chu Huan to exonerate yourself",
+            "title": "A Chance to Escape Blame"
+        },
+        {
+            "id": "a01_a048_a011loop",
+            "description": "For you and for Lady Xie Ruolan, let Chu Huan take the blame and stop the fighting. This is Prince Ning's last favor to you",
+            "title": "The Final Ultimatum"
+        },
+        {
+            "id": "a01_a052_a012loop",
+            "description": "After years of hiding, you have rebuilt much strength, but the situation is chaotic and the front is dire; should you advance or retreat?",
+            "title": "The Tumultuous Times"
+        },
+        {
+            "id": "a01_a053_a012a",
+            "description": "From then on, live incognito and be a reclusive couple — why not?",
+            "title": "Attaining Enlightenment and Immortality"
+        },
+        {
+            "id": "a01_a054_a012b053054",
+            "description": "Since you bear Sikong blood, you cannot ignore Da Xuan and the people; defend the homeland and do not shirk your duty",
+            "title": "My Surname is Sikong"
+        },
+        {
+            "id": "a01_a055_a046055",
+            "description": "Xie Ruolan senses your peril and finds a way to resolve the problem",
+            "title": "The Princess Consort of the Prince of Jin"
+        },
+        {
+            "id": "a01_a056_a047048_abe003",
+            "description": "No choice; after all, our father only had two sons",
+            "title": "Dwindling Imperial Heirs"
+        },
+        {
+            "id": "a01_a059_a013loop",
+            "description": "When you were in trouble, who did Xie Ruolan seek help from that became the path to breaking the stalemate?",
+            "title": "A Path to Break the Deadlock"
+        },
+        {
+            "id": "a01_a062_a014loop",
+            "description": "The Empress is willing to plead with the Emperor on your behalf — this is your chance to allay the Emperor's suspicions",
+            "title": "This Subject Has Something to Say"
+        },
+        {
+            "id": "a01_a067_a015loop",
+            "description": "The Emperor questions why you did not report the Chen family's misdeeds and instead ordered troops privately",
+            "title": "The Reason for Deploying Troops"
+        },
+        {
+            "id": "a01_a070_a015c_abe006",
+            "description": "You suggest that the Chen family took bribes and that I had a share?",
+            "title": "Am I, the Emperor, Greedy?"
+        },
+        {
+            "id": "a01_a072_a016loop",
+            "description": "The Emperor's attitude softens; he no longer suspects your treason so long as you reveal who gave the troop order to end the matter",
+            "title": "The One Who Deployed the Troops"
+        },
+        {
+            "id": "a01_a075_a064_abe007",
+            "description": "At least in the Emperor's eyes, your decisiveness does not match your elder brother's — go and be a comfortable prince",
+            "title": "Decipher the Emperor's Intentions"
+        },
+        {
+            "id": "a01_a077_aqte2loop",
+            "description": "A toast to meeting, a toast to parting forever, a toast to the burden you have taken up. I cannot be the mountain-splitting blade, but I can be the brick under your foot",
+            "qte1": "Raise the wine cup",
+            "title": "Parting From an Old Friend"
+        },
+        {
+            "id": "a01_a079_a057_abe004",
+            "description": "In the end, you could not wait for a turn of fate",
+            "help": "[Prologue] The scapegoat → Expose her intentions\n[Prologue] The pawn seeking rescue → Save Guo Xuan\n[Chapter 1] The path to break the stalemate → The Empress",
+            "title": "The Butterfly Effect"
+        },
+        {
+            "id": "a01_a080_a029_abe002",
+            "description": "You broke into the palace, but your forces could not overcome the city guard; the effort failed at the last moment — cursed by fate",
+            "title": "Such is Fate"
+        },
+        {
+            "id": "a01_a083_a069079",
+            "description": "In this chaotic era there are the extravagant and the patriotic, the schemers and the petty — may Your Highness not forget your original purpose through the hardships ahead",
+            "title": "North and South of the River"
+        },
+        {
+            "id": "a01_a084_a017loop",
+            "description": "The power of the gentry and the will of the Son of Heaven cannot be overturned by right and wrong; now you should go bid Chu Huan farewell",
+            "title": "The Final Outcome"
+        },
+        {
+            "id": "a02_a001_a001002003004",
+            "description": "When will these stormy waves cease? Perhaps when someone becomes the loser",
+            "title": "The Wind Does Not Cease"
+        },
+        {
+            "id": "a02_a002_a001loop",
+            "description": "Xie Ruolan's younger brother returns to the capital; you and his sister gather at the Prince of Jin's mansion",
+            "title": "A Rare Family Banquet"
+        },
+        {
+            "id": "a02_a006_a002loop",
+            "description": "Xie Xuan and Chu Huan's entrusted man clashes with someone — do you use this chance to test his mettle?",
+            "title": "True Measure of One's Capabilities"
+        },
+        {
+            "id": "a02_a009_a007008",
+            "description": "Speaking of what gift to give Zu Kun, the jade comb Xie gave is rather good",
+            "title": "Where Is the Jade Thumb Ring"
+        },
+        {
+            "id": "a02_a012_a003loop",
+            "description": "Zu Kun returns to the capital and invites you to a banquet; how can you leave a good impression?",
+            "title": "The Subtleties of Attending a Banquet"
+        },
+        {
+            "id": "a02_a016_a004loop",
+            "description": "Compared with Sikong Zheng's mountain-like gift, the stirrups you brought seem a bit shabby",
+            "title": "A Humble Gift"
+        },
+        {
+            "id": "a02_a020_a005loop",
+            "description": "Compared with Sikong Zheng's mountain-like gift, you arrived empty-handed with only the breeze in your sleeves",
+            "title": "Empty-handed"
+        },
+        {
+            "id": "a02_a024_a006loop",
+            "description": "This rare Kunshan jade finally has a purpose — rely on it to win over Zu Kun",
+            "title": "An Object of Great Value"
+        },
+        {
+            "id": "a02_a027_a017",
+            "description": "The scholar who presented a poem to Zu Kun looks vaguely familiar, doesn't he?",
+            "title": "A Scholar's Fervor"
+        },
+        {
+            "id": "a02_a031_a007loop",
+            "description": "At Zu Kun's banquet, Zu Yue wants to spar with you",
+            "title": "Zu Yue's Challenge"
+        },
+        {
+            "id": "a02_a034_aqte1loop",
+            "description": "You step into the courtyard and the duel with Zu Yue begins",
+            "title": "The Clash of Blades"
+        },
+        {
+            "id": "a02_a044_a030qte4",
+            "qte1": "Draw sword"
+        },
+        {
+            "id": "a02_a047_aqte5",
+            "qte1": "Charge and shove"
+        },
+        {
+            "id": "a02_a052_a038_abe001",
+            "description": "Due to your poor skill, you repeatedly miss in the duel and Zu Yue is accidentally killed",
+            "title": "Swords and Spears Have No Eyes"
+        },
+        {
+            "id": "a02_a053_a008loop",
+            "description": "Zhu Yuanzhi outmatched Zu Yue in the bout; unexpectedly, Chu Huan left this talent for you",
+            "title": "Talented Allies by One's Side"
+        },
+        {
+            "id": "a02_a057_a009loop",
+            "description": "At the banquet, Zu Kun brings up the northern campaign — this is your best opportunity to draw closer to him",
+            "title": "The Debate on the Northern Expedition"
+        },
+        {
+            "id": "a02_a061_a010loop",
+            "description": "There are countless difficulties with a northern campaign, but right now your task is not to solve those military problems but to resolve the Emperor's view on it",
+            "title": "The Crux of the Northern Campaign"
+        },
+        {
+            "id": "a02_a066_a011loop",
+            "description": "If the northern campaign fails, who dares shoulder the blame for squandering state power? Who can bear it?",
+            "title": "Responsibility for the Defeat"
+        },
+        {
+            "id": "a02_a070_a043",
+            "description": "The Emperor seems unwilling to send troops north; if Zu Kun has no objection, this matter is probably decided",
+            "title": "Zu Kun's Opinion"
+        },
+        {
+            "id": "a02_a071_a044045046047_abe002",
+            "description": "Because you failed to seize the chance at the banquet to leverage Zu Kun's influence for the northern campaign, Sikong Zheng suppressed you until you could not raise your head; you had to march north, were ambushed by Wu Pu and died",
+            "title": "The Lone Brave"
+        },
+        {
+            "id": "a02_a073_a012loop",
+            "description": "After the banquet, Chen Wan'er brings you a bowl of sobering soup",
+            "title": "Sobering Soup"
+        },
+        {
+            "id": "a02_a077_a013loop",
+            "description": "You wish to travel far — when will you return?",
+            "title": "Asking About Your Return"
+        },
+        {
+            "id": "a02_a080_a051",
+            "description": "Leaving the capital to join the army and go north, the skies and seas are vast and Prince Ning cannot restrain you",
+            "title": "A Dragon Returns to the Sea"
+        },
+        {
+            "id": "a03_a001_a001",
+            "description": "Why would a man not take the Wu hook and reclaim fifty border prefectures?",
+            "title": "Northern Expedition"
+        },
+        {
+            "id": "a03_a002_aqte1loop",
+            "qte1": "I, your subordinate, obey orders"
+        },
+        {
+            "id": "a03_a004_a001loop",
+            "description": "On the army's march north you meet an unidentified youth",
+            "title": "The Youth in the Woods"
+        },
+        {
+            "id": "a03_a008_a002loop",
+            "description": "The northern refugees greet the royal army joyfully, bringing the scarce grain they could spare",
+            "title": "The Kindness of the Former People"
+        },
+        {
+            "id": "a03_a012_a003loop",
+            "description": "A great battle is about to begin; ask around about Yiyang's current situation",
+            "title": "The Situation in Yiyang"
+        },
+        {
+            "id": "a03_a018_a004loop",
+            "description": "Former minister Chu Maolun of Xuan arrives beneath Yiyang's walls and seems to want to speak with you",
+            "title": "Former Officials of Xuan"
+        },
+        {
+            "id": "a03_a021_a005loop",
+            "description": "Former minister Chu Maolun of Xuan wishes to enter the city to speak with you privately",
+            "title": "Request to Enter the City"
+        },
+        {
+            "id": "a03_a024_aqte2",
+            "description": "A mere dog by Wu Pu's horse dares to request parley?",
+            "qte1": "Aim",
+            "title": "Execute the Traitor with an Arrow"
+        },
+        {
+            "id": "a03_a028_a006loop",
+            "description": "Chu Maolun says the lost national jade seal is held by Shi Lang and hopes to trade it with you for mutual benefit",
+            "title": "The Imperial Heirloom Seal"
+        },
+        {
+            "id": "a03_a032_a007loop",
+            "description": "What do you intend to do about Chu Maolun's proposed deal?",
+            "title": "Northward Advance, Southern Return"
+        },
+        {
+            "id": "a03_a034_a007a017018_abe001",
+            "description": "The imperial jade seal is tempting; you accept Chu Maolun's words and fall into a Wu Nu trap",
+            "title": "Imperial Seal of a Fallen Dynasty"
+        },
+        {
+            "id": "a03_a042_a008loop",
+            "description": "Shi Lang forces the captured Xuan refugees to assault the walls",
+            "title": "Refugees Assaulting the City"
+        },
+        {
+            "id": "a03_a045_a009loop",
+            "description": "The refugees steadily approach — under no circumstances may they place ladders against the battlements",
+            "title": "The Wall in Crisis"
+        },
+        {
+            "id": "a03_a046_a009a034_abe002",
+            "description": "Never shoot arrows at Xuan's people! Ride out and fight to the death!",
+            "title": "He's a Real Man"
+        },
+        {
+            "id": "a03_a049_a010loop",
+            "description": "To lift morale, you decide to avoid Wu Pu's main force and launch a night raid on their camp",
+            "title": "The Main Force of the Wuyou"
+        },
+        {
+            "id": "a03_a052_a011loop",
+            "description": "This is a near-suicide mission — who will lead the night raid on Wu Pu's camp?",
+            "title": "Plan for the Night Raid"
+        },
+        {
+            "id": "a03_a057_a045046_abe005",
+            "description": "You order Xie Xuan to raid the camp; although the raid initially succeeds, his fondness for battle keeps him from breaking off and the enemy pursues, resulting in the city's fall",
+            "title": "Poor Judgment in Appointments"
+        },
+        {
+            "id": "a03_a059_a012loop",
+            "description": "When Yiyang is in peril, a ragtag relief army suddenly arrives — can this improvised militia really be relied upon?",
+            "title": "Unexpected Reinforcements"
+        },
+        {
+            "id": "a03_a060_a012a054_abe006",
+            "description": "The militia enters the city, but a Wu Nu traitor is among them; he deliberately creates chaos and colludes with the Wu Nu army, leading to the city's fall",
+            "title": "Sabotage by Spies"
+        },
+        {
+            "id": "a03_a063_a013loop",
+            "description": "To protect the city, you decide not to admit the militia for now; this will chill their hearts and you must quickly find a way to appease them",
+            "title": "Pacify the Righteous Fighters"
+        },
+        {
+            "id": "a03_a064_a013a_abe007",
+            "description": "Sending people out to placate the militia is useful, but a Wu Nu spy learns the Prince of Jin is outside the walls; when the Wu Nu army attacks, you have nowhere to flee",
+            "title": "Carelessness Leads to Death"
+        },
+        {
+            "id": "a03_a066_a014loop",
+            "description": "You sneak into the militia camp to meet the leader Liu Dadao privately, but you are discovered",
+            "title": "Exposed Whereabouts"
+        },
+        {
+            "id": "a03_a070_a015loop",
+            "description": "To intimidate Liu Dadao you must provide reasons why the militia is unreliable",
+            "title": "Suspicion Towards the Righteous Army"
+        },
+        {
+            "id": "a03_a074_a016loop",
+            "description": "To convince Liu Dadao, you must present a reasonable method for rooting out spies and accepting the militia",
+            "title": "Recruitment of the Righteous Army"
+        },
+        {
+            "id": "a03_a078_a017loop",
+            "description": "Following the flute's tune, you climb the walls and find the militia leader's granddaughter Liu Nian playing a melody alone",
+            "title": "The Melody on the City Walls"
+        },
+        {
+            "id": "a03_a083_a018loop",
+            "description": "Are the Wu Pu people truly that powerful and unbeatable?",
+            "title": "A Formidable Enemy"
+        },
+        {
+            "id": "a03_a087_a070",
+            "description": "Xuan's true enemy has never been to the north",
+            "title": "Gaze Northward"
+        },
+        {
+            "id": "a03_a088_a044_abe004",
+            "description": "Misjudging the enemy's main force, the assault fails and you are captured by Wu Nu",
+            "title": "Emperor Wu of Xuan"
+        },
+        {
+            "id": "a03_a090_aqte3loop",
+            "qte1": "Put on the cloak"
+        },
+        {
+            "id": "a04_a001_a001002",
+            "description": "Wu Pu has besieged the city for days and no relief has arrived",
+            "title": "Trapped in Yiyang"
+        },
+        {
+            "id": "a04_a002_a001loop",
+            "description": "Shi Lang's army suddenly broke camp and withdrew — perhaps our reinforcements arrived",
+            "title": "The Truth About the Reinforcements"
+        },
+        {
+            "id": "a04_a003_a001a003_abe001",
+            "description": "Shi Lang feigns retreat to lure Yiyang's garrison out, and you fall into the trap",
+            "title": "Sudden Turnaround Thrust"
+        },
+        {
+            "id": "a04_a007_a002loop",
+            "description": "Shi Lang launches a general assault and Yiyang is attacked from multiple sides",
+            "title": "Struggling to Cope"
+        },
+        {
+            "id": "a04_a008_a002a010_abe002",
+            "description": "Shi Lang attacks from two sides; you decide to send troops to relieve the east. After fires in the south you retreat and Sikong Zheng ascends the throne; you live bitterly as the Exiled Prince",
+            "title": "The Carefree Prince"
+        },
+        {
+            "id": "a04_a009_a002b012013",
+            "description": "In the crisis, you decide to lead Xie Xuan to reinforce the southern city",
+            "title": "Rushing Reinforcements to the Southern City"
+        },
+        {
+            "id": "a04_a010_a002c011_abe003",
+            "description": "Shi Lang attacks from two sides; you lead the west relief force. After the southern fires you abandon the city and are caught and cut down by Shi Lang",
+            "title": "Frequent Running Champion"
+        },
+        {
+            "id": "a04_a011_a002d_abe004",
+            "description": "Shi Lang attacks from two sides; you order everyone to reinforce the north and ultimately die fighting in the south after the fires",
+            "title": "Fire in the Southern City"
+        },
+        {
+            "id": "a04_a012_a035_a1_abe013",
+            "description": "You launch an all-or-nothing raid on Shi Lang's camp but are killed due to lack of skill",
+            "title": "Lack of Martial Prowess"
+        },
+        {
+            "id": "a04_a013_a035_a2",
+            "description": "For yourself, your brothers, and the thousands of soldiers who fight to the last, this is a life-or-death battle that cannot be lost",
+            "title": "Storming into the Enemy Camp"
+        },
+        {
+            "id": "a04_a015_a014015016_abe005",
+            "description": "Liu Dadao guarding the west fled",
+            "title": "Better You than Me"
+        },
+        {
+            "id": "a04_a017_a003loop",
+            "description": "Seven days of defense, arrows exhausted, heavy casualties — Yiyang's fall is imminent",
+            "title": "A Losing Battle"
+        },
+        {
+            "id": "a04_a018_a003a020021022_abe006",
+            "description": "In Yiyang's dire straits, at Xie Xuan's urging you decide to burn the granaries and abandon the city",
+            "title": "The Fault Lies with Your Subject"
+        },
+        {
+            "id": "a04_a022_a005",
+            "description": "Horsemen into the mountain of blades — return not until broken",
+            "title": "Charge into the enemy camp"
+        },
+        {
+            "id": "a04_a023_a005a029030031_abe007",
+            "description": "You storm the enemy camp; an arrow strikes Shi Lang but you are killed by Shi Lang",
+            "title": "Slightly Outmatched in Skill"
+        },
+        {
+            "id": "a04_a027_aqte1",
+            "qte1": "Dodge"
+        },
+        {
+            "id": "a04_a028_a36_abe008",
+            "description": "You launch an all-or-nothing raid on Shi Lang's camp but are killed due to lack of skill",
+            "title": "Less Agile Physique"
+        },
+        {
+            "id": "a04_a030_aqte2",
+            "qte1": "Dodge"
+        },
+        {
+            "id": "a04_a031_a38_abe009",
+            "description": "You launch an all-or-nothing raid on Shi Lang's camp but are slain by Shi Lang",
+            "title": "Flashy but Useless Moves"
+        },
+        {
+            "id": "a04_a033_aqte3",
+            "qte1": "Charge and pick up"
+        },
+        {
+            "id": "a04_a034_a40_abe010",
+            "description": "You launch an all-or-nothing raid on Shi Lang's camp but are killed due to lack of skill",
+            "title": "Every Extra Inch Counts"
+        },
+        {
+            "id": "a04_a036_a006loop",
+            "description": "Break the ranks, charge into the enemy, and wound Shi Lang severely — this man will be a future menace. Young one, give your name!",
+            "title": "Who Is This Person"
+        },
+        {
+            "id": "a04_a037_a006a42_abe012",
+            "description": "Shi Lang, learning you are the Prince of Jin of Xuan, rejoices greatly",
+            "title": "So Close Yet So Far"
+        },
+        {
+            "id": "a04_a038_a006b043044045046047048",
+            "description": "Zu Yue leads troops to relieve Yiyang; Shi Lang is forced to withdraw, and in the southern capital Prince Jin's mansion Xie Ruolan gives birth",
+            "title": "A Joyous Occasion at the Prince's Residence"
+        },
+        {
+            "id": "a04_a039_aqte5loop",
+            "qte1": "Charge and draw sword"
+        },
+        {
+            "id": "a04_a041_aqte3",
+            "qte1": "Charge and escape"
+        },
+        {
+            "id": "a04_a042_a040_a1be011",
+            "description": "You launch an all-or-nothing raid on Shi Lang's camp but are killed due to lack of skill",
+            "title": "Backed the Wrong Patron"
+        },
+        {
+            "id": "a04_a043_a039_a1",
+            "description": "A broken blade does not mean defeat — you can still grab the broken sword. Pick up the broken blade!",
+            "title": "Broken Blade"
+        },
+        {
+            "id": "a05_a001_a001002003004",
+            "description": "Yong'an grows distant, our resolve has reached its end",
+            "title": "The General Departs"
+        },
+        {
+            "id": "a05_a002_a001loop",
+            "description": "What are you fighting for? And why fight?",
+            "title": "What Are We Fighting For"
+        },
+        {
+            "id": "a05_a007_a002loop",
+            "description": "An urgent letter from the capital reaches Yiyang; your scouts sent to probe the capital return at last",
+            "title": "Urgent Missive from the Imperial City"
+        },
+        {
+            "id": "a05_a011_a003loop",
+            "description": "Zu Kun has just left; the army's affairs are chaotic and the capital sends word the Emperor is ill, summoning you home at once",
+            "title": "Return to the Capital at Once"
+        },
+        {
+            "id": "a05_a012_a003a010_abe001",
+            "description": "You answered the imperial edict to return and see the ailing Emperor — and never returned",
+            "title": "Brotherly Respect and Harmony"
+        },
+        {
+            "id": "a05_a014_aqte5loop",
+            "qte1": "Charge and draw sword"
+        },
+        {
+            "id": "a05_a015_a004loop",
+            "description": "You suspect this edict is not so simple",
+            "title": "The Meaning of the Imperial Decree"
+        },
+        {
+            "id": "a05_a016_a004a012_abe002",
+            "description": "You think the Emperor summoned you to abdicate and was killed by Chen Ying upon your return",
+            "title": "A Fleeting Dream"
+        },
+        {
+            "id": "a05_a019_a022loop",
+            "description": "A former benefactor now an enemy — persuading Cao Biaozhi to surrender may benefit you both",
+            "title": "Urging Surrender at the City Walls"
+        },
+        {
+            "id": "a05_a020_a005loop",
+            "description": "Chen Ying arrives at the Yiyang camp with a ministerial order to take command of Yiyang's forces",
+            "title": "The Ministry of War's Transfer Order"
+        },
+        {
+            "id": "a05_a022_a005b016_abe003",
+            "description": "You refuse to hand over the tiger tally to Chen Ying; Sikong Zheng grows wary and immediately acts",
+            "title": "Alerting the Enemy by Rash Action"
+        },
+        {
+            "id": "a05_a024_a006loop",
+            "description": "Xie Jian'an rushed to Yiyang from afar — this night will not be peaceful",
+            "title": "Defying One's Superior"
+        },
+        {
+            "id": "a05_a025_a006b_abe004",
+            "description": "You refused Zhu Yuanzhi's counsel and were overtaken by Sikong Zheng's preemptive strike",
+            "title": "Hesitation Leads to Defeat"
+        },
+        {
+            "id": "a05_a029_a007loop",
+            "description": "One step back cannot mean retreat step by step — today we march south with a clear conscience",
+            "title": "Divine Mandate Is with Me"
+        },
+        {
+            "id": "a05_a033_a008loop",
+            "description": "After tonight, Xuan will never be peaceful again; those who know your pain wish to keep you company for the moment",
+            "title": "The Great Battle Approaches"
+        },
+        {
+            "id": "a05_a036_a009loop",
+            "description": "A thoughtful maiden makes you a calming incense to grant you, at least until dawn, a peaceful dream",
+            "title": "Calming Incense"
+        },
+        {
+            "id": "a05_a041_a010loop",
+            "description": "With the passes ahead and pursuers behind, time is tight; a Wu Pu man claims he can resolve the crisis",
+            "title": "Pressing Time"
+        },
+        {
+            "id": "a05_a042_a010a_abe005",
+            "description": "Even in crisis you do not wish to trade with the Wu Nu",
+            "title": "Refusing to Cooperate"
+        },
+        {
+            "id": "a05_a044_a011loop",
+            "description": "An old enemy met unexpectedly today looks so fallen from grace",
+            "title": "Meeting Shi Lang Again"
+        },
+        {
+            "id": "a05_a047_a012loop",
+            "description": "Shi Lang asks you for military supplies and promises to hold back the Qingzhou army",
+            "title": "A Business Deal"
+        },
+        {
+            "id": "a05_a048_a012a_abe006",
+            "description": "You generously supply Shi Lang but he betrays his promise",
+            "title": "Money Is No Object"
+        },
+        {
+            "id": "a05_a050_a013loop",
+            "description": "It is both business and gamble — high demands, settle on the ground",
+            "title": "Haggling Over Terms"
+        },
+        {
+            "id": "a05_a051_a013a_abe007",
+            "description": "Underbidding too hard leads to an irreparable split",
+            "title": "Negotiations Broke Down"
+        },
+        {
+            "id": "a05_a054_aqte2",
+            "qte1": "Avoid the arrows"
+        },
+        {
+            "id": "a05_a055_a037_abe008",
+            "description": "In the southern rebellion's siege battle, Cao Biaozhi's arrow decides the outcome",
+            "title": "Decisive Strike for Victory"
+        },
+        {
+            "id": "a05_a057_a014loop",
+            "description": "Pursuers are at your heels; waste no time — by any means necessary, seize this Tangchi iron city",
+            "title": "Breaching the City"
+        },
+        {
+            "id": "a05_a064_a015loop",
+            "description": "During the great battle someone is secretly colluding with the enemy seeking an escape; how to deal with them is your decision",
+            "title": "Evidence of Colluding with the Enemy"
+        },
+        {
+            "id": "a05_a070_a016loop",
+            "description": "Eunuch Wen suddenly arrives at the camp bearing the Emperor's edict",
+            "title": "An Unexpected Emissary"
+        },
+        {
+            "id": "a05_a071_a016a050051052053054",
+            "description": "After abandoning the southward march, you bring back the princess, march north and establish a new Jin princely court; the realm is divided into three, and who will claim supremacy remains unknown",
+            "title": "The Turn of History's Wheel"
+        },
+        {
+            "id": "a05_a072_a016b055",
+            "description": "Bold Wen Xian is guilty of forging an imperial edict — for such a crime he should be executed!",
+            "title": "A Forged Imperial Decree"
+        },
+        {
+            "id": "a05_a075_a056_abe009",
+            "description": "Many in the army decide to abandon the rebellion in face of rich rewards and high office",
+            "title": "Divide and Conquer"
+        },
+        {
+            "id": "a05_a077_a017loop",
+            "description": "Sikong Zheng persuades you to withdraw for now, promising to let Xie Ruolan leave the city",
+            "title": "Advance or Retreat"
+        },
+        {
+            "id": "a05_a081_a018loop",
+            "description": "Sikong Zheng demands you retreat further",
+            "title": "A Dilemma"
+        },
+        {
+            "id": "a05_a082_a018a_abe010",
+            "description": "You decide to fall back thirty li for Xie Ruolan's sake, missing the chance and being overtaken by the Qingzhou army",
+            "title": "Encircled and Trapped"
+        },
+        {
+            "id": "a05_a085_a019loop",
+            "description": "Winners and losers determine fate; old hatreds and fresh grievances — Sikong Zheng's life or death now rests on your word",
+            "title": "Victors and Losers"
+        },
+        {
+            "id": "a05_a088_a023loop",
+            "description": "The fratricidal fighting with your brother finally ends here",
+            "title": "Brothers"
+        },
+        {
+            "id": "a05_a090_a012loop",
+            "description": "How to deal with Sikong Zheng is your decision",
+            "title": "Disposition"
+        },
+        {
+            "id": "a05_a094_a021loop",
+            "description": "The secret to lasting prosperity is not putting all your eggs in one basket",
+            "title": "A Subtle Blade"
+        },
+        {
+            "id": "a05_a095_a021b_abe011",
+            "description": "The Chen family's centuries-old prestige — better mutual destruction than letting enemies take power",
+            "title": "Emperor Min of Xuan"
+        },
+        {
+            "id": "a05_a097_a071",
+            "description": "Set up an altar, proclaim to the world, succeed to the throne, and change the era name to Longwu!",
+            "title": "The Mandate of Heaven"
+        },
+        {
+            "id": "a06_a001_a001002003004005",
+            "description": "Since ascending the throne, ten or more swift years have passed; your ambitions have not diminished an inch",
+            "title": "Gazing upon the Vast Sea"
+        },
+        {
+            "id": "a06_a002_a001loop",
+            "description": "On how to deal with Wu Pu, your two sons each have their own views",
+            "title": "Tactics and Strategy"
+        },
+        {
+            "id": "a06_a007_a002loop",
+            "description": "The Crown Prince's horse ran wild and struck the imperial carriage",
+            "title": "Startled Horse"
+        },
+        {
+            "id": "a06_a012_a003loop",
+            "description": "State affairs weigh heavily; only with Lady Jing can you find some leisure",
+            "title": "Consort Liu Jing"
+        },
+        {
+            "id": "a06_a016_a004loop",
+            "description": "You planned to find peace with Lady Jing, but Chen Wan'er unexpectedly came to the palace",
+            "title": "Lady Chen"
+        },
+        {
+            "id": "a06_a020_a005loop",
+            "description": "The treasury is thin — where should this year's limited funds be spent?",
+            "title": "Court Expenditures"
+        },
+        {
+            "id": "a06_a024_a006loop",
+            "description": "It is late — where will you stay tonight?",
+            "title": "Flipping the Plaques"
+        },
+        {
+            "id": "a06_a031_a007loop",
+            "description": "This debauched, carnivorous revelry and absurd dream must now be awakened from",
+            "title": "An Absurd Grand Dream"
+        },
+        {
+            "id": "a06_a032_a007a_abe001",
+            "description": "My dragon throne, my realm, my beauties — how could a mere Crown Prince covet them!",
+            "title": "Emperor You of Xuan"
+        },
+        {
+            "id": "a06_a033_a007b_abe002",
+            "description": "Ruolan, Sheng'er has grown up now…",
+            "title": "Emperor Zong of Xuan"
+        },
+        {
+            "id": "a06_a034_a049_a1be005",
+            "description": "You have truly made old Zhu suffer",
+            "title": "The Dimmed Imperial Star"
+        },
+        {
+            "id": "a06_a035_a050051052",
+            "description": "Fortunately Zhu Yuanzhi rushed to rescue the sovereign and should be made Grand General!",
+            "title": "Grand General Zhu"
+        },
+        {
+            "id": "a06_a039_a008loop",
+            "description": "Reform requires leadership; Xie Xuan has languished so many years — now is the time to use him",
+            "title": "Visiting the Marquis of Yongning"
+        },
+        {
+            "id": "a06_a042_a009loop",
+            "description": "Now is the time to have Xie Xuan devote himself and serve the cause of Xuan",
+            "title": "Words of Persuasion"
+        },
+        {
+            "id": "a06_a046_a010loop",
+            "description": "Unexpectedly, Chen Wan'er brought her son to pay respects to Ruolan",
+            "title": "Paying Respects to Ruolan"
+        },
+        {
+            "id": "a06_a050_a011loop",
+            "description": "Sikong Xu wishes to make your right-hand man, the powerful general Zhu Yuanzhi, his mentor",
+            "title": "Requesting an Imperial Tutor"
+        },
+        {
+            "id": "a06_a054_a012loop",
+            "description": "Zhu Yuanzhi grows more overbearing; the military ministry has repeatedly impeached him as disobedient despite his great achievements",
+            "title": "The Overbearing General"
+        },
+        {
+            "id": "a06_a059_a013loop",
+            "description": "According to Fan Zhong, rumors say Zhu Yuanzhi has the makings of an emperor",
+            "title": "Rumors among the People"
+        },
+        {
+            "id": "a06_a063_a014loop",
+            "description": "Regarding how to handle Zhu Yuanzhi, Xie Jian'an asks your stance",
+            "title": "Employment of Personnel"
+        },
+        {
+            "id": "a06_a067_a015loop",
+            "description": "The Eastern Yan requests to marry the Xuan princess as a condition for alliance",
+            "title": "Marriage Alliance"
+        },
+        {
+            "id": "a06_a074_a016loop",
+            "description": "Xie Xuan's reforms end in failure",
+            "title": "Failed Reforms"
+        },
+        {
+            "id": "a06_a075_a016a",
+            "description": "Between you and Xie Xuan there seems an invisible wall; apart from \"let it be,\" words are powerless",
+            "title": "Estrangement"
+        },
+        {
+            "id": "a06_a076_a016b",
+            "description": "Facing Xie Xuan's perfunctory attitude, you seem to have no choice but to give up",
+            "title": "Perfunctory Response"
+        },
+        {
+            "id": "a06_a078_a017loop",
+            "description": "Reform in Qingzhou faces many difficulties; Xie Jian'an asks you to recall Xie Xuan",
+            "title": "Thwarted Reforms"
+        },
+        {
+            "id": "a06_a079_a017a",
+            "description": "Recall Xie Xuan — we cannot let him fall into danger again",
+            "title": "Ceasing Action"
+        },
+        {
+            "id": "a06_a080_a017b048",
+            "description": "Grant Xie Xuan the Shangfang sword; if a policy is changed, change it thoroughly",
+            "title": "Pursuing Reform to the End"
+        },
+        {
+            "id": "a06_a081_a049",
+            "description": "The gentry's troops are near the capital — will Zhu Yuanzhi truly come to their aid?",
+            "title": "Suspicion"
+        },
+        {
+            "id": "a06_a082_a053054",
+            "description": "The gentry's forces are near the capital, Zu Yue is held up by Wu Pu, and the court is alarmed — what to do?",
+            "title": "Restless Fear"
+        },
+        {
+            "id": "a06_a083_a055_abe003",
+            "description": "Your past leniency in sparing Sikong Zheng has now produced this great disaster",
+            "title": "The Deposed Emperor of Xuan"
+        },
+        {
+            "id": "a06_a085_a018loop",
+            "description": "The gentry alliance has reached the capital; faced with their demands you must decide",
+            "title": "Choices and Sacrifices"
+        },
+        {
+            "id": "a06_a086_a018a_abe004",
+            "description": "What if troops are at the capital? If there must be war, then let there be war — I will not compromise with the gentry",
+            "title": "The Ill-Fated Emperor of Xuan"
+        },
+        {
+            "id": "a06_a087_a018b057058059060",
+            "description": "Execute Xie Xuan to divide the gentry; your path must not end here — you must lead Da Xuan onward",
+            "title": "Weighing Priorities"
+        },
+        {
+            "id": "a07_a001_a001002003",
+            "description": "Shi Lang has prepared for years and at last musters his great host southward",
+            "title": "The Iron Hooves March Southward"
+        },
+        {
+            "id": "a07_a003_a001loop",
+            "description": "Reform failed and state strength was harmed — facing Shi Lang's southern army, what will you do?",
+            "title": "Striving to Respond"
+        },
+        {
+            "id": "a07_a006_a005006007_abe001",
+            "description": "The wounds of failed reform have not healed; retreating to Tianhe is the safest course",
+            "title": "Emperor Huai of Xuan"
+        },
+        {
+            "id": "a07_a007_a008009010_a010_a1_abe002",
+            "description": "Even if reforms failed and the state is weak, you do not intend to hand the northern passes to others",
+            "title": "Emperor Ai of Xuan"
+        },
+        {
+            "id": "a07_a009_a002loop",
+            "description": "Toil and governance are for the present era; Xuan and Wu Pu still have one last battle!",
+            "title": "There Is Still a Battle to Fight"
+        },
+        {
+            "id": "a07_a012_a012013014_abe003",
+            "description": "With the realm at peace, we should not start new wars; to spare the people suffering, retreating to Tianhe is the wisest",
+            "title": "Emperor Kang of Xuan"
+        },
+        {
+            "id": "a07_a016_a030031",
+            "description": "This barrier joining Heaven and Earth, built on blood, can secure peace for ten thousand generations",
+            "title": "Emperor Ming of Xuan"
+        },
+        {
+            "id": "a07_a017_aqte1loop",
+            "description": "Years of accumulation — all for the day we no longer endure others' bullying",
+            "qte1": "Charge and turn around",
+            "title": "March North with the Army"
+        },
+        {
+            "id": "a07_a020_a003loop",
+            "description": "Urgency — Shi Lang breaches the central camp",
+            "title": "King Against King"
+        },
+        {
+            "id": "a07_a021_a003a039_abe004",
+            "description": "Shi Lang shoots and kills the Xuan Emperor in desperation, reversing the battle",
+            "title": "The Tides of War Have Shifted Once More"
+        },
+        {
+            "id": "a07_a023_a008loop",
+            "description": "Wu Pu is trapped and the arrow is on the string; yet a dispatch arrives from the rear",
+            "title": "Chaos in the Rear"
+        },
+        {
+            "id": "a07_a024_a008a",
+            "description": "Chen Wan'er executes a gentry minister to quell the unrest",
+            "title": "The Cry of the Luan and Phoenix"
+        },
+        {
+            "id": "a07_a025_a004loop",
+            "description": "Your time is nearly up; you must arrange your affairs before the end",
+            "title": "Ruler and Subject, Each in Their Place"
+        },
+        {
+            "id": "a07_a029_a005loop",
+            "description": "You possess countless beauties, but as life wanes you only want one by your side",
+            "title": "A Ladle of Weak Water"
+        },
+        {
+            "id": "a07_a034_a008bbe005",
+            "description": "The opportunity for battle can be sought again, but the state must not be lost — withdraw quickly to pacify the realm",
+            "title": "Emperor Zhuang of Xuan"
+        },
+        {
+            "id": "a07_a037_aqte2loop",
+            "qte1": "Charge and shoot an arrow"
+        },
+        {
+            "id": "a07_a038_a006loop",
+            "description": "To whom should this Xuan realm be entrusted? You already have your choice",
+            "title": "The Decree of Abdication"
+        },
+        {
+            "id": "a07_a043_a007loop",
+            "description": "If you hand Xuan to the eldest, will the second truly willingly assist?",
+            "title": "Father and Son"
+        },
+        {
+            "id": "a07_a049_a009loop",
+            "description": "You ask your ministers whom they think should succeed you",
+            "title": "Who Shall Bear the Great Responsibility"
+        },
+        {
+            "id": "a07_a050_a066067068",
+            "description": "Guard the land and open new frontiers — what is one life to that?",
+            "title": "The Nine Provinces United as One"
+        },
+        {
+            "id": "a07_a053_a071072073074",
+            "description": "Let Sheng'er rule while Xu'er assists; our Sikong household must no longer be stained by kin's blood",
+            "title": "Emperor Jing of Xuan"
+        },
+        {
+            "id": "a07_a054_a075075_a1075_a2075_a3075_a4075_a5075_a6",
+            "description": "In an imperial house there is no room for family sentiment. To ensure Sikong Sheng's smooth succession, you decide to poison your younger son",
+            "title": "Emperor Cheng of Xuan"
+        },
+        {
+            "id": "a07_a055_a076077",
+            "description": "The state rises by martial strength; with Xu'er and General Zhu supporting each other, Da Xuan can be at peace",
+            "title": "Emperor Wen of Xuan"
+        },
+        {
+            "id": "a07_a056_a010loop",
+            "description": "Not knowing how it began, yet falling in deep",
+            "title": "A Pair of Lovebirds"
+        },
+        {
+            "id": "a07_a056_a078079080081",
+            "description": "A benevolent ruler and good ministers entrust the realm to Sheng'er and General Zu Yue; there will be no worries",
+            "title": "Emperor Guangwu of Xuan"
+        },
+        {
+            "id": "a07_a057_a082083084085",
+            "description": "Balance is the art of power — but sometimes it goes too far",
+            "title": "Emperor Zhao of Xuan"
+        },
+        {
+            "id": "a07_a061_a011loop",
+            "description": "Grudges and favors entwined",
+            "title": "Intertwined Branches"
+        },
+        {
+            "id": "a07_a065_a012loop",
+            "description": "Together forever, together longing",
+            "title": "A Pair of Flying Swallows"
+        },
+        {
+            "id": "a07_a070_aqte3loop",
+            "qte1": "View the afterword"
+        }
+    ]
+}

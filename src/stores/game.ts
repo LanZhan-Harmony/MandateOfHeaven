@@ -175,11 +175,11 @@ export const useGameStore = defineStore("game", () => {
   );
 
   /** 各章节的完成进度（0-1 浮点数） */
-  const chapterProgress = computed<number[]>(() =>[0.5, 0.7, 1, 0.2, 0, 0, 0]
-    /* storyletsByChapter.map((chapterStorylets) => {
+  const chapterProgress = computed<number[]>(() =>
+    storyletsByChapter.map((chapterStorylets) => {
       const visitedCount = visitedStoryletIds.value.filter((s) => chapterStorylets.includes(s)).length;
       return clamp(visitedCount / chapterStorylets.length, 0, 1);
-    }), */
+    }),
   );
 
   /** 各章节中尚未播放的视频列表 */

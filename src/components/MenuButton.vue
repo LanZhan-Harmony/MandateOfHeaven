@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useMediaStore } from "@/stores/media";
+import { useMediaStore } from "../stores/media";
 import { computed, onUnmounted, ref } from "vue";
 
 const props = defineProps<{
