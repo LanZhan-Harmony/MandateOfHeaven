@@ -25,6 +25,13 @@
         "effectsVolume": "Effects Volume",
         "language": "Language"
     },
+    "chapter": {
+        "enterChapter": "Enter Chapter"
+    },
+    "storyline": {
+        "currentProgress": "Current Progress",
+        "storylineHelp": "Storyline Help"
+    },
     "character": {
         "characterIntroduction": "Character Introduction",
         "characterStories": "Character Stories"

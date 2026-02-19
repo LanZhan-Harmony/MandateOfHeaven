@@ -16,7 +16,7 @@ const mediaStore = useMediaStore();
 
 async function handleClick() {
   emit("click");
-  await mediaStore.setEffectAudioAsync("音效3");
+  await mediaStore.setEffectAudioAsync("音效7");
   if (props.path) {
     router.push(props.path);
   } else {
@@ -32,5 +32,10 @@ async function handleClick() {
   position: relative;
   z-index: 1000;
   margin: 35px 0 0 40px;
+}
+@media (max-height: 500px) {
+  .nav-btn {
+    margin: 20px 0 0 20px;
+  }
 }
 </style>

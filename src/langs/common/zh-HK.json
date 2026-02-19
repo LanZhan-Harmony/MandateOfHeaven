@@ -25,6 +25,13 @@
         "effectsVolume": "音效音量",
         "language": "介面語言"
     },
+    "chapter": {
+        "enterChapter": "進入章節"
+    },
+    "storyline": {
+        "currentProgress": "當前進度",
+        "storylineHelp": "幫助"
+    },
     "character": {
         "characterIntroduction": "人物介紹",
         "characterStories": "人物故事"

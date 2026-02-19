@@ -134,7 +134,7 @@ select option {
   color: #d1c4b9;
 }
 
-@media (max-width: 1024px) {
+@media (max-height: 500px) {
   .settings {
     width: 90%;
     margin: 6% auto 0;

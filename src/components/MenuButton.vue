@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useMediaStore } from "@/stores/media";
 import { computed, onUnmounted, ref } from "vue";
 
 const props = defineProps<{
@@ -7,8 +8,9 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: "click"): void;
-  (e: "pointerenter"): void;
 }>();
+
+const mediaStore = useMediaStore();
 
 const TOTAL_FRAMES = 15; // 精灵图总帧数
 const FRAME_DURATION = 30; // 每帧持续时间（毫秒）
@@ -59,8 +61,8 @@ function animateToTargetFrame(frame: number) {
   }
 }
 
-function handlePointerEnter() {
-  emit("pointerenter");
+async function handlePointerEnter() {
+  await mediaStore.setEffectAudioAsync("音效4");
   animateToTargetFrame(TOTAL_FRAMES - 1);
 }
 
@@ -109,7 +111,7 @@ onUnmounted(() => {
   outline: none;
 }
 
-@media (max-width: 1024px) {
+@media (max-height: 500px) {
   .btn {
     height: 30px;
     font-size: 18px;

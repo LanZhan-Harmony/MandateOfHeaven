@@ -23,7 +23,7 @@ const emit = defineEmits<{
   border: none;
   color: inherit;
   font-family: inherit;
-  font-size: 30px;
+  font-size: 26px;
   transition:
     color 0.3s,
     filter 0.3s;
@@ -34,8 +34,8 @@ const emit = defineEmits<{
   filter: drop-shadow(0 0 5px #edb26b);
 }
 .arrow {
-  width: 30px;
-  height: 30px;
+  width: 26px;
+  height: 26px;
   background-image: url("/common/images/箭头按钮.webp");
   background-size: contain;
   background-repeat: no-repeat;
@@ -53,14 +53,14 @@ const emit = defineEmits<{
   rotate: 180deg;
 }
 
-@media (max-width: 1024px) {
+@media (max-height: 500px) {
   .btn {
-    font-size: 24px;
+    font-size: 22px;
     gap: 6px;
   }
   .arrow {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
   }
 }
 </style>

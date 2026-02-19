@@ -6,7 +6,7 @@ import PageNavButton from "../components/PageNavButton.vue";
 import { useMediaStore } from "../stores/media";
 import type { characterType } from "../types/characterType";
 
-const { tm } = useI18n();
+const { tm } = useI18n(); // tm 用于获取整个对象的翻译，适合需要获取数组或对象的情况
 const mediaStore = useMediaStore();
 
 const characters = computed<characterType[]>(() => tm("characters") as characterType[]);
@@ -324,7 +324,7 @@ async function playHoverSound() {
 }
 
 /* 移动端适配 */
-@media (max-width: 1024px) {
+@media (max-height: 500px) {
   .list-item {
     width: 150px;
     height: 36px;

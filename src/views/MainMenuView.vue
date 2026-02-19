@@ -7,7 +7,7 @@ import { useMediaStore } from "../stores/media";
 import { onMounted, computed, onUnmounted } from "vue";
 import { useI18n } from "vue-i18n";
 
-const { t } = useI18n();
+const { t } = useI18n(); // t 用于获取单条文本翻译
 const mediaStore = useMediaStore();
 const gameStore = useGameStore();
 const appVersion = computed(() => `v${import.meta.env.VITE_APP_VERSION} | ${t("bottomBar.demo")}`);
@@ -44,10 +44,6 @@ async function navigateTo(path: string) {
   await mediaStore.setEffectAudioAsync("音效3");
   router.push(path);
 }
-
-async function playHoverSound() {
-  await mediaStore.setEffectAudioAsync("音效4");
-}
 </script>
 <template>
   <div class="container">
@@ -57,13 +53,10 @@ async function playHoverSound() {
     <div class="overlay">
       <!-- 左侧菜单按钮 -->
       <div class="left-menu">
-        <MenuButton :text="$t('menu.startStory')" @click="" @pointerenter="playHoverSound" />
-        <MenuButton
-          :text="$t('menu.chapterSelection')"
-          @click="navigateTo('/chapters')"
-          @pointerenter="playHoverSound" />
-        <MenuButton :text="$t('menu.portfolios')" @click="navigateTo('/portfolios')" @pointerenter="playHoverSound" />
-        <MenuButton :text="$t('menu.exitGame')" @click="" @pointerenter="playHoverSound" />
+        <MenuButton :text="$t('menu.startStory')" @click="" />
+        <MenuButton :text="$t('menu.chapterSelection')" @click="navigateTo('/chapters')" />
+        <MenuButton :text="$t('menu.portfolios')" @click="navigateTo('/portfolios')" />
+        <MenuButton :text="$t('menu.exitGame')" @click="" />
       </div>
 
       <!-- 底栏 -->
@@ -71,17 +64,11 @@ async function playHoverSound() {
         <span class="version">{{ appVersion }}</span>
         <span class="copyright">© 2026 {{ $t("bottomBar.copyright") }}</span>
         <div class="bottom-btn">
-          <BarButton :text="$t('bottomBar.settings')" @click="navigateTo('/settings')" @pointerenter="playHoverSound" />
-          <BarButton
-            :text="$t('bottomBar.announcements')"
-            @click="navigateTo('/announcements')"
-            @pointerenter="playHoverSound" />
-          <BarButton :text="$t('bottomBar.eula')" @click="navigateTo('/eula')" @pointerenter="playHoverSound" />
-          <BarButton
-            :text="$t('bottomBar.achievements')"
-            @click="navigateTo('/achievements')"
-            @pointerenter="playHoverSound" />
-          <BarButton :text="$t('bottomBar.credits')" @click="navigateTo('/credits')" @pointerenter="playHoverSound" />
+          <BarButton :text="$t('bottomBar.settings')" @click="navigateTo('/settings')" />
+          <BarButton :text="$t('bottomBar.announcements')" @click="navigateTo('/announcements')" />
+          <BarButton :text="$t('bottomBar.eula')" @click="navigateTo('/eula')" />
+          <BarButton :text="$t('bottomBar.achievements')" @click="navigateTo('/achievements')" />
+          <BarButton :text="$t('bottomBar.credits')" @click="navigateTo('/credits')" />
         </div>
       </div>
     </div>
@@ -130,7 +117,7 @@ async function playHoverSound() {
   gap: 15px;
 }
 
-@media (max-width: 1024px) {
+@media (max-height: 500px) {
   .bottom-btn {
     gap: 0px;
   }

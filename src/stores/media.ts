@@ -22,10 +22,10 @@ export const useMediaStore = defineStore("media", () => {
   watch(bgmVolume, (val) => localStorage.setItem("bgmVolume", val.toString()));
   watch(effectVolume, (val) => localStorage.setItem("effectVolume", val.toString()));
 
-  // 计算实际音量
-  const actualBgmVolume = computed(() => mainVolume.value * bgmVolume.value);
-  const actualPlayerVolume = computed(() => mainVolume.value * playerVolume.value);
-  const actualEffectVolume = computed(() => mainVolume.value * effectVolume.value);
+  // 计算实际音量（使用平方曲线以获得更自然的音量调整）
+  const actualBgmVolume = computed(() => Math.pow(mainVolume.value * bgmVolume.value, 2));
+  const actualPlayerVolume = computed(() => Math.pow(mainVolume.value * playerVolume.value, 2));
+  const actualEffectVolume = computed(() => Math.pow(mainVolume.value * effectVolume.value, 2));
 
   watch(actualBgmVolume, (newVolume: number) => {
     bgmAudio.volume = newVolume;

@@ -26,9 +26,28 @@ mergeMessages(commonFiles, "common");
 mergeMessages(characterFiles, "characters");
 mergeMessages(chapterFiles, "chapters");
 
+// 获取初始语言：优先读取本地缓存，其次匹配浏览器/系统语言，最后兜底 en-US
+const getInitialLocale = (): string => {
+  const savedLocale = localStorage.getItem("locale");
+  if (savedLocale) return savedLocale;
+
+  const navLang = navigator.language;
+  if (!navLang) return "en-US";
+
+  // 匹配项目中存在的语言代码
+  if (navLang.startsWith("zh")) {
+    return navLang.includes("HK") || navLang.includes("TW") || navLang.includes("MO") ? "zh-HK" : "zh-CN";
+  }
+  if (navLang.startsWith("ja")) return "ja-JP";
+  if (navLang.startsWith("ko")) return "ko-KR";
+  if (navLang.startsWith("en")) return "en-US";
+
+  return "en-US";
+};
+
 const i18n = createI18n({
   legacy: false, // 使用 Composition API 模式
-  locale: localStorage.getItem("locale") || "zh-CN", // 初始化时优先读取 localStorage
+  locale: getInitialLocale(), // 使用探测函数初始化
   fallbackLocale: "en-US", // 备用语言
   messages,
 });

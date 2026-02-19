@@ -25,6 +25,13 @@
         "effectsVolume": "効果音音量",
         "language": "インターフェース言語"
     },
+    "chapter": {
+        "enterChapter": "章に入る"
+    },
+    "storyline": {
+        "currentProgress": "現在の進行状況",
+        "storylineHelp": "物語ヘルプ"
+    },
     "character": {
         "characterIntroduction": "キャラクター紹介",
         "characterStories": "キャラクター物語"

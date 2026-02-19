@@ -53,7 +53,7 @@ const emit = defineEmits<{
 }
 
 /* 移动端适配 */
-@media (max-width: 1024px) {
+@media (max-height: 500px) {
   .image {
     width: 30px;
     height: 30px;
