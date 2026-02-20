@@ -15,7 +15,7 @@
         {
             "id": "ChuHuan",
             "name": "Chu Huan",
-            "description": "Once a trusted retainer of Emperor Sikong Jing, now the closest aide to Sikong Yao. He once led troops to protect Sikong Jing’s family during their retreat south. Loyal and righteous, he deeply supports Sikong Yao’s ambition to reclaim the north.\nTo Sikong Yao, he is both a loyal subject and a guardian who cared for him since childhood.",
+            "description": "Once a trusted retainer of Emperor Sikong Jing, now the closest aide to Sikong Yao. He once led troops to protect Sikong Jing's family during their retreat south. Loyal and righteous, he deeply supports Sikong Yao's ambition to reclaim the north.\nTo Sikong Yao, he is both a loyal subject and a guardian who cared for him since childhood.",
             "stories": []
         },
         {
@@ -39,7 +39,7 @@
         {
             "id": "ChenWanEr",
             "name": "Chen Waner",
-            "description": "Daughter of the Chen family, the greatest noble family in Xuan. After the death of her parents, power shifted to her great-uncle Chen Dao, and her branch of the family was gradually stripped of influence.\nAs the last daughter of the main line, she refused to let her uncle dictate her fate. Pushed out of the family’s center of power, she relied on her intelligence and wit to maneuver among factions and secure advantages for herself.",
+            "description": "Daughter of the Chen family, the greatest noble family in Xuan. After the death of her parents, power shifted to her great-uncle Chen Dao, and her branch of the family was gradually stripped of influence.\nAs the last daughter of the main line, she refused to let her uncle dictate her fate. Pushed out of the family's center of power, she relied on her intelligence and wit to maneuver among factions and secure advantages for herself.",
             "stories": []
         },
         {
@@ -57,7 +57,7 @@
         {
             "id": "ChenDao",
             "name": "Chen Dao",
-            "description": "Chancellor of Xuan and head of the powerful Chen family, the foremost noble family of the realm. Deeply calculating, treacherous, and ruthless, he foresaw the turmoil that would follow the princes’ struggles and the Wunu invasion. He chose to back the reclusive Prince of Langya and rose to dominance as the leading noble in the south.",
+            "description": "Chancellor of Xuan and head of the powerful Chen family, the foremost noble family of the realm. Deeply calculating, treacherous, and ruthless, he foresaw the turmoil that would follow the princes' struggles and the Wunu invasion. He chose to back the reclusive Prince of Langya and rose to dominance as the leading noble in the south.",
             "stories": []
         },
         {
@@ -69,7 +69,7 @@
         {
             "id": "ZuYue",
             "name": "Zu Yue",
-            "description": "Daughter of Great General Zu Kun of Xuan. Having followed her father on campaigns for years, she became a formidable warrior with an open and lively spirit. In private, she sometimes longed for the splendor of Jiangnan’s pavilions and admired cultured scholars and handsome men.\nYet life in the army also shaped her into someone decisive and ruthless in serious matters. When carrying out orders, she never allowed personal feelings, striking fear into her enemies.",
+            "description": "Daughter of Great General Zu Kun of Xuan. Having followed her father on campaigns for years, she became a formidable warrior with an open and lively spirit. In private, she sometimes longed for the splendor of Jiangnan's pavilions and admired cultured scholars and handsome men.\nYet life in the army also shaped her into someone decisive and ruthless in serious matters. When carrying out orders, she never allowed personal feelings, striking fear into her enemies.",
             "stories": []
         },
         {
@@ -81,7 +81,7 @@
         {
             "id": "LiuNian",
             "name": "Liu Nian",
-            "description": "Granddaughter of Liu Dadao, leader of the northern fortress clans.\nOrphaned young, she grew up under her grandfather’s care in the lost northern lands, enduring hardship. Having witnessed countless friends and kin slain by the Wunu, she longs for the day when the people of the north can live in peace again.",
+            "description": "Granddaughter of Liu Dadao, leader of the northern fortress clans.\nOrphaned young, she grew up under her grandfather's care in the lost northern lands, enduring hardship. Having witnessed countless friends and kin slain by the Wunu, she longs for the day when the people of the north can live in peace again.",
             "stories": []
         },
         {
@@ -93,7 +93,7 @@
         {
             "id": "ZhuYuanZhi",
             "name": "Zhu Yuanzhi",
-            "description": "Of humble origins and blessed with immense strength, he spent his childhood forging iron, raiding, and working as a mercenary in the north with his father. After their bandit lair was destroyed by the Wu, he fled south alone. Later, when he waylaid Chu Huan’s carriage, his talent was recognized and he was taken in as a follower, joining the army to hone his skills.",
+            "description": "Of humble origins and blessed with immense strength, he spent his childhood forging iron, raiding, and working as a mercenary in the north with his father. After their bandit lair was destroyed by the Wu, he fled south alone. Later, when he waylaid Chu Huan's carriage, his talent was recognized and he was taken in as a follower, joining the army to hone his skills.",
             "stories": []
         },
         {
@@ -105,19 +105,19 @@
         {
             "id": "ZuKun",
             "name": "Zu Kun",
-            "description": "A native of Yongan City, Great General of Xuan and pillar of the realm, the chief commander guarding the Tianhe front against the Wu.\nSteady and mature, calm in judgment and never revealing his emotions, he has repelled the Wu’s invasions many times and enjoys immense prestige within the army. Rarely meddling in politics, he is often praised for his integrity.",
+            "description": "A native of Yongan City, Great General of Xuan and pillar of the realm, the chief commander guarding the Tianhe front against the Wu.\nSteady and mature, calm in judgment and never revealing his emotions, he has repelled the Wu's invasions many times and enjoys immense prestige within the army. Rarely meddling in politics, he is often praised for his integrity.",
             "stories": []
         },
         {
             "id": "LiuDaDao",
             "name": "Liu Dadao",
-            "description": "Leader of the northern fortress clans and commander of the righteous army, once a soldier in the Yongan army.\nDuring the Wu invasion, fear drove him to desert. Later, he learned his wife and son perished in flight, plunging him into grief and remorse. After his daughter-in-law’s death, he raised his granddaughter Liu Nian alone, the two depending solely on each other.",
+            "description": "Leader of the northern fortress clans and commander of the righteous army, once a soldier in the Yongan army.\nDuring the Wu invasion, fear drove him to desert. Later, he learned his wife and son perished in flight, plunging him into grief and remorse. After his daughter-in-law's death, he raised his granddaughter Liu Nian alone, the two depending solely on each other.",
             "stories": []
         },
         {
             "id": "SiKongSheng",
             "name": "Sikong Sheng",
-            "description": "Eldest son of Sikong Yao and Xie Ruolan, titled Crown Prince of Xuan.\nIn childhood, he lived through his father’s struggle for the throne and his mother’s death. Entrusted with high hopes by his father, he was raised with respect and discipline. Polished and diligent, just as his mother had wished, he grew into a prince of great talent for governance, devoted to aiding his father and caring for the people.",
+            "description": "Eldest son of Sikong Yao and Xie Ruolan, titled Crown Prince of Xuan.\nIn childhood, he lived through his father's struggle for the throne and his mother's death. Entrusted with high hopes by his father, he was raised with respect and discipline. Polished and diligent, just as his mother had wished, he grew into a prince of great talent for governance, devoted to aiding his father and caring for the people.",
             "stories": []
         },
         {
@@ -135,19 +135,19 @@
         {
             "id": "WangMing",
             "name": "Wang Ming",
-            "description": "Born the son of commoners, he grew up in poverty. In his youth, he earned a living by writing essays for wealthy households. The integrity and spirit within his words caught the eye of Yu Gong, who applauded his talent and sought him out, taking him as a disciple.\nWith Yu Gong’s guidance, Wang Ming became upright and disciplined. Yu Gong often jested with Prince Jin, saying, This boy is much like I was in my youth.",
+            "description": "Born the son of commoners, he grew up in poverty. In his youth, he earned a living by writing essays for wealthy households. The integrity and spirit within his words caught the eye of Yu Gong, who applauded his talent and sought him out, taking him as a disciple.\nWith Yu Gong's guidance, Wang Ming became upright and disciplined. Yu Gong often jested with Prince Jin, saying, This boy is much like I was in my youth.",
             "stories": []
         },
         {
             "id": "ChuMeng",
             "name": "Chu Meng",
-            "description": "Son of Chu Huan. When his father was accused, Prince of Jin secretly protected him by changing his name and placing him in the army. After Prince of Jin ascended the throne, he was promoted to Captain of the Imperial Guard. To the court, he seemed taciturn and awkward, yet he held the Emperor’s special favor. Whenever the Emperor toured, Chu Meng was always three steps behind.",
+            "description": "Son of Chu Huan. When his father was accused, Prince of Jin secretly protected him by changing his name and placing him in the army. After Prince of Jin ascended the throne, he was promoted to Captain of the Imperial Guard. To the court, he seemed taciturn and awkward, yet he held the Emperor's special favor. Whenever the Emperor toured, Chu Meng was always three steps behind.",
             "stories": []
         },
         {
             "id": "QiuSheng",
             "name": "Qiu Sheng",
-            "description": "Sworn brother of Liu Dadao, leader of the northern righteous army. Wielding a long spear, he is unmatched in battle. Fiery by nature, he scorns the Wu’s repeated attempts to win him over.",
+            "description": "Sworn brother of Liu Dadao, leader of the northern righteous army. Wielding a long spear, he is unmatched in battle. Fiery by nature, he scorns the Wu's repeated attempts to win him over.",
             "stories": []
         },
         {
@@ -171,13 +171,13 @@
         {
             "id": "QiJiu",
             "name": "Qi Jiu",
-            "description": "Of humble soldierly origin, once a mere footman under General Zu Kun. Later assigned to serve with Prince of Jin, Sikong Yao at Yiyang, he fought side by side with the Prince, even leading a daring raid on Shi Lang’s camp.\nAfter Zu Kun’s death, he joined Sikong Yao’s Northern Shuo Army, often charging as vanguard, loyal without fail. With the founding of the new dynasty, he was honored as a founding general, yet still bore his iron halberd guarding the palace gates.",
+            "description": "Of humble soldierly origin, once a mere footman under General Zu Kun. Later assigned to serve with Prince of Jin, Sikong Yao at Yiyang, he fought side by side with the Prince, even leading a daring raid on Shi Lang's camp.\nAfter Zu Kun's death, he joined Sikong Yao's Northern Shuo Army, often charging as vanguard, loyal without fail. With the founding of the new dynasty, he was honored as a founding general, yet still bore his iron halberd guarding the palace gates.",
             "stories": []
         },
         {
             "id": "LinShu",
             "name": "Lin Shu",
-            "description": "Once a frontier hero who gathered followers for protection in the war-torn borderlands. When he heard that Zu Kun was leading troops north, he brought his men to join and humbly requested to serve as a mere foot soldier. Zu Kun placed him under Sikong Yao’s command at Yiyang.\nTaciturn yet fierce, he always fought at the front lines. In the bloody defense of Yiyang, he and Zhu Yuanzhi held the northern wall, where he witnessed Shi Lang’s command banner fall. From then on, he pledged himself wholly to Prince of Jin. Rising from outlaw to general through countless campaigns, he remained steadfast and loyal. Despite his high rank, he lived simply, often standing with his hand on his sword at the palace steps, guarding the Emperor’s carriage.",
+            "description": "Once a frontier hero who gathered followers for protection in the war-torn borderlands. When he heard that Zu Kun was leading troops north, he brought his men to join and humbly requested to serve as a mere foot soldier. Zu Kun placed him under Sikong Yao's command at Yiyang.\nTaciturn yet fierce, he always fought at the front lines. In the bloody defense of Yiyang, he and Zhu Yuanzhi held the northern wall, where he witnessed Shi Lang's command banner fall. From then on, he pledged himself wholly to Prince of Jin. Rising from outlaw to general through countless campaigns, he remained steadfast and loyal. Despite his high rank, he lived simply, often standing with his hand on his sword at the palace steps, guarding the Emperor's carriage.",
             "stories": []
         },
         {
@@ -195,13 +195,13 @@
         {
             "id": "WangGuaFu",
             "name": "Widow Wang",
-            "description": "No one knows her real name—everyone calls her Widow Wang. It is said she was once the daughter of a wealthy merchant. On her wedding day, her household was destroyed by Wu raiders, forcing her into exile.\nYears of hardship hardened her tongue, making her sharp and formidable, often intimidating her companions. Yet her heart still bore kindness: when she saw the helpless, she would share her food, even as she cursed them.\nShe had seen the royal army march north and offered her grain in welcome. She had survived the Wu massacres, falling into valleys and living on wild fruit. She had stood at Yiyang’s gates to watch the Emperor return in triumph. She endured the decline of Xuan and now witnessed the rise of Great Xuan. Hers was a life of sixty turbulent, extraordinary years…\nOr so she claims. Now, in the taverns of the southern capital, crowds gather daily to hear this woman storyteller spin her tales anew.",
+            "description": "No one knows her real name—everyone calls her Widow Wang. It is said she was once the daughter of a wealthy merchant. On her wedding day, her household was destroyed by Wu raiders, forcing her into exile.\nYears of hardship hardened her tongue, making her sharp and formidable, often intimidating her companions. Yet her heart still bore kindness: when she saw the helpless, she would share her food, even as she cursed them.\nShe had seen the royal army march north and offered her grain in welcome. She had survived the Wu massacres, falling into valleys and living on wild fruit. She had stood at Yiyang's gates to watch the Emperor return in triumph. She endured the decline of Xuan and now witnessed the rise of Great Xuan. Hers was a life of sixty turbulent, extraordinary years…\nOr so she claims. Now, in the taverns of the southern capital, crowds gather daily to hear this woman storyteller spin her tales anew.",
             "stories": []
         },
         {
             "id": "YaEr",
             "name": "Yaer",
-            "description": "A tribute girl from a small western kingdom, blessed with ivory skin and stunning beauty. Though unskilled in the music of the Central Plains upon entering the palace, her exotic looks drew the Emperor’s gaze. Under Consort Liu’s tutelage, she shed her innocence, and with her fiery and uninhibited charms, became uniquely favored.",
+            "description": "A tribute girl from a small western kingdom, blessed with ivory skin and stunning beauty. Though unskilled in the music of the Central Plains upon entering the palace, her exotic looks drew the Emperor's gaze. Under Consort Liu's tutelage, she shed her innocence, and with her fiery and uninhibited charms, became uniquely favored.",
             "stories": []
         }
     ]
