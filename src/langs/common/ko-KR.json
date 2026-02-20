@@ -29,6 +29,7 @@
         "enterChapter": "챕터 입장"
     },
     "storyline": {
+        "valueToPayAttentionTo": "이 챕터에서 주의해야 할 값",
         "currentProgress": "현재 진행 상황",
         "storylineHelp": "이야기 도움말"
     },

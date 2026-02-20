@@ -6,6 +6,22 @@
     "main"
   ],
   "permissions": [
-    "core:default"
+    "core:default",
+    {
+      "identifier": "http:allow-fetch",
+      "allow": [
+        {
+          "url": "https://prod.beifa.shyingyou.cn/*"
+        }
+      ]
+    },
+    {
+      "identifier": "http:allow-request",
+      "allow": [
+        {
+          "url": "https://prod.beifa.shyingyou.cn/*"
+        }
+      ]
+    }
   ]
 }

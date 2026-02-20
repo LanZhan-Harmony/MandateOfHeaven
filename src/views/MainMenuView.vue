@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useGameStore } from "../stores/game";
+import { useSaveStore } from "../stores/save";
 import BarButton from "../components/BarButton.vue";
 import MenuButton from "../components/MenuButton.vue";
 import router from "../router";
@@ -9,7 +9,7 @@ import { useI18n } from "vue-i18n";
 
 const { t } = useI18n(); // t 用于获取单条文本翻译
 const mediaStore = useMediaStore();
-const gameStore = useGameStore();
+const saveStore = useSaveStore();
 const appVersion = computed(() => `v${import.meta.env.VITE_APP_VERSION} | ${t("bottomBar.demo")}`);
 
 onMounted(async () => {
@@ -42,7 +42,7 @@ onMounted(async () => {
 
 async function navigateTo(path: string) {
   await mediaStore.setEffectAudioAsync("音效3");
-  router.push(path);
+  await router.push(path);
 }
 </script>
 <template>
@@ -53,7 +53,7 @@ async function navigateTo(path: string) {
     <div class="overlay">
       <!-- 左侧菜单按钮 -->
       <div class="left-menu">
-        <MenuButton :text="$t('menu.startStory')" @click="" />
+        <MenuButton :text="saveStore.isNewGame ? $t('menu.startStory') : $t('menu.continueStory')" @click="" />
         <MenuButton :text="$t('menu.chapterSelection')" @click="navigateTo('/chapters')" />
         <MenuButton :text="$t('menu.portfolios')" @click="navigateTo('/portfolios')" />
         <MenuButton :text="$t('menu.exitGame')" @click="" />

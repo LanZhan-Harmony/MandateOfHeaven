@@ -29,6 +29,7 @@
         "enterChapter": "Enter Chapter"
     },
     "storyline": {
+        "valueToPayAttentionTo": "Value to pay attention to in this chapter",
         "currentProgress": "Current Progress",
         "storylineHelp": "Storyline Help"
     },

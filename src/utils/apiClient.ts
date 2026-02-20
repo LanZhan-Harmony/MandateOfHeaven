@@ -1,3 +1,4 @@
+import { fetch as tauriFetch } from "@tauri-apps/plugin-http";
 import type { archiveType } from "../types/archiveType";
 import type { briefArchiveType } from "../types/briefArchiveType";
 
@@ -5,7 +6,9 @@ import type { briefArchiveType } from "../types/briefArchiveType";
  * 处理动态cookie的API客户端
  */
 class APIClient {
-  private baseUrl: string = "https://prod.beifa.shyingyou.cn";
+  private baseUrl: string =
+    import.meta.env.DEV && !(window as any).__TAURI_INTERNALS__ ? "" : "https://prod.beifa.shyingyou.cn";
+
   private sessionCookie: string | null;
   private headers: Record<string, string> = {
     Accept: "application/json",
@@ -41,14 +44,25 @@ class APIClient {
 
     this.sessionCookie =
       foundCookie ||
-      "K6QdgYl9QW5DYSpyLiwMOyq7PCs%2BUBiyBSCQqeTjSdYLEqPkCww7HmTfqkZGPLP5QfPATslBJTuTn96LLnikeH6CLeuXU5Vzyl7J0MZrKoIi6%2B0yBziJBPTu7m9J%2B8tDL5ZFr%2BXjergMGk3G%2BE655fIDmwUQX0RE%2F7bXs9XXc%2FxVdespusO6qAvwdQaketYJMn%2BlI2P3IK53TSkng0dNoGr1CCDM3pTTdr8%3D--XMrx94vt%2FIUWZE7a--ut7Wc17bvboGxDnxkfuKaw%3D%3D";
+      "rhVH54%2FcMxT3OStH%2B8mPbaO2mrZL8lLQw1p7MKwtRXmHYComn3Y0h%2BByq8WbcyGUt5ZVsMWwVc%2BmA3kP9eySzjTJfTNtpmkxdn0wCpsOjjg2JHffVdWWOqtJMylZxIZWxHzqvvOR9VGPneDVMwOUJazherpz%2Fb81yfmQkOnvWb8KjejSgk3ppvcs9QBDCdTR2A9uGtRtZaQ7AS4uDJMNb3wnW1CPGDianQI%3D--He4qG2rEreLyaBdH--TttKxwdX%2FaUQ4XRAF4dQxA%3D%3D";
+  }
+
+  /**
+   * 获取当前环境下的 fetch 函数
+   */
+  private async getFetch() {
+    // 检查是否在 Tauri 环境中
+    if ((window as any).__TAURI_INTERNALS__) {
+      return tauriFetch;
+    }
+    return window.fetch.bind(window);
   }
 
   /**
    * 从响应中提取并更新cookie
    * @param response HTTP响应对象
    */
-  private updateCookieFromResponse(response: Response) {
+  private updateCookieFromResponse(response: any) {
     const setCookie = response.headers.get("set-cookie");
     if (setCookie) {
       // 解析set-cookie头
@@ -70,12 +84,27 @@ class APIClient {
    * 执行HTTP请求
    */
   private async request(method: string, path: string, body: any = null) {
-    const headers: Record<string, string> = {
-      ...this.headers,
-      Cookie: `_session=${this.sessionCookie}`,
-    };
+    const isTauri = !!(window as any).__TAURI_INTERNALS__;
+    const isDev = import.meta.env.DEV && !isTauri;
 
-    const options: RequestInit = {
+    // 基础头部信息
+    const headers: Record<string, string> = { ...this.headers };
+
+    // 浏览器环境下，移除那些会被浏览器拦截或由 Vite Proxy 注入的受限头部
+    if (isDev) {
+      delete headers["User-Agent"];
+      delete headers["Sec-CH-UA"];
+      delete headers["Sec-CH-UA-Mobile"];
+      delete headers["Sec-CH-UA-Platform"];
+      delete headers["Sec-Fetch-Dest"];
+      delete headers["Sec-Fetch-Mode"];
+      delete headers["Sec-Fetch-Site"];
+    } else {
+      // 在 Tauri 或生产环境下，手动补上 Cookie
+      headers["Cookie"] = `_session=${this.sessionCookie}`;
+    }
+
+    const options: any = {
       method,
       headers,
     };
@@ -85,7 +114,8 @@ class APIClient {
       options.body = JSON.stringify(body);
     }
 
-    const response = await fetch(`${this.baseUrl}${path}`, options);
+    const activeFetch = await this.getFetch();
+    const response = await activeFetch(`${this.baseUrl}${path}`, options);
 
     // 关键：从响应中更新cookie！
     this.updateCookieFromResponse(response);
@@ -99,6 +129,7 @@ class APIClient {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
 
+    // Tauri fetch 返回的对象同样支持 .json()
     return await response.json();
   }
 

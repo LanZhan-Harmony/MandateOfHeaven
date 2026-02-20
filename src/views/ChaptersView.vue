@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import ChapterLineItem from "../components/ChapterLineItem.vue";
-import type { chapterType } from "../types/chapterType";
+import router from "@/router";
 import { computed, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
-import PageNavButton from "../components/PageNavButton.vue";
-import { useGameStore } from "../stores/game";
-import { useMediaStore } from "../stores/media";
 import ChapterDescription from "../components/ChapterDescription.vue";
+import ChapterLineItem from "../components/ChapterLineItem.vue";
+import PageNavButton from "../components/PageNavButton.vue";
+import { useMediaStore } from "../stores/media";
+import { useSaveStore } from "../stores/save";
+import type { chapterType } from "../types/chapterType";
 
 const { tm } = useI18n();
 const mediaStore = useMediaStore();
-const gameStore = useGameStore();
+const saveStore = useSaveStore();
 
 const chapters = computed(() => tm("chapters") as chapterType[]);
 const selectedIndex = ref(0);
@@ -37,6 +38,9 @@ onMounted(() => {
 function handleClick(index: number) {
   selectedIndex.value = index;
 }
+async function enterChapter() {
+  await router.push("/storylines");
+}
 </script>
 <template>
   <div class="container">
@@ -50,7 +54,7 @@ function handleClick(index: number) {
         :iconPath="chapterIcons[index]! || chapterIcons[0]!"
         :title="chapter.title"
         :selected="index === selectedIndex"
-        :locked="false"
+        :locked="saveStore.chapterUnlocked[index] === false"
         @click="handleClick(index)" />
     </div>
 
@@ -59,8 +63,8 @@ function handleClick(index: number) {
       class="description"
       :chapterId="selectedIndex"
       :description="chapters[selectedIndex]!.description"
-      :progress="gameStore.chapterProgress[selectedIndex] || 0"
-      @click="" />
+      :progress="saveStore.chapterProgress[selectedIndex] || 0"
+      @click="enterChapter" />
   </div>
 </template>
 <style scoped>

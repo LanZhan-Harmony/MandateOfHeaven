@@ -29,6 +29,7 @@
         "enterChapter": "章に入る"
     },
     "storyline": {
+        "valueToPayAttentionTo": "この章で注目すべき値",
         "currentProgress": "現在の進行状況",
         "storylineHelp": "物語ヘルプ"
     },

@@ -31,12 +31,13 @@ const progressWidth = computed(() => {
   position: relative;
   flex-grow: 1;
   height: 100%;
-  margin: 0 180px 0 -25px;
+  margin: 0 250px 0 -25px;
 }
 .dynamic {
   position: absolute;
   left: 0;
   top: 0;
+  width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -46,6 +47,7 @@ const progressWidth = computed(() => {
   height: 100%;
   object-fit: cover;
   transition: width 0.3s;
+  flex-shrink: 0;
 }
 .head {
   height: 100%;
@@ -59,5 +61,6 @@ const progressWidth = computed(() => {
 .progress-text {
   font-size: 22px;
   margin-left: 10px;
+  flex-shrink: 0;
 }
 </style>

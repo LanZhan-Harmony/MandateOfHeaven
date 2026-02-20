@@ -1,17 +1,41 @@
 import { defineStore } from "pinia";
-import { computed, ref, shallowReactive, toRaw } from "vue";
+import { computed, ref, toRaw } from "vue";
 import { chapterEndingVideoIds } from "../assets/data/chapterEndingVideos.js";
 import endings from "../assets/data/endings.json";
 import { valueChangeVideoIds } from "../assets/data/valueChangeVideos.js";
 import videos from "../assets/data/videos.json";
 import type { actionGroupType, uiButtonActionGroupType } from "../types/actionGroupType.js";
 import type { archiveType, ffiArgumentType, timelineLineType } from "../types/archiveType.js";
-import type { PlayerInstruction } from "../types/playerInstructionType.js";
 import type { videoType } from "../types/videoType.js";
 import { apiClient } from "../utils/apiClient.js";
 import { deepArrayEquals } from "../utils/comparer.js";
 import { convertToChapterId, convertToStoryletId, convertToVideoId } from "../utils/converter.js";
 import { clamp, randomChance } from "./calc.js";
+import { usePlayerStore } from "./player.js";
+
+// =============================
+// 静态游戏数据
+// =============================
+
+const endingsData = endings as Record<string, string>;
+
+/** 所有 storylet 及其视频的映射表 */
+const videosData = videos.storylets as videoType[];
+
+/** 所有 storylet ID 列表 */
+const allStoryletIds: string[] = videosData.map((s) => s.id);
+/** 所有视频 ID 列表 */
+const allVideoIds: string[] = videosData.flatMap((s) => s.videos);
+
+/** 按章节（0-7）分组的所有视频 ID 列表 */
+const videosByChapter: string[][] = [...Array(8).keys()].map((chapterId) =>
+  videosData.filter((s) => convertToChapterId(s.id) === chapterId).flatMap((s) => s.videos),
+);
+
+/** 按章节（0-7）分组的所有 storylet ID 列表 */
+const storyletsByChapter: string[][] = [...Array(8).keys()].map((chapterId) =>
+  videosData.filter((s) => convertToChapterId(s.id) === chapterId).map((s) => s.id),
+);
 
 /**
  * 判断给定视频是否为章节结束视频
@@ -21,28 +45,14 @@ function isChapterEndingVideo(videoId: string): boolean {
   return chapterEndingVideoIds.includes(convertToVideoId(videoId));
 }
 
-// =============================
-// 静态游戏数据
-// =============================
-
-const endingsData = endings as Record<string, string>;
-
 /**
- * 获取视频对应的结局提示文本
+ * 获取视频对应的结局类型
  * @param videoId 视频 ID
- * @returns 结局文本，如无则返回 null
+ * @returns 结局类型，如无则返回 null
  */
-function getEndingPrompt(videoId: string): string | null {
-  return endingsData[convertToStoryletId(videoId)] || null;
+function getEndingType(videoId: string): "gold" | "silver" | "bronze" | null {
+  return (endingsData[convertToStoryletId(videoId)] as "gold" | "silver" | "bronze") || null;
 }
-
-/** 所有 storylet 及其视频的映射表 */
-const videosData = videos.storylets as videoType[];
-
-/** 所有 storylet ID 列表 */
-const allStoryletIds: string[] = videosData.map((s) => s.id);
-/** 所有视频 ID 列表 */
-const allVideoIds: string[] = videosData.flatMap((s) => s.videos);
 
 // =============================
 // 游戏数据查询函数
@@ -66,25 +76,40 @@ function getStoryletFromVideo(videoId: string): string | null {
   return videosData.find((s) => s.videos.includes(convertToVideoId(videoId)))?.id ?? null;
 }
 
-/** 按章节（0-7）分组的所有视频 ID 列表 */
-const videosByChapter: string[][] = [...Array(8).keys()].map((chapterId) =>
-  videosData.filter((s) => convertToChapterId(s.id) === chapterId).flatMap((s) => s.videos),
-);
-
-/** 按章节（0-7）分组的所有 storylet ID 列表 */
-const storyletsByChapter: string[][] = [...Array(8).keys()].map((chapterId) =>
-  videosData.filter((s) => convertToChapterId(s.id) === chapterId).map((s) => s.id),
-);
-
 /**
  * 检查视频是否会导致游戏数值变化
  * @param videoId 视频 ID
+ * @returns 是否会导致数值变化
  */
 function hasValueChanges(videoId: string): boolean {
   return valueChangeVideoIds.includes(convertToVideoId(videoId));
 }
 
-export const useGameStore = defineStore("game", () => {
+export {
+  allStoryletIds,
+  allVideoIds,
+  getEndingType,
+  getStoryletFromVideo,
+  getVideosFromStorylet,
+  hasValueChanges,
+  isChapterEndingVideo,
+};
+
+// =============================
+// Store 定义
+// =============================
+
+/**
+ * 存档 Store
+ *
+ * 职责：管理游戏存档数据（与服务器同步）、派生章节进度统计，
+ * 以及依赖存档上下文的播放控制（startVideo / progressVideo）。
+ * 播放队列的原始状态由 usePlayerStore 持有。
+ */
+export const useSaveStore = defineStore("save", () => {
+  // 依赖注入：在 store setup 顶层获取 player store（无循环模块依赖）
+  const playerStore = usePlayerStore();
+
   // ----------------------------------
   // 响应式状态
   // ----------------------------------
@@ -94,32 +119,6 @@ export const useGameStore = defineStore("game", () => {
 
   /** 当前所处的 storylet ID */
   const currentStoryletId = ref<string | null>(null);
-
-  /** 播放器指令队列（包含视频和交互信息） */
-  const playerInstructions = shallowReactive<PlayerInstruction[]>([]);
-
-  /** 当前正在播放的指令索引（-1 表示未开始） */
-  const currentPlayerInstructionId = ref(-1);
-
-  /** 本地记录的已完整观看视频列表（用于 UI 标记） */
-  const fullyWatchedVideos = ref<string[]>([]);
-
-  /** 用于计数触发器的特殊计数器 */
-  const specialCounter = ref(0);
-
-  // ----------------------------------
-  // 状态重置
-  // ----------------------------------
-
-  /** 重置所有游戏本地状态（切换存档或新游戏时调用） */
-  async function resetGameState(): Promise<void> {
-    currentSave.value = null;
-    currentStoryletId.value = null;
-    playerInstructions.length = 0;
-    currentPlayerInstructionId.value = -1;
-    fullyWatchedVideos.value = [];
-    specialCounter.value = 0;
-  }
 
   // ----------------------------------
   // 计算属性
@@ -151,19 +150,6 @@ export const useGameStore = defineStore("game", () => {
         .filter((line): line is ["play_video", string] => line[0] === "play_video")
         .map((line) => line[1]) ?? [],
   );
-
-  /**
-   * 将视频标记为已观看
-   * @param videoId 视频 ID
-   */
-  function setVideoWatched(videoId: string): void {
-    if (!fullyWatchedVideos.value.includes(videoId)) {
-      fullyWatchedVideos.value = [...fullyWatchedVideos.value, videoId];
-    }
-  }
-
-  /** 已完整观看的视频列表（只读暴露） */
-  const watchedVideos = computed<string[]>(() => fullyWatchedVideos.value);
 
   /** 各章节的解锁状态（是否有该章节的视频已被访问） */
   const chapterUnlocked = computed<boolean[]>(() =>
@@ -223,15 +209,19 @@ export const useGameStore = defineStore("game", () => {
     return valueChanges;
   });
 
-  /** 当前播放指令对应的视频 ID */
-  const currentVideoId = computed<string | null>(() =>
-    currentPlayerInstructionId.value === -1
-      ? null
-      : (playerInstructions[currentPlayerInstructionId.value]?.videoId ?? null),
-  );
-
   /** 是否为新游戏（未开始或处于第一个 storylet） */
   const isNewGame = computed<boolean>(() => !currentSave.value || currentStoryletId.value === "a00_a001_a001");
+
+  // ----------------------------------
+  // 状态操作
+  // ----------------------------------
+
+  /** 重置存档及播放器的所有本地状态（切换存档或新游戏时调用） */
+  async function resetGameState(): Promise<void> {
+    currentSave.value = null;
+    currentStoryletId.value = null;
+    playerStore.resetPlayerState();
+  }
 
   // ----------------------------------
   // 核心函数：同步存档数据
@@ -299,7 +289,7 @@ export const useGameStore = defineStore("game", () => {
 
     // 有回滚或无新事件时，重建完整队列
     if (rolledBackEvents.length > 0 || newEvents.length === 0) {
-      playerInstructions.length = 0;
+      playerStore.playerInstructions.length = 0;
       eventsToProcess = newSave.timeline.lines.slice();
     }
 
@@ -338,13 +328,13 @@ export const useGameStore = defineStore("game", () => {
           const playEvent = event as ["play_video", string];
           const videoId = playEvent[1];
           const actionGroups: actionGroupType[] = [];
-          const endingPrompt = getEndingPrompt(videoId);
+          const endingType = getEndingType(videoId);
 
-          if (endingPrompt) {
+          if (endingType) {
             // 结局视频：附加结局提示动作组
             actionGroups.push({
               type: "ending",
-              actions: [{ prompt: endingPrompt, index: convertToChapterId(videoId), key: "unknown" }],
+              actions: [{ prompt: endingType, index: convertToChapterId(videoId), key: "unknown" }],
             });
           } else if (isChapterEndingVideo(videoId)) {
             // 章节结束视频：附加章节结束动画动作组
@@ -354,7 +344,7 @@ export const useGameStore = defineStore("game", () => {
             });
           }
 
-          playerInstructions.push({ storyletId: currentStorylet, videoId, loop: false, actionGroups });
+          playerStore.playerInstructions.push({ storyletId: currentStorylet, videoId, loop: false, actionGroups });
           break;
         }
 
@@ -367,7 +357,7 @@ export const useGameStore = defineStore("game", () => {
           if (!ffiType) break;
 
           if (ffiType === "qte_continue") {
-            const lastInstruction = playerInstructions[playerInstructions.length - 1];
+            const lastInstruction = playerStore.playerInstructions[playerStore.playerInstructions.length - 1];
             if (!lastInstruction) break;
             lastInstruction.loop = true;
             const params = ffiEvent[2] as ffiArgumentType[];
@@ -401,15 +391,15 @@ export const useGameStore = defineStore("game", () => {
 
         case "count_trigger":
           // 计数触发：累计 3 次后触发
-          specialCounter.value += 1;
-          await commitSaveAction(specialCounter.value >= 3 ? "enough" : "not_enough", pendingActions);
+          playerStore.specialCounter += 1;
+          await commitSaveAction(playerStore.specialCounter >= 3 ? "enough" : "not_enough", pendingActions);
           newSave.timeline.actions = [];
           break;
 
         case "qte_slide":
         case "qte_trigger": {
           // QTE 触发：将选项附加到当前视频指令上
-          const lastInstruction = playerInstructions[playerInstructions.length - 1];
+          const lastInstruction = playerStore.playerInstructions[playerStore.playerInstructions.length - 1];
           if (!lastInstruction) break;
           const currentVideo = lastInstruction.videoId;
           lastInstruction.loop = currentVideo.toLowerCase().includes("loop");
@@ -435,7 +425,7 @@ export const useGameStore = defineStore("game", () => {
 
     // 处理普通 UI 按钮动作
     if (newSave.timeline.actions.length > 0) {
-      if (playerInstructions.length === 0) {
+      if (playerStore.playerInstructions.length === 0) {
         // 有动作但无视频可挂载，强制执行第一个动作跳过
         await commitSaveAction(0);
         return;
@@ -456,12 +446,12 @@ export const useGameStore = defineStore("game", () => {
       const timeLimitIndex = newSave.timeline.actions.findIndex((action) => action[1] === "time_limit_choose");
       if (timeLimitIndex === -1) {
         // 无时间限制：视频循环等待用户操作
-        playerInstructions[playerInstructions.length - 1]!.loop = true;
+        playerStore.playerInstructions[playerStore.playerInstructions.length - 1]!.loop = true;
       } else {
         uiButtonGroup.timeLimitedActionIndex = timeLimitIndex;
       }
 
-      playerInstructions[playerInstructions.length - 1]!.actionGroups.push(uiButtonGroup);
+      playerStore.playerInstructions[playerStore.playerInstructions.length - 1]!.actionGroups.push(uiButtonGroup);
     }
 
     // ------------------------------------------------------------------
@@ -469,23 +459,23 @@ export const useGameStore = defineStore("game", () => {
     // ------------------------------------------------------------------
     if (rewindToVideoId) {
       let rewindIndex = -1;
-      for (let i = 0; i < playerInstructions.length; ++i) {
-        if (playerInstructions[i]!.videoId === rewindToVideoId) {
+      for (let i = 0; i < playerStore.playerInstructions.length; ++i) {
+        if (playerStore.playerInstructions[i]!.videoId === rewindToVideoId) {
           rewindIndex = i;
           break;
         }
       }
       if (rewindIndex > 0) {
-        playerInstructions.splice(0, rewindIndex);
+        playerStore.playerInstructions.splice(0, rewindIndex);
       }
     }
 
     // ------------------------------------------------------------------
     // 步骤 6：移除超出第 7 章的视频（游戏共 8 章，索引 0-7）
     // ------------------------------------------------------------------
-    for (let i = 0; i < playerInstructions.length; i++) {
-      if (convertToChapterId(playerInstructions[i]!.videoId) > 7) {
-        playerInstructions.splice(i);
+    for (let i = 0; i < playerStore.playerInstructions.length; i++) {
+      if (convertToChapterId(playerStore.playerInstructions[i]!.videoId) > 7) {
+        playerStore.playerInstructions.splice(i);
         break;
       }
     }
@@ -528,7 +518,7 @@ export const useGameStore = defineStore("game", () => {
       const storyletVideos = getVideosFromStorylet(storyletId);
       if (storyletVideos) {
         for (const videoId of storyletVideos) {
-          setVideoWatched(videoId);
+          playerStore.setVideoWatched(videoId);
         }
       }
     }
@@ -554,11 +544,13 @@ export const useGameStore = defineStore("game", () => {
   }
 
   /**
-   * 推测性同步：仅在本地无存档时才触发完整同步
+   * 推测性同步：仅在本地无存档时才触发完整同步。
+   * 适合在应用启动时调用，避免重复加载。
    */
   async function speculativeSyncSave(): Promise<void> {
     if (!currentSave.value) {
       await fullSyncSave();
+      logAllStates();
     }
   }
 
@@ -639,11 +631,11 @@ export const useGameStore = defineStore("game", () => {
   // ----------------------------------
 
   /**
-   * 开始播放：加载第一个播放指令。
-   * 若队列为空，则尝试回溯到时间线最后一个视频。
+   * 开始播放：激活第一个播放指令。
+   * 若队列为空，则先回溯到时间线最后一个视频再激活。
    */
   async function startVideo(): Promise<void> {
-    if (playerInstructions.length === 0) {
+    if (playerStore.playerInstructions.length === 0) {
       const lastPlayLine = currentSave.value?.timeline.lines.findLast(
         (line): line is ["play_video", string] => line[0] === "play_video",
       );
@@ -652,9 +644,9 @@ export const useGameStore = defineStore("game", () => {
       }
     }
 
-    if (currentPlayerInstructionId.value === -1 && playerInstructions.length > 0) {
-      currentPlayerInstructionId.value = 0;
-      currentStoryletId.value = playerInstructions[0]?.storyletId ?? null;
+    if (playerStore.currentPlayerInstructionId === -1 && playerStore.playerInstructions.length > 0) {
+      playerStore.currentPlayerInstructionId = 0;
+      currentStoryletId.value = playerStore.playerInstructions[0]?.storyletId ?? null;
     }
   }
 
@@ -662,24 +654,42 @@ export const useGameStore = defineStore("game", () => {
    * 推进到下一个视频：移除当前指令并更新播放状态。
    */
   async function progressVideo(): Promise<void> {
-    if (playerInstructions.length === 0) {
-      currentPlayerInstructionId.value = -1;
+    if (playerStore.playerInstructions.length === 0) {
+      playerStore.currentPlayerInstructionId = -1;
       return;
     }
 
-    if (currentPlayerInstructionId.value >= 0) {
-      currentPlayerInstructionId.value = 0;
-      playerInstructions.shift();
+    if (playerStore.currentPlayerInstructionId >= 0) {
+      playerStore.currentPlayerInstructionId = 0;
+      playerStore.playerInstructions.shift();
     } else {
-      currentPlayerInstructionId.value = 0;
+      playerStore.currentPlayerInstructionId = 0;
     }
 
-    currentStoryletId.value = playerInstructions[0]?.storyletId ?? null;
-    toRaw(playerInstructions);
+    currentStoryletId.value = playerStore.playerInstructions[0]?.storyletId ?? null;
+    toRaw(playerStore.playerInstructions);
 
-    if (playerInstructions.length === 0) {
-      currentPlayerInstructionId.value = -1;
+    if (playerStore.playerInstructions.length === 0) {
+      playerStore.currentPlayerInstructionId = -1;
     }
+  }
+
+  function logAllStates(): void {
+    console.log("currentSave:", currentSave.value);
+    console.log("currentStoryletId:", currentStoryletId.value);
+    console.log("visitedStoryletIds:", visitedStoryletIds.value);
+    console.log("selectedActions:", selectedActions.value);
+    console.log("rewindableVideos:", rewindableVideos.value);
+    console.log("videosOnCurrentTimeline:", videosOnCurrentTimeline.value);
+    console.log("chapterUnlocked:", chapterUnlocked.value);
+    console.log("chapterProgress:", chapterProgress.value);
+    console.log("unplayedVideosPerChapter:", unplayedVideosPerChapter.value);
+    console.log("chapterCurrentVideo:", chapterCurrentVideo.value);
+    console.log("values:", values.value);
+    console.log("playerInstructions:", playerStore.playerInstructions);
+    console.log("currentPlayerInstructionId:", playerStore.currentPlayerInstructionId);
+    console.log("fullyWatchedVideos:", playerStore.fullyWatchedVideos);
+    console.log("specialCounter:", playerStore.specialCounter);
   }
 
   // ----------------------------------
@@ -690,19 +700,14 @@ export const useGameStore = defineStore("game", () => {
     // 原始状态
     currentSave,
     currentStoryletId,
-    playerInstructions,
-    currentPlayerInstructionId,
-    specialCounter,
 
     // 计算属性
     currentChapterId,
-    currentVideoId,
     isNewGame,
     visitedStorylets: visitedStoryletIds,
     selectedActions,
     rewindableVideos,
     videosOnCurrentTimeline,
-    watchedVideos,
     chapterUnlocked,
     chapterProgress,
     unplayedVideosPerChapter,
@@ -716,7 +721,6 @@ export const useGameStore = defineStore("game", () => {
 
     // 状态操作
     resetGameState,
-    setVideoWatched,
 
     // 存档管理
     forceNewSave,
@@ -726,7 +730,7 @@ export const useGameStore = defineStore("game", () => {
     rewindSave,
     copySave,
 
-    // 播放控制
+    // 播放控制（依赖存档上下文）
     startVideo,
     progressVideo,
   };

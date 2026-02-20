@@ -29,6 +29,7 @@
         "enterChapter": "進入章節"
     },
     "storyline": {
+        "valueToPayAttentionTo": "本章節請留意",
         "currentProgress": "當前進度",
         "storylineHelp": "幫助"
     },

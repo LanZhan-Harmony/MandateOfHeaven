@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted } from "vue";
 import { RouterView } from "vue-router";
+import { useSaveStore } from "./stores/save";
+
+const saveStore = useSaveStore();
 
 // 阻止默认行为的通用函数
 function preventDefault(event: Event) {
@@ -26,7 +29,10 @@ function handleInteraction() {
   window.removeEventListener("touchstart", handleInteraction);
 }
 
-onMounted(() => {
+onMounted(async () => {
+  // 初始化游戏存档数据（仅在尚未加载时执行完整同步）
+  await saveStore.speculativeSyncSave();
+
   // 阻止右键菜单、文本选择和拖拽
   window.addEventListener("contextmenu", preventDefault);
   window.addEventListener("selectstart", preventDefault);

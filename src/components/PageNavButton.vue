@@ -18,7 +18,7 @@ async function handleClick() {
   emit("click");
   await mediaStore.setEffectAudioAsync("音效7");
   if (props.path) {
-    router.push(props.path);
+    await router.push(props.path);
   } else {
     router.back();
   }
