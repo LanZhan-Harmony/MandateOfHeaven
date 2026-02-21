@@ -20,7 +20,9 @@ body {
     color 0.5s,
     background-color 0.5s;
   line-height: 1.6;
-  font-family: "KuangShanKaiShu", "TsangErJinKai", "NanoOldSong", "STSong", "Songti SC", sans-serif;
+  font-family:
+    "Times New Roman", "KuangShanKaiShu", "TsangErJinKai", "NanoOldSong", "STSong", "Songti SC", "Microsoft YaHei",
+    sans-serif;
   font-size: 20px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

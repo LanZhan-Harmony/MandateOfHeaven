@@ -1,0 +1,47 @@
+{
+    "menu": {
+        "startStory": "Начать историю",
+        "continueStory": "Продолжить историю",
+        "chapterSelection": "Выбор главы",
+        "portfolios": "Досье персонажей",
+        "exitGame": "Выйти из игры"
+    },
+    "bottomBar": {
+        "copyright": "Студия Муянь",
+        "demo": "Демо-версия",
+        "settings": "Настройки",
+        "announcements": "Объявления",
+        "eula": "Лицензионное соглашение",
+        "achievements": "Достижения",
+        "credits": "Список создателей"
+    },
+    "button": {
+        "back": "Назад"
+    },
+    "setting": {
+        "mainVolume": "Общая громкость",
+        "videoVolume": "Громкость видео",
+        "bgmVolume": "Громкость фоновой музыки",
+        "effectsVolume": "Громкость эффектов",
+        "language": "Язык интерфейса"
+    },
+    "chapter": {
+        "enterChapter": "Войти в главу"
+    },
+    "storyline": {
+        "currentProgress": "Текущий прогресс",
+        "storylineHelp": "Помощь",
+        "valueToPayAttentionTo": "Обратите внимание в этой главе:",
+        "emperorTrust": "Доверие императора",
+        "sikongZhengGuilt": "Чувство вины Сиконг Чжэна",
+        "zuKunApproval": "Одобрение Цзу Куна",
+        "armyMorale": "Мораль армии",
+        "xieXuanFightingSpirit": "Боевой дух Се Сюаня",
+        "zhuYuanzhiLoyalty": "Верность Чжу Юаньчжи",
+        "zhuYuanzhiPower": "Власть Чжу Юаньчжи"
+    },
+    "character": {
+        "characterIntroduction": "Описание персонажа",
+        "characterStories": "Истории персонажей"
+    }
+}

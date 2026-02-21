@@ -6,6 +6,7 @@ const props = defineProps<{
   highlightIcon: string;
   sideLength: number;
   mobileSideLength?: number;
+  invert?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -18,6 +19,7 @@ const widthStr = computed(() => `${props.sideLength}px`);
 const mobileWidthStr = computed(() => `${props.mobileSideLength ?? props.sideLength}px`);
 const defaultIconUrl = computed(() => `url(${props.defaultIcon})`);
 const highlightIconUrl = computed(() => `url(${props.highlightIcon})`);
+const rotation = computed(() => (props.invert ? "rotate(180deg)" : "none"));
 </script>
 
 <template>
@@ -46,6 +48,7 @@ const highlightIconUrl = computed(() => `url(${props.highlightIcon})`);
   transition: background-image 0.3s;
   width: 100%;
   height: 100%;
+  transform: v-bind(rotation);
 }
 
 .btn:hover .image,

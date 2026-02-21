@@ -29,9 +29,16 @@
         "enterChapter": "章に入る"
     },
     "storyline": {
-        "valueToPayAttentionTo": "この章で注目すべき値",
         "currentProgress": "現在の進行状況",
-        "storylineHelp": "物語ヘルプ"
+        "storylineHelp": "物語ヘルプ",
+        "valueToPayAttentionTo": "この章で注目すべき値:",
+        "emperorTrust": "皇帝の信頼",
+        "sikongZhengGuilt": "司空正の罪悪感",
+        "zuKunApproval": "祖坤の認可",
+        "armyMorale": "軍の士気",
+        "xieXuanFightingSpirit": "謝玄の斗志",
+        "zhuYuanzhiLoyalty": "朱元之の忠誠心",
+        "zhuYuanzhiPower": "朱元之の権勢"
     },
     "character": {
         "characterIntroduction": "キャラクター紹介",

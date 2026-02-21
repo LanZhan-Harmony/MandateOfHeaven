@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import HelpOverlay from "@/components/HelpOverlay.vue";
 import ImageButton from "@/components/ImageButton.vue";
+import LoadingOverlay from "@/components/LoadingOverlay.vue";
 import PageNavButton from "@/components/PageNavButton.vue";
+import StorylineProgressBar from "@/components/StorylineProgressBar.vue";
 import router from "@/router";
 import { useMediaStore } from "@/stores/media";
 import { usePlayerStore } from "@/stores/player";
@@ -16,54 +19,45 @@ import type { storylineType } from "@/types/storylineType";
 import { convertToChapterId, convertToStoryletId, convertToVideoId } from "@/utils/converter";
 import { debounce } from "@/utils/debounce";
 import { DragZoomController } from "@/utils/dragZoomController";
-import { useHead } from "@unhead/vue";
 import { storeToRefs } from "pinia";
-import { computed, nextTick, onMounted, onUnmounted, reactive, ref, watch } from "vue";
+import { computed, nextTick, onMounted, onUnmounted, ref, shallowRef, watch } from "vue";
 import { useI18n } from "vue-i18n";
+
+// ========== 模块级常量 ==========
+// SVG 文本缓存：同一章节二次进入时无需重复请求
+const svgCache = new Map<number, string>();
+const domParser = new DOMParser();
 
 const { t, tm } = useI18n();
 const mediaStore = useMediaStore();
 const saveStore = useSaveStore();
 const playerStore = usePlayerStore();
-const { chapterUnlocked, chapterProgress, chapterCurrentVideo } = storeToRefs(saveStore);
+const { selectedChapterId, chapterProgress, chapterCurrentVideo } = storeToRefs(saveStore);
 const storylines = computed(() => tm("storylines") as storylineType[]);
 
 // ========== 章节数值定义 ==========
-const CHAPTER_VALUES: Record<string, { max: number; min: number; default: number }>[] = [
+const CHAPTER_VALUES: string[][] = [
   // 第0章
-  {
-    老皇帝的认可度: { max: 3, min: 0, default: 0 },
-    司空正的愧疚: { max: 1, min: 0, default: 0 },
-  },
+  ["emperorTrust", "sikongZhengGuilt"],
   // 第1章
-  {
-    老皇帝的认可度: { max: 5, min: -2, default: 0 },
-    司空正的愧疚: { max: 4, min: -3, default: 0 },
-  },
+  ["emperorTrust", "sikongZhengGuilt"],
   // 第2章
-  {
-    祖坤好感度: { max: 8, min: -1, default: 0 },
-  },
+  ["zuKunApproval"],
   // 第3章
-  {
-    军心: { max: 3, min: 0, default: 0 },
-  },
+  ["armyMorale"],
   // 第4章 - 无数值
-  {},
+  [],
   // 第5章
-  {
-    军心: { max: 5, min: 0, default: 0 },
-  },
-  // 第6章 - 无数值
-  {},
-  // 第7章 - 无数值
-  {},
+  ["armyMorale"],
+  // 第6章
+  ["xieXuanFightingSpirit", "zhuYuanzhiLoyalty", "zhuYuanzhiPower"],
+  // 第7章
+  ["zhuYuanzhiPower"],
 ];
 
 // ========== 页面状态 ==========
-const chapterIndex = ref(0);
 const showHelp = ref(false);
-const storylineBgStyle = computed(() => `url(/storylines/${chapterIndex.value}-背景.jpg)`);
+const storylineBgStyle = computed(() => `url(/storylines/${selectedChapterId.value}-背景.jpg)`);
 
 // ========== 响应式引用 ==========
 const boundingBoxRef = ref<HTMLElement | null>(null);
@@ -71,10 +65,10 @@ const storylineRef = ref<HTMLElement | null>(null);
 const nodesRef = ref<HTMLElement | null>(null);
 const backgroundRef = ref<HTMLElement | null>(null);
 
-// ========== 节点数据数组 ==========
-const nodesWithPreview = reactive<anchorType[]>([]);
-const nodesWithoutPreview = reactive<anchorType[]>([]);
-const otherAnchors = reactive<anchorType[]>([]);
+// ========== 节点数据数组（shallowRef：元素本身不需要深度响应式）==========
+const nodesWithPreview = shallowRef<anchorType[]>([]);
+const nodesWithoutPreview = shallowRef<anchorType[]>([]);
+const otherAnchors = shallowRef<anchorType[]>([]);
 
 // ========== 拖拽控制器 ==========
 let dragController: DragZoomController | null = null;
@@ -95,30 +89,60 @@ const GRADIENT_DEFS = `
 const GRADIENT_STYLE =
   "fill:none;fill-rule:nonzero;stroke:url(#possibleTimelineLineGradient);stroke-width:2px;filter:drop-shadow(0 0 5px #edb26b);";
 
-// ========== SVG 解析器（复用）==========
-const domParser = new DOMParser();
+/**
+ * 获取 SVG 文本（优先从缓存读取）
+ */
+async function fetchSvgText(chapterId: number): Promise<string | null> {
+  if (svgCache.has(chapterId)) {
+    return svgCache.get(chapterId)!;
+  }
+  const svgUrl = `/storylines/${chapterId}-流程.svg`;
+  const response = await fetch(svgUrl);
+  if (!response.ok) {
+    console.error(`Failed to fetch ${svgUrl}: ${response.status} ${response.statusText}`);
+    return null;
+  }
+  const text = await response.text();
+  svgCache.set(chapterId, text);
+  return text;
+}
 
 /**
  * 加载并渲染故事线地图
  */
 async function loadStoryline(chapterId: number) {
-  if (Number.isNaN(chapterId)) return;
-
   isMapReady.value = false;
-  await cleanup();
+
+  // 并行启动：SVG 预取 + BGM 切换，与淡出动画（300ms）同步进行
+  const bgmKey = chapterId <= 2 ? "chapter012_bgm" : chapterId <= 5 ? "chapter345_bgm" : "chapter67_bgm";
+  const svgTextPromise = fetchSvgText(chapterId);
+  const bgmPromise = mediaStore.setBGMAudioAsync(bgmKey);
+
+  // 等待淡出过渡完成，同时以上请求已在后台运行
+  await nextTick();
+  await new Promise((resolve) => setTimeout(resolve, 300));
+
+  // 清理旧控制器与节点数据
+  if (dragController) {
+    dragController.removeEventListener("dragstart", handleDragStart);
+    dragController.removeEventListener("dragend", handleDragEnd);
+    dragController.stop();
+    dragController = null;
+  }
+  nodesWithPreview.value = [];
+  nodesWithoutPreview.value = [];
+  otherAnchors.value = [];
 
   if (!boundingBoxRef.value || !storylineRef.value || !nodesRef.value || !backgroundRef.value) {
     throw new Error("refs not ready");
   }
 
-  // 加载 SVG 内容
-  const svgUrl = `/storylines/${chapterId}-流程.svg`;
-  const response = await fetch(svgUrl);
-  if (!response.ok) {
-    console.error(`Failed to fetch ${svgUrl}: ${response.status} ${response.statusText}`);
-    return;
-  }
-  const svgText = await response.text();
+  // 等待 SVG 文本（大概率已就绪）
+  const svgText = await svgTextPromise;
+  if (!svgText) return;
+
+  await bgmPromise;
+
   const svgDoc = domParser.parseFromString(svgText, "image/svg+xml");
 
   // 优化渲染
@@ -127,145 +151,145 @@ async function loadStoryline(chapterId: number) {
   // 添加渐变定义
   svgDoc.documentElement.appendChild(domParser.parseFromString(GRADIENT_DEFS, "image/svg+xml").documentElement);
 
-  // ========== 解析圆形/椭圆锚点 ==========
-  svgDoc.querySelectorAll("circle, ellipse").forEach((element) => {
-    const parentId = element.parentElement?.id;
-    if (!parentId) {
-      console.debug("Malformed anchor id:", element.parentElement || element);
+  // 构建局部数组避免 shallowRef 频繁触发更新
+  const newNodesWithPreview: anchorType[] = [];
+  const newNodesWithoutPreview: anchorType[] = [];
+  const newOtherAnchors: anchorType[] = [];
+
+  // ========== 单趟遍历所有 SVG 元素 ==========
+  svgDoc.querySelectorAll("circle, ellipse, text, path").forEach((element) => {
+    const tag = element.tagName;
+
+    if (tag === "circle" || tag === "ellipse") {
+      const parentId = element.parentElement?.id;
+      if (!parentId) {
+        console.debug("错误的锚点ID:", element.parentElement || element);
+        element.parentElement?.removeChild(element);
+        return;
+      }
+
+      switch (element.getAttribute("fill")) {
+        case "#FF0000": {
+          // 红色 = 普通视频锚点（小圆点，无预览图）
+          if (playerStore.watchedVideos.includes(parentId)) {
+            newNodesWithoutPreview.push({
+              x: parseFloat(element.getAttribute("cx") || "0"),
+              y: parseFloat(element.getAttribute("cy") || "0"),
+              id: parentId,
+              title: "",
+              imageUrl: "",
+              icon: "bronze",
+              disabled: true,
+              keyNode: hasValueChanges(parentId),
+            });
+          }
+          break;
+        }
+        case "#00FFAA": {
+          // 青色 = 章节入口跳转点
+          const targetChapter = convertToChapterId(parentId);
+          if (saveStore.chapterUnlocked[targetChapter]) {
+            newOtherAnchors.push({
+              x: parseFloat(element.getAttribute("cx") || "0"),
+              y: parseFloat(element.getAttribute("cy") || "0"),
+              id: parentId,
+              title: "",
+              imageUrl: "",
+              icon: "chapter-in",
+              keyNode: false,
+              disabled: false,
+            });
+          }
+          break;
+        }
+        case "#FF00EA": {
+          // 粉色 = 章节出口跳转点
+          const targetChapter = convertToChapterId(parentId);
+          if (saveStore.chapterUnlocked[targetChapter]) {
+            newOtherAnchors.push({
+              x: parseFloat(element.getAttribute("cx") || "0"),
+              y: parseFloat(element.getAttribute("cy") || "0"),
+              id: parentId,
+              title: "",
+              imageUrl: "",
+              icon: "chapter-out",
+              keyNode: false,
+              disabled: false,
+            });
+          }
+          break;
+        }
+        default:
+          break;
+      }
       element.parentElement?.removeChild(element);
       return;
     }
 
-    switch (element.getAttribute("fill")) {
-      case "#FF0000": {
-        // 红色 = 结局锚点（小圆点，无预览图）
-        const videoId = convertToVideoId(parentId);
+    if (tag === "text") {
+      const textNode = element.firstChild ?? element;
+      const videoId = textNode.textContent ?? "";
+      const storyletId = convertToStoryletId(videoId);
+      const endingType = getEndingType(storyletId);
+
+      if (playerStore.watchedVideos.includes(videoId)) {
         const anchor: anchorType = {
-          x: parseFloat(element.getAttribute("cx") || "0"),
-          y: parseFloat(element.getAttribute("cy") || "0"),
+          x: parseFloat((textNode as Element).getAttribute?.("x") || "0"),
+          y: parseFloat((textNode as Element).getAttribute?.("y") || "0"),
           id: videoId,
-          title: "",
-          imageUrl: "",
-          icon: "bronze",
-          disabled: true,
+          title: storylines.value.find((n) => n.id === storyletId)?.title ?? t(`nodes.${storyletId}.title`),
+          imageUrl: getThumbnailUrl(storyletId),
+          icon: endingType || "bronze",
+          disabled: !saveStore.rewindableVideos.includes(videoId),
           keyNode: hasValueChanges(videoId),
         };
-        if (playerStore.watchedVideos.includes(videoId)) {
-          nodesWithoutPreview.push(anchor);
+        if (endingType === "bronze") {
+          newOtherAnchors.push(anchor);
+        } else {
+          newNodesWithPreview.push(anchor);
         }
-        break;
       }
-      case "#00FFAA": {
-        // 青色 = 章节入口跳转点
-        const targetChapter = convertToChapterId(parentId);
-        const isLocked = !saveStore.chapterUnlocked[targetChapter];
-        const anchor: anchorType = {
-          x: parseFloat(element.getAttribute("cx") || "0"),
-          y: parseFloat(element.getAttribute("cy") || "0"),
-          id: parentId,
-          title: "",
-          imageUrl: "",
-          icon: "chapter-in",
-          keyNode: false,
-          disabled: isLocked,
-        };
-        if (!isLocked) otherAnchors.push(anchor);
-        break;
-      }
-      case "#FF00EA": {
-        // 粉色 = 章节出口跳转点
-        const targetChapter = convertToChapterId(parentId);
-        const isLocked = !saveStore.chapterUnlocked[targetChapter];
-        const anchor: anchorType = {
-          x: parseFloat(element.getAttribute("cx") || "0"),
-          y: parseFloat(element.getAttribute("cy") || "0"),
-          id: parentId,
-          title: "",
-          imageUrl: "",
-          icon: "chapter-out",
-          keyNode: false,
-          disabled: isLocked,
-        };
-        if (!isLocked) otherAnchors.push(anchor);
-        break;
-      }
-      default:
-        break;
-    }
-    element.parentElement?.removeChild(element);
-  });
 
-  // ========== 解析文本标签（带预览图节点）==========
-  svgDoc.querySelectorAll("text").forEach((element) => {
-    let textNode: SVGTextElement | ChildNode = element;
-    const firstChild = element.firstChild;
-    if (firstChild) {
-      textNode = firstChild;
-    }
-
-    const videoId = convertToVideoId(textNode.textContent ?? "");
-    const storyletId = convertToStoryletId(textNode.textContent ?? "");
-    const endingType = getEndingType(storyletId);
-
-    const anchor: anchorType = {
-      x: parseFloat((textNode as Element).getAttribute?.("x") || "0"),
-      y: parseFloat((textNode as Element).getAttribute?.("y") || "0"),
-      id: videoId,
-      title: storylines.value.find((n) => n.id === storyletId)?.title ?? t(`nodes.${storyletId}.title`),
-      imageUrl: getThumbnailUrl(storyletId),
-      icon: endingType || "bronze",
-      disabled: !saveStore.rewindableVideos.includes(videoId),
-      keyNode: hasValueChanges(videoId),
-    };
-
-    if (playerStore.watchedVideos.includes(videoId)) {
-      if (endingType === "bronze") {
-        otherAnchors.push(anchor);
-      } else {
-        nodesWithPreview.push(anchor);
-      }
-    }
-
-    element.parentElement?.removeChild(element);
-  });
-
-  // 预加载节点缩略图
-  preloadImages(nodesWithPreview.map((n) => n.imageUrl));
-
-  // ========== 处理路径线条 ==========
-  svgDoc.querySelectorAll("path").forEach((pathElement) => {
-    const pathId = (pathElement.getAttribute("serif:id") || pathElement.id)
-      .toLowerCase()
-      .split(",", 2)
-      .map(convertToVideoId);
-
-    if (pathId.length < 2) {
-      console.debug("Malformed line id:", pathElement);
+      element.parentElement?.removeChild(element);
       return;
     }
 
-    const bothOnTimeline = pathId.reduce(
-      (acc: boolean, id: string) => acc && saveStore.videosOnCurrentTimeline.includes(id),
-      true,
-    );
-    const bothWatched = pathId.reduce(
-      (acc: boolean, id: string) => acc && playerStore.watchedVideos.includes(id),
-      true,
-    );
-    const firstOnTimeline = saveStore.videosOnCurrentTimeline.includes(pathId[0]!);
+    // tag === "path"
+    {
+      const pathElement = element as SVGPathElement;
+      const pathId = pathElement.id.split(",", 2).map(convertToVideoId);
 
-    if (bothOnTimeline) {
-      pathElement.setAttribute("style", HIGHLIGHT_STYLE);
-      pathElement.removeAttribute("serif:id");
-    } else if (bothWatched) {
-      pathElement.removeAttribute("serif:id");
-    } else if (firstOnTimeline) {
-      pathElement.setAttribute("style", GRADIENT_STYLE);
-      pathElement.removeAttribute("serif:id");
-    } else {
-      pathElement.parentElement?.removeChild(pathElement);
+      if (pathId.length < 2) {
+        console.debug("错误的路径ID:", pathElement);
+        return;
+      }
+
+      const bothOnTimeline = pathId.every((id) => saveStore.videosOnCurrentTimeline.includes(id));
+      const bothWatched = pathId.every((id) => playerStore.watchedVideos.includes(id));
+      const firstOnTimeline = saveStore.videosOnCurrentTimeline.includes(pathId[0]!);
+
+      if (bothOnTimeline) {
+        pathElement.setAttribute("style", HIGHLIGHT_STYLE);
+        pathElement.removeAttribute("serif:id");
+      } else if (bothWatched) {
+        pathElement.removeAttribute("serif:id");
+      } else if (firstOnTimeline) {
+        pathElement.setAttribute("style", GRADIENT_STYLE);
+        pathElement.removeAttribute("serif:id");
+      } else {
+        pathElement.parentElement?.removeChild(pathElement);
+      }
+      return;
     }
   });
+
+  // 预加载节点缩略图
+  preloadImages(newNodesWithPreview.map((n) => n.imageUrl));
+
+  // 一次性赋值，触发单次响应式更新
+  nodesWithPreview.value = newNodesWithPreview;
+  nodesWithoutPreview.value = newNodesWithoutPreview;
+  otherAnchors.value = newOtherAnchors;
 
   // 将处理后的 SVG 插入背景容器
   backgroundRef.value.innerHTML = svgDoc.documentElement.outerHTML;
@@ -276,12 +300,16 @@ async function loadStoryline(chapterId: number) {
   dragController.addEventListener("dragend", handleDragEnd);
 
   // 移动到当前视频位置
-  await moveToCurrentVideo();
+  moveToCurrentVideo();
 
   isMapReady.value = true;
   await nextTick();
 }
 
+/**
+ * 优化 SVG 渲染性能
+ * @param svgDoc 需要优化的 SVG 文档对象
+ */
 function optimizeSvgRendering(svgDoc: Document) {
   const el = svgDoc.documentElement;
   el.setAttribute("buffered-rendering", "static");
@@ -293,6 +321,7 @@ function optimizeSvgRendering(svgDoc: Document) {
 
 /**
  * 简单的图片预加载
+ * @param urls 需要预加载的图片 URL 数组
  */
 function preloadImages(urls: string[]) {
   for (const url of urls) {
@@ -301,10 +330,12 @@ function preloadImages(urls: string[]) {
   }
 }
 
+/**
+ * 清理当前地图数据和控制器（不含淡出延迟，由 loadStoryline 统一管理）
+ */
 async function cleanup() {
   isMapReady.value = false;
   await nextTick();
-  // 等待过渡动画
   await new Promise((resolve) => setTimeout(resolve, 300));
 
   if (dragController) {
@@ -314,9 +345,9 @@ async function cleanup() {
     dragController = null;
   }
 
-  nodesWithPreview.splice(0, nodesWithPreview.length);
-  nodesWithoutPreview.splice(0, nodesWithoutPreview.length);
-  otherAnchors.splice(0, otherAnchors.length);
+  nodesWithPreview.value = [];
+  nodesWithoutPreview.value = [];
+  otherAnchors.value = [];
 }
 
 // ========== 拖拽事件处理 ==========
@@ -350,7 +381,7 @@ async function handleAnchorClick(anchorId: string) {
   if (anchorId.startsWith("chapter")) {
     // 章节跳转：更新当前章节索引并重新加载
     const targetChapterId = convertToChapterId(anchorId);
-    chapterIndex.value = targetChapterId;
+    selectedChapterId.value = targetChapterId;
   } else {
     // 视频节点跳转：回溯并导航到播放器
     await saveStore.rewindSave(anchorId);
@@ -361,18 +392,18 @@ async function handleAnchorClick(anchorId: string) {
 /**
  * 查找锚点数据
  */
-async function findAnchor(videoId: string): Promise<anchorType | undefined> {
-  let anchor = nodesWithPreview.find((a) => a.id === videoId);
-  anchor ||= nodesWithoutPreview.find((a) => a.id === videoId);
-  anchor ||= otherAnchors.find((a) => a.id === videoId);
-  return anchor;
+function findAnchor(videoId: string): anchorType | null {
+  let anchor = nodesWithPreview.value.find((a) => a.id === videoId);
+  anchor ||= nodesWithoutPreview.value.find((a) => a.id === videoId);
+  anchor ||= otherAnchors.value.find((a) => a.id === videoId);
+  return anchor || null;
 }
 
 /**
  * 移动视图到指定视频位置
  */
-async function moveTo(videoId: string) {
-  let anchor = await findAnchor(videoId);
+function moveTo(videoId: string) {
+  let anchor = findAnchor(videoId);
 
   if (!anchor) {
     const storyletId = getStoryletFromVideo(videoId);
@@ -382,36 +413,34 @@ async function moveTo(videoId: string) {
     }
     const relatedVideos = getVideosFromStorylet(storyletId) || [];
     for (const vid of relatedVideos) {
-      anchor = await findAnchor(vid);
+      anchor = findAnchor(vid);
       if (anchor) break;
     }
   }
 
   if (anchor) {
     dragController?.setCenter(anchor.x, anchor.y);
-  } else {
-    console.debug("No anchor found for videoId", videoId);
   }
 }
 
 /**
  * 移动到当前正在播放/观看的视频位置
  */
-async function moveToCurrentVideo() {
-  let videoId = chapterCurrentVideo.value[chapterIndex.value];
-  videoId ||= nodesWithPreview[0]?.id ?? null;
+function moveToCurrentVideo() {
+  let videoId = chapterCurrentVideo.value[selectedChapterId.value];
+  videoId ||= nodesWithPreview.value[0]?.id ?? null;
 
   if (!videoId) {
     console.debug("No storylet to move to");
     return;
   }
 
-  await moveTo(videoId);
+  moveTo(videoId);
 }
 
 function getThumbnailUrl(storyletId: string): string {
   const chapter = convertToChapterId(storyletId);
-  return `/chapters/node_thumbnails/${chapter}/${storyletId}.webp`;
+  return `/chapters/node_thumbnails/chapter${chapter}/${storyletId}.webp`;
 }
 
 /**
@@ -475,7 +504,7 @@ function getEndingIcon(icon: string): string | null {
 
 // 章节切换时重新加载
 watch(
-  () => chapterIndex.value,
+  () => selectedChapterId.value,
   async (newVal, oldVal) => {
     if (newVal !== oldVal) {
       await loadStoryline(newVal);
@@ -484,7 +513,7 @@ watch(
 );
 
 onMounted(async () => {
-  await loadStoryline(chapterIndex.value);
+  await loadStoryline(selectedChapterId.value);
 });
 
 onUnmounted(() => {
@@ -494,7 +523,10 @@ onUnmounted(() => {
 <template>
   <div class="game ui-font">
     <!-- 顶部导航 -->
-    <PageNavButton path="/chapters" />
+    <PageNavButton />
+
+    <!-- 加载指示器 -->
+    <LoadingOverlay v-if="!isMapReady" />
 
     <!-- 故事线地图 -->
     <div ref="boundingBoxRef" class="bounding-box">
@@ -510,7 +542,7 @@ onUnmounted(() => {
             @pointerenter.passive="handleAnchorHover">
             <img v-if="getEndingIcon(anchor.icon)" :src="getEndingIcon(anchor.icon)!" class="ending-icon" />
             <div class="preview">
-              <img :src="anchor.imageUrl" class="preview" />
+              <img :src="anchor.imageUrl" class="preview-img" />
               <img v-if="anchor.keyNode" src="/common/images/祥云.webp" class="key-icon" />
             </div>
             <div class="title">{{ anchor.disabled ? "" : anchor.title }}</div>
@@ -541,16 +573,12 @@ onUnmounted(() => {
             <ImageButton
               :default-icon="getAnchorIcon(anchor.icon)"
               :highlight-icon="getAnchorIconHighlight(anchor.icon)"
-              :side-length="48"
+              :side-length="80"
               :mobile-side-length="32"
               :invert="anchor.icon === 'chapter-out'" />
           </div>
         </div>
         <div ref="backgroundRef" class="background"></div>
-      </div>
-      <!-- 加载指示器 -->
-      <div :class="['loading vertical', { hidden: isMapReady }]">
-        <span>Loading...</span>
       </div>
     </div>
 
@@ -558,68 +586,47 @@ onUnmounted(() => {
     <div class="overlay">
       <!-- 右上角数值展示 -->
       <div class="value-display">
-        <div class="storyline-value-display">
-          <table>
-            <tbody>
-              <tr v-if="Object.keys(CHAPTER_VALUES[chapterIndex] ?? {}).length > 0">
-                {{
-                  $t("storyline.valueToPayAttentionTo")
-                }}：
-              </tr>
-              <tr v-for="(_value, name) in CHAPTER_VALUES[chapterIndex]" :key="name">
-                <td class="value">{{ $t(`values.${String(name)}`) }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <table>
+          <tbody>
+            <tr v-if="(CHAPTER_VALUES[selectedChapterId] || []).length > 0">
+              {{
+                $t("storyline.valueToPayAttentionTo")
+              }}
+            </tr>
+            <tr v-for="name in CHAPTER_VALUES[selectedChapterId]" :key="name">
+              <td class="value">{{ $t(`storyline.${name}`) }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
       <!-- 底部控制栏 -->
-      <div class="controls vertical">
-        <div class="buttons horizontal">
+      <div class="controls">
+        <div class="buttons">
           <ImageButton
             default-icon="/common/images/旗帜.webp"
             highlight-icon="/common/images/旗帜高亮.webp"
-            :side-length="32"
+            :side-length="28"
             :mobile-side-length="24"
             @click="moveToCurrentVideo" />
           <ImageButton
             default-icon="/common/images/问号.webp"
             highlight-icon="/common/images/问号高亮.webp"
-            :side-length="32"
+            :side-length="28"
             :mobile-side-length="24"
             @click="showHelp = true" />
           <div class="separator"></div>
           <div class="progress">
-            <span class="small">{{ $t("storyline.currentProgress") }}</span>
-            <span>{{ ((chapterProgress[chapterIndex] || 0) * 100).toFixed(0) }}%</span>
+            <span class="progress-small">{{ $t("storyline.currentProgress") }}</span>
+            <span class="progress-normal">{{ ((chapterProgress[selectedChapterId] || 0) * 100).toFixed(0) }}%</span>
           </div>
         </div>
-        <div class="progress-bar">
-          <div class="bar-bg">
-            <div class="bar-fill" :style="{ width: (chapterProgress[chapterIndex] || 0) * 100 + '%' }"></div>
-          </div>
-        </div>
+
+        <StorylineProgressBar class="progress-bar" :progress="chapterProgress[selectedChapterId] || 0" />
       </div>
 
       <!-- 帮助面板 -->
-      <div v-if="showHelp" class="help">
-        <div class="about vertical">
-          <div class="nav horizontal">
-            <h1>{{ $t("storyline.valueToPayAttentionTo") }}</h1>
-            <div class="separator"></div>
-            <ImageButton
-              default-icon="/common/images/箭头按钮.webp"
-              highlight-icon="/common/images/箭头按钮高亮.webp"
-              :side-length="32"
-              :mobile-side-length="24"
-              @click="showHelp = false" />
-          </div>
-          <div class="content-frame">
-            <img src="/common/images/说明页面.webp" aria-label="Help" />
-          </div>
-        </div>
-      </div>
+      <HelpOverlay v-if="showHelp" @close="showHelp = false" />
     </div>
   </div>
 </template>
@@ -635,24 +642,27 @@ onUnmounted(() => {
 .bounding-box {
   clip-path: content-box;
   contain: paint;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   position: absolute;
   overflow: hidden;
 }
 
-.bounding-box > * {
+.storyline,
+.loading {
   transition:
     opacity 0.3s,
     visibility 0.3s;
 }
 
-.bounding-box > .hidden {
+.hidden {
   visibility: hidden;
   opacity: 0;
 }
 
-.bounding-box > .storyline {
+.storyline {
   z-index: -1;
   will-change: transform;
   width: auto;
@@ -662,13 +672,14 @@ onUnmounted(() => {
   left: 0;
 }
 
-.bounding-box > .storyline > * {
+.nodes,
+.background {
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: contain;
 }
 
-.bounding-box > .storyline > .nodes {
+.nodes {
   z-index: 2;
   width: 100%;
   height: 100%;
@@ -677,25 +688,9 @@ onUnmounted(() => {
   left: 0;
 }
 
-.bounding-box > .storyline > .background {
+.background {
   background-image: v-bind(storylineBgStyle);
   z-index: 1;
-}
-
-.bounding-box .loading {
-  z-index: 990;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.bounding-box .loading > * {
-  font-size: 3em;
 }
 
 /* ========== 带预览图节点（StoryletAnchorWithPreview）========== */
@@ -703,22 +698,18 @@ onUnmounted(() => {
   z-index: 2;
   position: absolute;
   transform: translate(-50%, -50%);
-  cursor: pointer;
 }
 
-.btn-storylet.disabled {
-  cursor: not-allowed;
-}
-
-.btn-storylet .ending-icon {
+.ending-icon {
   width: 56px;
   position: absolute;
   top: 0;
   right: 0;
   transform: translate(30%, -30%);
+  z-index: 3;
 }
 
-.btn-storylet div.preview {
+.preview {
   background-image: url(/common/images/银色框.webp);
   background-repeat: no-repeat;
   background-size: contain;
@@ -728,27 +719,27 @@ onUnmounted(() => {
   position: relative;
 }
 
-.btn-storylet div.preview img.preview {
+.preview-img {
   object-fit: contain;
   pointer-events: none;
   width: 100%;
   height: 100%;
 }
 
-.btn-storylet div.preview img.key-icon {
-  z-index: -200;
+.key-icon {
+  z-index: -10;
   width: 170%;
   position: absolute;
   top: 0%;
   left: -40%;
 }
 
-.btn-storylet .title {
+.title {
   text-align: center;
   color: #aaa;
   width: 100%;
-  margin-top: 0.6lh;
-  font-size: 1.2em;
+  margin-top: 14px;
+  font-size: 30px;
   transition: color 0.2s linear;
   position: absolute;
 }
@@ -763,7 +754,7 @@ onUnmounted(() => {
   color: #918375;
 }
 
-.btn-storylet.disabled .preview img.preview {
+.btn-storylet.disabled .preview-img {
   visibility: hidden;
 }
 
@@ -786,7 +777,6 @@ onUnmounted(() => {
 
 .storylet-anchor.disabled {
   filter: grayscale() brightness(50%);
-  cursor: not-allowed;
 }
 
 /* ========== 覆盖层 ========== */
@@ -800,23 +790,17 @@ onUnmounted(() => {
   left: 0;
 }
 
-.overlay > * {
-  pointer-events: auto;
-}
-
-.overlay .value-display {
+.value-display {
   width: fit-content;
-  margin: 3em 0;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 3%;
+  right: 1%;
 }
 
-.overlay .controls {
-  pointer-events: none;
+.controls {
+  pointer-events: auto;
   width: 100%;
-  padding: 1em 2em;
-  font-size: 2em;
+  padding: 0 50px 10px 50px;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -824,123 +808,45 @@ onUnmounted(() => {
   flex-direction: column;
 }
 
-.overlay .controls .buttons {
+.buttons {
   display: flex;
   align-items: center;
+  gap: 10px;
+  flex-direction: row;
 }
 
-.overlay .controls .buttons button {
-  pointer-events: auto;
+.progress-small {
+  font-size: 20px;
 }
 
-.overlay .controls .buttons .progress > * {
-  margin-left: 0.5ic;
-}
-
-.overlay .controls .buttons .progress .small {
-  font-size: 0.7em;
-}
-
-.overlay .controls .progress-bar {
-  width: 100%;
-  margin-top: 0.2lh;
-}
-
-/* ========== 进度条 ========== */
-.bar-bg {
-  background-image: url(/common/images/进度条底色-暗.webp);
-  background-repeat: no-repeat;
-  background-size: contain;
-  border-radius: 4px;
-  height: 1lh;
-  position: relative;
-  overflow: hidden;
-}
-
-.bar-fill {
-  background-image: url(/common/images/进度条-暗.webp);
-  background-repeat: no-repeat;
-  background-size: contain;
-  height: 100%;
-  transition: width 0.3s;
-  position: absolute;
-  top: 0;
-  left: 0;
+.progress-normal {
+  font-size: 30px;
+  margin-left: 10px;
 }
 
 /* ========== 数值展示 ========== */
-.storyline-value-display {
-  font-size: 1.5em;
-}
-
-.storyline-value-display tr {
+.value-display tr {
   line-height: 120%;
 }
 
-.storyline-value-display tr td {
+.value-display tr td {
   text-align: left;
-  padding-right: 0.5ic;
+  padding-right: 8px;
 }
 
-/* ========== 帮助面板 ========== */
-.overlay .help {
-  z-index: 9990;
-  height: 100%;
-  position: relative;
-}
-
-.about {
-  aspect-ratio: 2762/1440;
-  background-image: url(/common/images/关于.webp);
-  background-position: 50%;
-  background-repeat: no-repeat;
-  background-size: contain;
-  width: 100%;
-  height: 100%;
-  margin: auto 0;
-  padding: 5%;
-  display: flex;
-  flex-direction: column;
-}
-
-.about .nav {
-  width: 100%;
-  margin-bottom: 1lh;
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.about .nav h1 {
-  font-size: 3em;
-}
-
-.about .nav button {
-  align-self: flex-end;
-}
-
-.about .content-frame {
-  flex-grow: 1;
-  overflow-y: scroll;
-}
-
-.about .content-frame img {
-  width: 100%;
-}
-
-/* ========== 工具类 ========== */
 .separator {
   flex: 1;
 }
 
-.horizontal {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.vertical {
-  display: flex;
-  flex-direction: column;
+@media (max-height: 500px) {
+  .progress-small {
+    font-size: 16px;
+  }
+  .progress-normal {
+    font-size: 24px;
+  }
+  .value-display{
+    font-size: 16px;
+  }
 }
 </style>

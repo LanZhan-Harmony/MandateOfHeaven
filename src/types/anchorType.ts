@@ -6,5 +6,5 @@ export interface anchorType {
   imageUrl: string; // 缩略图URL
   icon: "bronze" | "silver" | "gold" | "chapter-in" | "chapter-out"; // 图标类型
   disabled: boolean; // 是否禁用（不可点击）
-  keyNode: boolean; // 是否为关键节点（显示特殊标记）
+  keyNode: boolean; // 是否会导致数值变化的关键节点
 }

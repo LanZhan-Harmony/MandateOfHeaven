@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import router from "@/router";
+import { storeToRefs } from "pinia";
 import { computed, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import ChapterDescription from "../components/ChapterDescription.vue";
@@ -14,10 +15,10 @@ const mediaStore = useMediaStore();
 const saveStore = useSaveStore();
 
 const chapters = computed(() => tm("chapters") as chapterType[]);
-const selectedIndex = ref(0);
+const { selectedChapterId } = storeToRefs(saveStore);
 
 const videoSrc = computed(() => {
-  return `/chapters/introductions/chapter${selectedIndex.value}/章节图.webm`;
+  return `/chapters/introductions/chapter${selectedChapterId.value}/章节图.webm`;
 });
 
 const chapterIcons = [
@@ -32,11 +33,12 @@ const chapterIcons = [
 ];
 
 onMounted(() => {
+  selectedChapterId.value = saveStore.currentChapterId;
   mediaStore.setBGMAudioAsync("chapter_select_bgm", 45);
 });
 
 function handleClick(index: number) {
-  selectedIndex.value = index;
+  selectedChapterId.value = index;
 }
 async function enterChapter() {
   await router.push("/storylines");
@@ -53,7 +55,7 @@ async function enterChapter() {
         :key="chapter.id"
         :iconPath="chapterIcons[index]! || chapterIcons[0]!"
         :title="chapter.title"
-        :selected="index === selectedIndex"
+        :selected="index === selectedChapterId"
         :locked="saveStore.chapterUnlocked[index] === false"
         @click="handleClick(index)" />
     </div>
@@ -61,9 +63,9 @@ async function enterChapter() {
     <video :src="videoSrc" autoplay loop muted class="intro-video" />
     <ChapterDescription
       class="description"
-      :chapterId="selectedIndex"
-      :description="chapters[selectedIndex]!.description"
-      :progress="saveStore.chapterProgress[selectedIndex] || 0"
+      :chapterId="selectedChapterId"
+      :description="chapters[selectedChapterId]!.description"
+      :progress="saveStore.chapterProgress[selectedChapterId] || 0"
       @click="enterChapter" />
   </div>
 </template>

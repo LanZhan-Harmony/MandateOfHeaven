@@ -29,9 +29,16 @@
         "enterChapter": "챕터 입장"
     },
     "storyline": {
-        "valueToPayAttentionTo": "이 챕터에서 주의해야 할 값",
         "currentProgress": "현재 진행 상황",
-        "storylineHelp": "이야기 도움말"
+        "storylineHelp": "이야기 도움말",
+        "valueToPayAttentionTo": "이 챕터에서 주의해야 할 값:",
+        "emperorTrust": "황제의 신뢰",
+        "sikongZhengGuilt": "사공정의  죄책감",
+        "zuKunApproval": "주쿤의 인정",
+        "armyMorale": "군심",
+        "xieXuanFightingSpirit": "사현(謝玄)의 투지",
+        "zhuYuanzhiLoyalty": "주원지의 충성심",
+        "zhuYuanzhiPower": "주원지의 권세"
     },
     "character": {
         "characterIntroduction": "캐릭터 소개",

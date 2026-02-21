@@ -29,9 +29,16 @@
         "enterChapter": "Enter Chapter"
     },
     "storyline": {
-        "valueToPayAttentionTo": "Value to pay attention to in this chapter",
         "currentProgress": "Current Progress",
-        "storylineHelp": "Storyline Help"
+        "storylineHelp": "Storyline Help",
+        "valueToPayAttentionTo": "Value to pay attention to in this chapter:",
+        "emperorTrust": "Emperor's Trust",
+        "sikongZhengGuilt": "SiKong Zheng's Guilt",
+        "zuKunApproval": "Zu Kun's Approval",
+        "armyMorale": "Army Morale",
+        "xieXuanFightingSpirit": "Xie Xuan's Fighting Spirit",
+        "zhuYuanzhiLoyalty": "Zhu Yuanzhi's Loyalty",
+        "zhuYuanzhiPower": "Zhu Yuanzhi's Power"
     },
     "character": {
         "characterIntroduction": "Character Introduction",

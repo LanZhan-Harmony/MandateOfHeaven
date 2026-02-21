@@ -29,9 +29,16 @@
         "enterChapter": "进入章节"
     },
     "storyline": {
-        "valueToPayAttentionTo": "本章节请留意",
         "currentProgress": "当前进度",
-        "storylineHelp": "帮助"
+        "storylineHelp": "帮助",
+        "valueToPayAttentionTo": "本章节请留意：",
+        "emperorTrust": "皇帝的信任",
+        "sikongZhengGuilt": "司空正的愧疚",
+        "zuKunApproval": "祖坤的认可",
+        "armyMorale": "军心",
+        "xieXuanFightingSpirit": "谢玄的斗志",
+        "zhuYuanzhiLoyalty": "朱元之的忠心",
+        "zhuYuanzhiPower": "朱元之的权势"
     },
     "character": {
         "characterIntroduction": "人物介绍",

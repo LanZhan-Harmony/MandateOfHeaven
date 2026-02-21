@@ -31,10 +31,10 @@ export function convertToVideoId(id: string): string {
 }
 
 /**
- * 从 storylet ID 中提取章节编号
- * @param storyletId storylet ID，例如 `a01_a002_a003`
+ * 从任意格式的 ID 中提取章节编号
+ * @param id 任意格式的 ID，例如 `"a01_a002_a003"`或 `"chapter1"`
  * @returns 章节编号，例如 `1`
  */
-export function convertToChapterId(storyletId: string): number {
-  return parseInt(storyletId.split("_", 2)[0]!.replaceAll(/\D/g, ""), 10);
+export function convertToChapterId(id: string): number {
+  return parseInt(id.split("_", 2)[0]!.replaceAll(/\D/g, ""), 10);
 }

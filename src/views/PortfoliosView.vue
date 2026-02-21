@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from "vue";
+import { computed, onMounted, onUnmounted, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
 import CommentButton from "../components/CommentButton.vue";
 import PageNavButton from "../components/PageNavButton.vue";
@@ -11,6 +11,13 @@ const mediaStore = useMediaStore();
 
 const characters = computed<characterType[]>(() => tm("characters") as characterType[]);
 const selectedIndex = ref(0);
+const infoContentRef = ref<HTMLElement | null>(null);
+
+watch(selectedIndex, () => {
+  if (infoContentRef.value) {
+    infoContentRef.value.scrollTop = 0;
+  }
+});
 
 const ANGLE_STEP = 5.5;
 
@@ -130,7 +137,7 @@ async function playHoverSound() {
         <img class="title-icon" src="/common/images/名字图标.webp" alt="icon" />
         <h1 class="character-name">{{ currentCharacter.name }}</h1>
       </div>
-      <div class="info-content">
+      <div class="info-content" ref="infoContentRef">
         <h3 class="character-title">{{ $t("character.characterIntroduction") }}</h3>
         <p class="character-introduction">{{ currentCharacter.description }}</p>
 
@@ -250,7 +257,7 @@ async function playHoverSound() {
   left: 0;
   gap: 20px;
   margin-top: 0;
-  z-index: 100;
+  z-index: 10;
 }
 .info-panel {
   position: absolute;
@@ -280,6 +287,7 @@ async function playHoverSound() {
 .info-content {
   flex: 1;
   overflow-y: auto;
+  padding-bottom: 30px;
   padding-right: 10px;
   scrollbar-width: none;
   -ms-overflow-style: none;

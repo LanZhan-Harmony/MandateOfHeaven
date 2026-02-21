@@ -120,6 +120,9 @@ export const useSaveStore = defineStore("save", () => {
   /** 当前所处的 storylet ID */
   const currentStoryletId = ref<string | null>(null);
 
+  /** 当前选择的章节 ID */
+  const selectedChapterId = ref<number>(0);
+
   // ----------------------------------
   // 计算属性
   // ----------------------------------
@@ -512,6 +515,7 @@ export const useSaveStore = defineStore("save", () => {
       (line) => line[0] === "storylet_start" || line[0] === "storylet_end",
     );
     currentStoryletId.value = lastStoryletLine && typeof lastStoryletLine[1] === "string" ? lastStoryletLine[1] : null;
+    selectedChapterId.value = convertToChapterId(currentStoryletId.value ?? "") || 0;
 
     // 步骤 5：将所有已访问 storylet 的视频标记为已观看
     for (const storyletId of saveData.visited_storylets) {
@@ -550,7 +554,7 @@ export const useSaveStore = defineStore("save", () => {
   async function speculativeSyncSave(): Promise<void> {
     if (!currentSave.value) {
       await fullSyncSave();
-      logAllStates();
+      // logAllStates();
     }
   }
 
@@ -700,6 +704,7 @@ export const useSaveStore = defineStore("save", () => {
     // 原始状态
     currentSave,
     currentStoryletId,
+    selectedChapterId,
 
     // 计算属性
     currentChapterId,

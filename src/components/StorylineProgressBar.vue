@@ -11,8 +11,7 @@ const progressWidth = computed(() => {
 </script>
 <template>
   <div class="progress-bar">
-    <img class="background" src="/common/images/进度条底色-黑.webp" />
-    <img class="dynamic" :style="progressWidth" src="/common/images/进度条-暗.webp" />
+    <div class="dynamic" :style="progressWidth" />
   </div>
 </template>
 <style scoped>
@@ -20,17 +19,20 @@ const progressWidth = computed(() => {
   position: relative;
   width: 100%;
   height: 20px;
-}
-.background {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  background-image: url(/common/images/进度条底色-黑.webp);
+  background-repeat: no-repeat;
+  background-size: contain;
+  overflow: hidden;
 }
 .dynamic {
   position: absolute;
+  left: 0;
+  top: 0;
   height: 100%;
-  object-fit: cover;
   transition: width 0.3s;
   flex-shrink: 0;
+  background-image: url(/common/images/进度条-暗.webp);
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 </style>

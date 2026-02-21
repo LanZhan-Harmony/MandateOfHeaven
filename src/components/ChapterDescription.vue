@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref, watch } from "vue";
 import ArrowButton from "./ArrowButton.vue";
 import ChapterProgressBar from "./ChapterProgressBar.vue";
 
@@ -19,6 +19,17 @@ const chapterIdPicSrc = computed(() => {
 const chapterNamePicSrc = computed(() => {
   return `/chapters/images/chapter${props.chapterId}/下.webp`;
 });
+
+const descriptionRef = ref<HTMLElement | null>(null);
+
+watch(
+  () => props.chapterId,
+  () => {
+    if (descriptionRef.value) {
+      descriptionRef.value.scrollTop = 0;
+    }
+  },
+);
 </script>
 <template>
   <div class="description-card">
@@ -26,7 +37,7 @@ const chapterNamePicSrc = computed(() => {
       <img class="chapter-id-pic" :src="chapterIdPicSrc" />
       <img class="chapter-name-pic" :src="chapterNamePicSrc" />
     </div>
-    <div class="description-text">{{ props.description }}</div>
+    <div ref="descriptionRef" class="description-text">{{ props.description }}</div>
     <ChapterProgressBar :progress="progress" />
     <ArrowButton :text="$t('chapter.enterChapter')" class="enter-btn" direction="right" @click="$emit('click')" />
   </div>
