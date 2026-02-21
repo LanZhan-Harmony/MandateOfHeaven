@@ -1,0 +1,196 @@
+{
+    "achievements": [
+        {
+            "id": "rising_gale",
+            "name": "大風起こる"
+        },
+        {
+            "id": "age_of_strife",
+            "name": "大争乱の世"
+        },
+        {
+            "id": "imperial_will_unfathomable",
+            "name": "聖心測り難し"
+        },
+        {
+            "id": "master_strategist",
+            "name": "智謀の士"
+        },
+        {
+            "id": "drifting_like_duckweed",
+            "name": "雨に打たれる浮き草"
+        },
+        {
+            "id": "mandate_of_heaven",
+            "name": "天命ここに帰す"
+        },
+        {
+            "id": "unyielding_spirit",
+            "name": "不屈の骨"
+        },
+        {
+            "id": "bold_remonstrance",
+            "name": "直言敢行"
+        },
+        {
+            "id": "dragon_into_the_sea",
+            "name": "蛟龍、海に入る"
+        },
+        {
+            "id": "weight_of_rites_and_affection",
+            "name": "礼も情も重んず"
+        },
+        {
+            "id": "martial_master",
+            "name": "武道の達人"
+        },
+        {
+            "id": "hidden_dragon_emerges",
+            "name": "潜龍、海に躍る"
+        },
+        {
+            "id": "dignity_preserved",
+            "name": "体面を保つ"
+        },
+        {
+            "id": "blade_unsheathed",
+            "name": "刃を拭い試す"
+        },
+        {
+            "id": "counter_within_scheme",
+            "name": "策を以て策を制す"
+        },
+        {
+            "id": "emperor_xuanwu",
+            "name": "宣武帝"
+        },
+        {
+            "id": "break_the_mountain",
+            "name": "山を破り缺を穿つ"
+        },
+        {
+            "id": "court_jester_supreme",
+            "name": "捧哏の名手"
+        },
+        {
+            "id": "fickle_hearts",
+            "name": "人心の薄さ"
+        },
+        {
+            "id": "fight_to_the_death",
+            "name": "死力を尽くす"
+        },
+        {
+            "id": "reborn_from_ruin",
+            "name": "破れて後に生ず"
+        },
+        {
+            "id": "ask_the_mandate",
+            "name": "天命を問う"
+        },
+        {
+            "id": "principled_choice",
+            "name": "為すべきを為し、為さざるを守る"
+        },
+        {
+            "id": "between_north_and_south",
+            "name": "南北のはざま"
+        },
+        {
+            "id": "emperor_xuanyang",
+            "name": "宣炀帝"
+        },
+        {
+            "id": "heavenly_ordination",
+            "name": "天命を受く"
+        },
+        {
+            "id": "vision_of_peace",
+            "name": "太平の志"
+        },
+        {
+            "id": "emperor_xuanyou",
+            "name": "宣幽帝"
+        },
+        {
+            "id": "emperor_xuanzong",
+            "name": "宣縦帝"
+        },
+        {
+            "id": "mistrust_and_abandon",
+            "name": "疑いて用いず"
+        },
+        {
+            "id": "deposed_emperor_xuan",
+            "name": "宣廃帝"
+        },
+        {
+            "id": "emperor_xuanshang",
+            "name": "宣殤帝"
+        },
+        {
+            "id": "longwu_reform",
+            "name": "隆武の変法"
+        },
+        {
+            "id": "xunyang_campaign",
+            "name": "潯陽出塞"
+        },
+        {
+            "id": "favor_for_all",
+            "name": "恩沢あまねく"
+        },
+        {
+            "id": "all_under_heaven",
+            "name": "九州同じくす"
+        },
+        {
+            "id": "emperor_xuanhuai",
+            "name": "宣懐帝"
+        },
+        {
+            "id": "emperor_xuanai",
+            "name": "宣哀帝"
+        },
+        {
+            "id": "emperor_xuankang",
+            "name": "宣康帝"
+        },
+        {
+            "id": "emperor_xuanzhuang",
+            "name": "宣荘帝"
+        },
+        {
+            "id": "emperor_xuanming",
+            "name": "宣明帝"
+        },
+        {
+            "id": "emperor_xuanjing",
+            "name": "宣景帝"
+        },
+        {
+            "id": "emperor_xuancheng",
+            "name": "宣成帝"
+        },
+        {
+            "id": "emperor_xuanwen",
+            "name": "宣文帝"
+        },
+        {
+            "id": "emperor_xuanguangwu",
+            "name": "宣光武帝"
+        },
+        {
+            "id": "emperor_xuanzhao",
+            "name": "宣昭帝"
+        },
+        {
+            "id": "yan_never_returns",
+            "name": "燕、帰らず"
+        },
+        {
+            "id": "thousand_sails_passed",
+            "name": "千帆過ぎゆく"
+        }
+    ]
+}

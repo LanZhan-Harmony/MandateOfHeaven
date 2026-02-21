@@ -1,0 +1,235 @@
+{
+    "introductions": [
+        {
+            "videoId": "00_001_001",
+            "time": 65,
+            "duration": 8,
+            "name": "Xie Ruolan",
+            "description": "Your princess consort, born to the Xie clan of Danling. Through marriage ties, the Xie family is a powerful ally."
+        },
+        {
+            "videoId": "00_005_002003004005",
+            "time": 20,
+            "duration": 7,
+            "name": "Chu Huan",
+            "description": "Commander of the capital gates. He escorted you south from the north and has earned your deep trust."
+        },
+        {
+            "videoId": "00_005_002003004005",
+            "time": 38,
+            "duration": 7,
+            "name": "Xie Jian'an",
+            "description": "Head of the Xie family of Danling and father of Xie Ruolan. He serves as Minister (Shangshu Ling) in the current court."
+        },
+        {
+            "videoId": "00_005_002003004005",
+            "time": 49,
+            "duration": 6,
+            "name": "Yu Gong",
+            "description": "President of the Imperial Academy. Haughty and aloof, he commands great respect among scholars."
+        },
+        {
+            "videoId": "00_067_032",
+            "time": 41,
+            "duration": 8,
+            "name": "Chen Wan'er",
+            "description": "Born into the leading Chen family of Qingzhou. Her great-uncle is Chancellor Chen Dao, a man of enormous power."
+        },
+        {
+            "videoId": "00_075_034",
+            "time": 102,
+            "duration": 2,
+            "name": "Wang Ming",
+            "description": "A student of Yu Gong."
+        },
+        {
+            "videoId": "00_077_036",
+            "time": 17,
+            "duration": 5,
+            "name": "Sikong Zheng",
+            "description": "Your elder full brother, who holds the title Prince Ning."
+        },
+        {
+            "videoId": "01_001_001",
+            "time": 8,
+            "duration": 8,
+            "name": "Cao Biaozhi",
+            "description": "Deputy Minister of Revenue and one of Xuan state's rare pragmatists. Upright, efficient, and a former pupil of Chen Lang, ancestor of the Chen house."
+        },
+        {
+            "videoId": "01_001_001",
+            "time": 24,
+            "duration": 5,
+            "name": "Chen Dao",
+            "description": "Head of the Chen household and serving Chancellor — the foremost leader among Xuan's aristocratic clans."
+        },
+        {
+            "videoId": "01_005_002003004",
+            "time": 88,
+            "duration": 2,
+            "name": "Empress Li",
+            "description": "The biological mother of you and Sikong Zheng."
+        },
+        {
+            "videoId": "01_033_037038",
+            "time": 8,
+            "duration": 2,
+            "name": "Chen Ying",
+            "description": "Son of Chen Dao."
+        },
+        {
+            "videoId": "02_001_001002003004",
+            "time": 114,
+            "duration": 4,
+            "name": "Xie Xuan",
+            "description": "Youngest son of Xie Jian'an and younger brother of Xie Ruolan."
+        },
+        {
+            "videoId": "02_011_010015016",
+            "time": 54,
+            "duration": 3,
+            "name": "Zu Kun",
+            "description": "A highly respected general in the Xuan army."
+        },
+        {
+            "videoId": "02_015_011012",
+            "time": 41,
+            "duration": 3,
+            "name": "Zu Kun",
+            "description": "A highly respected general in the Xuan army."
+        },
+        {
+            "videoId": "02_019_013014",
+            "time": 35,
+            "duration": 2,
+            "name": "Zu Kun",
+            "description": "A highly respected general in the Xuan army."
+        },
+        {
+            "videoId": "03_003_002",
+            "time": 59,
+            "duration": 2,
+            "name": "Xie Xuan",
+            "description": "A Zhonglang general serving in the Northern forces."
+        },
+        {
+            "videoId": "03_003_002",
+            "time": 60,
+            "duration": 3,
+            "name": "Zhu Yuanzhi",
+            "description": "Commander charged with pacifying the border bandits."
+        },
+        {
+            "videoId": "03_030_006B024",
+            "time": 44,
+            "duration": 3,
+            "name": "Shi Lang",
+            "description": "Left General of the Wunu (Zhao) army."
+        },
+        {
+            "videoId": "03_031_006C025",
+            "time": 45,
+            "duration": 3,
+            "name": "Shi Lang",
+            "description": "Left General of the Wunu (Zhao) army."
+        },
+        {
+            "videoId": "03_036_019020021022023",
+            "time": 14,
+            "duration": 3,
+            "name": "Shi Lang",
+            "description": "Left General of the Wunu (Zhao) army."
+        },
+        {
+            "videoId": "03_039_026",
+            "time": 10,
+            "duration": 3,
+            "name": "Shi Lang",
+            "description": "Left General of the Wunu (Zhao) army."
+        },
+        {
+            "videoId": "03_040_027",
+            "time": 10,
+            "duration": 3,
+            "name": "Shi Lang",
+            "description": "Left General of the Wunu (Zhao) army."
+        },
+        {
+            "videoId": "04_025_005B032033034035",
+            "time": 60,
+            "duration": 5,
+            "name": "Warning",
+            "description": "Extensive interaction is required ahead — prepare accordingly."
+        },
+        {
+            "videoId": "05_093_070",
+            "time": 71,
+            "duration": 5,
+            "name": "Chen Lang",
+            "description": "Forebear of the Chen house and a veteran minister across three reigns; served as Minister of Personnel during the Jianping era."
+        },
+        {
+            "videoId": "05_076_057058059060061",
+            "time": 20,
+            "duration": 3,
+            "name": "Fan Zhong",
+            "description": "The adopted son (godson) of Wenxian."
+        },
+        {
+            "videoId": "06_001_001002003004005",
+            "time": 68,
+            "duration": 6,
+            "name": "Sikong Xu",
+            "description": "Your second prince, born to Consort Chen Wan'er."
+        },
+        {
+            "videoId": "06_001_001002003004005",
+            "time": 72,
+            "duration": 6,
+            "name": "Sikong Sheng",
+            "description": "The Crown Prince — your eldest son, born to the late Empress Xie Ruolan."
+        },
+        {
+            "videoId": "06_001_001002003004005",
+            "time": 80,
+            "duration": 6,
+            "name": "Sikong Yu",
+            "description": "Bestowed the title Princess of Xunyang — your youngest daughter, born to Consort Liu Nian (Zhaoyi)."
+        },
+        {
+            "videoId": "06_006_006007",
+            "time": 3,
+            "duration": 7,
+            "name": "Fan Zhong",
+            "description": "Chief palace eunuch, successor to Eunuch Wen — now your close personal attendant."
+        },
+        {
+            "videoId": "06_006_006007",
+            "time": 48,
+            "duration": 10,
+            "name": "Chu Meng",
+            "description": "Son of Chu Huan and a Colonel of the Imperial Guards. When his family was implicated, you secretly sheltered him; after his vindication he became your personal guard."
+        },
+        {
+            "videoId": "06_022_005B020",
+            "time": 83,
+            "duration": 8,
+            "name": "Li Dingyuan",
+            "description": "Former commander of the imperial city garrison. A former ally of Prince Ning — you retained him to keep watch over the court officials."
+        },
+        {
+            "videoId": "06_066_031032033034035",
+            "time": 16,
+            "duration": 5,
+            "name": "Murong Cui",
+            "description": "Envoy from Yan East and one of the youngest, most promising commanders from that region."
+        },
+        {
+            "videoId": "06_077_044045046047",
+            "time": 17,
+            "duration": 8,
+            "name": "Qiu Sheng",
+            "description": "Count of Yun County and a veteran soldier once under Liu Dadao. He distinguished himself in the bloody fighting at Yiyang."
+        }
+    ]
+}

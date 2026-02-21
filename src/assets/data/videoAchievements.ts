@@ -1,0 +1,17 @@
+export const videoAchievements: Record<string, string> = {
+  "00_001_001": "age_of_strife",
+  "00_065_030": "imperial_will_unfathomable",
+  "02_025_006A": "weight_of_rites_and_affection",
+  "02_026_006B": "weight_of_rites_and_affection",
+  "02_050_036": "martial_master",
+  "02_072_048049": "hidden_dragon_emerges",
+  "03_036_019020021022023": "counter_within_scheme",
+  "04_016_017018019": "fight_to_the_death",
+  "04_038_006B043044045046047048": "reborn_from_ruin",
+  "05_097_071": "heavenly_ordination",
+  "06_065_014B": "mistrust_and_abandon",
+  "06_068_015A036037038039042": "xunyang_campaign",
+  "06_080_017B048": "longwu_reform",
+  "07_032_005C": "yan_never_returns",
+  "07_070_QTE3LOOP": "all_under_heaven",
+};

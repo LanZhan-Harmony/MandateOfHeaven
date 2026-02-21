@@ -1,0 +1,196 @@
+{
+    "achievements": [
+        {
+            "id": "rising_gale",
+            "name": "The Rising Gale"
+        },
+        {
+            "id": "age_of_strife",
+            "name": "An Age of Great Strife"
+        },
+        {
+            "id": "imperial_will_unfathomable",
+            "name": "The Emperor’s Unfathomable Will"
+        },
+        {
+            "id": "master_strategist",
+            "name": "Master of Stratagems"
+        },
+        {
+            "id": "drifting_like_duckweed",
+            "name": "Duckweed in the Rain"
+        },
+        {
+            "id": "mandate_of_heaven",
+            "name": "Chosen by the Mandate of Heaven"
+        },
+        {
+            "id": "unyielding_spirit",
+            "name": "Unyielding Spirit"
+        },
+        {
+            "id": "bold_remonstrance",
+            "name": "Courage to Remonstrate"
+        },
+        {
+            "id": "dragon_into_the_sea",
+            "name": "Dragon Enters the Sea"
+        },
+        {
+            "id": "weight_of_rites_and_affection",
+            "name": "Rites and Affection Alike"
+        },
+        {
+            "id": "martial_master",
+            "name": "Grandmaster of the Martial Way"
+        },
+        {
+            "id": "hidden_dragon_emerges",
+            "name": "Hidden Dragon Takes to the Sea"
+        },
+        {
+            "id": "dignity_preserved",
+            "name": "Dignity Preserved"
+        },
+        {
+            "id": "blade_unsheathed",
+            "name": "Blade Wiped and Drawn"
+        },
+        {
+            "id": "counter_within_scheme",
+            "name": "Turning the Scheme to One’s Advantage"
+        },
+        {
+            "id": "emperor_xuanwu",
+            "name": "Emperor Xuanwu"
+        },
+        {
+            "id": "break_the_mountain",
+            "name": "Shattering the Mountain"
+        },
+        {
+            "id": "court_jester_supreme",
+            "name": "Master of Repartee"
+        },
+        {
+            "id": "fickle_hearts",
+            "name": "Fickle Hearts"
+        },
+        {
+            "id": "fight_to_the_death",
+            "name": "Fight unto Death"
+        },
+        {
+            "id": "reborn_from_ruin",
+            "name": "Reborn from Ruin"
+        },
+        {
+            "id": "ask_the_mandate",
+            "name": "Questioning the Mandate of Heaven"
+        },
+        {
+            "id": "principled_choice",
+            "name": "To Act and to Refrain"
+        },
+        {
+            "id": "between_north_and_south",
+            "name": "Between North and South"
+        },
+        {
+            "id": "emperor_xuanyang",
+            "name": "Emperor Xuanyang"
+        },
+        {
+            "id": "heavenly_ordination",
+            "name": "Ordained by Heaven"
+        },
+        {
+            "id": "vision_of_peace",
+            "name": "Vision of Great Peace"
+        },
+        {
+            "id": "emperor_xuanyou",
+            "name": "Emperor Xuanyou"
+        },
+        {
+            "id": "emperor_xuanzong",
+            "name": "Emperor Xuanzong"
+        },
+        {
+            "id": "mistrust_and_abandon",
+            "name": "Distrust and Disuse"
+        },
+        {
+            "id": "deposed_emperor_xuan",
+            "name": "The Deposed Emperor Xuan"
+        },
+        {
+            "id": "emperor_xuanshang",
+            "name": "Emperor Xuanshang"
+        },
+        {
+            "id": "longwu_reform",
+            "name": "The Longwu Reforms"
+        },
+        {
+            "id": "xunyang_campaign",
+            "name": "The Xunyang Campaign"
+        },
+        {
+            "id": "favor_for_all",
+            "name": "Grace Bestowed Upon All"
+        },
+        {
+            "id": "all_under_heaven",
+            "name": "All Under the Nine Provinces"
+        },
+        {
+            "id": "emperor_xuanhuai",
+            "name": "Emperor Xuanhuai"
+        },
+        {
+            "id": "emperor_xuanai",
+            "name": "Emperor Xuan’ai"
+        },
+        {
+            "id": "emperor_xuankang",
+            "name": "Emperor Xuankang"
+        },
+        {
+            "id": "emperor_xuanzhuang",
+            "name": "Emperor Xuanzhuang"
+        },
+        {
+            "id": "emperor_xuanming",
+            "name": "Emperor Xuanming"
+        },
+        {
+            "id": "emperor_xuanjing",
+            "name": "Emperor Xuanjing"
+        },
+        {
+            "id": "emperor_xuancheng",
+            "name": "Emperor Xuancheng"
+        },
+        {
+            "id": "emperor_xuanwen",
+            "name": "Emperor Xuanwen"
+        },
+        {
+            "id": "emperor_xuanguangwu",
+            "name": "Emperor Xuanguangwu"
+        },
+        {
+            "id": "emperor_xuanzhao",
+            "name": "Emperor Xuanzhao"
+        },
+        {
+            "id": "yan_never_returns",
+            "name": "No Return to Yan"
+        },
+        {
+            "id": "thousand_sails_passed",
+            "name": "A Thousand Sails Have Passed"
+        }
+    ]
+}

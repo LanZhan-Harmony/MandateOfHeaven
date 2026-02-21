@@ -1,0 +1,235 @@
+{
+    "introductions": [
+        {
+            "videoId": "00_001_001",
+            "time": 65,
+            "duration": 8,
+            "name": "謝若蘭",
+            "description": "あなたの王妃。丹陵の名門・謝氏の出身であり、姻戚関係を通じて謝家はあなたの強力な後ろ盾となっている。"
+        },
+        {
+            "videoId": "00_005_002003004005",
+            "time": 20,
+            "duration": 7,
+            "name": "楚桓",
+            "description": "京城の城門校尉。北方からあなたを護って南下し、深い信任を受けている。"
+        },
+        {
+            "videoId": "00_005_002003004005",
+            "time": 38,
+            "duration": 7,
+            "name": "謝建安",
+            "description": "丹陵謝氏の家主。謝若蘭の父であり、朝廷にて尚書台尚書令を務める。"
+        },
+        {
+            "videoId": "00_005_002003004005",
+            "time": 49,
+            "duration": 6,
+            "name": "虞宮",
+            "description": "国子監祭酒。清高孤傲の気風を持ち、学徒の間で極めて高い威望を誇る。"
+        },
+        {
+            "videoId": "00_067_032",
+            "time": 41,
+            "duration": 8,
+            "name": "陳婉児",
+            "description": "士族の筆頭たる慶州陳氏の出身。叔父の陳導は当朝の丞相であり、権勢は絶大である。"
+        },
+        {
+            "videoId": "00_075_034",
+            "time": 102,
+            "duration": 2,
+            "name": "王明",
+            "description": "虞宮の門下生。"
+        },
+        {
+            "videoId": "00_077_036",
+            "time": 17,
+            "duration": 5,
+            "name": "司空正",
+            "description": "あなたと同父同母の兄。寧王に冊封されている。"
+        },
+        {
+            "videoId": "01_001_001",
+            "time": 8,
+            "duration": 8,
+            "name": "曹表之",
+            "description": "戸部侍郎。宣国では稀有な実務派であり、端正実直な人物。陳朗の門人でもある。"
+        },
+        {
+            "videoId": "01_001_001",
+            "time": 24,
+            "duration": 5,
+            "name": "陳導",
+            "description": "陳家の家主にして丞相。宣国士族の頂点に立つ存在。"
+        },
+        {
+            "videoId": "01_005_002003004",
+            "time": 88,
+            "duration": 2,
+            "name": "皇后李氏",
+            "description": "あなたと司空正の生母。"
+        },
+        {
+            "videoId": "01_033_037038",
+            "time": 8,
+            "duration": 2,
+            "name": "陳應",
+            "description": "陳導の子。"
+        },
+        {
+            "videoId": "02_001_001002003004",
+            "time": 114,
+            "duration": 4,
+            "name": "謝玄",
+            "description": "謝建安の幼子。謝若蘭の弟。"
+        },
+        {
+            "videoId": "02_011_010015016",
+            "time": 54,
+            "duration": 3,
+            "name": "祖坤",
+            "description": "宣軍において極めて高い威望を持つ将。"
+        },
+        {
+            "videoId": "02_015_011012",
+            "time": 41,
+            "duration": 3,
+            "name": "祖坤",
+            "description": "宣軍において極めて高い威望を持つ将。"
+        },
+        {
+            "videoId": "02_019_013014",
+            "time": 35,
+            "duration": 2,
+            "name": "祖坤",
+            "description": "宣軍において極めて高い威望を持つ将。"
+        },
+        {
+            "videoId": "03_003_002",
+            "time": 59,
+            "duration": 2,
+            "name": "謝玄",
+            "description": "北軍中郎将。"
+        },
+        {
+            "videoId": "03_003_002",
+            "time": 60,
+            "duration": 3,
+            "name": "朱元之",
+            "description": "討夷校尉。"
+        },
+        {
+            "videoId": "03_030_006B024",
+            "time": 44,
+            "duration": 3,
+            "name": "石狼",
+            "description": "邬奴（趙）の左将軍。"
+        },
+        {
+            "videoId": "03_031_006C025",
+            "time": 45,
+            "duration": 3,
+            "name": "石狼",
+            "description": "邬奴（趙）の左将軍。"
+        },
+        {
+            "videoId": "03_036_019020021022023",
+            "time": 14,
+            "duration": 3,
+            "name": "石狼",
+            "description": "邬奴（趙）の左将軍。"
+        },
+        {
+            "videoId": "03_039_026",
+            "time": 10,
+            "duration": 3,
+            "name": "石狼",
+            "description": "邬奴（趙）の左将軍。"
+        },
+        {
+            "videoId": "03_040_027",
+            "time": 10,
+            "duration": 3,
+            "name": "石狼",
+            "description": "邬奴（趙）の左将軍。"
+        },
+        {
+            "videoId": "04_025_005B032033034035",
+            "time": 60,
+            "duration": 5,
+            "name": "警告",
+            "description": "この先、大量の操作が必要となる。心して備えよ。"
+        },
+        {
+            "videoId": "05_093_070",
+            "time": 71,
+            "duration": 5,
+            "name": "陳朗",
+            "description": "陳氏の高祖にして三朝に仕えた老臣。建平年間には吏部尚書を務めた。"
+        },
+        {
+            "videoId": "05_076_057058059060061",
+            "time": 20,
+            "duration": 3,
+            "name": "范忠",
+            "description": "温賢の義子。"
+        },
+        {
+            "videoId": "06_001_001002003004005",
+            "time": 68,
+            "duration": 6,
+            "name": "司空旭",
+            "description": "あなたの第二皇子。陳夫人・陳婉児の子。"
+        },
+        {
+            "videoId": "06_001_001002003004005",
+            "time": 72,
+            "duration": 6,
+            "name": "司空盛",
+            "description": "当朝の太子。先皇后・謝若蘭の子であり、あなたの長子。"
+        },
+        {
+            "videoId": "06_001_001002003004005",
+            "time": 80,
+            "duration": 6,
+            "name": "司空钰",
+            "description": "浔陽公主に封ぜられたあなたの末娘。劉念（昭儀）の子。"
+        },
+        {
+            "videoId": "06_006_006007",
+            "time": 3,
+            "duration": 7,
+            "name": "范忠",
+            "description": "中常侍。温公公の後を継ぎ、現在はあなたの側近宦官である。"
+        },
+        {
+            "videoId": "06_006_006007",
+            "time": 48,
+            "duration": 10,
+            "name": "楚蒙",
+            "description": "楚桓の子、羽林校尉。楚桓が罪に連座した折、密かにあなたが庇護し、のちに近衛となった。"
+        },
+        {
+            "videoId": "06_022_005B020",
+            "time": 83,
+            "duration": 8,
+            "name": "李定遠",
+            "description": "前任の皇城司都統。寧王旧党であるが、百官監察のため留任させている。"
+        },
+        {
+            "videoId": "06_066_031032033034035",
+            "time": 16,
+            "duration": 5,
+            "name": "慕容崔",
+            "description": "燕東の使臣にして、同地随一の若き将。"
+        },
+        {
+            "videoId": "06_077_044045046047",
+            "time": 17,
+            "duration": 8,
+            "name": "邱勝",
+            "description": "雲県伯。かつて劉大刀麾下の古参兵であり、弋陽の激戦にて大功を立てた。"
+        }
+    ]
+}

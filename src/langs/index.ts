@@ -6,6 +6,9 @@ const chapterFiles = import.meta.glob("./chapters/*.json", { eager: true, import
 const characterFiles = import.meta.glob("./characters/*.json", { eager: true, import: "default" });
 const storylineFiles = import.meta.glob("./storylines/*.json", { eager: true, import: "default" });
 const endingFiles = import.meta.glob("./endings/*.json", { eager: true, import: "default" });
+const achievementFiles = import.meta.glob("./achievements/*.json", { eager: true, import: "default" });
+const introductionsFiles = import.meta.glob("./introductions/*.json", { eager: true, import: "default" });
+const valueChangesFiles = import.meta.glob("./valueChanges/*.json", { eager: true, import: "default" });
 
 const messages: Record<string, any> = {};
 
@@ -29,6 +32,9 @@ mergeMessages(characterFiles, "characters");
 mergeMessages(chapterFiles, "chapters");
 mergeMessages(storylineFiles, "storylines");
 mergeMessages(endingFiles, "endings");
+mergeMessages(achievementFiles, "achievements");
+mergeMessages(introductionsFiles, "introductions");
+mergeMessages(valueChangesFiles, "valueChanges");
 
 // 获取初始语言：优先读取本地缓存，其次匹配浏览器语言
 const getInitialLocale = (): string => {
@@ -45,6 +51,7 @@ const getInitialLocale = (): string => {
   if (navLang.startsWith("ja")) return "ja-JP";
   if (navLang.startsWith("ko")) return "ko-KR";
   if (navLang.startsWith("en")) return "en-US";
+  if (navLang.startsWith("ru")) return "ru-RU";
 
   return "en-US";
 };

@@ -1,0 +1,280 @@
+{
+    "valueChanges": [
+        {
+            "storyletId": "a00_a029_a015",
+            "videoId": "00_029_015",
+            "valueChangedText": "皇帝のあなたへの信頼",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a00_a056_a012b",
+            "videoId": "00_056_012B",
+            "valueChangedText": "皇帝のあなたへの信頼",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a00_a060_a013b",
+            "videoId": "00_060_013B",
+            "valueChangedText": "皇帝のあなたへの信頼",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a00_a064_a014b",
+            "videoId": "00_064_014B",
+            "valueChangedText": "皇帝のあなたへの信頼",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a00_a080_a017b",
+            "videoId": "00_080_017B",
+            "valueChangedText": "司空正のあなたに対する罪悪感",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a01_a004_a001b",
+            "videoId": "01_004_001B",
+            "valueChangedText": "皇帝のあなたへの信頼",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a01_a007_a002a",
+            "videoId": "01_007_002A",
+            "valueChangedText": "司空正のあなたに対する罪悪感",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a01_a009_a002c",
+            "videoId": "01_009_002C",
+            "valueChangedText": "司空正のあなたに対する罪悪感",
+            "valueChangedType": "減少"
+        },
+        {
+            "storyletId": "a01_a025_a006b019",
+            "videoId": "01_025_006B019",
+            "valueChangedText": "皇帝のあなたへの信頼",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a01_a036_a008b",
+            "videoId": "01_036_008B",
+            "valueChangedText": "司空正のあなたに対する罪悪感",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a01_a037_a008c",
+            "videoId": "01_037_008C",
+            "valueChangedText": "司空正のあなたに対する罪悪感",
+            "valueChangedType": "減少"
+        },
+        {
+            "storyletId": "a01_a041_a009b040",
+            "videoId": "01_041_009B040",
+            "valueChangedText": "司空正のあなたに対する罪悪感",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a01_a044_a010a",
+            "videoId": "01_044_010A",
+            "valueChangedText": "司空正のあなたに対する罪悪感",
+            "valueChangedType": "減少"
+        },
+        {
+            "storyletId": "a01_a045_a010b",
+            "videoId": "01_045_010B",
+            "valueChangedText": "司空正のあなたに対する罪悪感",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a01_a065_a014c",
+            "videoId": "01_065_014C",
+            "valueChangedText": "皇帝のあなたへの信頼",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a01_a069_a015b",
+            "videoId": "01_069_015B",
+            "valueChangedText": "皇帝のあなたへの信頼",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a01_a070_a015c_abe006",
+            "videoId": "01_070_015C_BE006",
+            "valueChangedText": "皇帝のあなたへの信頼",
+            "valueChangedType": "減少"
+        },
+        {
+            "storyletId": "a01_a073_a016a",
+            "videoId": "01_073_016A",
+            "valueChangedText": "皇帝のあなたへの信頼",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a02_a018_a004b",
+            "videoId": "02_018_004B",
+            "valueChangedText": "祖坤のあなたへの好感",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a02_a021_a005a",
+            "videoId": "02_021_005A",
+            "valueChangedText": "祖坤のあなたへの好感",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a02_a022_a005b",
+            "videoId": "02_022_005B",
+            "valueChangedText": "祖坤のあなたへの好感",
+            "valueChangedType": "減少"
+        },
+        {
+            "storyletId": "a02_a025_a006a",
+            "videoId": "02_025_006A",
+            "valueChangedText": "祖坤のあなたへの好感",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a02_a026_a006b",
+            "videoId": "02_026_006B",
+            "valueChangedText": "祖坤のあなたへの好感",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a02_a029_a019",
+            "videoId": "02_029_019",
+            "valueChangedText": "祖坤のあなたへの好感",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a02_a050_a036",
+            "videoId": "02_050_036",
+            "valueChangedText": "祖坤のあなたへの好感",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a02_a058_a009a",
+            "videoId": "02_058_009A",
+            "valueChangedText": "祖坤のあなたへの好感",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a02_a062_a010a",
+            "videoId": "02_062_010A",
+            "valueChangedText": "祖坤のあなたへの好感",
+            "valueChangedType": "減少"
+        },
+        {
+            "storyletId": "a02_a063_a010b",
+            "videoId": "02_063_010B",
+            "valueChangedText": "祖坤のあなたへの好感",
+            "valueChangedType": "減少"
+        },
+        {
+            "storyletId": "a02_a064_a010c",
+            "videoId": "02_064_010C",
+            "valueChangedText": "祖坤のあなたへの好感",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a02_a067_a011a",
+            "videoId": "02_067_011A",
+            "valueChangedText": "祖坤のあなたへの好感",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a02_a068_a011b",
+            "videoId": "02_068_011B",
+            "valueChangedText": "祖坤のあなたへの好感",
+            "valueChangedType": "減少"
+        },
+        {
+            "storyletId": "a02_a069_a011c",
+            "videoId": "02_069_011C",
+            "valueChangedText": "祖坤のあなたへの好感",
+            "valueChangedType": "減少"
+        },
+        {
+            "storyletId": "a03_a025_a012",
+            "videoId": "03_025_012",
+            "valueChangedText": "軍の士気",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a03_a031_a006c025",
+            "videoId": "03_031_006C025",
+            "valueChangedText": "軍の士気",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a03_a035_a007b",
+            "videoId": "03_035_007B",
+            "valueChangedText": "軍の士気",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a03_a043_a008a",
+            "videoId": "03_043_008A",
+            "valueChangedText": "軍の士気",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a03_a090_a009c",
+            "videoId": "03_090_009C",
+            "valueChangedText": "軍の士気",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a03_a071_a015a",
+            "videoId": "03_071_015A",
+            "valueChangedText": "劉大刀のあなたへの信頼",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a03_a076_a016b066",
+            "videoId": "03_076_016B066",
+            "valueChangedText": "劉大刀のあなたへの信頼",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a05_a031_a007b",
+            "videoId": "05_031_007B",
+            "valueChangedText": "軍の士気",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a05_a058_a014a040",
+            "videoId": "05_058_014A040",
+            "valueChangedText": "軍の士気",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a05_a061_a042",
+            "videoId": "05_061_042",
+            "valueChangedText": "軍の士気",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a05_a066_a015b045",
+            "videoId": "05_066_015B045",
+            "valueChangedText": "軍の士気",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a06_a051_a011a",
+            "videoId": "06_051_011A",
+            "valueChangedText": "朱元之の忠誠心",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a06_a055_a012a",
+            "videoId": "06_055_012A",
+            "valueChangedText": "朱元之の忠誠心",
+            "valueChangedType": "増加"
+        },
+        {
+            "storyletId": "a06_a061_a013b",
+            "videoId": "06_061_013B",
+            "valueChangedText": "朱元之の忠誠心",
+            "valueChangedType": "増加"
+        }
+    ]
+}

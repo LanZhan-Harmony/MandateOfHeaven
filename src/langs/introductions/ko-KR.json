@@ -1,0 +1,235 @@
+{
+    "introductions": [
+        {
+            "videoId": "00_001_001",
+            "time": 65,
+            "duration": 8,
+            "name": "사약란",
+            "description": "당신의 왕비로 단릉 사족 사씨 출신\n인척 관계 덕분에 사가는 당신의 강력한 버팀목"
+        },
+        {
+            "videoId": "00_005_002003004005",
+            "time": 20,
+            "duration": 7,
+            "name": "초환",
+            "description": "도성 성문 교위\n북방에서 당신을 호위하여 남하했으며, 당신의 깊은 신임을 얻음"
+        },
+        {
+            "videoId": "00_005_002003004005",
+            "time": 38,
+            "duration": 7,
+            "name": "사건안",
+            "description": "단릉 사씨 가주\n사약란의 아버지. 현 조정의 상서대 상서령"
+        },
+        {
+            "videoId": "00_005_002003004005",
+            "time": 49,
+            "duration": 6,
+            "name": "우궁",
+            "description": "국자감 제주\n고결한 인품으로 학자들 사이에서 매우 큰 명망을 지님"
+        },
+        {
+            "videoId": "00_067_032",
+            "time": 41,
+            "duration": 8,
+            "name": "진완아",
+            "description": "사족의 수장인 경주 진씨 출신\n종조부는 조정의 승상 진도. 그야말로 권세가 하늘을 찌름"
+        },
+        {
+            "videoId": "00_075_034",
+            "time": 102,
+            "duration": 2,
+            "name": "왕명",
+            "description": "우궁의 학생"
+        },
+        {
+            "videoId": "00_077_036",
+            "time": 17,
+            "duration": 5,
+            "name": "사공정",
+            "description": "당신의 동복 친형\n영왕으로 책봉됨"
+        },
+        {
+            "videoId": "01_001_001",
+            "time": 8,
+            "duration": 8,
+            "name": "조표지",
+            "description": "호부시랑，선국에서 드문 실무파로 일을 잘 처리함\n진가의 고조 진랑의 학생"
+        },
+        {
+            "videoId": "01_001_001",
+            "time": 24,
+            "duration": 5,
+            "name": "진도",
+            "description": "진가 가주로 승상에 오름\n선국 모든 사족의 수장"
+        },
+        {
+            "videoId": "01_005_002003004",
+            "time": 88,
+            "duration": 2,
+            "name": "황후 이씨 ",
+            "description": "당신과 사공정의 생모"
+        },
+        {
+            "videoId": "01_033_037038",
+            "time": 8,
+            "duration": 2,
+            "name": "진응",
+            "description": "진도의 아들"
+        },
+        {
+            "videoId": "02_001_001002003004",
+            "time": 114,
+            "duration": 4,
+            "name": "사현",
+            "description": "사건안의 어린 아들\n사약란의 남동생"
+        },
+        {
+            "videoId": "02_011_010015016",
+            "time": 54,
+            "duration": 3,
+            "name": "조곤",
+            "description": "선군 내에서 극히 높은 명망을 지닌 장수"
+        },
+        {
+            "videoId": "02_015_011012",
+            "time": 41,
+            "duration": 3,
+            "name": "조곤",
+            "description": "선군 내에서 극히 높은 명망을 지닌 장수"
+        },
+        {
+            "videoId": "02_019_013014",
+            "time": 35,
+            "duration": 2,
+            "name": "조곤",
+            "description": "선군 내에서 극히 높은 명망을 지닌 장수"
+        },
+        {
+            "videoId": "03_003_002",
+            "time": 59,
+            "duration": 2,
+            "name": "사현",
+            "description": "북군 중랑장"
+        },
+        {
+            "videoId": "03_003_002",
+            "time": 60,
+            "duration": 3,
+            "name": "주원지",
+            "description": "토이교위"
+        },
+        {
+            "videoId": "03_030_006B024",
+            "time": 44,
+            "duration": 3,
+            "name": "석랑",
+            "description": "오노 좌장군"
+        },
+        {
+            "videoId": "03_031_006C025",
+            "time": 45,
+            "duration": 3,
+            "name": "석랑",
+            "description": "오노 좌장군"
+        },
+        {
+            "videoId": "03_036_019020021022023",
+            "time": 14,
+            "duration": 3,
+            "name": "석랑",
+            "description": "오노 좌장군"
+        },
+        {
+            "videoId": "03_039_026",
+            "time": 10,
+            "duration": 3,
+            "name": "석랑",
+            "description": "오노 좌장군"
+        },
+        {
+            "videoId": "03_040_027",
+            "time": 10,
+            "duration": 3,
+            "name": "석랑",
+            "description": "오노 좌장군"
+        },
+        {
+            "videoId": "04_025_005B032033034035",
+            "time": 60,
+            "duration": 5,
+            "name": "경고",
+            "description": "앞으로 많은 조작이 필요하니 준비하십시오"
+        },
+        {
+            "videoId": "05_093_070",
+            "time": 71,
+            "duration": 5,
+            "name": "진랑",
+            "description": "진씨 고조，3대에 걸친 노신\n건평 연간에 일찍이 이부상서를 지냄"
+        },
+        {
+            "videoId": "05_076_057058059060061",
+            "time": 20,
+            "duration": 3,
+            "name": "범충",
+            "description": "온현의 양아들"
+        },
+        {
+            "videoId": "06_001_001002003004005",
+            "time": 68,
+            "duration": 6,
+            "name": "사공욱",
+            "description": "당신의 둘째 황자. 진부인 진완아의 소생"
+        },
+        {
+            "videoId": "06_001_001002003004005",
+            "time": 72,
+            "duration": 6,
+            "name": "사공성",
+            "description": "현 조정의 태자\n당신의 큰아들. 선황후 사약란의 소생"
+        },
+        {
+            "videoId": "06_001_001002003004005",
+            "time": 80,
+            "duration": 6,
+            "name": "사공옥",
+            "description": "심양공주로 책봉\n당신의 막내딸. 유소의 유염의 소생"
+        },
+        {
+            "videoId": "06_006_006007",
+            "time": 3,
+            "duration": 7,
+            "name": "범충",
+            "description": "중상시. 온 공공의 직위를 계승\n지금은 당신의 측근 태감"
+        },
+        {
+            "videoId": "06_006_006007",
+            "time": 48,
+            "duration": 10,
+            "name": "초몽",
+            "description": "초환의 아들. 우림교위\n초환이 죄를 얻어 가족이 연루되었을 때 은밀히 당신이 보호함\n누명이 벗겨진 후 당신의 측근 호위가 됨"
+        },
+        {
+            "videoId": "06_022_005B020",
+            "time": 83,
+            "duration": 8,
+            "name": "이정원",
+            "description": "전임 황성사 도통\n영왕의 수하. 당신이 백관을 감찰하는 용도로 그를 남겨둠"
+        },
+        {
+            "videoId": "06_066_031032033034035",
+            "time": 16,
+            "duration": 5,
+            "name": "모용최",
+            "description": "연동 사신. 또한 연동에서 가장 젊고 유능한 장수"
+        },
+        {
+            "videoId": "06_077_044045046047",
+            "time": 17,
+            "duration": 8,
+            "name": "구승",
+            "description": "운현백，옛날 유대도 휘하의 노병\n익양 혈전에서 큰 공을 세움"
+        }
+    ]
+}

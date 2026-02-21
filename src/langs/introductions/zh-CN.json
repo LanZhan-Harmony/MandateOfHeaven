@@ -1,0 +1,235 @@
+{
+    "introductions": [
+        {
+            "videoId": "00_001_001",
+            "time": 65,
+            "duration": 8,
+            "name": "谢若兰",
+            "description": "你的王妃，出身丹陵士族谢氏\n因为姻亲关系，谢家是你的强力臂助"
+        },
+        {
+            "videoId": "00_005_002003004005",
+            "time": 20,
+            "duration": 7,
+            "name": "楚桓",
+            "description": "京城城门校尉\n自北方护你南下，深得你的信任"
+        },
+        {
+            "videoId": "00_005_002003004005",
+            "time": 38,
+            "duration": 7,
+            "name": "谢建安",
+            "description": "丹陵谢氏家主\n谢若兰之父，当朝尚书台尚书令"
+        },
+        {
+            "videoId": "00_005_002003004005",
+            "time": 49,
+            "duration": 6,
+            "name": "虞宫",
+            "description": "国子监祭酒\n清高孤傲，在学子中极有威望"
+        },
+        {
+            "videoId": "00_067_032",
+            "time": 41,
+            "duration": 8,
+            "name": "陈婉儿",
+            "description": "出身士族之首的庆州陈氏\n叔公乃朝中丞相陈导，可谓权势滔天"
+        },
+        {
+            "videoId": "00_075_034",
+            "time": 102,
+            "duration": 2,
+            "name": "王明",
+            "description": "庾宫的学生"
+        },
+        {
+            "videoId": "00_077_036",
+            "time": 17,
+            "duration": 5,
+            "name": "司空正",
+            "description": "你同父同母的亲哥哥\n被册封为宁王"
+        },
+        {
+            "videoId": "01_001_001",
+            "time": 8,
+            "duration": 8,
+            "name": "曹表之",
+            "description": "户部侍郎，宣国少有的务实派，为人端正\n做事得力，是陈家高祖陈朗的学生"
+        },
+        {
+            "videoId": "01_001_001",
+            "time": 24,
+            "duration": 5,
+            "name": "陈导",
+            "description": "陈家家主，官拜丞相\n宣国众士族之首"
+        },
+        {
+            "videoId": "01_005_002003004",
+            "time": 88,
+            "duration": 2,
+            "name": "皇后李氏",
+            "description": "你和司空正的生母"
+        },
+        {
+            "videoId": "01_033_037038",
+            "time": 8,
+            "duration": 2,
+            "name": "陈应",
+            "description": "陈导之子"
+        },
+        {
+            "videoId": "02_001_001002003004",
+            "time": 114,
+            "duration": 4,
+            "name": "谢玄",
+            "description": "谢建安幼子\n谢若兰的弟弟"
+        },
+        {
+            "videoId": "02_011_010015016",
+            "time": 54,
+            "duration": 3,
+            "name": "祖坤",
+            "description": "宣军中极具威望的将领"
+        },
+        {
+            "videoId": "02_015_011012",
+            "time": 41,
+            "duration": 3,
+            "name": "祖坤",
+            "description": "宣军中极具威望的将领"
+        },
+        {
+            "videoId": "02_019_013014",
+            "time": 35,
+            "duration": 2,
+            "name": "祖坤",
+            "description": "宣军中极具威望的将领"
+        },
+        {
+            "videoId": "03_003_002",
+            "time": 59,
+            "duration": 2,
+            "name": "谢玄",
+            "description": "北军中郎将"
+        },
+        {
+            "videoId": "03_003_002",
+            "time": 60,
+            "duration": 3,
+            "name": "朱元之",
+            "description": "讨夷校尉"
+        },
+        {
+            "videoId": "03_030_006B024",
+            "time": 44,
+            "duration": 3,
+            "name": "石狼",
+            "description": "邬奴（赵）左将军"
+        },
+        {
+            "videoId": "03_031_006C025",
+            "time": 45,
+            "duration": 3,
+            "name": "石狼",
+            "description": "邬奴（赵）左将军"
+        },
+        {
+            "videoId": "03_036_019020021022023",
+            "time": 14,
+            "duration": 3,
+            "name": "石狼",
+            "description": "邬奴（赵）左将军"
+        },
+        {
+            "videoId": "03_039_026",
+            "time": 10,
+            "duration": 3,
+            "name": "石狼",
+            "description": "邬奴（赵）左将军"
+        },
+        {
+            "videoId": "03_040_027",
+            "time": 10,
+            "duration": 3,
+            "name": "石狼",
+            "description": "邬奴（赵）左将军"
+        },
+        {
+            "videoId": "04_025_005B032033034035",
+            "time": 60,
+            "duration": 5,
+            "name": "警告",
+            "description": "前方需要大量操作，请做好准备"
+        },
+        {
+            "videoId": "05_093_070",
+            "time": 71,
+            "duration": 5,
+            "name": "陈朗",
+            "description": "陈氏高祖，三朝老臣\n建平年间曾任吏部尚书"
+        },
+        {
+            "videoId": "05_076_057058059060061",
+            "time": 20,
+            "duration": 3,
+            "name": "范忠",
+            "description": "温贤的干儿子"
+        },
+        {
+            "videoId": "06_001_001002003004005",
+            "time": 68,
+            "duration": 6,
+            "name": "司空旭",
+            "description": "你的二皇子，由陈夫人陈婉儿所出"
+        },
+        {
+            "videoId": "06_001_001002003004005",
+            "time": 72,
+            "duration": 6,
+            "name": "司空盛",
+            "description": "当朝太子\n你的大儿子，由先皇后谢若兰所出"
+        },
+        {
+            "videoId": "06_001_001002003004005",
+            "time": 80,
+            "duration": 6,
+            "name": "司空钰",
+            "description": "受封浔阳公主\n你的小女儿，由刘昭仪刘念所出"
+        },
+        {
+            "videoId": "06_006_006007",
+            "time": 3,
+            "duration": 7,
+            "name": "范忠",
+            "description": "中常侍，接替温公公的职位\n如今是你的贴身太监"
+        },
+        {
+            "videoId": "06_006_006007",
+            "time": 48,
+            "duration": 10,
+            "name": "楚蒙",
+            "description": "楚桓之子，羽林校尉\n在楚桓获罪牵连家族时暗中被你保下\n平反后成为你的贴身护卫"
+        },
+        {
+            "videoId": "06_022_005B020",
+            "time": 83,
+            "duration": 8,
+            "name": "李定远",
+            "description": "前任皇城司都统\n宁王旧党，你留他用以监察百官"
+        },
+        {
+            "videoId": "06_066_031032033034035",
+            "time": 16,
+            "duration": 5,
+            "name": "慕容崔",
+            "description": "燕东使臣，也是燕东最年轻有为的将领。"
+        },
+        {
+            "videoId": "06_077_044045046047",
+            "time": 17,
+            "duration": 8,
+            "name": "邱胜",
+            "description": "云县伯，昔日刘大刀麾下老卒\n于弋阳血战立有大功。"
+        }
+    ]
+}

@@ -1,0 +1,196 @@
+{
+    "achievements": [
+        {
+            "id": "rising_gale",
+            "name": "Восстал Великий Ветер"
+        },
+        {
+            "id": "age_of_strife",
+            "name": "Эпоха Великой Смуты"
+        },
+        {
+            "id": "imperial_will_unfathomable",
+            "name": "Воля Государя непостижима"
+        },
+        {
+            "id": "master_strategist",
+            "name": "Мастер хитроумных замыслов"
+        },
+        {
+            "id": "drifting_like_duckweed",
+            "name": "Ряска под дождём"
+        },
+        {
+            "id": "mandate_of_heaven",
+            "name": "Избран Небесным Мандатом"
+        },
+        {
+            "id": "unyielding_spirit",
+            "name": "Несгибаемый дух"
+        },
+        {
+            "id": "bold_remonstrance",
+            "name": "Смелость говорить истину"
+        },
+        {
+            "id": "dragon_into_the_sea",
+            "name": "Дракон входит в море"
+        },
+        {
+            "id": "weight_of_rites_and_affection",
+            "name": "И долг, и чувства равно важны"
+        },
+        {
+            "id": "martial_master",
+            "name": "Великий мастер воинского пути"
+        },
+        {
+            "id": "hidden_dragon_emerges",
+            "name": "Скрытый дракон выходит в море"
+        },
+        {
+            "id": "dignity_preserved",
+            "name": "Сохранить достоинство"
+        },
+        {
+            "id": "blade_unsheathed",
+            "name": "Испытать острие клинка"
+        },
+        {
+            "id": "counter_within_scheme",
+            "name": "Обратить замысел против замысла"
+        },
+        {
+            "id": "emperor_xuanwu",
+            "name": "Император Сюаньу-ди"
+        },
+        {
+            "id": "break_the_mountain",
+            "name": "Проломить гору"
+        },
+        {
+            "id": "court_jester_supreme",
+            "name": "Мастер придворного остроумия"
+        },
+        {
+            "id": "fickle_hearts",
+            "name": "Сердца людские холодны"
+        },
+        {
+            "id": "fight_to_the_death",
+            "name": "Сражаться до смерти"
+        },
+        {
+            "id": "reborn_from_ruin",
+            "name": "Возрождение из руин"
+        },
+        {
+            "id": "ask_the_mandate",
+            "name": "Вопрошать Небесный Мандат"
+        },
+        {
+            "id": "principled_choice",
+            "name": "Делать должное и отказываться от лишнего"
+        },
+        {
+            "id": "between_north_and_south",
+            "name": "Между Севером и Югом"
+        },
+        {
+            "id": "emperor_xuanyang",
+            "name": "Император Сюаньян-ди"
+        },
+        {
+            "id": "heavenly_ordination",
+            "name": "Принявший веление Неба"
+        },
+        {
+            "id": "vision_of_peace",
+            "name": "Стремление к Великому миру"
+        },
+        {
+            "id": "emperor_xuanyou",
+            "name": "Император Сюань Ю-ди"
+        },
+        {
+            "id": "emperor_xuanzong",
+            "name": "Император Сюаньцзун-ди"
+        },
+        {
+            "id": "mistrust_and_abandon",
+            "name": "Подозревать и не использовать"
+        },
+        {
+            "id": "deposed_emperor_xuan",
+            "name": "Свергнутый император Сюань"
+        },
+        {
+            "id": "emperor_xuanshang",
+            "name": "Император Сюаньшан-ди"
+        },
+        {
+            "id": "longwu_reform",
+            "name": "Реформы Лунъу"
+        },
+        {
+            "id": "xunyang_campaign",
+            "name": "Поход из Сюняна"
+        },
+        {
+            "id": "favor_for_all",
+            "name": "Милость, дарованная всем"
+        },
+        {
+            "id": "all_under_heaven",
+            "name": "Единство Поднебесной"
+        },
+        {
+            "id": "emperor_xuanhuai",
+            "name": "Император Сюаньхуай-ди"
+        },
+        {
+            "id": "emperor_xuanai",
+            "name": "Император Сюаньай-ди"
+        },
+        {
+            "id": "emperor_xuankang",
+            "name": "Император Сюанькан-ди"
+        },
+        {
+            "id": "emperor_xuanzhuang",
+            "name": "Император Сюаньчжуан-ди"
+        },
+        {
+            "id": "emperor_xuanming",
+            "name": "Император Сюаньмин-ди"
+        },
+        {
+            "id": "emperor_xuanjing",
+            "name": "Император Сюаньцзин-ди"
+        },
+        {
+            "id": "emperor_xuancheng",
+            "name": "Император Сюаньчэн-ди"
+        },
+        {
+            "id": "emperor_xuanwen",
+            "name": "Император Сюаньвэнь-ди"
+        },
+        {
+            "id": "emperor_xuanguangwu",
+            "name": "Император Сюань Гуанъу-ди"
+        },
+        {
+            "id": "emperor_xuanzhao",
+            "name": "Император Сюаньчжао-ди"
+        },
+        {
+            "id": "yan_never_returns",
+            "name": "Янь не возвращается"
+        },
+        {
+            "id": "thousand_sails_passed",
+            "name": "Мимо прошли тысячи парусов"
+        }
+    ]
+}

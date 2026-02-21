@@ -10,7 +10,7 @@ import type { videoType } from "../types/videoType.js";
 import { apiClient } from "../utils/apiClient.js";
 import { deepArrayEquals } from "../utils/comparer.js";
 import { convertToChapterId, convertToStoryletId, convertToVideoId } from "../utils/converter.js";
-import { clamp, randomChance } from "./calc.js";
+import { clamp, randomChance } from "../utils/calc.js";
 import { usePlayerStore } from "./player.js";
 
 // =============================

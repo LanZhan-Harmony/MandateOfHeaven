@@ -1,0 +1,196 @@
+{
+    "achievements": [
+        {
+            "id": "rising_gale",
+            "name": "대풍이 일다"
+        },
+        {
+            "id": "age_of_strife",
+            "name": "대쟁란의 시대"
+        },
+        {
+            "id": "imperial_will_unfathomable",
+            "name": "성심은 헤아릴 수 없다"
+        },
+        {
+            "id": "master_strategist",
+            "name": "지략의 명수"
+        },
+        {
+            "id": "drifting_like_duckweed",
+            "name": "비에 흔들리는 부평초"
+        },
+        {
+            "id": "mandate_of_heaven",
+            "name": "천명이 돌아오다"
+        },
+        {
+            "id": "unyielding_spirit",
+            "name": "굳센 기개"
+        },
+        {
+            "id": "bold_remonstrance",
+            "name": "직언을 두려워하지 않다"
+        },
+        {
+            "id": "dragon_into_the_sea",
+            "name": "교룡이 바다에 들다"
+        },
+        {
+            "id": "weight_of_rites_and_affection",
+            "name": "예와 정을 함께 중히 여기다"
+        },
+        {
+            "id": "martial_master",
+            "name": "무도의 고수"
+        },
+        {
+            "id": "hidden_dragon_emerges",
+            "name": "잠룡이 바다로 나아가다"
+        },
+        {
+            "id": "dignity_preserved",
+            "name": "체면을 지키다"
+        },
+        {
+            "id": "blade_unsheathed",
+            "name": "칼날을 닦아 시험하다"
+        },
+        {
+            "id": "counter_within_scheme",
+            "name": "계책으로 계책을 제압하다"
+        },
+        {
+            "id": "emperor_xuanwu",
+            "name": "선무제"
+        },
+        {
+            "id": "break_the_mountain",
+            "name": "산을 깨뜨리다"
+        },
+        {
+            "id": "court_jester_supreme",
+            "name": "받침의 달인"
+        },
+        {
+            "id": "fickle_hearts",
+            "name": "인심은 박하다"
+        },
+        {
+            "id": "fight_to_the_death",
+            "name": "죽음을 무릅쓰다"
+        },
+        {
+            "id": "reborn_from_ruin",
+            "name": "무너짐 뒤에 다시 서다"
+        },
+        {
+            "id": "ask_the_mandate",
+            "name": "천명을 묻다"
+        },
+        {
+            "id": "principled_choice",
+            "name": "할 것은 하고, 하지 않을 것은 하지 않다"
+        },
+        {
+            "id": "between_north_and_south",
+            "name": "남과 북 사이"
+        },
+        {
+            "id": "emperor_xuanyang",
+            "name": "선양제"
+        },
+        {
+            "id": "heavenly_ordination",
+            "name": "하늘의 명을 받들다"
+        },
+        {
+            "id": "vision_of_peace",
+            "name": "태평의 뜻"
+        },
+        {
+            "id": "emperor_xuanyou",
+            "name": "선유제"
+        },
+        {
+            "id": "emperor_xuanzong",
+            "name": "선종제"
+        },
+        {
+            "id": "mistrust_and_abandon",
+            "name": "의심하여 쓰지 않다"
+        },
+        {
+            "id": "deposed_emperor_xuan",
+            "name": "선폐제"
+        },
+        {
+            "id": "emperor_xuanshang",
+            "name": "선상제"
+        },
+        {
+            "id": "longwu_reform",
+            "name": "융무 변법"
+        },
+        {
+            "id": "xunyang_campaign",
+            "name": "심양 출정"
+        },
+        {
+            "id": "favor_for_all",
+            "name": "은택을 고루 내리다"
+        },
+        {
+            "id": "all_under_heaven",
+            "name": "구주가 하나 되다"
+        },
+        {
+            "id": "emperor_xuanhuai",
+            "name": "선회제"
+        },
+        {
+            "id": "emperor_xuanai",
+            "name": "선애제"
+        },
+        {
+            "id": "emperor_xuankang",
+            "name": "선강제"
+        },
+        {
+            "id": "emperor_xuanzhuang",
+            "name": "선장제"
+        },
+        {
+            "id": "emperor_xuanming",
+            "name": "선명제"
+        },
+        {
+            "id": "emperor_xuanjing",
+            "name": "선경제"
+        },
+        {
+            "id": "emperor_xuancheng",
+            "name": "선성제"
+        },
+        {
+            "id": "emperor_xuanwen",
+            "name": "선문제"
+        },
+        {
+            "id": "emperor_xuanguangwu",
+            "name": "선광무제"
+        },
+        {
+            "id": "emperor_xuanzhao",
+            "name": "선소제"
+        },
+        {
+            "id": "yan_never_returns",
+            "name": "연은 돌아오지 않는다"
+        },
+        {
+            "id": "thousand_sails_passed",
+            "name": "천 척의 돛이 지나가다"
+        }
+    ]
+}
