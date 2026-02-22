@@ -31,11 +31,13 @@
     "storyline": {
         "currentProgress": "當前進度",
         "storylineHelp": "幫助",
+        "helpPicture": "说明页面-zh-CN.webp",
         "valueToPayAttentionTo": "本章節請留意：",
         "emperorTrust": "皇帝的信任",
         "sikongZhengGuilt": "司空正的愧疚",
         "zuKunApproval": "祖坤的認可",
         "armyMorale": "軍心",
+        "liuDadaoTrust": "劉大刀的信任",
         "xieXuanFightingSpirit": "謝玄的鬥志",
         "zhuYuanzhiLoyalty": "朱元之的忠心",
         "zhuYuanzhiPower": "朱元之的權勢"
@@ -43,5 +45,16 @@
     "character": {
         "characterIntroduction": "人物介紹",
         "characterStories": "人物故事"
+    },
+    "player": {
+        "storyline": "劇情線",
+        "enterNextChapter": "進入下一章"
+    },
+    "dialog": {
+        "helpSpoilerWarning": "自由探索可以得到更高的成就感\n查看攻略可能會影響沉浸體驗\n您是否確定要查看該節點過關攻略?",
+        "letMeTryAgain": "我再試試",
+        "viewGuide": "查看攻略",
+        "closeTip": "關閉提示",
+        "closeDialog": "關閉對話框"
     }
 }

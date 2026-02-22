@@ -3,6 +3,7 @@ import { computed, ref, watch } from "vue";
 
 export const useMediaStore = defineStore("media", () => {
   const bgmAudio = new Audio();
+  const loopAudio = new Audio();
 
   // 辅助函数：从 localStorage 获取数字
   const getStoredNum = (key: string, defaultValue: number) => {
@@ -16,6 +17,8 @@ export const useMediaStore = defineStore("media", () => {
   const bgmVolume = ref(getStoredNum("bgmVolume", 0.5));
   const effectVolume = ref(getStoredNum("effectVolume", 1.0));
 
+  const temporaryPlayerMuted = ref(false);
+
   // 实时保存到 localStorage
   watch(mainVolume, (val) => localStorage.setItem("mainVolume", val.toString()));
   watch(playerVolume, (val) => localStorage.setItem("playerVolume", val.toString()));
@@ -24,11 +27,14 @@ export const useMediaStore = defineStore("media", () => {
 
   // 计算实际音量（使用平方曲线以获得更自然的音量调整）
   const actualBgmVolume = computed(() => Math.pow(mainVolume.value * bgmVolume.value, 2));
-  const actualPlayerVolume = computed(() => Math.pow(mainVolume.value * playerVolume.value, 2));
+  const actualPlayerVolume = computed(() => Math.pow(mainVolume.value * playerVolume.value * (temporaryPlayerMuted.value ? 0 : 1), 2));
   const actualEffectVolume = computed(() => Math.pow(mainVolume.value * effectVolume.value, 2));
 
   watch(actualBgmVolume, (newVolume: number) => {
     bgmAudio.volume = newVolume;
+  });
+  watch(actualPlayerVolume, (newVolume: number) => {
+    loopAudio.volume = newVolume;
   });
 
   /**
@@ -54,11 +60,14 @@ export const useMediaStore = defineStore("media", () => {
   }
 
   /**
-   * 暂停播放背景音乐
+   * 暂停播放所有音频
    */
-  function pauseBGMAudio() {
+  function pauseAllAudios() {
     if (!bgmAudio.paused) {
       bgmAudio.pause();
+    }
+    if (!loopAudio.paused) {
+      loopAudio.pause();
     }
   }
 
@@ -85,14 +94,30 @@ export const useMediaStore = defineStore("media", () => {
     }
   }
 
+  async function setLoopAudioAsync(chapterId: number, videoId: string) {
+    loopAudio.pause();
+    loopAudio.src = `/chapters/loop_audios/chapter${chapterId}/${videoId}.opus`;
+    loopAudio.loop = true;
+    loopAudio.volume = actualPlayerVolume.value;
+    try {
+      await loopAudio.play();
+    } catch (error) {
+      console.error("无法播放循环音频:", error);
+    }
+  }
+
   return {
+    loopAudio,
     mainVolume,
     playerVolume,
     bgmVolume,
     effectVolume,
+    temporaryPlayerMuted,
+    actualPlayerVolume,
     setBGMAudioAsync,
-    pauseBGMAudio,
+    pauseAllAudios,
     resumeBGMAudioAsync,
     setEffectAudioAsync,
+    setLoopAudioAsync,
   };
 });

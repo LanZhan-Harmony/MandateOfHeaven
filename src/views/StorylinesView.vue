@@ -44,9 +44,9 @@ const CHAPTER_VALUES: string[][] = [
   // 第2章
   ["zuKunApproval"],
   // 第3章
-  ["armyMorale"],
-  // 第4章 - 无数值
-  [],
+  ["armyMorale", "liuDadaoTrust"],
+  // 第4章
+  ["liuDadaoTrust"],
   // 第5章
   ["armyMorale"],
   // 第6章
@@ -588,7 +588,7 @@ onUnmounted(() => {
       <div class="value-display">
         <table>
           <tbody>
-            <tr v-if="(CHAPTER_VALUES[selectedChapterId] || []).length > 0">
+            <tr>
               {{
                 $t("storyline.valueToPayAttentionTo")
               }}
@@ -845,7 +845,7 @@ onUnmounted(() => {
   .progress-normal {
     font-size: 24px;
   }
-  .value-display{
+  .value-display {
     font-size: 16px;
   }
 }

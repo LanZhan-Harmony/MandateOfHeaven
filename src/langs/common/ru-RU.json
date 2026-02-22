@@ -31,11 +31,13 @@
     "storyline": {
         "currentProgress": "Текущий прогресс",
         "storylineHelp": "Помощь",
+        "helpPicture": "说明页面-zh-CN.webp",
         "valueToPayAttentionTo": "Обратите внимание в этой главе:",
         "emperorTrust": "Доверие императора",
         "sikongZhengGuilt": "Чувство вины Сиконг Чжэна",
         "zuKunApproval": "Одобрение Цзу Куна",
         "armyMorale": "Мораль армии",
+        "liuDadaoTrust": "Доверие Лю Дадао",
         "xieXuanFightingSpirit": "Боевой дух Се Сюаня",
         "zhuYuanzhiLoyalty": "Верность Чжу Юаньчжи",
         "zhuYuanzhiPower": "Власть Чжу Юаньчжи"
@@ -43,5 +45,16 @@
     "character": {
         "characterIntroduction": "Описание персонажа",
         "characterStories": "Истории персонажей"
+    },
+    "player": {
+        "storyline": "Линия сюжета",
+        "enterNextChapter": "Перейти к следующей главе"
+    },
+    "dialog": {
+        "helpSpoilerWarning": "Свободное исследование может принести больше удовлетворения от достижения\nПросмотр гайда может повлиять на погружение в игру\nВы уверены, что хотите просмотреть гайд для этого узла?",
+        "letMeTryAgain": "Попробовать снова",
+        "viewGuide": "Посмотреть гайд",
+        "closeTip": "Закрыть подсказку",
+        "closeDialog": "Закрыть диалоговое окно"
     }
 }

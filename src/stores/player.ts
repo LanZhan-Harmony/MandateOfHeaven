@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { computed, ref, shallowReactive } from "vue";
-import type { PlayerInstruction } from "../types/playerInstructionType.js";
+import type { playerInstructionType } from "../types/playerInstructionType.js";
 
 /**
  * 播放器 Store
@@ -14,7 +14,7 @@ export const usePlayerStore = defineStore("player", () => {
   // ----------------------------------
 
   /** 播放器指令队列（包含视频 ID、循环标志、动作组信息） */
-  const playerInstructions = shallowReactive<PlayerInstruction[]>([]);
+  const playerInstructions = shallowReactive<playerInstructionType[]>([]);
 
   /** 当前正在播放的指令索引（-1 表示未激活） */
   const currentPlayerInstructionId = ref(-1);

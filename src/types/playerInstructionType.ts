@@ -1,7 +1,7 @@
 import type { actionGroupType } from "./actionGroupType";
 
 /** 播放器指令：描述单个视频的播放参数 */
-export interface PlayerInstruction {
+export interface playerInstructionType {
   /** 所属 storylet ID */
   storyletId: string;
   /** 视频 ID */

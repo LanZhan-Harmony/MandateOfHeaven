@@ -31,11 +31,13 @@
     "storyline": {
         "currentProgress": "Current Progress",
         "storylineHelp": "Storyline Help",
+        "helpPicture": "说明页面-zh-CN.webp",
         "valueToPayAttentionTo": "Value to pay attention to in this chapter:",
         "emperorTrust": "Emperor's Trust",
         "sikongZhengGuilt": "SiKong Zheng's Guilt",
         "zuKunApproval": "Zu Kun's Approval",
         "armyMorale": "Army Morale",
+        "liuDadaoTrust": "Liu Dadao's Trust",
         "xieXuanFightingSpirit": "Xie Xuan's Fighting Spirit",
         "zhuYuanzhiLoyalty": "Zhu Yuanzhi's Loyalty",
         "zhuYuanzhiPower": "Zhu Yuanzhi's Power"
@@ -43,5 +45,16 @@
     "character": {
         "characterIntroduction": "Character Introduction",
         "characterStories": "Character Stories"
+    },
+    "player": {
+        "storyline": "Storyline",
+        "enterNextChapter": "Enter Next Chapter"
+    },
+    "dialog": {
+        "helpSpoilerWarning": "Help may contain spoilers. Do you want to view it?",
+        "letMeTryAgain": "Let Me Try Again",
+        "viewGuide": "View Guide",
+        "closeTip": "Close Tip",
+        "closeDialog": "Close Dialog"
     }
 }

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted } from "vue";
 import { RouterView } from "vue-router";
+import DialogOverlay from "./components/DialogOverlay.vue";
 import { useSaveStore } from "./stores/save";
 
 const saveStore = useSaveStore();
@@ -58,6 +59,7 @@ onBeforeUnmount(() => {
 <template>
   <div id="app-container">
     <RouterView />
+    <DialogOverlay />
   </div>
 </template>
 

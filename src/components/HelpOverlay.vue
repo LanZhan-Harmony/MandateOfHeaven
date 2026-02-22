@@ -17,7 +17,7 @@ const emit = defineEmits<{
         @click="emit('close')" />
     </div>
     <div class="content-frame">
-      <img src="/common/images/说明页面.webp" aria-label="Help" />
+      <img :src="`/common/images/${$t('storyline.helpPicture')}`" aria-label="Help" />
     </div>
   </div>
 </template>
