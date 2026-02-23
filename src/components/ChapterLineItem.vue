@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useMediaStore } from "../stores/media";
 import { computed } from "vue";
+import { useMediaStore } from "../stores/media";
 
 const props = defineProps<{
   iconPath: string;
@@ -86,6 +86,7 @@ async function handlePointerEnter() {
 .icon {
   width: 24px;
   height: 24px;
+  flex-shrink: 0;
   background-size: contain;
   background-repeat: no-repeat;
   transition: background-image 0.2s linear;
@@ -93,6 +94,7 @@ async function handlePointerEnter() {
 
 .title {
   color: #fff;
+  text-wrap: nowrap;
 }
 
 @media (max-height: 500px) {

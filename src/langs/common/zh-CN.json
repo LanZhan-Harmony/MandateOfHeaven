@@ -56,5 +56,10 @@
         "viewGuide": "查看攻略",
         "closeTip": "关闭提示",
         "closeDialog": "关闭对话框"
+    },
+    "esc": {
+        "continueStory": "继续游戏",
+        "backToStoryline": "返回故事线",
+        "settings": "设置"
     }
 }

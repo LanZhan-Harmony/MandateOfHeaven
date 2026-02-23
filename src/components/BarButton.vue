@@ -94,6 +94,7 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 120px;
 }
 .btn:hover {
   color: #fff;

@@ -5,6 +5,7 @@ import { useMediaStore } from "@/stores/media";
 import { usePlayerStore } from "@/stores/player";
 import { getEndingType, useSaveStore } from "@/stores/save";
 import { useUIStore } from "@/stores/ui";
+import type { uiButtonActionGroupType } from "@/types/actionGroupType";
 import type { endingType } from "@/types/endingType";
 import type { introductionType } from "@/types/introductionType";
 import type { playerInstructionType } from "@/types/playerInstructionType";
@@ -81,7 +82,7 @@ const BUTTON_POSITIONS: { x: number; y: number }[][] = [
 const PLAYBACK_RATES = [0.5, 1, 1.5, 2];
 
 // 控制条显示延时
-const CONTROLS_SHOW_DELAY = 1500;
+const CONTROLS_SHOW_DELAY = 3000;
 const SEEK_DEBOUNCE_DELAY = 250;
 
 const introductions = computed(() => tm("introductions") as introductionType[]);
@@ -92,22 +93,32 @@ const playerRef = shallowRef<Player | null>(null);
 const playerState = shallowRef<playStateType | null>(null);
 const videoEl = ref<HTMLVideoElement | null>(null);
 
-const isLoopVideo = props.instruction.loop;
+const isLoopVideo = computed(() => props.instruction.loop);
 
 // 控制条底部偏移（当 video.js 原生控制条显示时抬高自定义控制条）
 const controlsBottomOffset = computed(() => (showVideoJsControls ? "30px" : "0"));
 
 // UI 状态
-const showQteOverlay = ref(
-  isLoopVideo ||
-    props.instruction.actionGroups.some((g) => g.type === "qte") ||
-    props.instruction.actionGroups.some((g) => g.type === "ui_button" && g.timeLimitedActionIndex !== undefined),
+const showQteOverlay = computed(
+  () =>
+    !hasSelectedOption.value &&
+    (isLoopVideo.value ||
+      props.instruction.actionGroups.some((g) => g.type === "qte") ||
+      props.instruction.actionGroups.some((g) => g.type === "ui_button" && g.timeLimitedActionIndex !== undefined)),
 );
 const hasSelectedOption = ref(false);
 const showControlsOverlay = ref(false);
-const showMouseCursor = ref(false);
+const showMouseCursor = ref(isLoopVideo.value);
 const seekingTime = ref<number | null>(null);
 const showEndScreen = ref(false);
+
+// 监听进入循环视频，确保鼠标指针显示
+watch(isLoopVideo, (isLoop) => {
+  if (isLoop) {
+    showMouseCursor.value = true;
+    showControlsOverlay.value = false;
+  }
+});
 
 // 控制条自动隐藏定时器
 let controlsHideTimer: number | null = null;
@@ -119,34 +130,8 @@ function scheduleHideControls() {
   if (controlsHideTimer) clearTimeout(controlsHideTimer);
   controlsHideTimer = setTimeout(() => {
     showControlsOverlay.value = false;
-    showMouseCursor.value = false;
+    showMouseCursor.value = isLoopVideo.value;
   }, CONTROLS_SHOW_DELAY);
-}
-
-/**
- * 取消控制条自动隐藏并立刻隐藏
- */
-function hideControlsNow() {
-  if (controlsHideTimer) {
-    clearTimeout(controlsHideTimer);
-    controlsHideTimer = null;
-  }
-  showControlsOverlay.value = false;
-  showMouseCursor.value = false;
-}
-
-/**
- * 鼠标移动时显示控制条，并（非循环视频）启动自动隐藏倒计时
- */
-function handleMouseMove() {
-  if (!isPlaying.value) return;
-  if (isLoopVideo) {
-    showMouseCursor.value = true;
-    return;
-  }
-  showMouseCursor.value = true;
-  showControlsOverlay.value = true;
-  scheduleHideControls();
 }
 
 /**
@@ -168,7 +153,6 @@ const videoUrl = computed(() => {
 
 /**
  * 字幕轨道配置
- * 格式：res://chapter{章节号}_{语言代码}/subtitles/{视频文件名}.vtt
  *
  * 【字幕对齐原理】
  * VTT 文件格式示例：
@@ -190,7 +174,7 @@ const subtitleTracks = computed(() => {
 
   const chapterId = convertToChapterId(props.instruction.videoId);
   const fileName = props.instruction.videoId;
-  const subtitlePath = `/chapter/subtitles/chapter${chapterId}/${uiStore.locale}/${fileName}.vtt`;
+  const subtitlePath = `/chapters/subtitles/chapter${chapterId}/${uiStore.locale}/${fileName}.vtt`;
 
   return [
     {
@@ -311,7 +295,11 @@ const containerStyle = computed(() => ({
 onMounted(() => {
   updateScale();
   window.addEventListener("resize", updateScale);
-  mediaStore.pauseAllAudios();
+  // 只有当前播放的实例才需要暂停 BGM，预加载组件不操作
+  if (props.play) {
+    mediaStore.pauseAllAudios();
+    if (isLoopVideo.value) showMouseCursor.value = true;
+  }
 
   if (!videoEl.value) return;
 
@@ -325,9 +313,8 @@ onMounted(() => {
 
   // 初始化 video.js 播放器
   const player = videojs(videoEl.value, {
-    controls: false,
-    fluid: true,
-    loop: isLoopVideo && props.instruction.videoId !== "04_022_005",
+    controls: showVideoJsControls,
+    loop: isLoopVideo.value && props.instruction.videoId !== "04_022_005",
     language: uiStore.locale,
     languages: uiStore.allLocales,
     techOrder: ["html5"],
@@ -345,11 +332,9 @@ onMounted(() => {
   // --- 注册 video.js 原生事件 ---
   player.on("play", () => {
     state.playing = true;
-    handlePlay();
   });
   player.on("pause", () => {
     state.playing = false;
-    handlePause();
   });
   player.on("ended", () => {
     state.playing = false;
@@ -362,7 +347,6 @@ onMounted(() => {
   player.on("durationchange", () => {
     state.duration = player.duration() || 0;
   });
-  player.on("seeking", handleSeeking);
   player.on("seeked", handleSeeked);
   player.on("error", handleError);
   player.on("texttrackchange", handleTextTrackChange);
@@ -392,9 +376,6 @@ onMounted(() => {
     { immediate: true, flush: "sync" },
   );
 
-  // 鼠标移动显示控制条
-  document.addEventListener("mousemove", handleMouseMove);
-
   // 空格键播放/暂停
   const onSpaceKey = (e: KeyboardEvent) => {
     if (e.key === " " || e.code === "Space") {
@@ -405,20 +386,25 @@ onMounted(() => {
   document.addEventListener("keydown", onSpaceKey);
   removeSpaceKeyListener = () => document.removeEventListener("keydown", onSpaceKey);
 
-  // 初始化时触发一次，确保控制条可见
-  handleMouseMove();
+  // 绑定视频播放器音量到 actualPlayerVolume
+  player.volume(mediaStore.actualPlayerVolume);
+  watch(
+    () => mediaStore.actualPlayerVolume,
+    (vol) => {
+      player.volume(vol);
+    },
+  );
 
   // 配置字幕显示样式（通过 video.js textTrackSettings 子组件）
   const tts = (player as any).textTrackSettings;
   if (tts) {
-    tts.setValues({ backgroundColor: "#000", backgroundOpacity: "0", fontPercent: "2" });
+    tts.setValues({ backgroundColor: "#000", backgroundOpacity: "0", fontPercent: "2.00" });
     tts.saveSettings();
     tts.updateDisplay();
   }
 });
 
 onUnmounted(() => {
-  document.removeEventListener("mousemove", handleMouseMove);
   removeSpaceKeyListener?.();
   if (controlsHideTimer) clearTimeout(controlsHideTimer);
 
@@ -473,8 +459,7 @@ async function handleVideoEnded() {
 
     // 限时选项超时
     const timedGroup = props.instruction.actionGroups.find(
-      (g): g is import("@/types/actionGroupType").uiButtonActionGroupType =>
-        g.type === "ui_button" && g.timeLimitedActionIndex !== undefined,
+      (g): g is uiButtonActionGroupType => g.type === "ui_button" && g.timeLimitedActionIndex !== undefined,
     );
     if (timedGroup) {
       await handleSelectOption(timedGroup.timeLimitedActionIndex!);
@@ -520,16 +505,6 @@ function handleSeeked() {
 }
 
 /**
- * 暂停事件
- */
-function handlePause() {}
-
-/**
- * 播放事件
- */
-function handlePlay() {}
-
-/**
  * 播放错误处理
  */
 function handleError(_event: unknown) {
@@ -572,6 +547,16 @@ async function startPlayback() {
     await playerRef.value?.play();
   } catch (e) {
     console.debug("Error starting video track:", e);
+  }
+
+  // 循环视频需恢复循环音频（pauseAllAudios 会将其暂停）
+  if (isLoopVideo.value) {
+    showMouseCursor.value = true;
+    try {
+      await mediaStore.loopAudio.play();
+    } catch (e) {
+      console.debug("Error resuming loop audio:", e);
+    }
   }
 }
 
@@ -617,7 +602,6 @@ async function toggleMute() {
  * @param {number} optionIndex - 选项索引
  */
 async function handleSelectOption(optionIndex: number) {
-  showQteOverlay.value = false;
   hasSelectedOption.value = true;
 
   // 提交保存动作到游戏状态
@@ -674,24 +658,29 @@ async function handleQteSelectOption(optionIndex: number) {
 }
 
 /**
- * 切换控制条显示
+ * 鼠标移动时显示控制条，并重置自动隐藏计时器
+ */
+function handleMouseMove() {
+  showMouseCursor.value = true;
+  if (!isLoopVideo.value) scheduleHideControls();
+}
+
+/**
+ * 切换控制条显示（点击屏幕时显示控制条并启动自动隐藏计时器）
  */
 function toggleControls() {
-  showControlsOverlay.value = !showControlsOverlay.value;
-}
-
-/**
- * 阻止事件冒泡（用于控制条区域，防止点击穿透到 toggleControls）
- */
-function stopPropagation(e: Event) {
-  e.stopPropagation();
-}
-
-/**
- * 进度条开始拖动（seeking 事件，无需特殊处理）
- */
-function handleSeeking() {
-  // 不做任何处理，Video.js 内部已处理
+  if (!showControlsOverlay.value) {
+    showControlsOverlay.value = true;
+    showMouseCursor.value = true;
+    if (!isLoopVideo.value) scheduleHideControls();
+  } else {
+    showControlsOverlay.value = false;
+    showMouseCursor.value = isLoopVideo.value;
+    if (controlsHideTimer) {
+      clearTimeout(controlsHideTimer);
+      controlsHideTimer = null;
+    }
+  }
 }
 
 /**
@@ -767,7 +756,6 @@ watch(
       const yulvSids = ["a06_a025_a006a012", "a06_a026_a006b013", "a06_a027_a006c014qte2", "a06_a028_a006d"];
       if (yulvSids.includes(sid)) {
         const visited = saveStore.currentSave?.visited_storylets || [];
-        console.log(visited);
         if (yulvSids.every((s) => visited.includes(s))) {
           achievementStore.activateAchievement("favor_for_all");
         }
@@ -806,7 +794,7 @@ watch(
 );
 </script>
 <template>
-  <div v-show="isPlaying" class="storylet-player">
+  <div v-show="isPlaying" class="storylet-player" :style="containerStyle">
     <!-- Video.js 视频播放器（直接使用 video.js，不经过包装组件） -->
     <div
       id="player"
@@ -820,7 +808,8 @@ watch(
       ]"
       :data-playing-status="playerState?.playing"
       style="width: 100%; height: 100%"
-      @click="toggleControls">
+      @click="toggleControls"
+      @mousemove="handleMouseMove">
       <video ref="videoEl" class="video-js" crossorigin="anonymous" playsinline />
     </div>
 
@@ -828,26 +817,27 @@ watch(
     <div
       v-show="showControlsOverlay && !showEndScreen"
       :class="['custom-controls ui-font', { 'top-half': showQteOverlay }]"
-      @click="toggleControls">
+      @click="toggleControls"
+      @mousemove="handleMouseMove">
       <!-- 顶部导航 -->
-      <div class="nav">
-        <PageNavButton @click="emit('back')" />
-      </div>
+      <PageNavButton class="nav" @click="emit('back')" />
 
       <!-- 底部控制条（非QTE模式显示） -->
       <div v-if="showControls && !showQteOverlay" class="controls vertical" @click.stop>
         <div class="switches horizontal">
-          <!-- 播放/暂停按钮 -->
-          <button v-show="!playerState?.playing" class="play" @click="togglePlayPause" />
-          <button v-show="playerState?.playing" class="pause" @click="togglePlayPause" />
+          <div class="left-switches">
+            <!-- 播放/暂停按钮 -->
+            <button v-show="!playerState?.playing" class="play" @click="togglePlayPause" />
+            <button v-show="playerState?.playing" class="pause" @click="togglePlayPause" />
 
-          <!-- 静音按钮 -->
-          <button :class="['mute', { muted: mediaStore.temporaryPlayerMuted }]" @click="toggleMute" />
+            <!-- 静音按钮 -->
+            <button :class="['mute', { muted: mediaStore.temporaryPlayerMuted }]" @click="toggleMute" />
+          </div>
 
-          <div class="separator" />
-
-          <!-- 下一段按钮（仅已观看视频可用） -->
-          <button v-if="canSkip && !isLoopVideo" class="next" @click="skipToEnd" />
+          <div class="right-switches">
+            <!-- 下一段按钮（仅已观看视频可用） -->
+            <button v-if="canSkip && !isLoopVideo" class="next" @click="skipToEnd" />
+          </div>
         </div>
 
         <!-- 进度条 -->
@@ -951,50 +941,18 @@ watch(
   </div>
 </template>
 <style scoped>
-.chapter-title-wrapper {
-  opacity: 1;
-  transition:
-    opacity 1s ease-in-out,
-    display 1s allow-discrete;
-  pointer-events: none;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-@starting-style {
-  .chapter-title-wrapper {
-    opacity: 0;
-  }
-}
-
-.chapter-title-wrapper .chapter-title {
-  width: 20%;
-}
-
-.chapter-title-wrapper .actions {
-  position: absolute;
-  bottom: 8em;
-  right: 8em;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 1s;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-
 /* ==========================================
    StoryletPlayer 主组件
    ========================================== */
+
+/* video.js 充满容器 */
+:deep(.video-js) {
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+}
 
 /* 鼠标隐藏状态 */
 .mouse-hidden {
@@ -1011,7 +969,7 @@ watch(
 }
 
 /* 自定义控制层（带渐变遮罩） */
-.storylet-player .custom-controls {
+.custom-controls {
   z-index: 100;
   opacity: 1;
   background-image: linear-gradient(#000c 0, #0000 50%, #000c 100%);
@@ -1020,123 +978,131 @@ watch(
     visibility 0.2s;
 }
 
-/* QTE 场景：只保留上半部渐变（不遮挡选项区） */
-.storylet-player .custom-controls.top-half {
+/* QTE 场景：只保留上半部渐变 */
+.custom-controls.top-half {
   background-image: linear-gradient(#000c 0, #0000 50% 100%);
 }
 
 /* 顶部导航栏定位 */
-.storylet-player .custom-controls > .nav {
+.nav {
   position: absolute;
-  top: 3lh;
-  left: 3ic;
+  top: 10px;
+  left: 30px;
+  scale: 1.4;
 }
 
 /* 底部控制条 */
-.storylet-player .custom-controls > .controls {
+.controls {
   left: 0;
   bottom: v-bind(controlsBottomOffset);
   align-items: flex-start;
   width: 100%;
-  padding-bottom: 0.5lh;
-  font-size: 2.5em;
+  padding-bottom: 12px;
   position: absolute;
 }
 
-.storylet-player .custom-controls > .controls > * {
+.controls > * {
   width: 100%;
 }
 
 /* 按钮组 */
-.storylet-player .custom-controls > .controls > .switches {
+.switches {
   align-items: stretch;
-  padding: 0 1ic;
+  padding: 0 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-switches,
+.right-switches {
+  display: flex;
+  gap: 10px;
 }
 
 @media (pointer: coarse) {
-  .storylet-player .custom-controls > .controls > .switches > button {
-    height: 1.5lh;
+  .switches button {
+    height: 36px;
   }
 }
 
-.storylet-player .custom-controls > .controls > .switches > button {
+.switches button {
   aspect-ratio: 1;
   text-align: center;
   vertical-align: middle;
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: contain;
+  background-color: transparent;
+  border: none;
   width: auto;
-  height: 1lh;
-  margin: 0 0.3ic;
+  height: 50px;
+  margin: 0 5px;
+  cursor: pointer;
 }
 
-.storylet-player .custom-controls > .controls > .switches > button:hover,
-.storylet-player .custom-controls > .controls > .switches > button:focus {
+.switches button:hover,
+.switches button:focus {
   color: #fff;
 }
 
-/* 播放按钮 */
-.storylet-player .custom-controls > .controls > .switches > button.play {
+/* 各类型按钮背景 */
+.play {
   background-image: url(/common/images/播放按钮.webp);
 }
-.storylet-player .custom-controls > .controls > .switches > button.play:hover,
-.storylet-player .custom-controls > .controls > .switches > button.play:focus {
+.play:hover,
+.play:focus {
   background-image: url(/common/images/播放按钮高亮.webp);
 }
 
-/* 暂停按钮 */
-.storylet-player .custom-controls > .controls > .switches > button.pause {
+.pause {
   background-image: url(/common/images/暂停按钮.webp);
 }
-.storylet-player .custom-controls > .controls > .switches > button.pause:hover,
-.storylet-player .custom-controls > .controls > .switches > button.pause:focus {
+.pause:hover,
+.pause:focus {
   background-image: url(/common/images/暂停按钮高亮.webp);
 }
 
-/* 跳过按钮 */
-.storylet-player .custom-controls > .controls > .switches > button.next {
+.next {
   background-image: url(/common/images/跳过视频按钮.webp);
 }
-.storylet-player .custom-controls > .controls > .switches > button.next:hover,
-.storylet-player .custom-controls > .controls > .switches > button.next:focus {
+.next:hover,
+.next:focus {
   background-image: url(/common/images/跳过视频按钮高亮.webp);
 }
 
-/* 静音按钮 */
-.storylet-player .custom-controls > .controls > .switches > button.mute {
+.mute {
   background-image: url(/common/images/静音按钮.webp);
 }
-.storylet-player .custom-controls > .controls > .switches > button.mute:hover,
-.storylet-player .custom-controls > .controls > .switches > button.mute:focus {
+.mute:hover,
+.mute:focus {
   background-image: url(/common/images/静音按钮高亮.webp);
 }
-.storylet-player .custom-controls > .controls > .switches > button.mute.muted {
+.mute.muted {
   background-image: url(/common/images/已静音按钮.webp);
 }
-.storylet-player .custom-controls > .controls > .switches > button.mute.muted:hover,
-.storylet-player .custom-controls > .controls > .switches > button.mute.muted:focus {
+.mute.muted:hover,
+.mute.muted:focus {
   background-image: url(/common/images/已静音按钮高亮.webp);
 }
 
-/* 进度条背景 */
-.storylet-player .custom-controls > .controls > .progress-bar {
+/* 进度条 */
+.progress-bar {
+  position: relative;
   filter: drop-shadow(0 4px 4px #00000040);
   background: url(/common/images/进度条底色-暗.webp) 50% / contain no-repeat;
   width: 100%;
-  height: 1lh;
-  margin-top: 1lh;
+  height: 24px;
+  margin-top: 24px;
 }
 
-/* 进度条填充（宽度由 v-bind 注入 CSS 变量驱动） */
-.storylet-player .custom-controls > .controls > .progress-bar > .progress {
+.progress {
   height: 100%;
   width: calc(v-bind(progressPercent) * 1.005);
   filter: drop-shadow(0 4px 4px #00000040);
   z-index: 5;
   pointer-events: none;
   background-image: url(/common/images/进度条-亮.webp);
-  background-position: 50%;
+  background-position: left center; /* 确保从左侧开始填充 */
   background-repeat: no-repeat;
   background-size: contain;
   display: block;
@@ -1145,8 +1111,7 @@ watch(
   left: 0;
 }
 
-/* 进度条滑块游标（竖线指示器） */
-.storylet-player .custom-controls > .controls > .progress-bar > .progress:before {
+.progress:before {
   content: "";
   z-index: 4;
   background: linear-gradient(0deg, #0000 1px, #fff 2px, #a7835c 5px, #0000);
@@ -1155,8 +1120,7 @@ watch(
   transform: translate(-12px, -50%);
 }
 
-/* 进度条 range 输入（透明覆盖，用于拖动） */
-.storylet-player .custom-controls > .controls > .progress-bar > input[type="range"] {
+.progress-bar > input[type="range"] {
   z-index: 3;
   appearance: none;
   background: 0 0;
@@ -1167,14 +1131,14 @@ watch(
   bottom: 0;
   left: 0;
 }
-.storylet-player .custom-controls > .controls > .progress-bar > input[type="range"]::-webkit-slider-thumb {
+.progress-bar > input[type="range"]::-webkit-slider-thumb {
   appearance: none;
   width: 25px;
   height: 25px;
 }
 
 /* 问卷/选项区域 */
-.storylet-player .questionnaire {
+.questionnaire {
   z-index: 100;
   pointer-events: none;
   align-items: center;
@@ -1185,46 +1149,46 @@ watch(
   left: 0;
 }
 
-.storylet-player .questionnaire > .center {
+.questionnaire .center {
   align-items: center;
   margin: auto;
 }
 
-.storylet-player .questionnaire > .center > * {
+.questionnaire .center > * {
   pointer-events: auto;
 }
 
-/* 数值变化提示（右侧滑入） */
-.storylet-player .data-change-alert {
+/* 数值变化提示 */
+.data-change-alert {
   color: #e2c697;
   text-align: center;
   z-index: 200;
   background: linear-gradient(#0f0f0f00, #41332477 50%, #918375 100%);
   border-radius: 10px 0 0 10px;
   padding: 10px 30px;
-  font-size: 2em;
+  font-size: 30px;
   position: absolute;
-  top: 15%;
+  top: 10%;
   right: 0;
 }
 
-.storylet-player .data-change-slide-enter-active,
-.storylet-player .data-change-slide-leave-active {
+.data-change-slide-enter-active,
+.data-change-slide-leave-active {
   transition: transform 0.3s;
 }
 
-.storylet-player .data-change-slide-enter-from,
-.storylet-player .data-change-slide-leave-to {
+.data-change-slide-enter-from,
+.data-change-slide-leave-to {
   transform: translate(110%);
 }
 
-.storylet-player .data-change-slide-enter-to,
-.storylet-player .data-change-slide-leave-from {
+.data-change-slide-enter-to,
+.data-change-slide-leave-from {
   transform: translate(0);
 }
 
-/* 角色介绍弹窗（右侧滑入） */
-.storylet-player .character-intro {
+/* 角色介绍弹窗 */
+.character-intro {
   color: #e2c697;
   z-index: 100;
   background: #00000026;
@@ -1236,14 +1200,14 @@ watch(
   font-family:
     Source Han Serif VF,
     serif;
-  font-size: 2em;
+  font-size: 32px;
   display: flex;
   position: absolute;
   top: 10%;
   right: 0;
 }
 
-.storylet-player .character-intro .popup-icon {
+.character-intro .popup-icon {
   background-image: url(/common/images/弹窗图标.webp);
   background-position: 50%;
   background-repeat: no-repeat;
@@ -1253,19 +1217,19 @@ watch(
   margin-right: 8px;
 }
 
-.storylet-player .character-intro .name {
+.character-intro .name {
   font-size: 24px;
   font-weight: 900;
 }
 
-.storylet-player .character-intro .separator {
+.character-intro .separator {
   background: #a7835c;
   width: 1px;
   height: 44px;
   margin: 0 8px;
 }
 
-.storylet-player .character-intro .description {
+.character-intro .description {
   text-align: left;
   white-space: pre-wrap;
   max-width: 300px;
@@ -1274,18 +1238,66 @@ watch(
   line-height: 150%;
 }
 
-.storylet-player .character-intro-slide-enter-active,
-.storylet-player .character-intro-slide-leave-active {
+.character-intro-slide-enter-active,
+.character-intro-slide-leave-active {
   transition: transform 0.3s;
 }
 
-.storylet-player .character-intro-slide-enter-from,
-.storylet-player .character-intro-slide-leave-to {
+.character-intro-slide-enter-from,
+.character-intro-slide-leave-to {
   transform: translate(110%);
 }
 
-.storylet-player .character-intro-slide-enter-to,
-.storylet-player .character-intro-slide-leave-from {
+.character-intro-slide-enter-to,
+.character-intro-slide-leave-from {
   transform: translate(0);
+}
+
+/* ==========================================
+   Video.js 字幕样式定制
+   ========================================== */
+
+/* 强制字幕容器置于底部居中 */
+:deep(.vjs-text-track-display) {
+  bottom: 10% !important;
+  top: auto !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  pointer-events: none !important;
+}
+
+/* 轨道背景透明，强制居中 */
+:deep(.vjs-text-track-cue) {
+  background-color: transparent !important;
+  position: absolute !important;
+  inset: auto 0 0 0 !important;
+  width: 100% !important;
+  height: auto !important;
+  text-align: center !important;
+  transform: none !important;
+}
+
+/* 字幕文本样式：KuangShanKaiShu, 白色文字, 黑色描边 */
+:deep(.vjs-text-track-cue > div) {
+  background-color: transparent !important;
+  color: #ffffff !important;
+  font-family:
+    "KuangShanKaiShu", "Times New Roman", "TsangErJinKai", "NanoOldSong", "STSong", "Songti SC", "Microsoft YaHei" !important;
+  font-size: 60px !important;
+  text-align: center !important;
+  -webkit-text-stroke: 1px #000000 !important;
+  display: inline-block !important;
+  width: auto !important;
+  transform: none !important;
+}
+
+@media (max-height: 800px) {
+  .nav {
+    position: absolute;
+    top: 20px;
+    left: 60px;
+    scale: 2;
+  }
 }
 </style>

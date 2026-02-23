@@ -85,7 +85,7 @@ async function enterChapter() {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  z-index: 1;
+  z-index: 2;
 }
 .intro-video {
   position: absolute;

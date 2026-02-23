@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@tauri-apps/plugin-http": "^2.5.7",
+    "@vueuse/core": "^14.2.1",
     "pinia": "^3.0.4",
     "video.js": "^8.23.4",
     "vue": "^3.5.25",

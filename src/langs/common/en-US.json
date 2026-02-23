@@ -56,5 +56,10 @@
         "viewGuide": "View Guide",
         "closeTip": "Close Tip",
         "closeDialog": "Close Dialog"
+    },
+    "esc": {
+        "continueStory": "Continue Story",
+        "backToStoryline": "Back to Storyline",
+        "settings": "Settings"
     }
 }

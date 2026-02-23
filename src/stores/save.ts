@@ -133,7 +133,7 @@ export const useSaveStore = defineStore("save", () => {
   );
 
   /** 已访问的 storylet ID 列表 */
-  const visitedStoryletIds = computed<string[]>(() => currentSave.value?.visited_storylets ?? []);
+  const visitedStorylets = computed<string[]>(() => currentSave.value?.visited_storylets ?? []);
 
   /** 已选择的动作记录列表 */
   const selectedActions = computed<string[]>(() => currentSave.value?.selected_actions ?? []);
@@ -166,7 +166,7 @@ export const useSaveStore = defineStore("save", () => {
   /** 各章节的完成进度（0-1 浮点数） */
   const chapterProgress = computed<number[]>(() =>
     storyletsByChapter.map((chapterStorylets) => {
-      const visitedCount = visitedStoryletIds.value.filter((s) => chapterStorylets.includes(s)).length;
+      const visitedCount = visitedStorylets.value.filter((s) => chapterStorylets.includes(s)).length;
       return clamp(visitedCount / chapterStorylets.length, 0, 1);
     }),
   );
@@ -671,7 +671,6 @@ export const useSaveStore = defineStore("save", () => {
     }
 
     currentStoryletId.value = playerStore.playerInstructions[0]?.storyletId ?? null;
-    toRaw(playerStore.playerInstructions);
 
     if (playerStore.playerInstructions.length === 0) {
       playerStore.currentPlayerInstructionId = -1;
@@ -681,7 +680,7 @@ export const useSaveStore = defineStore("save", () => {
   function logAllStates(): void {
     console.log("currentSave:", currentSave.value);
     console.log("currentStoryletId:", currentStoryletId.value);
-    console.log("visitedStoryletIds:", visitedStoryletIds.value);
+    console.log("visitedStoryletIds:", visitedStorylets.value);
     console.log("selectedActions:", selectedActions.value);
     console.log("rewindableVideos:", rewindableVideos.value);
     console.log("videosOnCurrentTimeline:", videosOnCurrentTimeline.value);
@@ -709,7 +708,7 @@ export const useSaveStore = defineStore("save", () => {
     // 计算属性
     currentChapterId,
     isNewGame,
-    visitedStorylets: visitedStoryletIds,
+    visitedStorylets,
     selectedActions,
     rewindableVideos,
     videosOnCurrentTimeline,

@@ -27,7 +27,9 @@ export const useMediaStore = defineStore("media", () => {
 
   // 计算实际音量（使用平方曲线以获得更自然的音量调整）
   const actualBgmVolume = computed(() => Math.pow(mainVolume.value * bgmVolume.value, 2));
-  const actualPlayerVolume = computed(() => Math.pow(mainVolume.value * playerVolume.value * (temporaryPlayerMuted.value ? 0 : 1), 2));
+  const actualPlayerVolume = computed(() =>
+    Math.pow(mainVolume.value * playerVolume.value * (temporaryPlayerMuted.value ? 0 : 1), 2),
+  );
   const actualEffectVolume = computed(() => Math.pow(mainVolume.value * effectVolume.value, 2));
 
   watch(actualBgmVolume, (newVolume: number) => {
@@ -102,7 +104,9 @@ export const useMediaStore = defineStore("media", () => {
     try {
       await loopAudio.play();
     } catch (error) {
-      console.error("无法播放循环音频:", error);
+      if (!(error instanceof DOMException && error.name === "AbortError")) {
+        console.error("无法播放循环音频:", error);
+      }
     }
   }
 

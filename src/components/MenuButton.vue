@@ -101,6 +101,7 @@ onUnmounted(() => {
   font-family: inherit;
   transition: color 0.45s;
   display: inline-block;
+  text-wrap: nowrap;
 }
 
 .btn:hover {

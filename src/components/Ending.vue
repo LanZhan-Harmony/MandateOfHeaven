@@ -146,14 +146,13 @@ onMounted(async () => {
 
     <!-- 底部操作栏 -->
     <Transition name="fade" mode="out-in">
-      <div v-show="showContent" class="action horizontal">
-        <div></div>
-        <ArrowButton
-          :text="$t('player.storyline')"
-          direction="right"
-          @click="navigateToStoryline"
-          @pointerenter="mediaStore.setEffectAudioAsync('音效4')" />
-      </div>
+      <ArrowButton
+        v-show="showContent"
+        class="navigate-btn"
+        :text="$t('player.storyline')"
+        direction="right"
+        @click="navigateToStoryline"
+        @pointerenter="mediaStore.setEffectAudioAsync('音效4')" />
     </Transition>
   </div>
 </template>
@@ -200,18 +199,21 @@ onMounted(async () => {
   z-index: 0;
   color: #ffe9d0;
   width: 17%;
-  font-size: 1.5em;
+  font-size: 30px;
   font-weight: 500;
   line-height: 1.7;
   position: absolute;
   left: 10%;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.action {
-  z-index: 0;
-  width: 80%;
+.navigate-btn {
   position: absolute;
-  bottom: 5%;
+  right: 10%;
+  bottom: 10%;
+  scale: 1.3;
+  z-index: 2;
 }
 
 .video {

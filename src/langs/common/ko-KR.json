@@ -56,5 +56,10 @@
         "viewGuide": "공략 보기",
         "closeTip": "팁 닫기",
         "closeDialog": "대화 상자 닫기"
+    },
+    "esc": {
+        "continueStory": "게임 계속하기",
+        "backToStoryline": "스토리라인으로 돌아가기",
+        "settings": "설정"
     }
 }

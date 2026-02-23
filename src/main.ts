@@ -1,3 +1,4 @@
+import "video.js/dist/video-js.css";
 import "./assets/main.css";
 
 import { createPinia } from "pinia";

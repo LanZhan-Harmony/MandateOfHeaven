@@ -17,11 +17,12 @@
   - 拖动进度：stroke-dasharray 递增显示
   -->
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 
 /** 尾部图片资源 */
 import tailImageUrl from "/common/images/qte_slide_tail.png";
 /** 箭头图片资源 */
+import { useEventListener } from "@vueuse/core";
 import arrowImageUrl from "/common/images/qte_slide_arrow.png";
 
 const props = defineProps<{
@@ -44,7 +45,7 @@ const progress = ref(0);
 // ───────── 贝塞尔曲线数学工具 ─────────
 
 /** 获取安全路径坐标 */
-const getPathCoords = (): [number, number, number, number, number, number, number, number] => {
+function getPathCoords(): [number, number, number, number, number, number, number, number] {
   const p = props.bezierPath;
   if (p && p.length >= 8) {
     return [p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7]] as [
@@ -59,7 +60,7 @@ const getPathCoords = (): [number, number, number, number, number, number, numbe
     ];
   }
   return [0, 0, 0, 0, 0, 0, 0, 0];
-};
+}
 
 /** 三次贝塞尔插值 */
 function cubicBezier(t: number, p0: number, p1: number, p2: number, p3: number) {
@@ -212,34 +213,18 @@ function handlePointerMove(event: MouseEvent | TouchEvent) {
   progress.value = getCurveLength(t) / totalLength.value;
 }
 
-const handlePointerUp = () => {
+function handlePointerUp() {
   isDragging.value = false;
   progress.value = 0;
-};
+}
 
-onMounted(() => {
-  const el = rootRef.value;
-  if (!el) return;
-  el.addEventListener("mousedown", handlePointerDown);
-  el.addEventListener("mousemove", handlePointerMove);
-  el.addEventListener("mouseup", handlePointerUp);
-  el.addEventListener("touchstart", handlePointerDown);
-  el.addEventListener("touchmove", handlePointerMove);
-  el.addEventListener("touchend", handlePointerUp);
-  el.addEventListener("touchcancel", handlePointerUp);
-});
-
-onUnmounted(() => {
-  const el = rootRef.value;
-  if (!el) return;
-  el.removeEventListener("mousedown", handlePointerDown);
-  el.removeEventListener("mousemove", handlePointerMove);
-  el.removeEventListener("mouseup", handlePointerUp);
-  el.removeEventListener("touchstart", handlePointerDown);
-  el.removeEventListener("touchmove", handlePointerMove);
-  el.removeEventListener("touchend", handlePointerUp);
-  el.removeEventListener("touchcancel", handlePointerUp);
-});
+useEventListener(rootRef, "mousedown", handlePointerDown);
+useEventListener(rootRef, "mousemove", handlePointerMove);
+useEventListener(rootRef, "mouseup", handlePointerUp);
+useEventListener(rootRef, "touchstart", handlePointerDown);
+useEventListener(rootRef, "touchmove", handlePointerMove);
+useEventListener(rootRef, "touchend", handlePointerUp);
+useEventListener(rootRef, "touchcancel", handlePointerUp);
 
 /** 进度达到 95% 触发成功 */
 watch(progress, (value) => {

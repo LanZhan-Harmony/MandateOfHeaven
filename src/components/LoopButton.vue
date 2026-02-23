@@ -84,6 +84,8 @@ const handlePointerEnter = async () => {
   --slide-x: 0;
   background-repeat: no-repeat;
   background-size: cover;
+  background-color: transparent;
+  border: none;
   min-width: 12lh;
   min-height: 1lh;
   padding-top: 0.8lh;
@@ -92,6 +94,7 @@ const handlePointerEnter = async () => {
   position: absolute;
   -webkit-mask-source-type: alpha;
   mask-mode: alpha;
+  font-family: inherit;
 }
 
 /* 左侧按钮样式 */

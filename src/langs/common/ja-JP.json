@@ -56,5 +56,10 @@
         "viewGuide": "攻略を見る",
         "closeTip": "ヒントを閉じる",
         "closeDialog": "ダイアログを閉じる"
+    },
+    "esc": {
+        "continueStory": "物語を続ける",
+        "backToStoryline": "物語線に戻る",
+        "settings": "設定"
     }
 }

@@ -1,3 +1,115 @@
-<script setup lang="ts"></script>
-<template></template>
-<style scoped></style>
+<script setup lang="ts">
+import LoadingOverlay from "@/components/LoadingOverlay.vue";
+import MenuButton from "@/components/MenuButton.vue";
+import PageNavButton from "@/components/PageNavButton.vue";
+import StoryletPlayer from "@/components/StoryletPlayer.vue";
+import router from "@/router";
+import { useMediaStore } from "@/stores/media";
+import { usePlayerStore } from "@/stores/player";
+import { useSaveStore } from "@/stores/save";
+import { useMagicKeys } from "@vueuse/core";
+import { storeToRefs } from "pinia";
+import { computed, onMounted, ref, watch } from "vue";
+
+const mediaStore = useMediaStore();
+const saveStore = useSaveStore();
+const playerStore = usePlayerStore();
+const { currentPlayerInstructionId, playerInstructions } = storeToRefs(playerStore);
+
+// 仅挂载当前指令 + 预加载下一条，避免多余的 video.js 实例
+const visibleInstructions = computed(() => {
+  const id = currentPlayerInstructionId.value;
+  if (id === -1) return [];
+  return playerInstructions.value.slice(id, id + 2);
+});
+
+const isPaused = ref(false);
+const { escape } = useMagicKeys();
+watch(escape!, async (pressed) => {
+  if (pressed) {
+    await mediaStore.setEffectAudioAsync("esc");
+    isPaused.value = !isPaused.value;
+  }
+});
+
+async function handleDone() {
+  await saveStore.progressVideo();
+  if (playerInstructions.value.length === 0) {
+    navigateBack();
+  }
+}
+
+async function handleContinue() {
+  await mediaStore.setEffectAudioAsync("音效7");
+  isPaused.value = false;
+}
+
+async function handleToStoryline() {
+  await mediaStore.setEffectAudioAsync("音效7");
+  router.push("/storyline");
+}
+
+async function handleToSettings() {
+  await mediaStore.setEffectAudioAsync("音效7");
+  router.push("/settings");
+}
+
+function navigateBack() {
+  router.back();
+}
+
+onMounted(async () => {
+  mediaStore.pauseAllAudios();
+  await saveStore.startVideo();
+});
+</script>
+<template>
+  <div class="container">
+    <PageNavButton v-if="playerInstructions.length === 0" />
+    <LoadingOverlay v-if="playerInstructions.length === 0" />
+
+    <!-- 仅挂载当前指令 + 预加载下一条（用 videoId 作 key 保证正确销毁/新建） -->
+    <StoryletPlayer
+      class="player-view"
+      v-for="(instruction, index) in visibleInstructions"
+      :key="instruction.videoId"
+      :instruction="instruction"
+      :show-controls="true"
+      :show-video-js-controls="false"
+      :play="index === 0"
+      :pause="isPaused"
+      @done="handleDone"
+      @back="navigateBack" />
+
+    <div v-if="isPaused" class="pause-menu">
+      <MenuButton :text="$t('esc.continueStory')" @click="handleContinue" />
+      <MenuButton :text="$t('esc.backToStoryline')" @click="handleToStoryline" />
+      <MenuButton :text="$t('esc.settings')" @click="handleToSettings" />
+    </div>
+  </div>
+</template>
+<style scoped>
+.player-view {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.pause-menu {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 15%;
+  background-image: url(/common/images/esc背景.webp);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+</style>
