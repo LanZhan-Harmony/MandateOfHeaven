@@ -222,10 +222,6 @@ const handleSelectOption = (optionIndex: number) => {
   pointer-events: none;
 }
 
-.qte-container > * {
-  pointer-events: auto;
-}
-
 /* 左右双滑动布局 */
 .qte-left-right {
   flex-direction: row;

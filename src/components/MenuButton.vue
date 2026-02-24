@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useMediaStore } from "../stores/media";
 import { computed, onUnmounted, ref } from "vue";
+import { useMediaStore } from "../stores/media";
 
 const props = defineProps<{
   text: string;
@@ -17,6 +17,7 @@ const FRAME_DURATION = 30; // 每帧持续时间（毫秒）
 
 const currentFrame = ref(0);
 const targetFrame = ref(0);
+const isHovering = ref(false);
 
 let animationFrameId: number | null = null;
 let lastFrameTime = 0;
@@ -62,11 +63,16 @@ function animateToTargetFrame(frame: number) {
 }
 
 async function handlePointerEnter() {
-  await mediaStore.setEffectAudioAsync("音效4");
+  isHovering.value = true;
   animateToTargetFrame(TOTAL_FRAMES - 1);
+  await mediaStore.setEffectAudioAsync("音效4");
+  if (!isHovering.value) {
+    animateToTargetFrame(0);
+  }
 }
 
 function handlePointerLeave() {
+  isHovering.value = false;
   animateToTargetFrame(0);
 }
 

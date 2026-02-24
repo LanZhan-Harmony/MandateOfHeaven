@@ -1,27 +1,23 @@
 <script setup lang="ts">
-import LoadingOverlay from "@/components/LoadingOverlay.vue";
-import MenuButton from "@/components/MenuButton.vue";
-import PageNavButton from "@/components/PageNavButton.vue";
-import StoryletPlayer from "@/components/StoryletPlayer.vue";
-import router from "@/router";
-import { useMediaStore } from "@/stores/media";
-import { usePlayerStore } from "@/stores/player";
-import { useSaveStore } from "@/stores/save";
 import { useMagicKeys } from "@vueuse/core";
 import { storeToRefs } from "pinia";
 import { computed, onMounted, ref, watch } from "vue";
+import LoadingOverlay from "../components/LoadingOverlay.vue";
+import MenuButton from "../components/MenuButton.vue";
+import PageNavButton from "../components/PageNavButton.vue";
+import StoryletPlayer from "../components/StoryletPlayer.vue";
+import router from "../router";
+import { useMediaStore } from "../stores/media";
+import { usePlayerStore } from "../stores/player";
+import { useSaveStore } from "../stores/save";
 
 const mediaStore = useMediaStore();
 const saveStore = useSaveStore();
 const playerStore = usePlayerStore();
-const { currentPlayerInstructionId, playerInstructions } = storeToRefs(playerStore);
+const { playerInstructions } = storeToRefs(playerStore);
 
-// 仅挂载当前指令 + 预加载下一条，避免多余的 video.js 实例
-const visibleInstructions = computed(() => {
-  const id = currentPlayerInstructionId.value;
-  if (id === -1) return [];
-  return playerInstructions.value.slice(id, id + 2);
-});
+// 仅取前 3 条指令参与渲染
+const visibleInstructions = computed(() => playerInstructions.value.slice(0, 3));
 
 const isPaused = ref(false);
 const { escape } = useMagicKeys();
@@ -35,7 +31,7 @@ watch(escape!, async (pressed) => {
 async function handleDone() {
   await saveStore.progressVideo();
   if (playerInstructions.value.length === 0) {
-    navigateBack();
+    router.push("/storylines");
   }
 }
 
@@ -46,7 +42,7 @@ async function handleContinue() {
 
 async function handleToStoryline() {
   await mediaStore.setEffectAudioAsync("音效7");
-  router.push("/storyline");
+  router.push("/storylines");
 }
 
 async function handleToSettings() {
@@ -54,12 +50,8 @@ async function handleToSettings() {
   router.push("/settings");
 }
 
-function navigateBack() {
-  router.back();
-}
-
 onMounted(async () => {
-  mediaStore.pauseAllAudios();
+  mediaStore.pauseBGMAudio();
   await saveStore.startVideo();
 });
 </script>
@@ -68,7 +60,6 @@ onMounted(async () => {
     <PageNavButton v-if="playerInstructions.length === 0" />
     <LoadingOverlay v-if="playerInstructions.length === 0" />
 
-    <!-- 仅挂载当前指令 + 预加载下一条（用 videoId 作 key 保证正确销毁/新建） -->
     <StoryletPlayer
       class="player-view"
       v-for="(instruction, index) in visibleInstructions"
@@ -78,8 +69,7 @@ onMounted(async () => {
       :show-video-js-controls="false"
       :play="index === 0"
       :pause="isPaused"
-      @done="handleDone"
-      @back="navigateBack" />
+      @done="handleDone" />
 
     <div v-if="isPaused" class="pause-menu">
       <MenuButton :text="$t('esc.continueStory')" @click="handleContinue" />

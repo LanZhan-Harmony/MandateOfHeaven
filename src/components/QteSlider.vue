@@ -17,12 +17,12 @@
   - 拖动进度：stroke-dasharray 递增显示
   -->
 <script setup lang="ts">
+import { useEventListener } from "@vueuse/core";
 import { computed, ref, watch } from "vue";
 
 /** 尾部图片资源 */
 import tailImageUrl from "/common/images/qte_slide_tail.png";
 /** 箭头图片资源 */
-import { useEventListener } from "@vueuse/core";
 import arrowImageUrl from "/common/images/qte_slide_arrow.png";
 
 const props = defineProps<{
@@ -317,6 +317,7 @@ watch(progress, (value) => {
   position: absolute;
   top: 0;
   left: 0;
+  pointer-events: auto;
 }
 
 /* 方向箭头呼吸动画 */

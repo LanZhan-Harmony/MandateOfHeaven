@@ -1,0 +1,405 @@
+{
+  "characters": [
+    {
+      "id": "SiKongYao",
+      "unlockConditions": [],
+      "stories": []
+    },
+    {
+      "id": "XieRuoLan",
+      "unlockConditions": [],
+      "stories": [
+        {
+          "id": "MingYueQianLiYuJunTong",
+          "unlockConditions": [
+            "a05_a069_a046047048049"
+          ]
+        },
+        {
+          "id": "QiZaiChaoChaoYuMuMu",
+          "unlockConditions": [
+            "a05_a096_a021a"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ChenWanEr",
+      "unlockConditions": [
+        "a01_a083_a069079"
+      ],
+      "stories": [
+        {
+          "id": "NiZhaoRanZhuoSe",
+          "unlockConditions": [
+            "a06_a048_a010b"
+          ]
+        },
+        {
+          "id": "QieDaiFengYuLai",
+          "unlockConditions": [
+            "a07_a031_a005b"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ZuYue",
+      "unlockConditions": [
+        "a01_a024_a006a019",
+        "a01_a025_a006b019"
+      ],
+      "stories": [
+        {
+          "id": "BuHuaEMei",
+          "unlockConditions": [
+            "a02_a030_a020"
+          ]
+        },
+        {
+          "id": "AnNengZheYao",
+          "unlockConditions": [
+            "a04_a038_a006b043044045046047048"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ChuHuan",
+      "unlockConditions": [
+        "a00_a005_a002003004005"
+      ],
+      "stories": [
+        {
+          "id": "QingShanMaiGuBuMaiMing",
+          "unlockConditions": [
+            "a05_a096_a021a"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "XieJianAn",
+      "unlockConditions": [
+        "a00_a005_a002003004005"
+      ],
+      "stories": [
+        {
+          "id": "JunChenMoLu",
+          "unlockConditions": [
+            "a06_a022_a005b020"
+          ]
+        },
+        {
+          "id": "DangDuanZeDuan",
+          "unlockConditions": [
+            "a07_a026_a004a"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SiKongJing",
+      "unlockConditions": [
+        "a00_a057_a028"
+      ],
+      "stories": [
+        {
+          "id": "AnLiu",
+          "unlockConditions": [
+            "a05_a072_a016b055"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "HuangHouLiShi",
+      "unlockConditions": [
+        "a01_a007_a002a",
+        "a01_a008_a002b",
+        "a01_a009_a002c"
+      ],
+      "stories": []
+    },
+    {
+      "id": "SiKongZheng",
+      "unlockConditions": [
+        "a00_a081_a037038039040041"
+      ],
+      "stories": [
+        {
+          "id": "PiaoYao",
+          "unlockConditions": [
+            "a00_a077_a036"
+          ]
+        },
+        {
+          "id": "ChenYe",
+          "unlockConditions": [
+            "a05_a031_a007b"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ChenDao",
+      "unlockConditions": [
+        "a01_a083_a069079"
+      ],
+      "stories": []
+    },
+    {
+      "id": "ChenYing",
+      "unlockConditions": [
+        "a01_a083_a069079"
+      ],
+      "stories": []
+    },
+    {
+      "id": "CaoBiaoZhi",
+      "unlockConditions": [
+        "a01_a060_a013a060"
+      ],
+      "stories": []
+    },
+    {
+      "id": "YuGong",
+      "unlockConditions": [
+        "a00_a005_a002003004005"
+      ],
+      "stories": []
+    },
+    {
+      "id": "LiuNian",
+      "unlockConditions": [
+        "a03_a087_a070"
+      ],
+      "stories": [
+        {
+          "id": "DiShengChang",
+          "unlockConditions": [
+            "a03_a087_a070"
+          ]
+        },
+        {
+          "id": "FeiWuXiang",
+          "unlockConditions": [
+            "a06_a068_a015a036037038039042"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ShiLang",
+      "unlockConditions": [
+        "a03_a036_a019020021022023",
+        "a03_a039_a026",
+        "a03_a040_a027",
+        "a03_a034_a007a017018_abe001"
+      ],
+      "stories": []
+    },
+    {
+      "id": "ZhuYuanZhi",
+      "unlockConditions": [
+        "a02_a007_a002a",
+        "a02_a008_a002b"
+      ],
+      "stories": [
+        {
+          "id": "GuLang",
+          "unlockConditions": [
+            "a02_a005_a005006"
+          ]
+        },
+        {
+          "id": "ChaiLang",
+          "unlockConditions": [
+            "a06_a061_a013b"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "XieXuan",
+      "unlockConditions": [
+        "a02_a001_a001002003004"
+      ],
+      "stories": [
+        {
+          "id": "XianYiNuMaShaoNianLang",
+          "unlockConditions": [
+            "a02_a001_a001002003004"
+          ]
+        },
+        {
+          "id": "JunZiBuLiWeiQiangXia",
+          "unlockConditions": [
+            "a06_a080_a017b048"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ZuKun",
+      "unlockConditions": [
+        "a02_a011_a010015016",
+        "a02_a015_a011012",
+        "a02_a019_a013014"
+      ],
+      "stories": []
+    },
+    {
+      "id": "LiuDaDao",
+      "unlockConditions": [
+        "a03_a058_a047048049050051052053"
+      ],
+      "stories": []
+    },
+    {
+      "id": "SiKongSheng",
+      "unlockConditions": [
+        "a06_a001_a001002003004005"
+      ],
+      "stories": [
+        {
+          "id": "GuZhouXing",
+          "unlockConditions": [
+            "a07_a056_a078079080081"
+          ]
+        },
+        {
+          "id": "ZhuGuangMing",
+          "unlockConditions": [
+            "a06_a049_a025"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SiKongXu",
+      "unlockConditions": [
+        "a06_a001_a001002003004005"
+      ],
+      "stories": [
+        {
+          "id": "JinShuiLouTaiXianDeYue",
+          "unlockConditions": [
+            "a07_a044_a007a059"
+          ]
+        },
+        {
+          "id": "LiShiShiYiGeLunHui",
+          "unlockConditions": [
+            "a07_a053_a071072073074"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SiKongYu",
+      "unlockConditions": [
+        "a06_a001_a001002003004005"
+      ],
+      "stories": [
+        {
+          "id": "JinZhi",
+          "unlockConditions": [
+            "a06_a011_a008"
+          ]
+        },
+        {
+          "id": "QianQiu",
+          "unlockConditions": [
+            "a06_a068_a015a036037038039042"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "WangMing",
+      "unlockConditions": [
+        "a06_a053_a026027028"
+      ],
+      "stories": []
+    },
+    {
+      "id": "ChuMeng",
+      "unlockConditions": [
+        "a06_a006_a006007"
+      ],
+      "stories": []
+    },
+    {
+      "id": "QiuSheng",
+      "unlockConditions": [
+        "a04_a038_a006b043044045046047048"
+      ],
+      "stories": []
+    },
+    {
+      "id": "LiDingYuan",
+      "unlockConditions": [
+        "a06_a022_a005b020"
+      ],
+      "stories": []
+    },
+    {
+      "id": "ChuMaoLun",
+      "unlockConditions": [
+        "a03_a035_a007b",
+        "a03_a023_a005b"
+      ],
+      "stories": []
+    },
+    {
+      "id": "LiuCaiRen",
+      "unlockConditions": [
+        "a06_a027_a006c014qte2"
+      ],
+      "stories": []
+    },
+    {
+      "id": "QiJiu",
+      "unlockConditions": [
+        "a05_a096_a021a"
+      ],
+      "stories": []
+    },
+    {
+      "id": "LinShu",
+      "unlockConditions": [
+        "a05_a096_a021a"
+      ],
+      "stories": []
+    },
+    {
+      "id": "ZhaoWu",
+      "unlockConditions": [
+        "a06_a001_a001002003004005"
+      ],
+      "stories": []
+    },
+    {
+      "id": "FuJiang",
+      "unlockConditions": [
+        "a06_a018_a004b"
+      ],
+      "stories": []
+    },
+    {
+      "id": "WangGuaFu",
+      "unlockConditions": [
+        "a07_a050_a066067068"
+      ],
+      "stories": []
+    },
+    {
+      "id": "MuRongCui",
+      "unlockConditions": [
+        "a06_a066_a031032033034035"
+      ],
+      "stories": []
+    }
+  ]
+}

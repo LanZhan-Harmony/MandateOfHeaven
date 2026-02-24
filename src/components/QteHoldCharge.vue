@@ -5,10 +5,10 @@
   位置和填充高度通过 CSS 变量 (useCssVars) 驱动。
   -->
 <script setup lang="ts">
-import type { storylineType } from "@/types/storylineType";
-import { convertToStoryletId } from "@/utils/converter";
 import { computed, onMounted, onUnmounted, ref, useCssVars, watch } from "vue";
 import { useI18n } from "vue-i18n";
+import type { storylineType } from "../types/storylineType";
+import { convertToStoryletId } from "../utils/converter";
 
 const { tm } = useI18n();
 
@@ -146,6 +146,7 @@ watch(() => props.holdRequired, reset);
 .qte-hold {
   left: v-bind(xPercent);
   top: v-bind(yPercent);
+  pointer-events: auto;
   width: 80px;
   height: 80px;
   position: absolute;
@@ -181,8 +182,7 @@ watch(() => props.holdRequired, reset);
   color: #fff8ed;
   justify-content: center;
   align-items: center;
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 22px;
   display: flex;
   position: absolute;
   inset: 0;
@@ -196,7 +196,6 @@ watch(() => props.holdRequired, reset);
   width: 100px;
   height: 100px;
   font-size: 20px;
-  font-weight: 700;
   position: absolute;
   transform: translate(-50%, -50%);
 }

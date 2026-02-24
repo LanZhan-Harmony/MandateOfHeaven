@@ -1,196 +1,244 @@
 {
     "achievements": [
         {
-            "id": "rising_gale",
-            "name": "大風起こる"
+            "id": "winds_of_change",
+            "name": "大風起こる",
+            "description": "序章クリア"
         },
         {
-            "id": "age_of_strife",
-            "name": "大争乱の世"
+            "id": "the_era_of_great_strife",
+            "name": "大争乱の世",
+            "description": "この乱世に、己の伝説を刻め"
         },
         {
-            "id": "imperial_will_unfathomable",
-            "name": "聖心測り難し"
+            "id": "unfathomable_mind_of_the_aged_emperor",
+            "name": "聖心測り難し",
+            "description": "皇帝を諫め、庾宮を保全する"
         },
         {
-            "id": "master_strategist",
-            "name": "智謀の士"
+            "id": "resourceful",
+            "name": "智謀の士",
+            "description": "異なる策を用い、老皇帝の許で生き延びる"
         },
         {
-            "id": "drifting_like_duckweed",
-            "name": "雨に打たれる浮き草"
+            "id": "rain_beating_on_duckweed",
+            "name": "雨に打たれる浮き草",
+            "description": "第一章クリア"
         },
         {
-            "id": "mandate_of_heaven",
-            "name": "天命ここに帰す"
+            "id": "destined_by_heaven",
+            "name": "天命ここに帰す",
+            "description": "挙兵の際、天の加護を受け、運命の子となる"
         },
         {
-            "id": "unyielding_spirit",
-            "name": "不屈の骨"
+            "id": "unyielding_bones",
+            "name": "不屈の骨",
+            "description": "敗れても誇りは捨てぬ。浅瀬に落ちた龍とて、司空正に侮らせはせぬ"
         },
         {
-            "id": "bold_remonstrance",
-            "name": "直言敢行"
+            "id": "courage_to_speak_frankly",
+            "name": "直言敢行",
+            "description": "皇帝に対しても、臆することなく直言する"
         },
         {
-            "id": "dragon_into_the_sea",
-            "name": "蛟龍、海に入る"
+            "id": "the_trials_begin",
+            "name": "蛟龍、海に入る",
+            "description": "第二章クリア"
         },
         {
-            "id": "weight_of_rites_and_affection",
-            "name": "礼も情も重んず"
+            "id": "a_gift_as_weighty_as_the_affection_behind_it",
+            "name": "礼も情も重んず",
+            "description": "祖坤の心に響く贈り物をする"
         },
         {
-            "id": "martial_master",
-            "name": "武道の達人"
+            "id": "kung_fu_master",
+            "name": "武道の達人",
+            "description": "比武にて祖月を破る"
         },
         {
-            "id": "hidden_dragon_emerges",
-            "name": "潜龍、海に躍る"
+            "id": "from_depths_to_the_deep",
+            "name": "潜龍、海に躍る",
+            "description": "皇帝を説得し、祖坤と共に北上する"
         },
         {
-            "id": "dignity_preserved",
-            "name": "体面を保つ"
+            "id": "decency",
+            "name": "体面を保つ",
+            "description": "強がりを貫き、祖月の手で自らの体面ある一生を終える"
         },
         {
-            "id": "blade_unsheathed",
-            "name": "刃を拭い試す"
+            "id": "sharpening_the_blade",
+            "name": "刃を拭い試す",
+            "description": "第三章クリア"
         },
         {
-            "id": "counter_within_scheme",
-            "name": "策を以て策を制す"
+            "id": "turning_the_tables",
+            "name": "策を以て策を制す",
+            "description": "流れに乗り、石狼の计略を逆手に取って一矢報いる"
         },
         {
-            "id": "emperor_xuanwu",
-            "name": "宣武帝"
+            "id": "emperor_wu_of_xuan",
+            "name": "宣武帝",
+            "description": "奇襲に失敗し、捕虜となった後に石狼の前で舞を踊る"
         },
         {
-            "id": "break_the_mountain",
-            "name": "山を破り缺を穿つ"
+            "id": "break_mountains_and_valleys",
+            "name": "山を破り缺を穿つ",
+            "description": "第四章クリア"
         },
         {
-            "id": "court_jester_supreme",
-            "name": "捧哏の名手"
+            "id": "master_of_comic_banter",
+            "name": "捧哏の名手",
+            "description": "石狼の総攻撃前のあらゆる計略を見破る"
         },
         {
             "id": "fickle_hearts",
-            "name": "人心の薄さ"
+            "name": "人心の薄さ",
+            "description": "危急の際、劉大刀はやはり己の命を優先した"
         },
         {
-            "id": "fight_to_the_death",
-            "name": "死力を尽くす"
+            "id": "struggling_desperately",
+            "name": "死力を尽くす",
+            "description": "魅力で劉大刀を征服する"
         },
         {
-            "id": "reborn_from_ruin",
-            "name": "破れて後に生ず"
+            "id": "rebirth_through_destruction",
+            "name": "破れて後に生ず",
+            "description": "弋陽を守り抜き、勝利を掴む"
         },
         {
-            "id": "ask_the_mandate",
-            "name": "天命を問う"
+            "id": "inquiring_of_heavens_mandate",
+            "name": "天命を問う",
+            "description": "第五章クリア"
         },
         {
-            "id": "principled_choice",
-            "name": "為すべきを為し、為さざるを守る"
+            "id": "to_act_and_to_refrain_from_acting",
+            "name": "為すべきを為し、為さざるを守る",
+            "description": "多くの民を巻き込むことなく挙兵に成功する"
         },
         {
             "id": "between_north_and_south",
-            "name": "南北のはざま"
+            "name": "南北のはざま",
+            "description": "一方に割拠し、乱世を三足鼎立へと導く"
         },
         {
-            "id": "emperor_xuanyang",
-            "name": "宣炀帝"
+            "id": "emperor_yang_of_xuan",
+            "name": "宣炀帝",
+            "description": "天下がどうあれ、三千の弱水より、唯一つの愛を掬いとる"
         },
         {
-            "id": "heavenly_ordination",
-            "name": "天命を受く"
+            "id": "receiving_the_mandate_in_response_to_heaven",
+            "name": "天命を受く",
+            "description": "帝位に就き、天下に布告する"
         },
         {
-            "id": "vision_of_peace",
-            "name": "太平の志"
+            "id": "the_record_of_great_peace",
+            "name": "太平の志",
+            "description": "第六章クリア"
         },
         {
-            "id": "emperor_xuanyou",
-            "name": "宣幽帝"
+            "id": "emperor_you_of_xuan",
+            "name": "宣幽帝",
+            "description": "美色に溺れ、朝政を顧みず、最後まで迷妄から覚めぬ"
         },
         {
-            "id": "emperor_xuanzong",
-            "name": "宣縦帝"
+            "id": "emperor_zong_of_xuan",
+            "name": "宣縦帝",
+            "description": "酒色の中で悟りを開き、太子に譲位する"
         },
         {
-            "id": "mistrust_and_abandon",
-            "name": "疑いて用いず"
+            "id": "never_suspect_the_man_you_need",
+            "name": "疑いて用いず",
+            "description": "他人の言に惑わされず、朱元之を重用し続ける"
         },
         {
-            "id": "deposed_emperor_xuan",
-            "name": "宣廃帝"
+            "id": "emperor_fei_of_xuan",
+            "name": "宣廃帝",
+            "description": "かつての心の甘さが、禍根を残す"
         },
         {
-            "id": "emperor_xuanshang",
-            "name": "宣殤帝"
+            "id": "emperor_shang_of_xuan",
+            "name": "宣殤帝",
+            "description": "古今、これほどまでに執拗な帝王は他にいない"
         },
         {
-            "id": "longwu_reform",
-            "name": "隆武の変法"
+            "id": "longwu_reformation",
+            "name": "隆武の変法",
+            "description": "天変恐れるに足らず、祖宗法とするに足らず、人言恤むに足らず"
         },
         {
-            "id": "xunyang_campaign",
-            "name": "潯陽出塞"
+            "id": "xunyang_ventures_beyond_the_frontier",
+            "name": "潯陽出塞",
+            "description": "実らぬ花、忘れられぬ故人"
         },
         {
-            "id": "favor_for_all",
-            "name": "恩沢あまねく"
+            "id": "showering_favors_equally",
+            "name": "恩沢あまねく",
+            "description": "春宵の楽しみ短く、日は高く昇る。これより君王、早朝に赴かず"
         },
         {
-            "id": "all_under_heaven",
-            "name": "九州同じくす"
+            "id": "all_under_heaven_unified",
+            "name": "九州同じくす",
+            "description": "第七章クリア"
         },
         {
-            "id": "emperor_xuanhuai",
-            "name": "宣懐帝"
+            "id": "emperor_huai_of_xuan",
+            "name": "宣懐帝",
+            "description": "変法失敗、痛みを伴う決断を下す"
         },
         {
-            "id": "emperor_xuanai",
-            "name": "宣哀帝"
+            "id": "emperor_ai_of_xuan",
+            "name": "宣哀帝",
+            "description": "国運を賭け、変法失敗後も急進的な姿勢を貫く"
         },
         {
-            "id": "emperor_xuankang",
-            "name": "宣康帝"
+            "id": "emperor_kang_of_xuan",
+            "name": "宣康帝",
+            "description": "万事に安定を求め、青史に名を残す"
         },
         {
-            "id": "emperor_xuanzhuang",
-            "name": "宣荘帝"
+            "id": "emperor_zhuang_of_xuan",
+            "name": "宣荘帝",
+            "description": "断ずべき時に断ぜねば、かえってその乱を招く"
         },
         {
-            "id": "emperor_xuanming",
-            "name": "宣明帝"
+            "id": "emperor_ming_of_xuan",
+            "name": "宣明帝",
+            "description": "和親せず、朝貢せず、故土を奪還し、神州を回復する"
         },
         {
-            "id": "emperor_xuanjing",
-            "name": "宣景帝"
+            "id": "emperor_jing_of_xuan",
+            "name": "宣景帝",
+            "description": "後継が定まらず、災いを後に残し、帝国を二代で滅ぼす"
         },
         {
-            "id": "emperor_xuancheng",
-            "name": "宣成帝"
+            "id": "emperor_cheng_of_xuan",
+            "name": "宣成帝",
+            "description": "最も無情なるは帝王の家なり"
         },
         {
-            "id": "emperor_xuanwen",
-            "name": "宣文帝"
+            "id": "emperor_wen_of_xuan",
+            "name": "宣文帝",
+            "description": "六合を清め、荒ぶる八荒を席巻する"
         },
         {
-            "id": "emperor_xuanguangwu",
-            "name": "宣光武帝"
+            "id": "emperor_guang_wu_of_xuan",
+            "name": "宣光武帝",
+            "description": "四海平らぎ、万国が朝貢する"
         },
         {
-            "id": "emperor_xuanzhao",
-            "name": "宣昭帝"
+            "id": "emperor_zhao_of_xuan",
+            "name": "宣昭帝",
+            "description": "天下の事はままならぬもの、全てが人の願い通りにはいかぬ"
         },
         {
-            "id": "yan_never_returns",
-            "name": "燕、帰らず"
+            "id": "no_way_home",
+            "name": "燕、帰らず",
+            "description": "十年の生死、両（ふた）つながら茫茫たり。思量せずとも、自（おの）ずから忘れ難し"
         },
         {
-            "id": "thousand_sails_passed",
-            "name": "千帆過ぎゆく"
+            "id": "when_the_last_sail_vanishes",
+            "name": "千帆過ぎゆく",
+            "description": "三千世界、無数の可能性を、朕はすべて巡り終えた"
         }
     ]
 }

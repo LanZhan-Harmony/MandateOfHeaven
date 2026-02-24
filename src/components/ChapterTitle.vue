@@ -13,8 +13,8 @@
   当 ending && showButton 时激活对应章节的成就。
   -->
 <script setup lang="ts">
-import { useAchievementStore } from "@/stores/achievement";
 import { computed, watch } from "vue";
+import { useAchievementStore } from "../stores/achievement";
 import ArrowButton from "./ArrowButton.vue";
 
 const achievementStore = useAchievementStore();
@@ -32,17 +32,17 @@ const emit = defineEmits<{
 
 /** 各章节对应的成就名称 */
 const CHAPTER_ACHIEVEMENTS = [
-  "rising_gale", // 第0章
-  "drifting_like_duckweed", // 第1章
-  "dragon_into_the_sea", // 第2章
-  "blade_unsheathed", // 第3章
-  "break_the_mountain", // 第4章
-  "ask_the_mandate", // 第5章
-  "vision_of_peace", // 第6章
+  "winds_of_change", // 第0章
+  "rain_beating_on_duckweed", // 第1章
+  "the_trials_begin", // 第2章
+  "sharpening_the_blade", // 第3章
+  "break_mountains_and_valleys", // 第4章
+  "inquiring_of_heavens_mandate", // 第5章
+  "the_record_of_great_peace", // 第6章
 ];
 
-const topImageUrl = computed(() => `/chapter/images/chapter${props.chapter}/上.webp`);
-const bottomImageUrl = computed(() => `/chapter/images/chapter${props.chapter}/${props.ending ? "完" : "下"}.webp`);
+const topImageUrl = computed(() => `/chapters/images/chapter${props.chapter}/上.webp`);
+const bottomImageUrl = computed(() => `/chapters/images/chapter${props.chapter}/${props.ending ? "完" : "下"}.webp`);
 
 // 预加载图片资源
 preloadImages([topImageUrl.value, bottomImageUrl.value]);
@@ -71,8 +71,8 @@ function preloadImages(urls: string[]) {
 </script>
 
 <template>
-  <div class="chapter-title-wrapper vertical">
-    <div class="chapter-title vertical">
+  <div class="chapter-title-wrapper">
+    <div class="chapter-title">
       <img :src="topImageUrl" />
       <img :src="bottomImageUrl" />
     </div>
@@ -92,8 +92,6 @@ function preloadImages(urls: string[]) {
     opacity 1s ease-in-out,
     display 1s allow-discrete;
   pointer-events: none;
-  justify-content: center;
-  align-items: center;
   width: 100%;
   height: 100%;
   position: absolute;
@@ -101,13 +99,26 @@ function preloadImages(urls: string[]) {
   left: 0;
 }
 
-.chapter-title-wrapper .chapter-title {
+.chapter-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 20%;
 }
 
-.chapter-title-wrapper .actions {
+.chapter-title img {
+  width: 100%;
+  height: auto;
+}
+
+.actions {
   position: absolute;
-  bottom: 8em;
-  right: 8em;
+  bottom: 150px;
+  right: 120px;
+  scale: 1.4;
 }
 </style>

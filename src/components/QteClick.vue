@@ -6,17 +6,17 @@
 -->
 
 <script setup lang="ts">
-import type { storylineType } from "@/types/storylineType";
-import { convertToStoryletId } from "@/utils/converter";
 import { computed, useCssVars } from "vue";
 import { useI18n } from "vue-i18n";
+import type { storylineType } from "../types/storylineType";
+import { convertToStoryletId } from "../utils/converter";
 
 const { tm } = useI18n();
 
 const props = defineProps<{
   videoId: string;
-  x?: number;
-  y?: number;
+  x: number;
+  y: number;
 }>();
 
 const emit = defineEmits(["success"]);
@@ -29,8 +29,8 @@ const descriptionText = computed(() => {
   return storylet?.qte1 || "";
 });
 
-const xPercent = computed(() => `${(props.x ?? 500 / 1920) * 100}%`);
-const yPercent = computed(() => `${(props.y ?? 800 / 1080) * 100}%`);
+const xPercent = computed(() => `${(props.x / 1920) * 100}%`);
+const yPercent = computed(() => `${(props.y / 1080) * 100}%`);
 
 /** CSS 变量注入（由 Vue 编译器转换为 --v{hash} 变量） */
 useCssVars(() => ({
@@ -61,6 +61,7 @@ const handleClick = () => {
 .qte-click {
   left: v-bind(xPercent);
   top: v-bind(yPercent);
+  pointer-events: auto;
   background-color: #000c;
   border: 2px solid #ffe6c8cc;
   border-radius: 100%;
@@ -78,7 +79,6 @@ const handleClick = () => {
   width: 100px;
   height: 100px;
   font-size: 20px;
-  font-weight: 700;
   position: absolute;
   transform: translate(-50%, -50%);
 }
@@ -89,8 +89,7 @@ const handleClick = () => {
   color: #fff8ed;
   justify-content: center;
   align-items: center;
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 25px;
   display: flex;
   position: absolute;
   inset: 0;

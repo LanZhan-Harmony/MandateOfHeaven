@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import router from "@/router";
 import { storeToRefs } from "pinia";
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import ChapterDescription from "../components/ChapterDescription.vue";
 import ChapterLineItem from "../components/ChapterLineItem.vue";
 import PageNavButton from "../components/PageNavButton.vue";
+import router from "../router";
 import { useMediaStore } from "../stores/media";
 import { useSaveStore } from "../stores/save";
 import type { chapterType } from "../types/chapterType";
@@ -47,7 +47,7 @@ async function enterChapter() {
 <template>
   <div class="container">
     <img class="background" src="/common/images/章节页背景.webp" />
-    <PageNavButton class="back-btn" />
+    <PageNavButton path="/"/>
 
     <div class="chapter-list">
       <ChapterLineItem
@@ -90,7 +90,7 @@ async function enterChapter() {
 .intro-video {
   position: absolute;
   right: -10%;
-  top: -5%;
+  top: -15%;
   width: 100%;
   z-index: 0;
 }

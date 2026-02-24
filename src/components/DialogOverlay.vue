@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useDialogStore } from "@/stores/dialog";
+import { useDialogStore } from "../stores/dialog";
 
 const dialogStore = useDialogStore();
 </script>
@@ -54,11 +54,8 @@ const dialogStore = useDialogStore();
   background: linear-gradient(#2e2012c9 37.02%, #0000007d 100%);
   border: 1px solid #2e2012c9;
   border-radius: 12px;
-  gap: 1lh;
-  width: auto;
-  min-width: 400px;
-  height: auto;
-  padding: 2%;
+  gap: 20px;
+  padding: 3%;
 }
 
 /* 顶部装饰图（弹窗顶部装饰.webp） */
@@ -74,15 +71,15 @@ const dialogStore = useDialogStore();
 /* 弹窗正文 */
 .global-alert-message {
   text-align: center;
-  font-size: 1.1em;
-  line-height: 1.6;
+  font-size: 18px;
+  line-height: 1.5;
 }
 
 /* 按钮区：居中排列，有间距 */
 .global-alert-actions {
   justify-content: center;
-  gap: 1lh;
-  margin-top: 2lh;
+  gap: 20px;
+  margin-top: 30px;
   display: flex;
 }
 
@@ -93,8 +90,9 @@ const dialogStore = useDialogStore();
   background: transparent;
   border: 1px solid #ffe9d0;
   border-radius: 8px;
-  padding: 0.4lh 1lh;
-  font-size: 1.1em;
+  padding: 8px 20px;
+  font-size: 18px;
+  font-family: inherit;
 }
 
 /* 次要按钮（取消）：镂空风格 */
@@ -110,5 +108,25 @@ const dialogStore = useDialogStore();
   background: #ffe9d0;
   border-color: #ffe9d0;
   font-weight: 700;
+}
+
+@media (max-height: 500px) {
+  .global-alert-dialog {
+    padding: 1%;
+  }
+  .global-alert-title {
+    height: 40px;
+  }
+  .global-alert-message {
+    font-size: 14px;
+  }
+  .global-alert-actions {
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .global-alert-button {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
 }
 </style>

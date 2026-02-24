@@ -11,16 +11,16 @@
   5. 背景视频：自动播放、静音、循环的 webm 结局动画
   -->
 <script setup lang="ts">
-import { emperorEndingStoryletIds } from "@/assets/data/emperorEndings";
-import { helpEndingStoryletIds } from "@/assets/data/helpEndings";
-import router from "@/router";
-import { useAchievementStore } from "@/stores/achievement";
-import { useDialogStore } from "@/stores/dialog";
-import { useMediaStore } from "@/stores/media";
-import { useSaveStore } from "@/stores/save";
-import type { endingType } from "@/types/endingType";
 import { computed, onMounted, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
+import { emperorEndingStoryletIds } from "../assets/data/emperorEndings";
+import { helpEndingStoryletIds } from "../assets/data/helpEndings";
+import router from "../router";
+import { useAchievementStore } from "../stores/achievement";
+import { useDialogStore } from "../stores/dialog";
+import { useMediaStore } from "../stores/media";
+import { useSaveStore } from "../stores/save";
+import type { endingType } from "../types/endingType";
 import ArrowButton from "./ArrowButton.vue";
 
 const { t, tm } = useI18n();
@@ -45,27 +45,27 @@ const showContent = ref(false);
 
 /** 结局ID → 成就名称映射 */
 const ENDING_ACHIEVEMENTS: Record<string, string> = {
-  a01_a032_a032033034035036_ahe001: "mandate_of_heaven",
-  a01_a070_a015c_abe006: "bold_remonstrance",
-  a02_a052_a038_abe001: "dignity_preserved",
-  a03_a088_a044_abe004: "emperor_xuanwu",
+  a01_a032_a032033034035036_ahe001: "destined_by_heaven",
+  a01_a070_a015c_abe006: "courage_to_speak_frankly",
+  a02_a052_a038_abe001: "decency",
+  a03_a088_a044_abe004: "emperor_wu_of_xuan",
   a04_a015_a014015016_abe005: "fickle_hearts",
   a05_a071_a016a050051052053054: "between_north_and_south",
-  a05_a095_a021b_abe001: "emperor_xuanyang",
-  a06_a032_a007a_abe001: "emperor_xuanyou",
-  a06_a033_a007b_abe002: "emperor_xuanzong",
-  a06_a083_a055_abe003: "deposed_emperor_xuan",
-  a06_a086_a018a_abe004: "emperor_xuanshang",
-  a07_a004_a001a: "emperor_xuanhuai",
-  a07_a005_a001b: "emperor_xuanai",
-  a07_a010_a002a: "emperor_xuankang",
-  a07_a034_a008bbe005: "emperor_xuanzhuang",
-  a07_a016_a030031: "emperor_xuanming",
-  a07_a053_a071072073074: "emperor_xuanjing",
-  a07_a054_a075075_a1075_a2075_a3075_a4075_a5075_a6: "emperor_xuancheng",
-  a07_a055_a076077: "emperor_xuanwen",
-  a07_a056_a078079080081: "emperor_xuanguangwu",
-  a07_a057_a082_abe_83_abe_84_abe_85: "emperor_xuanzhao",
+  a05_a095_a021b_abe001: "emperor_yang_of_xuan",
+  a06_a032_a007a_abe001: "emperor_you_of_xuan",
+  a06_a033_a007b_abe002: "emperor_zong_of_xuan",
+  a06_a083_a055_abe003: "emperor_fei_of_xuan",
+  a06_a086_a018a_abe004: "emperor_shang_of_xuan",
+  a07_a004_a001a: "emperor_huai_of_xuan",
+  a07_a005_a001b: "emperor_ai_of_xuan",
+  a07_a010_a002a: "emperor_kang_of_xuan",
+  a07_a034_a008bbe005: "emperor_zhuang_of_xuan",
+  a07_a016_a030031: "emperor_ming_of_xuan",
+  a07_a053_a071072073074: "emperor_jing_of_xuan",
+  a07_a054_a075075_a1075_a2075_a3075_a4075_a5075_a6: "emperor_cheng_of_xuan",
+  a07_a055_a076077: "emperor_wen_of_xuan",
+  a07_a056_a078079080081: "emperor_guang_wu_of_xuan",
+  a07_a057_a082_abe_83_abe_84_abe_85: "emperor_zhao_of_xuan",
 };
 
 /** 当前结局是否有攻略帮助 */
@@ -90,7 +90,7 @@ const showHelpDialog = async () => {
 /** 导航到故事线页面 */
 const navigateToStoryline = async () => {
   await mediaStore.setEffectAudioAsync("音效3");
-  await router.push("/storyline");
+  await router.push("/storylines");
 };
 
 // 结局成就触发
@@ -108,7 +108,7 @@ watch(
     // 检查"千帆过尽"成就：所有帝号结局是否都已被访问
     const visitedStorylets = saveStore.currentSave?.visited_storylets || [];
     if (emperorEndingStoryletIds.every((id) => visitedStorylets.includes(id))) {
-      achievementStore.activateAchievement("thousand_sails_passed");
+      achievementStore.activateAchievement("when_the_last_sail_vanishes");
     }
   },
   { immediate: true },
@@ -127,7 +127,7 @@ onMounted(async () => {
   <div class="ending vertical">
     <!-- 帮助攻略按钮（部分结局可用） -->
     <button v-if="hasHelp" v-show="showContent" class="help-btn" @click="showHelpDialog">
-      {{ t("ui.storyline_help") }}
+      {{ $t("storyline.storylineHelp") }}
     </button>
 
     <!-- 结局视频背景 -->
@@ -192,6 +192,7 @@ onMounted(async () => {
   position: absolute;
   top: 5%;
   right: 5%;
+  font-family: inherit;
 }
 
 .description {

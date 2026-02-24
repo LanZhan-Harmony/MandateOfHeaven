@@ -13,8 +13,14 @@ export const useUIStore = defineStore("ui", () => {
     i18n.global.locale.value = newLocale;
   });
 
+  // 播放速度索引，持久化到 localStorage
+  const storedSpeedIndex = localStorage.getItem("playbackRateIndex");
+  const playbackRateIndex = ref(storedSpeedIndex !== null ? parseInt(storedSpeedIndex, 10) : 1);
+  watch(playbackRateIndex, (val) => localStorage.setItem("playbackRateIndex", val.toString()));
+
   return {
     locale,
     allLocales,
+    playbackRateIndex,
   };
 });

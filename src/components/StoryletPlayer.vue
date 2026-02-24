@@ -1,21 +1,22 @@
 <script setup lang="ts">
-import { videoAchievements } from "@/assets/data/videoAchievements";
-import { useAchievementStore } from "@/stores/achievement";
-import { useMediaStore } from "@/stores/media";
-import { usePlayerStore } from "@/stores/player";
-import { getEndingType, useSaveStore } from "@/stores/save";
-import { useUIStore } from "@/stores/ui";
-import type { uiButtonActionGroupType } from "@/types/actionGroupType";
-import type { endingType } from "@/types/endingType";
-import type { introductionType } from "@/types/introductionType";
-import type { playerInstructionType } from "@/types/playerInstructionType";
-import type { playStateType } from "@/types/playStateType";
-import type { valueChangeType } from "@/types/valueChangeType";
-import { convertToChapterId, convertToStoryletId } from "@/utils/converter";
+import { sleep } from "@/utils/sleep";
 import videojs from "video.js";
 import type Player from "video.js/dist/types/player";
 import { computed, onMounted, onUnmounted, reactive, ref, shallowRef, watch } from "vue";
 import { useI18n } from "vue-i18n";
+import { videoAchievements } from "../assets/data/videoAchievements";
+import { useAchievementStore } from "../stores/achievement";
+import { useMediaStore } from "../stores/media";
+import { usePlayerStore } from "../stores/player";
+import { getEndingType, useSaveStore } from "../stores/save";
+import { useUIStore } from "../stores/ui";
+import type { uiButtonActionGroupType } from "../types/actionGroupType";
+import type { endingType } from "../types/endingType";
+import type { introductionType } from "../types/introductionType";
+import type { playerInstructionType } from "../types/playerInstructionType";
+import type { playStateType } from "../types/playStateType";
+import type { valueChangeType } from "../types/valueChangeType";
+import { convertToChapterId, convertToStoryletId } from "../utils/converter";
 import ChapterTitle from "./ChapterTitle.vue";
 import Ending from "./Ending.vue";
 import LoopButton from "./LoopButton.vue";
@@ -46,6 +47,10 @@ const uiStore = useUIStore();
 const achievementStore = useAchievementStore();
 
 let removeSpaceKeyListener: (() => void) | null = null;
+let playerReadyResolve: (() => void) | null = null;
+const playerReadyPromise = new Promise<void>((r) => {
+  playerReadyResolve = r;
+});
 
 const scale = ref(1);
 function updateScale() {
@@ -79,7 +84,10 @@ const BUTTON_POSITIONS: { x: number; y: number }[][] = [
   ], // 4个按钮
 ];
 
-const PLAYBACK_RATES = [0.5, 1, 1.5, 2];
+const PLAYBACK_RATES = [0.75, 1, 1.25, 1.5];
+
+// 当前播放速度索引（存储于 uiStore，持久化到 localStorage）
+const currentPlaybackRate = computed(() => PLAYBACK_RATES[uiStore.playbackRateIndex]!);
 
 // 控制条显示延时
 const CONTROLS_SHOW_DELAY = 3000;
@@ -140,6 +148,7 @@ function scheduleHideControls() {
 
 // 是否正在播放
 const isPlaying = computed(() => props.play && !props.pause);
+const isVisible = computed(() => props.play);
 
 /**
  * 视频URL计算
@@ -295,9 +304,7 @@ const containerStyle = computed(() => ({
 onMounted(() => {
   updateScale();
   window.addEventListener("resize", updateScale);
-  // 只有当前播放的实例才需要暂停 BGM，预加载组件不操作
   if (props.play) {
-    mediaStore.pauseAllAudios();
     if (isLoopVideo.value) showMouseCursor.value = true;
   }
 
@@ -324,6 +331,11 @@ onMounted(() => {
   });
 
   playerRef.value = player;
+
+  // 播放器就绪后 resolve promise（供 startPlayback 等待）
+  player.ready(() => {
+    playerReadyResolve?.();
+  });
 
   // 建立响应式状态对象（由 player 事件驱动更新）
   const state = reactive<playStateType>({ playing: false, currentTime: 0, duration: 0 });
@@ -394,6 +406,14 @@ onMounted(() => {
       player.volume(vol);
     },
   );
+
+  // 初始化时应用已保存的播放速度
+  player.playbackRate(currentPlaybackRate.value);
+  mediaStore.loopAudio.playbackRate = currentPlaybackRate.value;
+  watch(currentPlaybackRate, (rate) => {
+    player.playbackRate(rate);
+    mediaStore.loopAudio.playbackRate = rate;
+  });
 
   // 配置字幕显示样式（通过 video.js textTrackSettings 子组件）
   const tts = (player as any).textTrackSettings;
@@ -533,14 +553,30 @@ function handleTimeUpdate() {
     }
   }
 }
-
 /**
  * 开始播放
  */
 async function startPlayback() {
   if (playerState.value?.playing === true) return;
 
-  mediaStore.pauseAllAudios();
+  mediaStore.pauseLoopAudio();
+  // 等待播放器就绪（首次挂载时需要，后续调用 promise 已 resolved，不会阻塞）
+  await playerReadyPromise;
+
+  // 等待视频数据加载完成（readyState >= 3 即 HAVE_FUTURE_DATA）
+  const player = playerRef.value;
+  if (player && (player.readyState?.() ?? 0) < 3) {
+    await Promise.race([
+      new Promise<void>((resolve) => {
+        const onCanPlay = () => {
+          player.off("canplay", onCanPlay);
+          resolve();
+        };
+        player.on("canplay", onCanPlay);
+      }),
+      sleep(10000), // 安全兜底超时
+    ]);
+  }
 
   // 播放视频
   try {
@@ -549,13 +585,14 @@ async function startPlayback() {
     console.debug("Error starting video track:", e);
   }
 
-  // 循环视频需恢复循环音频（pauseAllAudios 会将其暂停）
-  if (isLoopVideo.value) {
+  // 循环视频需加载并播放循环音频
+  if (isLoopVideo.value && props.play) {
     showMouseCursor.value = true;
     try {
-      await mediaStore.loopAudio.play();
+      const chapterId = convertToChapterId(props.instruction.videoId);
+      await mediaStore.setLoopAudioAsync(chapterId, props.instruction.videoId);
     } catch (e) {
-      console.debug("Error resuming loop audio:", e);
+      console.debug("Error starting loop audio:", e);
     }
   }
 }
@@ -566,7 +603,7 @@ async function startPlayback() {
 async function pausePlayback() {
   if (playerState.value?.playing !== true) return;
 
-  mediaStore.pauseAllAudios();
+  mediaStore.pauseLoopAudio();
 
   try {
     playerRef.value?.pause();
@@ -628,6 +665,15 @@ async function handleDone() {
   playerStore.setVideoWatched(props.instruction.videoId);
   emit("done");
   await pausePlayback();
+}
+
+/**
+ * 循环切换播放速度
+ */
+function cyclePlaybackRate() {
+  uiStore.playbackRateIndex = (uiStore.playbackRateIndex + 1) % PLAYBACK_RATES.length;
+  playerRef.value?.playbackRate(currentPlaybackRate.value);
+  mediaStore.loopAudio.playbackRate = currentPlaybackRate.value;
 }
 
 /**
@@ -712,7 +758,7 @@ watch(
           lines.includes("a01_a040_a009a040") &&
           lines.includes("a01_a046_a010c")
         ) {
-          achievementStore.activateAchievement("unyielding_spirit");
+          achievementStore.activateAchievement("unyielding_bones");
         }
       }
 
@@ -721,7 +767,7 @@ watch(
         const lines =
           saveStore.currentSave?.timeline.lines.filter((e) => e[0] === "storylet_start").map((e) => e[1]) || [];
         if (lines.includes("a05_a059_a014b") && lines.includes("a05_a076_a057058059060061")) {
-          achievementStore.activateAchievement("principled_choice");
+          achievementStore.activateAchievement("to_act_and_to_refrain_from_acting");
         }
       }
 
@@ -733,7 +779,7 @@ watch(
           visited.includes("a00_a055_a012a") &&
           visited.includes("a00_a056_a012b")
         ) {
-          achievementStore.activateAchievement("master_strategist");
+          achievementStore.activateAchievement("resourceful");
         }
       }
 
@@ -748,7 +794,7 @@ watch(
       if (juniusSids.includes(sid)) {
         const visited = saveStore.currentSave?.visited_storylets || [];
         if (juniusSids.every((s) => visited.includes(s))) {
-          achievementStore.activateAchievement("court_jester_supreme");
+          achievementStore.activateAchievement("master_of_comic_banter");
         }
       }
 
@@ -757,13 +803,13 @@ watch(
       if (yulvSids.includes(sid)) {
         const visited = saveStore.currentSave?.visited_storylets || [];
         if (yulvSids.every((s) => visited.includes(s))) {
-          achievementStore.activateAchievement("favor_for_all");
+          achievementStore.activateAchievement("showering_favors_equally");
         }
       }
     }
 
-    // 加载新的循环音频
-    if (newProps.instruction.loop) {
+    // 加载新的循环音频（仅当前活跃播放器）
+    if (newProps.instruction.loop && newProps.play) {
       const chapterId = convertToChapterId(newProps.instruction.videoId);
       await mediaStore.setLoopAudioAsync(chapterId, newProps.instruction.videoId);
     }
@@ -794,7 +840,7 @@ watch(
 );
 </script>
 <template>
-  <div v-show="isPlaying" class="storylet-player" :style="containerStyle">
+  <div v-show="isVisible" class="storylet-player" :style="containerStyle">
     <!-- Video.js 视频播放器（直接使用 video.js，不经过包装组件） -->
     <div
       id="player"
@@ -835,6 +881,8 @@ watch(
           </div>
 
           <div class="right-switches">
+            <!-- 播放速度切换按钮 -->
+            <button class="speed" @click.stop="cyclePlaybackRate">{{ currentPlaybackRate }}x</button>
             <!-- 下一段按钮（仅已观看视频可用） -->
             <button v-if="canSkip && !isLoopVideo" class="next" @click="skipToEnd" />
           </div>
@@ -889,6 +937,7 @@ watch(
           <Qte
             v-if="actionGroup.type === 'qte'"
             v-show="play"
+            class="qte-wrapper"
             :disabled="!showQteOverlay"
             :video-id="actionGroup.id"
             :elapsed-ms="(playerState?.currentTime ?? 0) * 1000"
@@ -1040,8 +1089,7 @@ watch(
   cursor: pointer;
 }
 
-.switches button:hover,
-.switches button:focus {
+.switches button:hover {
   color: #fff;
 }
 
@@ -1049,39 +1097,54 @@ watch(
 .play {
   background-image: url(/common/images/播放按钮.webp);
 }
-.play:hover,
-.play:focus {
+.play:hover {
   background-image: url(/common/images/播放按钮高亮.webp);
 }
 
 .pause {
   background-image: url(/common/images/暂停按钮.webp);
 }
-.pause:hover,
-.pause:focus {
+.pause:hover {
   background-image: url(/common/images/暂停按钮高亮.webp);
 }
 
 .next {
   background-image: url(/common/images/跳过视频按钮.webp);
 }
-.next:hover,
-.next:focus {
+.next:hover {
   background-image: url(/common/images/跳过视频按钮高亮.webp);
+}
+
+/* 播放速度按钮 */
+.speed {
+  width: 90px !important;
+  padding: 0 14px !important;
+  border-radius: 8px !important;
+  border: 3px solid #8a8378 !important;
+  color: #8a8378 !important;
+  font-size: 22px !important;
+  font-family: inherit;
+  letter-spacing: 1px;
+  min-width: 72px;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s;
+}
+.speed:hover {
+  border-color: #fff !important;
+  color: #fff !important;
 }
 
 .mute {
   background-image: url(/common/images/静音按钮.webp);
 }
-.mute:hover,
-.mute:focus {
+.mute:hover {
   background-image: url(/common/images/静音按钮高亮.webp);
 }
 .mute.muted {
   background-image: url(/common/images/已静音按钮.webp);
 }
-.mute.muted:hover,
-.mute.muted:focus {
+.mute.muted:hover {
   background-image: url(/common/images/已静音按钮高亮.webp);
 }
 
@@ -1091,8 +1154,8 @@ watch(
   filter: drop-shadow(0 4px 4px #00000040);
   background: url(/common/images/进度条底色-暗.webp) 50% / contain no-repeat;
   width: 100%;
-  height: 24px;
-  margin-top: 24px;
+  height: 40px;
+  margin-top: 50px;
 }
 
 .progress {
@@ -1111,13 +1174,13 @@ watch(
   left: 0;
 }
 
-.progress:before {
+.progress::before {
   content: "";
   z-index: 4;
   background: linear-gradient(0deg, #0000 1px, #fff 2px, #a7835c 5px, #0000);
   position: absolute;
-  inset: -11px;
-  transform: translate(-12px, -50%);
+  inset: -11px 0;
+  transform: translateY(-50%);
 }
 
 .progress-bar > input[type="range"] {
@@ -1154,7 +1217,7 @@ watch(
   margin: auto;
 }
 
-.questionnaire .center > * {
+.questionnaire .center > :not(.qte-wrapper) {
   pointer-events: auto;
 }
 
@@ -1278,15 +1341,16 @@ watch(
   transform: none !important;
 }
 
-/* 字幕文本样式：KuangShanKaiShu, 白色文字, 黑色描边 */
+/* 字幕文本样式：白色文字, 黑色描边 */
 :deep(.vjs-text-track-cue > div) {
   background-color: transparent !important;
   color: #ffffff !important;
   font-family:
-    "KuangShanKaiShu", "Times New Roman", "TsangErJinKai", "NanoOldSong", "STSong", "Songti SC", "Microsoft YaHei" !important;
+    "Times New Roman", "KuangShanKaiShu", "TsangErJinKai", "NanoOldSong", "STSong", "Songti SC", "Microsoft YaHei" !important;
   font-size: 60px !important;
+  paint-order: stroke fill;
   text-align: center !important;
-  -webkit-text-stroke: 1px #000000 !important;
+  -webkit-text-stroke: 2px #000000 !important;
   display: inline-block !important;
   width: auto !important;
   transform: none !important;

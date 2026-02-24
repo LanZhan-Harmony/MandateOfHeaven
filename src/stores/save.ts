@@ -1,23 +1,21 @@
+import { endings } from "@/assets/data/endings.js";
 import { defineStore } from "pinia";
-import { computed, ref, toRaw } from "vue";
+import { computed, ref } from "vue";
 import { chapterEndingVideoIds } from "../assets/data/chapterEndingVideos.js";
-import endings from "../assets/data/endings.json";
 import { valueChangeVideoIds } from "../assets/data/valueChangeVideos.js";
 import videos from "../assets/data/videos.json";
 import type { actionGroupType, uiButtonActionGroupType } from "../types/actionGroupType.js";
 import type { archiveType, ffiArgumentType, timelineLineType } from "../types/archiveType.js";
 import type { videoType } from "../types/videoType.js";
 import { apiClient } from "../utils/apiClient.js";
+import { clamp, randomChance } from "../utils/calc.js";
 import { deepArrayEquals } from "../utils/comparer.js";
 import { convertToChapterId, convertToStoryletId, convertToVideoId } from "../utils/converter.js";
-import { clamp, randomChance } from "../utils/calc.js";
 import { usePlayerStore } from "./player.js";
 
 // =============================
 // 静态游戏数据
 // =============================
-
-const endingsData = endings as Record<string, string>;
 
 /** 所有 storylet 及其视频的映射表 */
 const videosData = videos.storylets as videoType[];
@@ -51,7 +49,7 @@ function isChapterEndingVideo(videoId: string): boolean {
  * @returns 结局类型，如无则返回 null
  */
 function getEndingType(videoId: string): "gold" | "silver" | "bronze" | null {
-  return (endingsData[convertToStoryletId(videoId)] as "gold" | "silver" | "bronze") || null;
+  return endings[convertToStoryletId(videoId)] || null;
 }
 
 // =============================

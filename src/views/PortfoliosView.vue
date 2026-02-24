@@ -1,15 +1,19 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
+import characterUnlockConditions from "../assets/data/characterUnlockConditions.json";
 import CommentButton from "../components/CommentButton.vue";
 import PageNavButton from "../components/PageNavButton.vue";
 import { useMediaStore } from "../stores/media";
+import { useSaveStore } from "../stores/save";
 import type { characterType } from "../types/characterType";
 
 const { tm } = useI18n(); // tm 用于获取整个对象的翻译，适合需要获取数组或对象的情况
 const mediaStore = useMediaStore();
+const saveStore = useSaveStore();
 
-const characters = computed<characterType[]>(() => tm("characters") as characterType[]);
+const allCharacters = computed<characterType[]>(() => tm("characters") as characterType[]);
+const characters = computed<characterType[]>(() => allCharacters.value.filter((c) => isCharacterUnlocked(c.id)));
 const selectedIndex = ref(0);
 const infoContentRef = ref<HTMLElement | null>(null);
 
@@ -21,7 +25,12 @@ watch(selectedIndex, () => {
 
 const ANGLE_STEP = 5.5;
 
-const currentCharacter = computed<characterType>(() => characters.value[selectedIndex.value]!);
+const currentCharacter = computed<characterType | undefined>(() => characters.value[selectedIndex.value]);
+
+const unlockedStories = computed(() => {
+  if (!currentCharacter.value) return [];
+  return currentCharacter.value.stories.filter((story) => isStoryUnlocked(story.id));
+});
 
 onMounted(async () => {
   await mediaStore.setBGMAudioAsync("character_bgm", 3);
@@ -91,6 +100,24 @@ function getItemStyle(index: number) {
   };
 }
 
+function isCharacterUnlocked(characterId: string): boolean {
+  const config = characterUnlockConditions.characters.find((c: any) => c.id === characterId);
+  if (!config) return true;
+  if (!config.unlockConditions || config.unlockConditions.length === 0) return true;
+  return config.unlockConditions.some((id: string) => saveStore.visitedStorylets.includes(id));
+}
+
+function isStoryUnlocked(storyId: string): boolean {
+  for (const character of characterUnlockConditions.characters) {
+    const story = character.stories.find((s: any) => s.id === storyId);
+    if (story) {
+      if (!story.unlockConditions || story.unlockConditions.length === 0) return true;
+      return story.unlockConditions.some((id: string) => saveStore.visitedStorylets.includes(id));
+    }
+  }
+  return true;
+}
+
 async function playHoverSound() {
   await mediaStore.setEffectAudioAsync("音效11");
 }
@@ -98,7 +125,7 @@ async function playHoverSound() {
 <template>
   <div class="container">
     <img class="background" src="/common/images/人物档案背景.webp" />
-    <PageNavButton class="back-btn" />
+    <PageNavButton />
 
     <!-- 左侧扇形角色选择 -->
     <div class="selector-panel" @wheel="handleWheel" @touchstart="handleTouchStart" @touchend="handleTouchEnd">
@@ -118,7 +145,12 @@ async function playHoverSound() {
     </div>
 
     <!-- 中间人物图片 -->
-    <div class="image-panel" @wheel="handleWheel" @touchstart="handleTouchStart" @touchend="handleTouchEnd">
+    <div
+      class="image-panel"
+      v-if="currentCharacter"
+      @wheel="handleWheel"
+      @touchstart="handleTouchStart"
+      @touchend="handleTouchEnd">
       <img class="moon" src="/common/images/月亮底纹.webp" />
       <img
         class="character-image"
@@ -132,7 +164,7 @@ async function playHoverSound() {
     </div>
 
     <!-- 右侧人物信息 -->
-    <div class="info-panel">
+    <div class="info-panel" v-if="currentCharacter">
       <div class="info-header">
         <img class="title-icon" src="/common/images/名字图标.webp" alt="icon" />
         <h1 class="character-name">{{ currentCharacter.name }}</h1>
@@ -141,10 +173,10 @@ async function playHoverSound() {
         <h3 class="character-title">{{ $t("character.characterIntroduction") }}</h3>
         <p class="character-introduction">{{ currentCharacter.description }}</p>
 
-        <template v-if="currentCharacter.stories.length > 0">
+        <template v-if="unlockedStories.length > 0">
           <span class="divider"></span>
           <h3 class="character-title">{{ $t("character.characterStories") }}</h3>
-          <div v-for="(story, idx) in currentCharacter.stories" :key="idx" class="character-story">
+          <div v-for="(story, idx) in unlockedStories" :key="idx" class="character-story">
             <h4 class="story-title">{{ story.title }}</h4>
             <p class="story-content">{{ story.content }}</p>
           </div>

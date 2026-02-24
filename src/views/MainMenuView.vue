@@ -14,6 +14,7 @@ const appVersion = computed(() => `v${import.meta.env.VITE_APP_VERSION} | ${t("b
 
 onMounted(async () => {
   try {
+    mediaStore.pauseLoopAudio();
     await mediaStore.setBGMAudioAsync("main_bgm", 20);
   } catch (error) {
     async function retry() {
@@ -53,7 +54,9 @@ async function navigateTo(path: string) {
     <div class="overlay">
       <!-- 左侧菜单按钮 -->
       <div class="left-menu">
-        <MenuButton :text="saveStore.isNewGame ? $t('menu.startStory') : $t('menu.continueStory')" @click="" />
+        <MenuButton
+          :text="saveStore.isNewGame ? $t('menu.startStory') : $t('menu.continueStory')"
+          @click="navigateTo('/player')" />
         <MenuButton :text="$t('menu.chapterSelection')" @click="navigateTo('/chapters')" />
         <MenuButton :text="$t('menu.portfolios')" @click="navigateTo('/portfolios')" />
         <MenuButton :text="$t('menu.exitGame')" @click="" />

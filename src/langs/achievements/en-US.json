@@ -1,196 +1,244 @@
 {
     "achievements": [
         {
-            "id": "rising_gale",
-            "name": "The Rising Gale"
+            "id": "winds_of_change",
+            "name": "Winds of Change",
+            "description": "Prologue Cleared"
         },
         {
-            "id": "age_of_strife",
-            "name": "An Age of Great Strife"
+            "id": "the_era_of_great_strife",
+            "name": "The Era of Great Strife",
+            "description": "Begin your legend in these turbulent times"
         },
         {
-            "id": "imperial_will_unfathomable",
-            "name": "The Emperor’s Unfathomable Will"
+            "id": "unfathomable_mind_of_the_aged_emperor",
+            "name": "Unfathomable Mind of the Aged Emperor",
+            "description": "Persuade the Aged Emperor and protect Yu Gong"
         },
         {
-            "id": "master_strategist",
-            "name": "Master of Stratagems"
+            "id": "resourceful",
+            "name": "Resourceful",
+            "description": "Using different methods to ensure your survival with the old Emperor"
         },
         {
-            "id": "drifting_like_duckweed",
-            "name": "Duckweed in the Rain"
+            "id": "rain_beating_on_duckweed",
+            "name": "Rain Beating on Duckweed",
+            "description": "Chapter 1 Cleared"
         },
         {
-            "id": "mandate_of_heaven",
-            "name": "Chosen by the Mandate of Heaven"
+            "id": "destined_by_heaven",
+            "name": "Destined by Heaven",
+            "description": "Blessed by heaven at the uprising, becoming the Child of Fortune"
         },
         {
-            "id": "unyielding_spirit",
-            "name": "Unyielding Spirit"
+            "id": "unyielding_bones",
+            "name": "Unyielding Bones",
+            "description": "Even if you're down, you can't let Zheng Sikong look down on you."
         },
         {
-            "id": "bold_remonstrance",
-            "name": "Courage to Remonstrate"
+            "id": "courage_to_speak_frankly",
+            "name": "Courage to Speak Frankly",
+            "description": "You are adept at speaking frankly, never pretending ignorance, even when facing the Emperor."
         },
         {
-            "id": "dragon_into_the_sea",
-            "name": "Dragon Enters the Sea"
+            "id": "the_trials_begin",
+            "name": "The Trials Begin",
+            "description": "Chapter 2 Cleared"
         },
         {
-            "id": "weight_of_rites_and_affection",
-            "name": "Rites and Affection Alike"
+            "id": "a_gift_as_weighty_as_the_affection_behind_it",
+            "name": "A Gift as Weighty as the Affection Behind It",
+            "description": "Give the gift that moves Zu Kun."
         },
         {
-            "id": "martial_master",
-            "name": "Grandmaster of the Martial Way"
+            "id": "kung_fu_master",
+            "name": "Kung Fu Master",
+            "description": "Defeat Zu Yue in a duel"
         },
         {
-            "id": "hidden_dragon_emerges",
-            "name": "Hidden Dragon Takes to the Sea"
+            "id": "from_depths_to_the_deep",
+            "name": "From Depths to the Deep",
+            "description": "Persuade the Emperor to let you accompany Zu Kun north"
         },
         {
-            "id": "dignity_preserved",
-            "name": "Dignity Preserved"
+            "id": "decency",
+            "name": "Decency",
+            "description": "Bring about your own dignified end by being stubbornly beaten by Zu Yue"
         },
         {
-            "id": "blade_unsheathed",
-            "name": "Blade Wiped and Drawn"
+            "id": "sharpening_the_blade",
+            "name": "Sharpening the Blade",
+            "description": "Chapter 3 Cleared"
         },
         {
-            "id": "counter_within_scheme",
-            "name": "Turning the Scheme to One’s Advantage"
+            "id": "turning_the_tables",
+            "name": "Turning the Tables",
+            "description": "Go with the flow and use Shi Lang's scheme against him"
         },
         {
-            "id": "emperor_xuanwu",
-            "name": "Emperor Xuanwu"
+            "id": "emperor_wu_of_xuan",
+            "name": "Emperor Wu of Xuan",
+            "description": "Fail in commanding the surprise attack, and after being captured, perform a dance for Shi Lang"
         },
         {
-            "id": "break_the_mountain",
-            "name": "Shattering the Mountain"
+            "id": "break_mountains_and_valleys",
+            "name": "Break Mountains and Valleys",
+            "description": "Chapter 4 Cleared"
         },
         {
-            "id": "court_jester_supreme",
-            "name": "Master of Repartee"
+            "id": "master_of_comic_banter",
+            "name": "Master of Comic Banter",
+            "description": "Uncover all of Shi Lang's schemes before the final assault"
         },
         {
             "id": "fickle_hearts",
-            "name": "Fickle Hearts"
+            "name": "Fickle Hearts",
+            "description": "In a critical moment, Liu Dadao still believes his life is most important"
         },
         {
-            "id": "fight_to_the_death",
-            "name": "Fight unto Death"
+            "id": "struggling_desperately",
+            "name": "Struggling Desperately",
+            "description": "Conquer Liu Dadao with your charm"
         },
         {
-            "id": "reborn_from_ruin",
-            "name": "Reborn from Ruin"
+            "id": "rebirth_through_destruction",
+            "name": "Rebirth Through Destruction",
+            "description": "Defend Yiyang and achieve victory"
         },
         {
-            "id": "ask_the_mandate",
-            "name": "Questioning the Mandate of Heaven"
+            "id": "inquiring_of_heavens_mandate",
+            "name": "Inquiring of Heaven's Mandate",
+            "description": "Chapter 5 Cleared"
         },
         {
-            "id": "principled_choice",
-            "name": "To Act and to Refrain"
+            "id": "to_act_and_to_refrain_from_acting",
+            "name": "To Act and to Refrain from Acting",
+            "description": "Succeed in the uprising without harming a large number of common people"
         },
         {
             "id": "between_north_and_south",
-            "name": "Between North and South"
+            "name": "Between North and South",
+            "description": "Carve out a domain, creating a three-way balance of power in this chaotic world"
         },
         {
-            "id": "emperor_xuanyang",
-            "name": "Emperor Xuanyang"
+            "id": "emperor_yang_of_xuan",
+            "name": "Emperor Yang of Xuan",
+            "description": "there are so many potential lovers to choose from, but you only pick one from among those potential lovers"
         },
         {
-            "id": "heavenly_ordination",
-            "name": "Ordained by Heaven"
+            "id": "receiving_the_mandate_in_response_to_heaven",
+            "name": "Receiving the Mandate in Response to Heaven",
+            "description": "Ascend the throne and proclaim it to the world"
         },
         {
-            "id": "vision_of_peace",
-            "name": "Vision of Great Peace"
+            "id": "the_record_of_great_peace",
+            "name": "The Record of Great Peace",
+            "description": "Chapter 6 Cleared"
         },
         {
-            "id": "emperor_xuanyou",
-            "name": "Emperor Xuanyou"
+            "id": "emperor_you_of_xuan",
+            "name": "Emperor You of Xuan",
+            "description": "Indulge in beauty, neglect state affairs, and remain unrepentant"
         },
         {
-            "id": "emperor_xuanzong",
-            "name": "Emperor Xuanzong"
+            "id": "emperor_zong_of_xuan",
+            "name": "Emperor Zong of Xuan",
+            "description": "Awaken suddenly amidst wine and lust, abdicating in favor of the Crown Prince"
         },
         {
-            "id": "mistrust_and_abandon",
-            "name": "Distrust and Disuse"
+            "id": "never_suspect_the_man_you_need",
+            "name": "Never Suspect the Man you Need",
+            "description": "No matter what others say, insist on reusing Zhu Yuanzhi"
         },
         {
-            "id": "deposed_emperor_xuan",
-            "name": "The Deposed Emperor Xuan"
+            "id": "emperor_fei_of_xuan",
+            "name": "Emperor Fei of Xuan",
+            "description": "Former soft-heartedness leads to bitter consequences"
         },
         {
-            "id": "emperor_xuanshang",
-            "name": "Emperor Xuanshang"
+            "id": "emperor_shang_of_xuan",
+            "name": "Emperor Shang of Xuan",
+            "description": "No stubborn emperor throughout history surpasses you in obstinacy"
         },
         {
-            "id": "longwu_reform",
-            "name": "The Longwu Reforms"
+            "id": "longwu_reformation",
+            "name": "Longwu Reformation",
+            "description": "Heaven's Mandate is not to be feared, the ancestors' ways are not to be followed, others' words are not to be heeded."
         },
         {
-            "id": "xunyang_campaign",
-            "name": "The Xunyang Campaign"
+            "id": "xunyang_ventures_beyond_the_frontier",
+            "name": "Xunyang Ventures Beyond the Frontier",
+            "description": "The bloom that never arrives, the unforgettable face of the past."
         },
         {
-            "id": "favor_for_all",
-            "name": "Grace Bestowed Upon All"
+            "id": "showering_favors_equally",
+            "name": "Showering Favors Equally",
+            "description": "Short are the nights of spring pleasure, the sun rises high, from then on the ruler no holds early court."
         },
         {
-            "id": "all_under_heaven",
-            "name": "All Under the Nine Provinces"
+            "id": "all_under_heaven_unified",
+            "name": "All Under Heaven Unified",
+            "description": "Chapter 7 Cleared"
         },
         {
-            "id": "emperor_xuanhuai",
-            "name": "Emperor Xuanhuai"
+            "id": "emperor_huai_of_xuan",
+            "name": "Emperor Huai of Xuan",
+            "description": "The reform fails, cut the loss courageously."
         },
         {
-            "id": "emperor_xuanai",
-            "name": "Emperor Xuan’ai"
+            "id": "emperor_ai_of_xuan",
+            "name": "Emperor Ai of Xuan",
+            "description": "Gamble on the nation's fortune being with you, pushing the reform radically even after failure"
         },
         {
-            "id": "emperor_xuankang",
-            "name": "Emperor Xuankang"
+            "id": "emperor_kang_of_xuan",
+            "name": "Emperor Kang of Xuan",
+            "description": "Seek stability in all things, thus securing a place in history."
         },
         {
-            "id": "emperor_xuanzhuang",
-            "name": "Emperor Xuanzhuang"
+            "id": "emperor_zhuang_of_xuan",
+            "name": "Emperor Zhuang of Xuan",
+            "description": "To hesitate in making a decision is to invite disaster."
         },
         {
-            "id": "emperor_xuanming",
-            "name": "Emperor Xuanming"
+            "id": "emperor_ming_of_xuan",
+            "name": "Emperor Ming of Xuan",
+            "description": "No peace marriages, no tribute, reclaim the lost territories, recover the Land."
         },
         {
-            "id": "emperor_xuanjing",
-            "name": "Emperor Xuanjing"
+            "id": "emperor_jing_of_xuan",
+            "name": "Emperor Jing of Xuan",
+            "description": "Unclear succession leads to future calamity, thus the empire falls in the second generation."
         },
         {
-            "id": "emperor_xuancheng",
-            "name": "Emperor Xuancheng"
+            "id": "emperor_cheng_of_xuan",
+            "name": "Emperor Cheng of Xuan",
+            "description": "No place more merciless than the Family of the Emperor."
         },
         {
-            "id": "emperor_xuanwen",
-            "name": "Emperor Xuanwen"
+            "id": "emperor_wen_of_xuan",
+            "name": "Emperor Wen of Xuan",
+            "description": "Hail the Unified Empire."
         },
         {
-            "id": "emperor_xuanguangwu",
-            "name": "Emperor Xuanguangwu"
+            "id": "emperor_guang_wu_of_xuan",
+            "name": "Emperor Guang Wu of Xuan",
+            "description": "All lands pay homage, all nations bow."
         },
         {
-            "id": "emperor_xuanzhao",
-            "name": "Emperor Xuanzhao"
+            "id": "emperor_zhao_of_xuan",
+            "name": "Emperor Zhao of Xuan",
+            "description": "In this world, all are bound together, yet much lies beyond our grasp."
         },
         {
-            "id": "yan_never_returns",
-            "name": "No Return to Yan"
+            "id": "no_way_home",
+            "name": "No Way Home",
+            "description": "Ten years parted, one living, one dead; Not thinking, Yet never forgetting."
         },
         {
-            "id": "thousand_sails_passed",
-            "name": "A Thousand Sails Have Passed"
+            "id": "when_the_last_sail_vanishes",
+            "name": "When the Last Sail Vanishes",
+            "description": "All realms I have beheld, all paths I have known."
         }
     ]
 }

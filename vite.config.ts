@@ -32,7 +32,7 @@ export default defineConfig({
             // 如果浏览器请求没带 Cookie，我们注入一个初始的
             // 这样如果你在浏览器里清了 Cookie，它也能回血
             const initialCookie =
-              "_session=rhVH54%2FcMxT3OStH%2B8mPbaO2mrZL8lLQw1p7MKwtRXmHYComn3Y0h%2BByq8WbcyGUt5ZVsMWwVc%2BmA3kP9eySzjTJfTNtpmkxdn0wCpsOjjg2JHffVdWWOqtJMylZxIZWxHzqvvOR9VGPneDVMwOUJazherpz%2Fb81yfmQkOnvWb8KjejSgk3ppvcs9QBDCdTR2A9uGtRtZaQ7AS4uDJMNb3wnW1CPGDianQI%3D--He4qG2rEreLyaBdH--TttKxwdX%2FaUQ4XRAF4dQxA%3D%3D";
+              "_session=RuiqQtzqqy7vrQIqbyW9SaGeNHztnhMGz6BodMxjX%2F%2BV7V2%2Fj81EocLCifhCTapK79H71i3B1Fat0LeqZJUx1tp4jrF5Kz6%2FsXGFuX7IfoRz%2B4d8aTFTRBgA40Kbkua%2BuofcgL2ELu1ZBKwQ5vPJw6fgAUjmid8H78NAxwc0GLdTjKHlr1M8YFizbuUNP1EA4ajdqKBmSKXkqQyRxAzT5qniYITiuZmqrVM%3D--k4e58DkIl1euDFkk--n0kxkQAvLI7yrw1iqsqjdQ%3D%3D";
 
             if (!req.headers.cookie || !req.headers.cookie.includes("_session=")) {
               proxyReq.setHeader("Cookie", initialCookie);

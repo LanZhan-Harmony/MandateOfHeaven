@@ -1,196 +1,244 @@
 {
     "achievements": [
         {
-            "id": "rising_gale",
-            "name": "大风起"
+            "id": "winds_of_change",
+            "name": "大风起",
+            "description": "通关序章"
         },
         {
-            "id": "age_of_strife",
-            "name": "大争之世"
+            "id": "the_era_of_great_strife",
+            "name": "大争之世",
+            "description": "在这纷乱的时代里，开始你的传奇"
         },
         {
-            "id": "imperial_will_unfathomable",
-            "name": "圣心难测"
+            "id": "unfathomable_mind_of_the_aged_emperor",
+            "name": "圣心难测",
+            "description": "劝服皇帝，保全庾宫"
         },
         {
-            "id": "master_strategist",
-            "name": "足智多谋"
+            "id": "resourceful",
+            "name": "足智多谋",
+            "description": "用不同的办法在老皇帝处保全自己"
         },
         {
-            "id": "drifting_like_duckweed",
-            "name": "雨打萍"
+            "id": "rain_beating_on_duckweed",
+            "name": "雨打萍",
+            "description": "通关第一章"
         },
         {
-            "id": "mandate_of_heaven",
-            "name": "天命所归"
+            "id": "destined_by_heaven",
+            "name": "天命所归",
+            "description": "在起事时被上天眷顾，成为气运之子"
         },
         {
-            "id": "unyielding_spirit",
-            "name": "硬骨头"
+            "id": "unyielding_bones",
+            "name": "硬骨头",
+            "description": "输人不输阵，今日龙遇浅滩也不能叫司空正看扁了"
         },
         {
-            "id": "bold_remonstrance",
-            "name": "勇于直言"
+            "id": "courage_to_speak_frankly",
+            "name": "勇于直言",
+            "description": "你善于有话直言，绝不揣着明白装糊涂，即使是面对皇上"
         },
         {
-            "id": "dragon_into_the_sea",
-            "name": "蛟入海"
+            "id": "the_trials_begin",
+            "name": "蛟入海",
+            "description": "通关第二章"
         },
         {
-            "id": "weight_of_rites_and_affection",
-            "name": "礼重情也重"
+            "id": "a_gift_as_weighty_as_the_affection_behind_it",
+            "name": "礼重情也重",
+            "description": "送礼送到祖坤心里"
         },
         {
-            "id": "martial_master",
-            "name": "武道高人"
+            "id": "kung_fu_master",
+            "name": "武道高人",
+            "description": "在比斗中击败祖月"
         },
         {
-            "id": "hidden_dragon_emerges",
-            "name": "潜龙入海"
+            "id": "from_depths_to_the_deep",
+            "name": "潜龙入海",
+            "description": "说服皇帝放你随祖坤北上"
         },
         {
-            "id": "dignity_preserved",
-            "name": "体面"
+            "id": "decency",
+            "name": "体面",
+            "description": "因逞强被祖月终结自己体面要脸的一生"
         },
         {
-            "id": "blade_unsheathed",
-            "name": "拭锋刀"
+            "id": "sharpening_the_blade",
+            "name": "拭锋刀",
+            "description": "通关第三章"
         },
         {
-            "id": "counter_within_scheme",
-            "name": "将计就计"
+            "id": "turning_the_tables",
+            "name": "将计就计",
+            "description": "顺水推舟，利用石狼计谋将他一军就计"
         },
         {
-            "id": "emperor_xuanwu",
-            "name": "宣舞帝"
+            "id": "emperor_wu_of_xuan",
+            "name": "宣舞帝",
+            "description": "指挥突袭失利，被俘后给石狼献舞"
         },
         {
-            "id": "break_the_mountain",
-            "name": "破山缺"
+            "id": "break_mountains_and_valleys",
+            "name": "破山缺",
+            "description": "通关第四章"
         },
         {
-            "id": "court_jester_supreme",
-            "name": "捧哏大师"
+            "id": "master_of_comic_banter",
+            "name": "捧哏大师",
+            "description": "踩中石狼总攻前的一切诡计"
         },
         {
             "id": "fickle_hearts",
-            "name": "人心凉薄"
+            "name": "人心凉薄",
+            "description": "危难关头，刘大刀还是觉得小命要紧"
         },
         {
-            "id": "fight_to_the_death",
-            "name": "奋死"
+            "id": "struggling_desperately",
+            "name": "奋死",
+            "description": "用魅力征服刘大刀"
         },
         {
-            "id": "reborn_from_ruin",
-            "name": "破而后生"
+            "id": "rebirth_through_destruction",
+            "name": "破而后生",
+            "description": "守住弋阳取得胜利"
         },
         {
-            "id": "ask_the_mandate",
-            "name": "问天命"
+            "id": "inquiring_of_heavens_mandate",
+            "name": "问天命",
+            "description": "通关第五章"
         },
         {
-            "id": "principled_choice",
-            "name": "有所为，有所不为"
+            "id": "to_act_and_to_refrain_from_acting",
+            "name": "有所为，有所不为",
+            "description": "在未殃及大量百姓的情况下起事成功"
         },
         {
             "id": "between_north_and_south",
-            "name": "南北之间"
+            "name": "南北之间",
+            "description": "割据一方，令这乱世从此三足鼎立"
         },
         {
-            "id": "emperor_xuanyang",
-            "name": "宣炀帝"
+            "id": "emperor_yang_of_xuan",
+            "name": "宣炀帝",
+            "description": "任这天下如何，三千弱水，你唯独取这一瓢"
         },
         {
-            "id": "heavenly_ordination",
-            "name": "应天受命"
+            "id": "receiving_the_mandate_in_response_to_heaven",
+            "name": "应天受命",
+            "description": "登临大宝，昭告天下"
         },
         {
-            "id": "vision_of_peace",
-            "name": "太平志"
+            "id": "the_record_of_great_peace",
+            "name": "太平志",
+            "description": "通关第六章"
         },
         {
-            "id": "emperor_xuanyou",
-            "name": "宣幽帝"
+            "id": "emperor_you_of_xuan",
+            "name": "宣幽帝",
+            "description": "耽于美色，荒废朝政仍执迷不悟"
         },
         {
-            "id": "emperor_xuanzong",
-            "name": "宣纵帝"
+            "id": "emperor_zong_of_xuan",
+            "name": "宣纵帝",
+            "description": "酒色之中幡然醒悟，禅位太子"
         },
         {
-            "id": "mistrust_and_abandon",
-            "name": "疑人不用"
+            "id": "never_suspect_the_man_you_need",
+            "name": "疑人不用",
+            "description": "不论旁人如何说，坚持重用朱元之"
         },
         {
-            "id": "deposed_emperor_xuan",
-            "name": "宣废帝"
+            "id": "emperor_fei_of_xuan",
+            "name": "宣废帝",
+            "description": "昔日心软，铸成恶果"
         },
         {
-            "id": "emperor_xuanshang",
-            "name": "宣殇帝"
+            "id": "emperor_shang_of_xuan",
+            "name": "宣殇帝",
+            "description": "古今帝王执拗者，无出其右"
         },
         {
-            "id": "longwu_reform",
-            "name": "隆武变法"
+            "id": "longwu_reformation",
+            "name": "隆武变法",
+            "description": "天变不足畏，祖宗不足法，人言不足恤"
         },
         {
-            "id": "xunyang_campaign",
-            "name": "浔阳出塞"
+            "id": "xunyang_ventures_beyond_the_frontier",
+            "name": "浔阳出塞",
+            "description": "等不到的花开，忘不掉的故人"
         },
         {
-            "id": "favor_for_all",
-            "name": "雨露均沾"
+            "id": "showering_favors_equally",
+            "name": "雨露均沾",
+            "description": "春宵苦短日高起，从此君王不早朝"
         },
         {
-            "id": "all_under_heaven",
-            "name": "九州同"
+            "id": "all_under_heaven_unified",
+            "name": "九州同",
+            "description": "通关第七章"
         },
         {
-            "id": "emperor_xuanhuai",
-            "name": "宣怀帝"
+            "id": "emperor_huai_of_xuan",
+            "name": "宣怀帝",
+            "description": "变法失利，壮士断腕"
         },
         {
-            "id": "emperor_xuanai",
-            "name": "宣哀帝"
+            "id": "emperor_ai_of_xuan",
+            "name": "宣哀帝",
+            "description": "赌一次国运在我，即使变法失利也激进到底"
         },
         {
-            "id": "emperor_xuankang",
-            "name": "宣康帝"
+            "id": "emperor_kang_of_xuan",
+            "name": "宣康帝",
+            "description": "万事求稳，即可青史留名"
         },
         {
-            "id": "emperor_xuanzhuang",
-            "name": "宣庄帝"
+            "id": "emperor_zhuang_of_xuan",
+            "name": "宣庄帝",
+            "description": "当断不断，反受其乱"
         },
         {
-            "id": "emperor_xuanming",
-            "name": "宣明帝"
+            "id": "emperor_ming_of_xuan",
+            "name": "宣明帝",
+            "description": "不和亲，不纳贡，收归故土，克复神州"
         },
         {
-            "id": "emperor_xuanjing",
-            "name": "宣景帝"
+            "id": "emperor_jing_of_xuan",
+            "name": "宣景帝",
+            "description": "立嗣不明，贻患于后，故天下二世而亡"
         },
         {
-            "id": "emperor_xuancheng",
-            "name": "宣成帝"
+            "id": "emperor_cheng_of_xuan",
+            "name": "宣成帝",
+            "description": "无情最是帝王家"
         },
         {
-            "id": "emperor_xuanwen",
-            "name": "宣文帝"
+            "id": "emperor_wen_of_xuan",
+            "name": "宣文帝",
+            "description": "荡清六合，横扫八荒"
         },
         {
-            "id": "emperor_xuanguangwu",
-            "name": "宣光武帝"
+            "id": "emperor_guang_wu_of_xuan",
+            "name": "宣光武帝",
+            "description": "四海宾服，万国朝拜"
         },
         {
-            "id": "emperor_xuanzhao",
-            "name": "宣昭帝"
+            "id": "emperor_zhao_of_xuan",
+            "name": "宣昭帝",
+            "description": "天下事，你中有我，我中有你，事事未必皆从人愿"
         },
         {
-            "id": "yan_never_returns",
-            "name": "燕难归"
+            "id": "no_way_home",
+            "name": "燕难归",
+            "description": "十年生死两茫茫，不思量，自难忘"
         },
         {
-            "id": "thousand_sails_passed",
-            "name": "千帆过尽"
+            "id": "when_the_last_sail_vanishes",
+            "name": "千帆过尽",
+            "description": "三千世界，无数可能，朕已遍览"
         }
     ]
 }

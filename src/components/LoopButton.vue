@@ -86,11 +86,11 @@ const handlePointerEnter = async () => {
   background-size: cover;
   background-color: transparent;
   border: none;
-  min-width: 12lh;
-  min-height: 1lh;
-  padding-top: 0.8lh;
-  padding-bottom: 0.8lh;
-  font-size: 1.7em;
+  min-width: 400px;
+  min-height: 100px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  font-size: 40px;
   position: absolute;
   -webkit-mask-source-type: alpha;
   mask-mode: alpha;
@@ -103,10 +103,10 @@ const handlePointerEnter = async () => {
   background-image: url(/common/images/选项A按钮.webp);
   background-position: 100%;
   justify-content: left;
-  padding-left: 4ic;
-  padding-right: 2lh;
-  -webkit-mask-image: linear-gradient(90deg, #0000 0%, #000 4ic);
-  mask-image: linear-gradient(90deg, #0000 0%, #000 4ic);
+  padding-left: 140px;
+  padding-right: 70px;
+  -webkit-mask-image: linear-gradient(90deg, #0000 0%, #000 140px);
+  mask-image: linear-gradient(90deg, #0000 0%, #000 140px);
 }
 
 .loop-button.left:hover,
@@ -120,10 +120,10 @@ const handlePointerEnter = async () => {
   background-image: url(/common/images/选项B按钮.webp);
   background-position: 0;
   justify-content: right;
-  padding-left: 2lh;
-  padding-right: 4ic;
-  -webkit-mask-image: linear-gradient(270deg, #0000 0%, #000 4ic);
-  mask-image: linear-gradient(270deg, #0000 0%, #000 4ic);
+  padding-left: 70px;
+  padding-right: 140px;
+  -webkit-mask-image: linear-gradient(270deg, #0000 0%, #000 140px);
+  mask-image: linear-gradient(270deg, #0000 0%, #000 140px);
 }
 
 .loop-button.right:hover,
@@ -138,8 +138,10 @@ const handlePointerEnter = async () => {
   background-position: 50%;
   background-size: contain;
   justify-content: center;
-  padding-left: 4ic;
-  padding-right: 4ic;
+  padding-left: 80px;
+  padding-right: 80px;
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 
 .loop-button.center:hover,

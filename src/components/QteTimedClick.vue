@@ -14,10 +14,10 @@
   accept 圆（灰底） → countdown 圆环（收缩动画） → click 按钮（最上层）
   -->
 <script setup lang="ts">
-import type { storylineType } from "@/types/storylineType";
-import { convertToStoryletId } from "@/utils/converter";
 import { computed, useCssVars } from "vue";
 import { useI18n } from "vue-i18n";
+import type { storylineType } from "../types/storylineType";
+import { convertToStoryletId } from "../utils/converter";
 
 const { tm } = useI18n();
 
@@ -138,6 +138,7 @@ const handleClick = () => {
 .qte-click {
   left: v-bind(xPercent);
   top: v-bind(yPercent);
+  pointer-events: auto;
   background-color: #000c;
   border: 2px solid #ffe6c8cc;
   border-radius: 100%;
@@ -153,8 +154,7 @@ const handleClick = () => {
   color: #fff8ed;
   justify-content: center;
   align-items: center;
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 22px;
   display: flex;
   position: absolute;
   inset: 0;

@@ -1,196 +1,244 @@
 {
     "achievements": [
         {
-            "id": "rising_gale",
-            "name": "대풍이 일다"
+            "id": "winds_of_change",
+            "name": "대풍이 일다",
+            "description": "서장 클리어"
         },
         {
-            "id": "age_of_strife",
-            "name": "대쟁란의 시대"
+            "id": "the_era_of_great_strife",
+            "name": "대쟁란의 시대",
+            "description": "이 어지러운 시대에 당신의 전설을 시작하라"
         },
         {
-            "id": "imperial_will_unfathomable",
-            "name": "성심은 헤아릴 수 없다"
+            "id": "unfathomable_mind_of_the_aged_emperor",
+            "name": "성심은 헤아릴 수 없다",
+            "description": "황제를 설득하여 유궁을 보존하라"
         },
         {
-            "id": "master_strategist",
-            "name": "지략의 명수"
+            "id": "resourceful",
+            "name": "지략의 명수",
+            "description": "여러 방법을 동원해 노황제 곁에서 살아남다"
         },
         {
-            "id": "drifting_like_duckweed",
-            "name": "비에 흔들리는 부평초"
+            "id": "rain_beating_on_duckweed",
+            "name": "비에 흔들리는 부평초",
+            "description": "제1장 클리어"
         },
         {
-            "id": "mandate_of_heaven",
-            "name": "천명이 돌아오다"
+            "id": "destined_by_heaven",
+            "name": "천명이 돌아오다",
+            "description": "거병 시 하늘의 보살핌을 받아 운명의 자식이 되다"
         },
         {
-            "id": "unyielding_spirit",
-            "name": "굳센 기개"
+            "id": "unyielding_bones",
+            "name": "굳센 기개",
+            "description": "패할지언정 기세는 꺾이지 않으리니, 곤경에 처한 용이라 하여 조공정에게 얕보일 수는 없다"
         },
         {
-            "id": "bold_remonstrance",
-            "name": "직언을 두려워하지 않다"
+            "id": "courage_to_speak_frankly",
+            "name": "직언을 두려워하지 않다",
+            "description": "황제 앞에서도 숨김없이 직언하는 데 능하다"
         },
         {
-            "id": "dragon_into_the_sea",
-            "name": "교룡이 바다에 들다"
+            "id": "the_trials_begin",
+            "name": "교룡이 바다에 들다",
+            "description": "제2장 클리어"
         },
         {
-            "id": "weight_of_rites_and_affection",
-            "name": "예와 정을 함께 중히 여기다"
+            "id": "a_gift_as_weighty_as_the_affection_behind_it",
+            "name": "예와 정을 함께 중히 여기다",
+            "description": "조곤의 마음을 움직이는 선물을 보내라"
         },
         {
-            "id": "martial_master",
-            "name": "무도의 고수"
+            "id": "kung_fu_master",
+            "name": "무도의 고수",
+            "description": "비무에서 조월을 격파하라"
         },
         {
-            "id": "hidden_dragon_emerges",
-            "name": "잠룡이 바다로 나아가다"
+            "id": "from_depths_to_the_deep",
+            "name": "잠룡이 바다로 나아가다",
+            "description": "황제를 설득하여 조곤과 함께 북상하라"
         },
         {
-            "id": "dignity_preserved",
-            "name": "체면을 지키다"
+            "id": "decency",
+            "name": "체면을 지키다",
+            "description": "오기를 부리다 조월의 손에 체면 있는 일생을 마감하다"
         },
         {
-            "id": "blade_unsheathed",
-            "name": "칼날을 닦아 시험하다"
+            "id": "sharpening_the_blade",
+            "name": "칼날을 닦아 시험하다",
+            "description": "제3장 클리어"
         },
         {
-            "id": "counter_within_scheme",
-            "name": "계책으로 계책을 제압하다"
+            "id": "turning_the_tables",
+            "name": "계책으로 계책을 제압하다",
+            "description": "흐름을 타서 석랑의 계책을 역이용해 일격을 가하다"
         },
         {
-            "id": "emperor_xuanwu",
-            "name": "선무제"
+            "id": "emperor_wu_of_xuan",
+            "name": "선무제",
+            "description": "기습 실패 후 포로가 되어 석랑을 위해 춤을 추다"
         },
         {
-            "id": "break_the_mountain",
-            "name": "산을 깨뜨리다"
+            "id": "break_mountains_and_valleys",
+            "name": "산을 깨뜨리다",
+            "description": "제4장 클리어"
         },
         {
-            "id": "court_jester_supreme",
-            "name": "받침의 달인"
+            "id": "master_of_comic_banter",
+            "name": "받침의 달인",
+            "description": "석랑의 총공격 전 모든 계략을 간파하다"
         },
         {
             "id": "fickle_hearts",
-            "name": "인심은 박하다"
+            "name": "인심은 박하다",
+            "description": "위기의 순간, 유대도는 결국 제 목숨을 더 중히 여겼다"
         },
         {
-            "id": "fight_to_the_death",
-            "name": "죽음을 무릅쓰다"
+            "id": "struggling_desperately",
+            "name": "죽음을 무릅쓰다",
+            "description": "매력으로 유대도를 정복하라"
         },
         {
-            "id": "reborn_from_ruin",
-            "name": "무너짐 뒤에 다시 서다"
+            "id": "rebirth_through_destruction",
+            "name": "무너짐 뒤에 다시 서다",
+            "description": "기양을 지켜내어 승리를 쟁취하라"
         },
         {
-            "id": "ask_the_mandate",
-            "name": "천명을 묻다"
+            "id": "inquiring_of_heavens_mandate",
+            "name": "천명을 묻다",
+            "description": "제5장 클리어"
         },
         {
-            "id": "principled_choice",
-            "name": "할 것은 하고, 하지 않을 것은 하지 않다"
+            "id": "to_act_and_to_refrain_from_acting",
+            "name": "할 것은 하고, 하지 않을 것은 하지 않다",
+            "description": "수많은 백성에게 피해를 주지 않고 거병에 성공하다"
         },
         {
             "id": "between_north_and_south",
-            "name": "남과 북 사이"
+            "name": "남과 북 사이",
+            "description": "한 지방을 점거하여 난세를 삼국정립의 형세로 만들다"
         },
         {
-            "id": "emperor_xuanyang",
-            "name": "선양제"
+            "id": "emperor_yang_of_xuan",
+            "name": "선양제",
+            "description": "천하가 어떠하든, 삼천의 물 중 오직 그대만을 택하리라"
         },
         {
-            "id": "heavenly_ordination",
-            "name": "하늘의 명을 받들다"
+            "id": "receiving_the_mandate_in_response_to_heaven",
+            "name": "하늘의 명을 받들다",
+            "description": "보위에 올라 천하에 선포하라"
         },
         {
-            "id": "vision_of_peace",
-            "name": "태평의 뜻"
+            "id": "the_record_of_great_peace",
+            "name": "태평의 뜻",
+            "description": "제6장 클리어"
         },
         {
-            "id": "emperor_xuanyou",
-            "name": "선유제"
+            "id": "emperor_you_of_xuan",
+            "name": "선유제",
+            "description": "미색에 빠져 정사를 돌보지 않고 끝까지 깨닫지 못하다"
         },
         {
-            "id": "emperor_xuanzong",
-            "name": "선종제"
+            "id": "emperor_zong_of_xuan",
+            "name": "선종제",
+            "description": "주색 속에서 홀연히 깨달아 태자에게 양위하다"
         },
         {
-            "id": "mistrust_and_abandon",
-            "name": "의심하여 쓰지 않다"
+            "id": "never_suspect_the_man_you_need",
+            "name": "의심하여 쓰지 않다",
+            "description": "남들의 말에 아랑곳하지 않고 주원지를 중용하라"
         },
         {
-            "id": "deposed_emperor_xuan",
-            "name": "선폐제"
+            "id": "emperor_fei_of_xuan",
+            "name": "선폐제",
+            "description": "지난날의 마음 약함이 악과를 맺다"
         },
         {
-            "id": "emperor_xuanshang",
-            "name": "선상제"
+            "id": "emperor_shang_of_xuan",
+            "name": "선상제",
+            "description": "고금의 제왕 중 아집이 당신을 능가하는 자는 없다"
         },
         {
-            "id": "longwu_reform",
-            "name": "융무 변법"
+            "id": "longwu_reformation",
+            "name": "융무 변법",
+            "description": "하늘의 변화는 두려워할 것이 못 되고, 조종의 법은 본받을 것이 못 되며, 남의 말은 근심할 것이 못 된다"
         },
         {
-            "id": "xunyang_campaign",
-            "name": "심양 출정"
+            "id": "xunyang_ventures_beyond_the_frontier",
+            "name": "심양 출정",
+            "description": "오지 않는 꽃피는 시절, 잊을 수 없는 옛 사람"
         },
         {
-            "id": "favor_for_all",
-            "name": "은택을 고루 내리다"
+            "id": "showering_favors_equally",
+            "name": "은택을 고루 내리다",
+            "description": "봄밤의 즐거움 짧아 해가 높이 떴으니, 이때부터 군주는 이른 아침 조례에 나가지 않다"
         },
         {
-            "id": "all_under_heaven",
-            "name": "구주가 하나 되다"
+            "id": "all_under_heaven_unified",
+            "name": "구주가 하나 되다",
+            "description": "제7장 클리어"
         },
         {
-            "id": "emperor_xuanhuai",
-            "name": "선회제"
+            "id": "emperor_huai_of_xuan",
+            "name": "선회제",
+            "description": "변법 실패, 과감한 결단으로 손실을 끊어내다"
         },
         {
-            "id": "emperor_xuanai",
-            "name": "선애제"
+            "id": "emperor_ai_of_xuan",
+            "name": "선애제",
+            "description": "국운을 걸고, 변법 실패 후에도 끝까지 급진적으로 밀어붙이다"
         },
         {
-            "id": "emperor_xuankang",
-            "name": "선강제"
+            "id": "emperor_kang_of_xuan",
+            "name": "선강제",
+            "description": "매사 안정을 구하여 청사에 이름을 남기다"
         },
         {
-            "id": "emperor_xuanzhuang",
-            "name": "선장제"
+            "id": "emperor_zhuang_of_xuan",
+            "name": "선장제",
+            "description": "결단해야 할 때 결단하지 못해 도리어 화를 입다"
         },
         {
-            "id": "emperor_xuanming",
-            "name": "선명제"
+            "id": "emperor_ming_of_xuan",
+            "name": "선명제",
+            "description": "화친하지 않고 조공하지 않으며, 옛 영토를 수복하고 신주를 되찾다"
         },
         {
-            "id": "emperor_xuanjing",
-            "name": "선경제"
+            "id": "emperor_jing_of_xuan",
+            "name": "선경제",
+            "description": "후계가 불분명하여 후세에 화를 남기니, 천하가 2대 만에 멸망하다"
         },
         {
-            "id": "emperor_xuancheng",
-            "name": "선성제"
+            "id": "emperor_cheng_of_xuan",
+            "name": "선성제",
+            "description": "가장 무정한 곳은 제왕의 가문이다"
         },
         {
-            "id": "emperor_xuanwen",
-            "name": "선문제"
+            "id": "emperor_wen_of_xuan",
+            "name": "선문제",
+            "description": "육합을 정화하고 팔황을 휩쓸다"
         },
         {
-            "id": "emperor_xuanguangwu",
-            "name": "선광무제"
+            "id": "emperor_guang_wu_of_xuan",
+            "name": "선광무제",
+            "description": "사해의 복종을 받고 만국이 조공하다"
         },
         {
-            "id": "emperor_xuanzhao",
-            "name": "선소제"
+            "id": "emperor_zhao_of_xuan",
+            "name": "선소제",
+            "description": "천하의 일은 뜻대로 되지 않는 법, 모든 것이 사람의 원대로 이루어지지는 않는다"
         },
         {
-            "id": "yan_never_returns",
-            "name": "연은 돌아오지 않는다"
+            "id": "no_way_home",
+            "name": "연은 돌아오지 않는다",
+            "description": "십 년의 생사라 망망하니, 생각지 않으려 해도 잊기 어렵구나"
         },
         {
-            "id": "thousand_sails_passed",
-            "name": "천 척의 돛이 지나가다"
+            "id": "when_the_last_sail_vanishes",
+            "name": "천 척의 돛이 지나가다",
+            "description": "삼천세계와 수많은 가능성을 짐이 모두 둘러보았노라"
         }
     ]
 }

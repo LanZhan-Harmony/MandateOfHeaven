@@ -1,27 +1,27 @@
 <script setup lang="ts">
-import HelpOverlay from "@/components/HelpOverlay.vue";
-import ImageButton from "@/components/ImageButton.vue";
-import LoadingOverlay from "@/components/LoadingOverlay.vue";
-import PageNavButton from "@/components/PageNavButton.vue";
-import StorylineProgressBar from "@/components/StorylineProgressBar.vue";
-import router from "@/router";
-import { useMediaStore } from "@/stores/media";
-import { usePlayerStore } from "@/stores/player";
+import { storeToRefs } from "pinia";
+import { computed, nextTick, onMounted, onUnmounted, ref, shallowRef, watch } from "vue";
+import { useI18n } from "vue-i18n";
+import HelpOverlay from "../components/HelpOverlay.vue";
+import ImageButton from "../components/ImageButton.vue";
+import LoadingOverlay from "../components/LoadingOverlay.vue";
+import PageNavButton from "../components/PageNavButton.vue";
+import StorylineProgressBar from "../components/StorylineProgressBar.vue";
+import router from "../router";
+import { useMediaStore } from "../stores/media";
+import { usePlayerStore } from "../stores/player";
 import {
   getEndingType,
   getStoryletFromVideo,
   getVideosFromStorylet,
   hasValueChanges,
   useSaveStore,
-} from "@/stores/save";
-import type { anchorType } from "@/types/anchorType";
-import type { storylineType } from "@/types/storylineType";
-import { convertToChapterId, convertToStoryletId, convertToVideoId } from "@/utils/converter";
-import { debounce } from "@/utils/debounce";
-import { DragZoomController } from "@/utils/dragZoomController";
-import { storeToRefs } from "pinia";
-import { computed, nextTick, onMounted, onUnmounted, ref, shallowRef, watch } from "vue";
-import { useI18n } from "vue-i18n";
+} from "../stores/save";
+import type { anchorType } from "../types/anchorType";
+import type { storylineType } from "../types/storylineType";
+import { convertToChapterId, convertToStoryletId, convertToVideoId } from "../utils/converter";
+import { debounce } from "../utils/debounce";
+import { DragZoomController } from "../utils/dragZoomController";
 
 // ========== 模块级常量 ==========
 // SVG 文本缓存：同一章节二次进入时无需重复请求
@@ -112,11 +112,13 @@ async function fetchSvgText(chapterId: number): Promise<string | null> {
  */
 async function loadStoryline(chapterId: number) {
   isMapReady.value = false;
+  mediaStore.pauseLoopAudio();
 
   // 并行启动：SVG 预取 + BGM 切换，与淡出动画（300ms）同步进行
   const bgmKey = chapterId <= 2 ? "chapter012_bgm" : chapterId <= 5 ? "chapter345_bgm" : "chapter67_bgm";
   const svgTextPromise = fetchSvgText(chapterId);
   const bgmPromise = mediaStore.setBGMAudioAsync(bgmKey);
+  console.log(`Started loading storyline ${chapterId}: SVG fetch and BGM switch in progress`);
 
   // 等待淡出过渡完成，同时以上请求已在后台运行
   await nextTick();
@@ -237,7 +239,7 @@ async function loadStoryline(chapterId: number) {
           x: parseFloat((textNode as Element).getAttribute?.("x") || "0"),
           y: parseFloat((textNode as Element).getAttribute?.("y") || "0"),
           id: videoId,
-          title: storylines.value.find((n) => n.id === storyletId)?.title ?? t(`nodes.${storyletId}.title`),
+          title: storylines.value.find((n) => n.id === storyletId)?.title ?? "",
           imageUrl: getThumbnailUrl(storyletId),
           icon: endingType || "bronze",
           disabled: !saveStore.rewindableVideos.includes(videoId),
@@ -523,7 +525,7 @@ onUnmounted(() => {
 <template>
   <div class="game ui-font">
     <!-- 顶部导航 -->
-    <PageNavButton />
+    <PageNavButton path="/chapters" />
 
     <!-- 加载指示器 -->
     <LoadingOverlay v-if="!isMapReady" />

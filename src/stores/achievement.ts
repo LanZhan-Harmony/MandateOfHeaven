@@ -1,7 +1,7 @@
-import type { achievementType } from "@/types/achievementType";
 import { defineStore } from "pinia";
 import { computed, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
+import type { achievementType } from "../types/achievementType";
 
 export const useAchievementStore = defineStore("achievement", () => {
   const { tm } = useI18n();

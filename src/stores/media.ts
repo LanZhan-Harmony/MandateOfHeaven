@@ -46,6 +46,9 @@ export const useMediaStore = defineStore("media", () => {
    */
   async function setBGMAudioAsync(name: string, startSeconds: number = 0) {
     if (bgmAudio.src.endsWith(`${name}.opus`)) {
+      if (bgmAudio.paused) {
+        await bgmAudio.play();
+      }
       return;
     }
     bgmAudio.pause();
@@ -61,15 +64,9 @@ export const useMediaStore = defineStore("media", () => {
     }
   }
 
-  /**
-   * 暂停播放所有音频
-   */
-  function pauseAllAudios() {
+  function pauseBGMAudio() {
     if (!bgmAudio.paused) {
       bgmAudio.pause();
-    }
-    if (!loopAudio.paused) {
-      loopAudio.pause();
     }
   }
 
@@ -79,6 +76,18 @@ export const useMediaStore = defineStore("media", () => {
   async function resumeBGMAudioAsync() {
     if (bgmAudio.paused) {
       await bgmAudio.play();
+    }
+  }
+
+  function pauseLoopAudio() {
+    if (!loopAudio.paused) {
+      loopAudio.pause();
+    }
+  }
+
+  async function resumeLoopAudioAsync() {
+    if (loopAudio.paused) {
+      await loopAudio.play();
     }
   }
 
@@ -119,8 +128,10 @@ export const useMediaStore = defineStore("media", () => {
     temporaryPlayerMuted,
     actualPlayerVolume,
     setBGMAudioAsync,
-    pauseAllAudios,
+    pauseBGMAudio,
     resumeBGMAudioAsync,
+    pauseLoopAudio,
+    resumeLoopAudioAsync,
     setEffectAudioAsync,
     setLoopAudioAsync,
   };

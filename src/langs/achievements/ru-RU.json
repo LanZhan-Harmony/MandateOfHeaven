@@ -1,196 +1,244 @@
 {
     "achievements": [
         {
-            "id": "rising_gale",
-            "name": "Восстал Великий Ветер"
+            "id": "winds_of_change",
+            "name": "Восстал Великий Ветер",
+            "description": "Прохождение пролога."
         },
         {
-            "id": "age_of_strife",
-            "name": "Эпоха Великой Смуты"
+            "id": "the_era_of_great_strife",
+            "name": "Эпоха Великой Смуты",
+            "description": "Начните свою легенду в эти неспокойные времена."
         },
         {
-            "id": "imperial_will_unfathomable",
-            "name": "Воля Государя непостижима"
+            "id": "unfathomable_mind_of_the_aged_emperor",
+            "name": "Воля Государя непостижима",
+            "description": "Убедите императора и спасите дворец Юй."
         },
         {
-            "id": "master_strategist",
-            "name": "Мастер хитроумных замыслов"
+            "id": "resourceful",
+            "name": "Мастер хитроумных замыслов",
+            "description": "Найдите способы уцелеть подле старого императора."
         },
         {
-            "id": "drifting_like_duckweed",
-            "name": "Ряска под дождём"
+            "id": "rain_beating_on_duckweed",
+            "name": "Ряска под дождём",
+            "description": "Прохождение главы 1."
         },
         {
-            "id": "mandate_of_heaven",
-            "name": "Избран Небесным Мандатом"
+            "id": "destined_by_heaven",
+            "name": "Избран Небесным Мандатом",
+            "description": "Получите благословение небес при восстании и станьте дитям удачи."
         },
         {
-            "id": "unyielding_spirit",
-            "name": "Несгибаемый дух"
+            "id": "unyielding_bones",
+            "name": "Несгибаемый дух",
+            "description": "Можно проиграть битву, но не честь. Даже дракону на мелководье не стоит терпеть насмешки Сыкун Чжэна."
         },
         {
-            "id": "bold_remonstrance",
-            "name": "Смелость говорить истину"
+            "id": "courage_to_speak_frankly",
+            "name": "Смелость говорить истину",
+            "description": "Вы всегда прямодушны и никогда не притворяетесь невеждой, даже перед лицом государя."
         },
         {
-            "id": "dragon_into_the_sea",
-            "name": "Дракон входит в море"
+            "id": "the_trials_begin",
+            "name": "Дракон входит в море",
+            "description": "Прохождение главы 2."
         },
         {
-            "id": "weight_of_rites_and_affection",
-            "name": "И долг, и чувства равно важны"
+            "id": "a_gift_as_weighty_as_the_affection_behind_it",
+            "name": "И долг, и чувства равно важны",
+            "description": "Преподнесите дар, который тронет сердце Цзу Куня."
         },
         {
-            "id": "martial_master",
-            "name": "Великий мастер воинского пути"
+            "id": "kung_fu_master",
+            "name": "Великий мастер воинского пути",
+            "description": "Одолейте Цзу Юэ в поединке."
         },
         {
-            "id": "hidden_dragon_emerges",
-            "name": "Скрытый дракон выходит в море"
+            "id": "from_depths_to_the_deep",
+            "name": "Скрытый дракон выходит в море",
+            "description": "Убедите императора позволить вам сопровождать Цзу Куня на север."
         },
         {
-            "id": "dignity_preserved",
-            "name": "Сохранить достоинство"
+            "id": "decency",
+            "name": "Сохранить достоинство",
+            "description": "Ваша гордыня привела лишь к тому, что Цзу Юэ оборвал вашу \"достойную\" жизнь."
         },
         {
-            "id": "blade_unsheathed",
-            "name": "Испытать острие клинка"
+            "id": "sharpening_the_blade",
+            "name": "Испытать острие клинка",
+            "description": "Прохождение главы 3."
         },
         {
-            "id": "counter_within_scheme",
-            "name": "Обратить замысел против замысла"
+            "id": "turning_the_tables",
+            "name": "Обратить замысел против замысла",
+            "description": "Плывите по течению и используйте коварство Ши Лана против него самого."
         },
         {
-            "id": "emperor_xuanwu",
-            "name": "Император Сюаньу-ди"
+            "id": "emperor_wu_of_xuan",
+            "name": "Император Сюаньу-ди",
+            "description": "Провал внезапной атаки — оказавшись в плену, станцуйте для Ши Лана."
         },
         {
-            "id": "break_the_mountain",
-            "name": "Проломить гору"
+            "id": "break_mountains_and_valleys",
+            "name": "Проломить гору",
+            "description": "Прохождение главы 4."
         },
         {
-            "id": "court_jester_supreme",
-            "name": "Мастер придворного остроумия"
+            "id": "master_of_comic_banter",
+            "name": "Мастер придворного остроумия",
+            "description": "Раскройте все уловки Ши Лана до начала его генерального наступления."
         },
         {
             "id": "fickle_hearts",
-            "name": "Сердца людские холодны"
+            "name": "Сердца людские холодны",
+            "description": "В час великой нужды Лю Дадао всё же ставит свою жизнь превыше всего."
         },
         {
-            "id": "fight_to_the_death",
-            "name": "Сражаться до смерти"
+            "id": "struggling_desperately",
+            "name": "Сражаться до смерти",
+            "description": "Покорите Лю Дадао своим обаянием."
         },
         {
-            "id": "reborn_from_ruin",
-            "name": "Возрождение из руин"
+            "id": "rebirth_through_destruction",
+            "name": "Возрождение из руин",
+            "description": "Удержите Иян и добейтесь победы."
         },
         {
-            "id": "ask_the_mandate",
-            "name": "Вопрошать Небесный Мандат"
+            "id": "inquiring_of_heavens_mandate",
+            "name": "Вопрошать Небесный Мандат",
+            "description": "Прохождение главы 5."
         },
         {
-            "id": "principled_choice",
-            "name": "Делать должное и отказываться от лишнего"
+            "id": "to_act_and_to_refrain_from_acting",
+            "name": "Делать должное и отказываться от лишнего",
+            "description": "Успешное восстание без лишних жертв среди простого люда."
         },
         {
             "id": "between_north_and_south",
-            "name": "Между Севером и Югом"
+            "name": "Между Севером и Югом",
+            "description": "Расколите мир, создав триединое равновесие сил в этот смутный час."
         },
         {
-            "id": "emperor_xuanyang",
-            "name": "Император Сюаньян-ди"
+            "id": "emperor_yang_of_xuan",
+            "name": "Император Сюаньян-ди",
+            "description": "Какова бы ни была судьба мира, из трех тысяч вод ты пьешь лишь одну чашу."
         },
         {
-            "id": "heavenly_ordination",
-            "name": "Принявший веление Неба"
+            "id": "receiving_the_mandate_in_response_to_heaven",
+            "name": "Принявший веление Неба",
+            "description": "Взойдите на престол и объявите об этом всему миру."
         },
         {
-            "id": "vision_of_peace",
-            "name": "Стремление к Великому миру"
+            "id": "the_record_of_great_peace",
+            "name": "Стремление к Великому миру",
+            "description": "Прохождение главы 6."
         },
         {
-            "id": "emperor_xuanyou",
-            "name": "Император Сюань Ю-ди"
+            "id": "emperor_you_of_xuan",
+            "name": "Император Сюань Ю-ди",
+            "description": "В плену красоты и праздности, забросив дела государственные до самого конца."
         },
         {
-            "id": "emperor_xuanzong",
-            "name": "Император Сюаньцзун-ди"
+            "id": "emperor_zong_of_xuan",
+            "name": "Император Сюаньцзун-ди",
+            "description": "Очнитесь от дурмана вина и плотских утех, отрекшись от трона в пользу наследника."
         },
         {
-            "id": "mistrust_and_abandon",
-            "name": "Подозревать и не использовать"
+            "id": "never_suspect_the_man_you_need",
+            "name": "Подозревать и не использовать",
+            "description": "Вопреки чужим словам, продолжайте доверять Чжу Юаньчжи."
         },
         {
-            "id": "deposed_emperor_xuan",
-            "name": "Свергнутый император Сюань"
+            "id": "emperor_fei_of_xuan",
+            "name": "Свергнутый император Сюань",
+            "description": "Минутная слабость в прошлом принесла горькие плоды."
         },
         {
-            "id": "emperor_xuanshang",
-            "name": "Император Сюаньшан-ди"
+            "id": "emperor_shang_of_xuan",
+            "name": "Император Сюаньшан-ди",
+            "description": "Среди всех владык прошлого и настоящего нет никого упрямее вас."
         },
         {
-            "id": "longwu_reform",
-            "name": "Реформы Лунъу"
+            "id": "longwu_reformation",
+            "name": "Реформы Лунъу",
+            "description": "Перемены неба не страшны, заветам предков нет нужды следовать, молвы людской не стоит бояться."
         },
         {
-            "id": "xunyang_campaign",
-            "name": "Поход из Сюняна"
+            "id": "xunyang_ventures_beyond_the_frontier",
+            "name": "Поход из Сюняна",
+            "description": "Цветы, что не распустятся, и старые друзья, которых не забыть."
         },
         {
-            "id": "favor_for_all",
-            "name": "Милость, дарованная всем"
+            "id": "showering_favors_equally",
+            "name": "Милость, дарованная всем",
+            "description": "Вешние ночи коротки, солнце встает высоко... С тех пор государь не спешит на утренние советы."
         },
         {
-            "id": "all_under_heaven",
-            "name": "Единство Поднебесной"
+            "id": "all_under_heaven_unified",
+            "name": "Единство Поднебесной",
+            "description": "Прохождение главы 7."
         },
         {
-            "id": "emperor_xuanhuai",
-            "name": "Император Сюаньхуай-ди"
+            "id": "emperor_huai_of_xuan",
+            "name": "Император Сюаньхуай-ди",
+            "description": "Реформы провалены — найдите в себе силы вовремя отступить."
         },
         {
-            "id": "emperor_xuanai",
-            "name": "Император Сюаньай-ди"
+            "id": "emperor_ai_of_xuan",
+            "name": "Император Сюаньай-ди",
+            "description": "Поставьте на карту судьбу страны и идите до конца, даже если реформы терпят крах."
         },
         {
-            "id": "emperor_xuankang",
-            "name": "Император Сюанькан-ди"
+            "id": "emperor_kang_of_xuan",
+            "name": "Император Сюанькан-ди",
+            "description": "Стремитесь к стабильности во всём, чтобы оставить добрую память в истории."
         },
         {
-            "id": "emperor_xuanzhuang",
-            "name": "Император Сюаньчжуан-ди"
+            "id": "emperor_zhuang_of_xuan",
+            "name": "Император Сюаньчжуан-ди",
+            "description": "Промедление в решениях рождает новые беды."
         },
         {
-            "id": "emperor_xuanming",
-            "name": "Император Сюаньмин-ди"
+            "id": "emperor_ming_of_xuan",
+            "name": "Император Сюаньмин-ди",
+            "description": "Никакого мира через браки, никакой дани — верните утраченные земли и возродите Срединное царство."
         },
         {
-            "id": "emperor_xuanjing",
-            "name": "Император Сюаньцзин-ди"
+            "id": "emperor_jing_of_xuan",
+            "name": "Император Сюаньцзин-ди",
+            "description": "Неясность в престолонаследии ведет к беде, и империя гибнет во втором поклонении."
         },
         {
-            "id": "emperor_xuancheng",
-            "name": "Император Сюаньчэн-ди"
+            "id": "emperor_cheng_of_xuan",
+            "name": "Император Сюаньчэн-ди",
+            "description": "В императорской семье чувствам места нет."
         },
         {
-            "id": "emperor_xuanwen",
-            "name": "Император Сюаньвэнь-ди"
+            "id": "emperor_wen_of_xuan",
+            "name": "Император Сюаньвэнь-ди",
+            "description": "Очистите мир от скверны и покорите все земли под солнцем."
         },
         {
-            "id": "emperor_xuanguangwu",
-            "name": "Император Сюань Гуанъу-ди"
+            "id": "emperor_guang_wu_of_xuan",
+            "name": "Император Сюань Гуанъу-ди",
+            "description": "Смирение четырех морей и поклонение десяти тысяч народов."
         },
         {
-            "id": "emperor_xuanzhao",
-            "name": "Император Сюаньчжао-ди"
+            "id": "emperor_zhao_of_xuan",
+            "name": "Император Сюаньчжао-ди",
+            "description": "В делах мира всё переплетено, и не всегда всё сбывается по воле человека."
         },
         {
-            "id": "yan_never_returns",
-            "name": "Янь не возвращается"
+            "id": "no_way_home",
+            "name": "Янь не возвращается",
+            "description": "Десять лет меж жизнью и смертью — бездонная пропасть... Не думаешь, но и забыть не в силах."
         },
         {
-            "id": "thousand_sails_passed",
-            "name": "Мимо прошли тысячи парусов"
+            "id": "when_the_last_sail_vanishes",
+            "name": "Мимо прошли тысячи парусов",
+            "description": "Три тысячи миров, бесчисленные возможности — император узрел их все."
         }
     ]
 }

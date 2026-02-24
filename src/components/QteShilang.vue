@@ -1,5 +1,5 @@
 <!--
-  QteShilang.vue - 石狼舞剑特殊QTE
+  QteShilang.vue - 石狼特殊QTE
   10 个在不同时间点出现的连续滑动QTE，完成至少 6 个算成功。
 
   时序（ms）：
@@ -12,8 +12,8 @@
 -->
 
 <script setup lang="ts">
-import { useMediaStore } from "@/stores/media";
 import { ref, watch } from "vue";
+import { useMediaStore } from "../stores/media";
 import QteSlider from "./QteSlider.vue";
 
 const props = defineProps<{
