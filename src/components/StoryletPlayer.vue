@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { sleep } from "@/utils/sleep";
 import videojs from "video.js";
 import type Player from "video.js/dist/types/player";
 import { computed, onMounted, onUnmounted, reactive, ref, shallowRef, watch } from "vue";
@@ -17,6 +16,8 @@ import type { playerInstructionType } from "../types/playerInstructionType";
 import type { playStateType } from "../types/playStateType";
 import type { valueChangeType } from "../types/valueChangeType";
 import { convertToChapterId, convertToStoryletId } from "../utils/converter";
+import { sleep } from "../utils/sleep";
+import { toStreamUrl } from "../utils/streamUrl";
 import ChapterTitle from "./ChapterTitle.vue";
 import Ending from "./Ending.vue";
 import LoopButton from "./LoopButton.vue";
@@ -157,7 +158,7 @@ const videoUrl = computed(() => {
   if (!props.instruction) return "";
   const chapterId = convertToChapterId(props.instruction.videoId);
   const fileName = props.instruction.videoId;
-  return `/chapters/videos/chapter${chapterId}/${fileName}.mp4`;
+  return toStreamUrl(`/chapters/videos/chapter${chapterId}/${fileName}.mp4`);
 });
 
 /**
@@ -262,7 +263,7 @@ const endingVideoUrl = computed(() => {
   if (!endingType) return "";
   const chapterId = convertToChapterId(props.instruction.videoId);
   const storyletId = convertToStoryletId(props.instruction.videoId);
-  return `chapters/endings/chapter${chapterId}/${storyletId}.webm`;
+  return toStreamUrl(`/chapters/endings/chapter${chapterId}/${storyletId}.webm`);
 });
 
 // 章节动画显示条件
@@ -362,6 +363,13 @@ onMounted(() => {
   player.on("seeked", handleSeeked);
   player.on("error", handleError);
   player.on("texttrackchange", handleTextTrackChange);
+
+  // Android WebView 中 video.js 会拦截 touch 事件导致 @click 不冒泡，
+  // 通过 video.js API 直接监听 touchend 来触发控制栏切换
+  player.on("touchend", (e: Event) => {
+    e.preventDefault();
+    toggleControls();
+  });
 
   // 监听字幕轨道列表变化，同步更新 video.js 中的 track
   watch(subtitleTracks, (tracks) => {
@@ -532,8 +540,10 @@ function handleError(_event: unknown) {
 
   const currentTime = playerRef.value.currentTime();
 
-  // 网络错误时尝试重新加载
-  if (playerRef.value.error()?.code === 2) {
+  const errorCode = playerRef.value.error()?.code;
+
+  // 网络错误(2) 或 解码错误(3) 时尝试重新加载
+  if (errorCode === 2 || errorCode === 3) {
     playerRef.value.error(undefined);
     playerRef.value.pause();
     playerRef.value.load();
@@ -946,7 +956,7 @@ watch(
         </Transition>
 
         <!-- 章节动画类型 -->
-        <Transition>
+        <Transition name="fade">
           <ChapterTitle
             v-if="play && actionGroup.type === 'animation'"
             v-show="showChapterAnimation"
@@ -958,7 +968,7 @@ watch(
         </Transition>
 
         <!-- 结局类型 -->
-        <Transition>
+        <Transition name="fade">
           <Ending
             v-if="play && showEndingScreen && actionGroup.type === 'ending'"
             :title="endingTitle"
@@ -1006,6 +1016,11 @@ watch(
 /* 鼠标隐藏状态 */
 .mouse-hidden {
   cursor: none;
+}
+
+/* 容器裁剪溢出内容（数值变化提示、角色介绍等） */
+.storylet-player {
+  overflow: hidden;
 }
 
 /* 播放器内所有直接子元素铺满 */
@@ -1219,6 +1234,25 @@ watch(
 
 .questionnaire .center > :not(.qte-wrapper) {
   pointer-events: auto;
+}
+
+/* 过渡动画 */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.transition-opacity {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.opacity-0 {
+  opacity: 0;
 }
 
 /* 数值变化提示 */

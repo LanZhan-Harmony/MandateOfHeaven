@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { useSaveStore } from "../stores/save";
+import { getCurrentWindow } from "@tauri-apps/api/window";
+import { computed, onMounted, onUnmounted } from "vue";
+import { useI18n } from "vue-i18n";
 import BarButton from "../components/BarButton.vue";
 import MenuButton from "../components/MenuButton.vue";
 import router from "../router";
 import { useMediaStore } from "../stores/media";
-import { onMounted, computed, onUnmounted } from "vue";
-import { useI18n } from "vue-i18n";
+import { useSaveStore } from "../stores/save";
 
 const { t } = useI18n(); // t 用于获取单条文本翻译
 const mediaStore = useMediaStore();
@@ -45,6 +46,14 @@ async function navigateTo(path: string) {
   await mediaStore.setEffectAudioAsync("音效3");
   await router.push(path);
 }
+
+async function exitGame() {
+  if ((window as any).__TAURI_INTERNALS__) {
+    await getCurrentWindow().close();
+  } else {
+    window.close();
+  }
+}
 </script>
 <template>
   <div class="container">
@@ -59,7 +68,7 @@ async function navigateTo(path: string) {
           @click="navigateTo('/player')" />
         <MenuButton :text="$t('menu.chapterSelection')" @click="navigateTo('/chapters')" />
         <MenuButton :text="$t('menu.portfolios')" @click="navigateTo('/portfolios')" />
-        <MenuButton :text="$t('menu.exitGame')" @click="" />
+        <MenuButton :text="$t('menu.exitGame')" @click="exitGame" />
       </div>
 
       <!-- 底栏 -->

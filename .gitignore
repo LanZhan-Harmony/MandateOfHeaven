@@ -35,5 +35,5 @@ coverage
 __screenshots__/
 
 # Ignore public/videos and its contents
-/public/videos/
-/public/videos/**
+/public/**/videos/
+/src-tauri/gen/android/app/src/main/assets/

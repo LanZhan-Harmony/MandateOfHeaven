@@ -47,7 +47,7 @@ async function enterChapter() {
 <template>
   <div class="container">
     <img class="background" src="/common/images/章节页背景.webp" />
-    <PageNavButton path="/"/>
+    <PageNavButton path="/" />
 
     <div class="chapter-list">
       <ChapterLineItem

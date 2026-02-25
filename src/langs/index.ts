@@ -9,6 +9,7 @@ const endingFiles = import.meta.glob("./endings/*.json", { eager: true, import: 
 const achievementFiles = import.meta.glob("./achievements/*.json", { eager: true, import: "default" });
 const introductionsFiles = import.meta.glob("./introductions/*.json", { eager: true, import: "default" });
 const valueChangesFiles = import.meta.glob("./valueChanges/*.json", { eager: true, import: "default" });
+const creditsFiles = import.meta.glob("./credits/*.json", { eager: true, import: "default" });
 
 const messages: Record<string, any> = {};
 
@@ -35,6 +36,7 @@ mergeMessages(endingFiles, "endings");
 mergeMessages(achievementFiles, "achievements");
 mergeMessages(introductionsFiles, "introductions");
 mergeMessages(valueChangesFiles, "valueChanges");
+mergeMessages(creditsFiles, "credits");
 
 // 获取初始语言：优先读取本地缓存，其次匹配浏览器语言
 const getInitialLocale = (): string => {

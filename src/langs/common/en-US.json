@@ -50,6 +50,13 @@
         "storyline": "Storyline",
         "enterNextChapter": "Enter Next Chapter"
     },
+    "credit": {
+        "creators": "Main Creators",
+        "productionUnits": "Production Units",
+        "castList": "Cast List",
+        "developer": "Web and Mobile Development",
+        "viewProject": "View Open Source Project"
+    },
     "dialog": {
         "helpSpoilerWarning": "Help may contain spoilers. Do you want to view it?",
         "letMeTryAgain": "Let Me Try Again",

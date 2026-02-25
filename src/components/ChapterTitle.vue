@@ -120,5 +120,6 @@ function preloadImages(urls: string[]) {
   bottom: 150px;
   right: 120px;
   scale: 1.4;
+  pointer-events: auto;
 }
 </style>

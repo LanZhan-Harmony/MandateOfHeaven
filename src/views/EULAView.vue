@@ -30,7 +30,7 @@ async function handleBack() {
   background-image: url(/common/images/关于.webp);
   background-position: 50%;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   width: 100%;
   height: 100%;
   padding: 3% 6%;
@@ -50,6 +50,12 @@ async function handleBack() {
 @media (max-height: 500px) {
   h1 {
     font-size: 24px;
+  }
+  .container {
+    padding: 1% 4%;
+  }
+  .nav {
+    margin-bottom: 12px;
   }
 }
 </style>

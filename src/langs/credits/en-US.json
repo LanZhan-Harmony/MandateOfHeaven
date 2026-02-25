@@ -1,0 +1,118 @@
+{
+    "credits": {
+        "creatorList": [
+            {
+                "role": "Director",
+                "names": [
+                    "Dihuang Jin"
+                ]
+            },
+            {
+                "role": "Executive Producer",
+                "names": [
+                    "Zhao Zhicheng",
+                    "Huang Jindi",
+                    "Ding Shenghao"
+                ]
+            },
+            {
+                "role": "Studio",
+                "names": [
+                    "Muyan Studio"
+                ]
+            }
+        ],
+        "companyList": [
+            "H&R Century (Beijing) Information Technology Co., Ltd.",
+            "FLEXVISION PTE.LTD.",
+            "Shanghai Muyan Network Technology Co., Ltd.",
+            "Shanghai Youyi Technology Co., Ltd."
+        ],
+        "castListItems": [
+            {
+                "role": "Sikong Yao",
+                "name": "Sun Rui"
+            },
+            {
+                "role": "Xie Ruolan",
+                "name": "Pan Mingyun"
+            },
+            {
+                "role": "Chen Waner",
+                "name": "Liu Xinnian"
+            },
+            {
+                "role": "Zu Yue",
+                "name": "Yang Ning"
+            },
+            {
+                "role": "Liu Nian",
+                "name": "Xiang Weijing"
+            },
+            {
+                "role": "Sikong Jing",
+                "name": "Yan Yilong"
+            },
+            {
+                "role": "Sikong Zheng",
+                "name": "Ouyang Weixi"
+            },
+            {
+                "role": "Sikong Sheng",
+                "name": "Lu Hao"
+            },
+            {
+                "role": "Sikong Xu",
+                "name": "Bao Lining"
+            },
+            {
+                "role": "Sikong Yu",
+                "name": "Yang Xiaoting"
+            },
+            {
+                "role": "Empress Li",
+                "name": "Xu Nuo"
+            },
+            {
+                "role": "Zu Kun",
+                "name": "Gao Wenjiong"
+            },
+            {
+                "role": "Xie Xuan",
+                "name": "Ke Bolun"
+            },
+            {
+                "role": "Zhu Yuanzhi",
+                "name": "Li Long"
+            },
+            {
+                "role": "Chen Ying",
+                "name": "Su Yi"
+            },
+            {
+                "role": "Chen Dao",
+                "name": "Cong Linyi"
+            },
+            {
+                "role": "Cao Biaozhi",
+                "name": "Fu Siye"
+            },
+            {
+                "role": "Shi Lang",
+                "name": "You Jingda"
+            },
+            {
+                "role": "Consort Liu",
+                "name": "Li Chuner"
+            },
+            {
+                "role": "Chu Huan",
+                "name": "Du Fan"
+            },
+            {
+                "role": "Murong Cui",
+                "name": "Qimeirenzhen"
+            }
+        ]
+    }
+}

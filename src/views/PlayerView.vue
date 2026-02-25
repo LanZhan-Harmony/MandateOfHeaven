@@ -16,8 +16,9 @@ const saveStore = useSaveStore();
 const playerStore = usePlayerStore();
 const { playerInstructions } = storeToRefs(playerStore);
 
-// 仅取前 3 条指令参与渲染
-const visibleInstructions = computed(() => playerInstructions.value.slice(0, 3));
+// 仅取前 N 条指令参与渲染（Android 硬件解码器有限，只保留 1 个以避免 MEDIA_ERR_DECODE）
+const isAndroid = /android/i.test(navigator.userAgent);
+const visibleInstructions = computed(() => playerInstructions.value.slice(0, isAndroid ? 1 : 3));
 
 const isPaused = ref(false);
 const { escape } = useMagicKeys();

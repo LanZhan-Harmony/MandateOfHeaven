@@ -98,10 +98,16 @@ export const useMediaStore = defineStore("media", () => {
   async function setEffectAudioAsync(name: string) {
     const effectAudio = new Audio(`/common/musics/${name}.opus`);
     effectAudio.volume = actualEffectVolume.value;
+    // 播放结束后立即释放资源，避免 Audio 对象泄漏
+    effectAudio.onended = () => {
+      effectAudio.onended = null;
+      effectAudio.src = "";
+    };
     try {
       await effectAudio.play();
     } catch (error) {
       console.error("无法播放音效:", error);
+      effectAudio.src = "";
     }
   }
 

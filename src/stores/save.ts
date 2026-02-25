@@ -1,7 +1,7 @@
-import { endings } from "@/assets/data/endings.js";
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import { chapterEndingVideoIds } from "../assets/data/chapterEndingVideos.js";
+import { endings } from "../assets/data/endings.js";
 import { valueChangeVideoIds } from "../assets/data/valueChangeVideos.js";
 import videos from "../assets/data/videos.json";
 import type { actionGroupType, uiButtonActionGroupType } from "../types/actionGroupType.js";
@@ -673,24 +673,6 @@ export const useSaveStore = defineStore("save", () => {
     if (playerStore.playerInstructions.length === 0) {
       playerStore.currentPlayerInstructionId = -1;
     }
-  }
-
-  function logAllStates(): void {
-    console.log("currentSave:", currentSave.value);
-    console.log("currentStoryletId:", currentStoryletId.value);
-    console.log("visitedStoryletIds:", visitedStorylets.value);
-    console.log("selectedActions:", selectedActions.value);
-    console.log("rewindableVideos:", rewindableVideos.value);
-    console.log("videosOnCurrentTimeline:", videosOnCurrentTimeline.value);
-    console.log("chapterUnlocked:", chapterUnlocked.value);
-    console.log("chapterProgress:", chapterProgress.value);
-    console.log("unplayedVideosPerChapter:", unplayedVideosPerChapter.value);
-    console.log("chapterCurrentVideo:", chapterCurrentVideo.value);
-    console.log("values:", values.value);
-    console.log("playerInstructions:", playerStore.playerInstructions);
-    console.log("currentPlayerInstructionId:", playerStore.currentPlayerInstructionId);
-    console.log("fullyWatchedVideos:", playerStore.fullyWatchedVideos);
-    console.log("specialCounter:", playerStore.specialCounter);
   }
 
   // ----------------------------------

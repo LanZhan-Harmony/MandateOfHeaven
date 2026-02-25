@@ -1,46 +1,17 @@
 <script setup lang="ts">
+import { computed } from "vue";
+import { useI18n } from "vue-i18n";
 import ImageButton from "../components/ImageButton.vue";
 import router from "../router";
 import { useMediaStore } from "../stores/media";
+import type { castType, creatorType } from "../types/creditType";
 
+const { tm } = useI18n();
 const mediaStore = useMediaStore();
 
-const creators = [
-  { role: "导演", names: ["帝皇今"] },
-  { role: "出品人", names: ["赵枳程", "黄金笛", "丁盛豪"] },
-  { role: "工作室", names: ["木焱工作室"] },
-];
-
-const companies = [
-  "欢瑞世纪(北京)信息科技有限公司",
-  "FLEXVISION PTE.LTD.",
-  "上海木焱网络科技有限公司",
-  "上海柚衣科技有限公司",
-];
-
-const cast = [
-  { role: "司空耀", name: "孙睿" },
-  { role: "谢若兰", name: "潘铭允" },
-  { role: "陈婉儿", name: "刘昕念" },
-  { role: "祖月", name: "杨宁" },
-  { role: "刘念", name: "向薇静" },
-  { role: "司空景", name: "闫艺泷" },
-  { role: "司空正", name: "欧阳卫熹" },
-  { role: "司空盛", name: "鲁昊" },
-  { role: "司空旭", name: "鲍李宁" },
-  { role: "司空钰", name: "杨晓婷" },
-  { role: "皇后李氏", name: "许诺" },
-  { role: "祖坤", name: "高文炯" },
-  { role: "谢玄", name: "柯博伦" },
-  { role: "朱元之", name: "李龙" },
-  { role: "陈应", name: "苏翊" },
-  { role: "陈导", name: "丛林一" },
-  { role: "曹表之", name: "付思液" },
-  { role: "石狼", name: "尤景达" },
-  { role: "柳才人", name: "李纯洱" },
-  { role: "楚桓", name: "杜梵" },
-  { role: "慕容崔", name: "齐美仁真" },
-];
+const creators = computed(() => tm("credits.creatorList") as creatorType[]);
+const companies = computed(() => tm("credits.companyList") as string[]);
+const cast = computed(() => tm("credits.castListItems") as castType[]);
 
 async function handleBack() {
   await mediaStore.setEffectAudioAsync("音效7");
@@ -63,7 +34,7 @@ async function handleBack() {
       <div class="scroll-container">
         <div class="scroll-content">
           <section class="section">
-            <h2>主创</h2>
+            <h2>{{ $t("credit.creators") }}</h2>
             <div v-for="(item, index) in creators" :key="'creator-' + index" class="credit-item">
               <span class="role">{{ item.role }}</span>
               <span class="names">{{ item.names.join(" / ") }}</span>
@@ -71,14 +42,14 @@ async function handleBack() {
           </section>
 
           <section class="section">
-            <h2>出品单位</h2>
+            <h2>{{ $t("credit.productionUnits") }}</h2>
             <div v-for="(company, index) in companies" :key="'company-' + index" class="company-item">
               {{ company }}
             </div>
           </section>
 
           <section class="section">
-            <h2>演员表</h2>
+            <h2>{{ $t("credit.castList") }}</h2>
             <div class="cast-grid">
               <div v-for="(actor, index) in cast" :key="'actor-' + index" class="cast-item">
                 <span class="role">{{ actor.role }}</span>
@@ -89,7 +60,7 @@ async function handleBack() {
           </section>
 
           <section class="section developer">
-            <h2>网页端及移动端制作</h2>
+            <h2>{{ $t("credit.developer") }}</h2>
             <div class="credit-item">
               <span class="names">LanZhan-Harmony</span>
             </div>
@@ -97,15 +68,15 @@ async function handleBack() {
               href="https://github.com/LanZhan-Harmony/MandateOfHeaven"
               target="_blank"
               class="project-link"
-              title="查看开源项目">
-              <span>查看开源项目</span>
+              :title="$t('credit.viewProject')">
+              <span>{{ $t("credit.viewProject") }}</span>
             </a>
           </section>
         </div>
         <!-- Duplicate content for seamless scrolling -->
         <div class="scroll-content" aria-hidden="true">
           <section class="section">
-            <h2>主创</h2>
+            <h2>{{ $t("credit.creators") }}</h2>
             <div v-for="(item, index) in creators" :key="'creator-dup-' + index" class="credit-item">
               <span class="role">{{ item.role }}</span>
               <span class="names">{{ item.names.join(" / ") }}</span>
@@ -113,14 +84,14 @@ async function handleBack() {
           </section>
 
           <section class="section">
-            <h2>出品单位</h2>
+            <h2>{{ $t("credit.productionUnits") }}</h2>
             <div v-for="(company, index) in companies" :key="'company-dup-' + index" class="company-item">
               {{ company }}
             </div>
           </section>
 
           <section class="section">
-            <h2>演员表</h2>
+            <h2>{{ $t("credit.castList") }}</h2>
             <div class="cast-grid">
               <div v-for="(actor, index) in cast" :key="'actor-dup-' + index" class="cast-item">
                 <span class="role">{{ actor.role }}</span>
@@ -131,12 +102,16 @@ async function handleBack() {
           </section>
 
           <section class="section developer">
-            <h2>网页端及移动端制作</h2>
+            <h2>{{ $t("credit.developer") }}</h2>
             <div class="credit-item">
               <span class="names">LanZhan-Harmony</span>
             </div>
-            <a href="https://github.com/LanZhan-Harmony/MandateOfHeaven" target="_blank" class="project-link">
-              <span>查看开源项目</span>
+            <a
+              href="https://github.com/LanZhan-Harmony/MandateOfHeaven"
+              target="_blank"
+              class="project-link"
+              :title="$t('credit.viewProject')">
+              <span>{{ $t("credit.viewProject") }}</span>
             </a>
           </section>
         </div>
@@ -150,7 +125,7 @@ async function handleBack() {
   background-image: url(/common/images/关于.webp);
   background-position: 50%;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   width: 100%;
   height: 100%;
   padding: 3% 6%;
@@ -201,7 +176,7 @@ async function handleBack() {
 .section {
   margin-bottom: 40px;
   width: 100%;
-  max-width: 600px;
+  max-width: 900px;
   text-align: center;
 }
 
@@ -245,14 +220,14 @@ h2 {
 .cast-item {
   display: flex;
   justify-content: space-between;
-  width: 300px;
+  width: 700px;
   margin-bottom: 8px;
   font-size: 25px;
 }
 
 .cast-item .role {
   text-align: right;
-  width: 100px;
+  width: 300px;
   color: #ccc;
 }
 
@@ -265,7 +240,7 @@ h2 {
 
 .cast-item .name {
   text-align: left;
-  width: 100px;
+  width: 300px;
 }
 
 .project-link {
@@ -297,6 +272,12 @@ h2 {
   }
   h2 {
     font-size: 24px;
+  }
+  .container {
+    padding: 1% 4%;
+  }
+  .nav {
+    margin-bottom: 12px;
   }
   .credit-item {
     font-size: 18px;

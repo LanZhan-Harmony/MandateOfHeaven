@@ -50,6 +50,13 @@
         "storyline": "物語線",
         "enterNextChapter": "次の章へ進む"
     },
+    "credit": {
+        "creators": "主なクリエイター",
+        "productionUnits": "制作ユニット",
+        "castList": "キャストリスト",
+        "developer": "ウェブ端末およびモバイル端末制作",
+        "viewProject": "オープンソースプロジェクトを表示"
+    },
     "dialog": {
         "helpSpoilerWarning": "自由探索はより高い達成感を得られます\n攻略を見ると没入体験に影響する可能性があります\nこのノードの攻略を閲覧しますか？",
         "letMeTryAgain": "もう一度試す",

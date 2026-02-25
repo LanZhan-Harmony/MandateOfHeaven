@@ -7,12 +7,12 @@ const emit = defineEmits<{
 <template>
   <div class="help">
     <div class="nav">
-      <h2>{{ $t("storyline.storylineHelp") }}</h2>
+      <h1>{{ $t("storyline.storylineHelp") }}</h1>
       <div class="separator"></div>
       <ImageButton
         default-icon="/common/images/关闭.webp"
         highlight-icon="/common/images/关闭高亮.webp"
-        :side-length="32"
+        :side-length="40"
         :mobile-side-length="24"
         @click="emit('close')" />
     </div>
@@ -32,7 +32,7 @@ const emit = defineEmits<{
   background-size: cover;
   width: 100%;
   height: 100%;
-  padding: 5%;
+  padding: 3% 5%;
   display: flex;
   flex-direction: column;
 }
@@ -77,5 +77,17 @@ const emit = defineEmits<{
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #b5a390;
+}
+
+@media (max-height: 500px) {
+  h1 {
+    font-size: 24px;
+  }
+  .help {
+    padding: 1% 4%;
+  }
+  .nav {
+    margin-bottom: 12px;
+  }
 }
 </style>

@@ -125,15 +125,7 @@ async function loadStoryline(chapterId: number) {
   await new Promise((resolve) => setTimeout(resolve, 300));
 
   // 清理旧控制器与节点数据
-  if (dragController) {
-    dragController.removeEventListener("dragstart", handleDragStart);
-    dragController.removeEventListener("dragend", handleDragEnd);
-    dragController.stop();
-    dragController = null;
-  }
-  nodesWithPreview.value = [];
-  nodesWithoutPreview.value = [];
-  otherAnchors.value = [];
+  releaseResources();
 
   if (!boundingBoxRef.value || !storylineRef.value || !nodesRef.value || !backgroundRef.value) {
     throw new Error("refs not ready");
@@ -322,24 +314,25 @@ function optimizeSvgRendering(svgDoc: Document) {
 }
 
 /**
- * 简单的图片预加载
+ * 简单的图片预加载（使用 link preload 避免创建游离 Image 对象）
  * @param urls 需要预加载的图片 URL 数组
  */
 function preloadImages(urls: string[]) {
   for (const url of urls) {
-    const img = new Image();
-    img.src = url;
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.as = "image";
+    link.href = url;
+    document.head.appendChild(link);
+    // 浏览器开始预加载后即可移除 link 元素
+    requestAnimationFrame(() => link.remove());
   }
 }
 
 /**
- * 清理当前地图数据和控制器（不含淡出延迟，由 loadStoryline 统一管理）
+ * 释放地图相关的大内存资源（同步，可安全用于 onUnmounted）
  */
-async function cleanup() {
-  isMapReady.value = false;
-  await nextTick();
-  await new Promise((resolve) => setTimeout(resolve, 300));
-
+function releaseResources() {
   if (dragController) {
     dragController.removeEventListener("dragstart", handleDragStart);
     dragController.removeEventListener("dragend", handleDragEnd);
@@ -350,6 +343,21 @@ async function cleanup() {
   nodesWithPreview.value = [];
   nodesWithoutPreview.value = [];
   otherAnchors.value = [];
+
+  // 释放 SVG DOM 内容
+  if (backgroundRef.value) {
+    backgroundRef.value.innerHTML = "";
+  }
+}
+
+/**
+ * 清理当前地图数据和控制器（带淡出动画，用于章节切换）
+ */
+async function cleanup() {
+  isMapReady.value = false;
+  await nextTick();
+  await new Promise((resolve) => setTimeout(resolve, 300));
+  releaseResources();
 }
 
 // ========== 拖拽事件处理 ==========
@@ -519,7 +527,11 @@ onMounted(async () => {
 });
 
 onUnmounted(() => {
-  cleanup();
+  // 必须同步清理，不能用 async cleanup()（其中的 await 会在组件已销毁后执行）
+  isMapReady.value = false;
+  releaseResources();
+  // 释放模块级 SVG 文本缓存，避免离开页面后仍占用内存
+  svgCache.clear();
 });
 </script>
 <template>

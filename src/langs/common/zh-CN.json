@@ -50,6 +50,13 @@
         "storyline": "剧情线",
         "enterNextChapter": "进入下一章"
     },
+    "credit": {
+        "creators": "主创",
+        "productionUnits": "出品单位",
+        "castList": "演员表",
+        "developer": "网页端及移动端制作",
+        "viewProject": "查看开源项目"
+    },
     "dialog": {
         "helpSpoilerWarning": "自由探索可以得到更高的成就感\n查看攻略可能会影响沉浸体验\n您是否确定要查看该节点过关攻略?",
         "letMeTryAgain": "我再试试",

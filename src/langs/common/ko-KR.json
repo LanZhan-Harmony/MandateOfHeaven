@@ -50,6 +50,13 @@
         "storyline": "스토리라인",
         "enterNextChapter": "다음 챕터로 이동"
     },
+    "credit": {
+        "creators": "주요 제작진",
+        "productionUnits": "제작 단위",
+        "castList": "배우 목록",
+        "developer": "웹 및 모바일 제작",
+        "viewProject": "오픈소스 프로젝트 보기"
+    },
     "dialog": {
         "helpSpoilerWarning": "자유 탐색은 더 큰 성취감을 줍니다\n공략을 보면 몰입감이 떨어질 수 있습니다\n해당 노드의 공략을 확인하시겠습니까?",
         "letMeTryAgain": "다시 시도하기",
