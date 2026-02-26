@@ -6,7 +6,7 @@
   <img src="./preview/1.png" alt="江山北望" width="100%" style="border-radius: 8px;"/>
 </div>
 
-**当前状态**：🚀 开发中...
+**当前状态**：🚀 基本完成
 
 ---
 

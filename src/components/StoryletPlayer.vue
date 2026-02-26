@@ -231,10 +231,7 @@ const characterIntro = computed(() => {
  * 是否可以跳过（快进到结尾）
  * 第0、1章始终可跳过，其他章节需要已观看过
  */
-const canSkip = computed(() => {
-  const chapterId = convertToChapterId(props.instruction.videoId);
-  return chapterId === 0 || chapterId === 1 || playerStore.watchedVideos.includes(props.instruction.videoId);
-});
+const canSkip = computed(() => playerStore.watchedVideos.includes(props.instruction.videoId));
 
 // 显示时间（用于进度条）
 const displayTime = computed(() => {
@@ -1317,10 +1314,6 @@ watch(
   justify-content: center;
   align-items: center;
   padding: 10px;
-  font-family:
-    Source Han Serif VF,
-    serif;
-  font-size: 32px;
   display: flex;
   position: absolute;
   top: 10%;
@@ -1338,8 +1331,8 @@ watch(
 }
 
 .character-intro .name {
-  font-size: 24px;
-  font-weight: 900;
+  font-size: 30px;
+  font-weight: 700;
 }
 
 .character-intro .separator {
@@ -1353,8 +1346,8 @@ watch(
   text-align: left;
   white-space: pre-wrap;
   max-width: 300px;
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 600;
   line-height: 150%;
 }
 

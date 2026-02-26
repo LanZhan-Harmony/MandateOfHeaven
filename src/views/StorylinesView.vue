@@ -134,11 +134,20 @@ async function loadStoryline(chapterId: number) {
   mediaStore.pauseLoopAudio();
 
   // 并行启动：SVG 预取 + BGM 切换，与淡出动画（300ms）同步进行
-  const bgmKey = chapterId <= 2 ? "chapter012_bgm" : chapterId <= 5 ? "chapter345_bgm" : "chapter67_bgm";
   const svgTextPromise = fetchSvgText(chapterId);
+
   // BGM 加载失败不应阻塞地图渲染
-  mediaStore.setBGMAudioAsync(bgmKey).catch((e) => console.warn("[Storyline] BGM load failed (non-critical):", e));
-  console.log(`[Storyline] Loading chapter ${chapterId}...`);
+  try {
+    if (chapterId <= 2) {
+      mediaStore.setBGMAudioAsync("chapter012_bgm");
+    } else if (chapterId <= 5) {
+      mediaStore.setBGMAudioAsync("chapter345_bgm", 25);
+    } else {
+      mediaStore.setBGMAudioAsync("chapter67_bgm", 20);
+    }
+  } catch (e) {
+    console.error("[Storyline] Failed to set BGM:", e);
+  }
 
   // 等待淡出过渡完成，同时以上请求已在后台运行
   await nextTick();

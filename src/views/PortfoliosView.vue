@@ -33,7 +33,7 @@ const unlockedStories = computed(() => {
 });
 
 onMounted(async () => {
-  await mediaStore.setBGMAudioAsync("character_bgm", 3);
+  await mediaStore.setBGMAudioAsync("character_bgm", 4);
   window.addEventListener("keydown", handleKeydown);
 });
 

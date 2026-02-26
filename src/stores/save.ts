@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import { chapterEndingVideoIds } from "../assets/data/chapterEndingVideos.js";
 import { endings } from "../assets/data/endings.js";
 import { valueChangeVideoIds } from "../assets/data/valueChangeVideos.js";
@@ -11,6 +11,7 @@ import { apiClient } from "../utils/apiClient.js";
 import { clamp, randomChance } from "../utils/calc.js";
 import { deepArrayEquals } from "../utils/comparer.js";
 import { convertToChapterId, convertToStoryletId, convertToVideoId } from "../utils/converter.js";
+import { useAchievementStore } from "./achievement.js";
 import { usePlayerStore } from "./player.js";
 
 // =============================
@@ -105,8 +106,8 @@ export {
  * 播放队列的原始状态由 usePlayerStore 持有。
  */
 export const useSaveStore = defineStore("save", () => {
-  // 依赖注入：在 store setup 顶层获取 player store（无循环模块依赖）
   const playerStore = usePlayerStore();
+  const achievementStore = useAchievementStore();
 
   // ----------------------------------
   // 响应式状态
@@ -114,6 +115,9 @@ export const useSaveStore = defineStore("save", () => {
 
   /** 当前存档（从服务器获取） */
   const currentSave = ref<archiveType | null>(null);
+
+  /** 当前存档 ID，持久化到 localStorage */
+  const saveId = ref<number>(parseInt(localStorage.getItem("saveId") ?? "0"));
 
   /** 当前所处的 storylet ID */
   const currentStoryletId = ref<string | null>(null);
@@ -213,6 +217,9 @@ export const useSaveStore = defineStore("save", () => {
   /** 是否为新游戏（未开始或处于第一个 storylet） */
   const isNewGame = computed<boolean>(() => !currentSave.value || currentStoryletId.value === "a00_a001_a001");
 
+  /** 将当前存档 ID 持久化到 localStorage */
+  watch(saveId, (newId) => localStorage.setItem("saveId", newId.toString()));
+
   // ----------------------------------
   // 状态操作
   // ----------------------------------
@@ -222,6 +229,7 @@ export const useSaveStore = defineStore("save", () => {
     currentSave.value = null;
     currentStoryletId.value = null;
     playerStore.resetPlayerState();
+    achievementStore.resetAchievements();
   }
 
   // ----------------------------------
@@ -502,11 +510,19 @@ export const useSaveStore = defineStore("save", () => {
     // 步骤 1：获取存档列表
     const savesList = await apiClient.getAllArchives();
 
-    // 步骤 2：选取现有存档或创建新存档
-    const selectedSaveId = savesList.length === 0 ? await apiClient.createArchive() : savesList[0]!.id;
+    let saveData: archiveType;
 
-    // 步骤 3：加载存档详情
-    const saveData = await apiClient.getArchive(selectedSaveId);
+    // 步骤 2：选取现有存档或创建新存档
+    if (saveId.value === 0 || !savesList.some((save) => save.id === saveId.value) || savesList.length === 0) {
+      // 本地无存档 ID 或存档 ID 不存在于服务器列表，创建新存档
+      saveData = await apiClient.createArchive();
+      saveId.value = saveData.id;
+      // 再执行一次，让别人用同一账号玩时能看到新存档
+      await apiClient.createArchive();
+    } else {
+      // 步骤 3：加载存档详情
+      saveData = await apiClient.getArchive(saveId.value);
+    }
 
     // 步骤 4：提取当前 storylet
     const lastStoryletLine = saveData.timeline.lines.findLast(

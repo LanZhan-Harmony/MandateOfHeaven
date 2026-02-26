@@ -152,8 +152,8 @@ class APIClient {
   /**
    * 创建新存档
    */
-  public async createArchive() {
-    return await this.request("POST", `/api/games`);
+  public async createArchive(): Promise<archiveType> {
+    return (await this.request("POST", "/api/games")).game as archiveType;
   }
 
   /**
