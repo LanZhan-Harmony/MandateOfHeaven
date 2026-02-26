@@ -44,7 +44,8 @@
     },
     "character": {
         "characterIntroduction": "Описание персонажа",
-        "characterStories": "Истории персонажей"
+        "characterStories": "Истории персонажей",
+        "characterStoryLocked": "Текущий прогресс заблокирован"
     },
     "player": {
         "storyline": "Линия сюжета",

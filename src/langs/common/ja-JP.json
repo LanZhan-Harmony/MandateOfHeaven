@@ -44,7 +44,8 @@
     },
     "character": {
         "characterIntroduction": "キャラクター紹介",
-        "characterStories": "キャラクター物語"
+        "characterStories": "キャラクター物語",
+        "characterStoryLocked": "現在の進捗はアンロックされていません"
     },
     "player": {
         "storyline": "物語線",

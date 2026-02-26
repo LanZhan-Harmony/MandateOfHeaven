@@ -27,11 +27,6 @@ const ANGLE_STEP = 5.5;
 
 const currentCharacter = computed<characterType | undefined>(() => characters.value[selectedIndex.value]);
 
-const unlockedStories = computed(() => {
-  if (!currentCharacter.value) return [];
-  return currentCharacter.value.stories.filter((story) => isStoryUnlocked(story.id));
-});
-
 onMounted(async () => {
   await mediaStore.setBGMAudioAsync("character_bgm", 4);
   window.addEventListener("keydown", handleKeydown);
@@ -173,12 +168,18 @@ async function playHoverSound() {
         <h3 class="character-title">{{ $t("character.characterIntroduction") }}</h3>
         <p class="character-introduction">{{ currentCharacter.description }}</p>
 
-        <template v-if="unlockedStories.length > 0">
+        <template v-if="currentCharacter.stories.length > 0">
           <span class="divider"></span>
           <h3 class="character-title">{{ $t("character.characterStories") }}</h3>
-          <div v-for="(story, idx) in unlockedStories" :key="idx" class="character-story">
-            <h4 class="story-title">{{ story.title }}</h4>
-            <p class="story-content">{{ story.content }}</p>
+          <div v-for="(story, idx) in currentCharacter.stories" :key="idx" class="character-story">
+            <div v-if="!isStoryUnlocked(story.id)" class="story-locked">
+              <img src="/common/images/锁.webp" alt="locked" />
+              <span> {{ $t("character.characterStoryLocked") }}</span>
+            </div>
+            <div v-else>
+              <h4 class="story-title">{{ story.title }}</h4>
+              <p class="story-content">{{ story.content }}</p>
+            </div>
           </div>
         </template>
       </div>
@@ -351,6 +352,14 @@ async function playHoverSound() {
 .character-story {
   margin-bottom: 15px;
 }
+.story-locked img {
+  width: 20px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+.story-locked span {
+  color: #f0e6d2;
+}
 .story-title {
   font-size: 22px;
   margin: 5px 0;
@@ -390,6 +399,12 @@ async function playHoverSound() {
   }
   .story-title {
     font-size: 16px;
+  }
+  .story-locked img {
+    width: 14px;
+  }
+  .story-locked span {
+    font-size: 14px;
   }
 }
 </style>

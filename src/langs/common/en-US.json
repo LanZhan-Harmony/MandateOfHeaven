@@ -44,7 +44,8 @@
     },
     "character": {
         "characterIntroduction": "Character Introduction",
-        "characterStories": "Character Stories"
+        "characterStories": "Character Stories",
+        "characterStoryLocked": "Locked"
     },
     "player": {
         "storyline": "Storyline",

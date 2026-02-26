@@ -44,7 +44,8 @@
     },
     "character": {
         "characterIntroduction": "캐릭터 소개",
-        "characterStories": "캐릭터 이야기"
+        "characterStories": "캐릭터 이야기",
+        "characterStoryLocked": "현재 진행 상황이 잠금되어 있습니다"
     },
     "player": {
         "storyline": "스토리라인",

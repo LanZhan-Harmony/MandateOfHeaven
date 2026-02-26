@@ -400,6 +400,13 @@
         "a06_a066_a031032033034035"
       ],
       "stories": []
+    },
+    {
+      "id": "YaEr",
+      "unlockConditions": [
+        "a09_a000_a00"
+      ],
+      "stories": []
     }
   ]
 }

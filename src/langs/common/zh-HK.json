@@ -44,7 +44,8 @@
     },
     "character": {
         "characterIntroduction": "人物介紹",
-        "characterStories": "人物故事"
+        "characterStories": "人物故事",
+        "characterStoryLocked": "當前進度未解鎖"
     },
     "player": {
         "storyline": "劇情線",
