@@ -19,3 +19,7 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# NanoHTTPD 本地媒体服务器 —— 保留所有类
+-keep class fi.iki.elonen.** { *; }
+-keep class com.muyan.mandate_of_heaven.LocalMediaServer { *; }

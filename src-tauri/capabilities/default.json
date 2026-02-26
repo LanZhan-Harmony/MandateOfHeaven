@@ -8,6 +8,7 @@
   "permissions": [
     "core:default",
     "core:window:allow-close",
+    "log:default",
     {
       "identifier": "http:allow-fetch",
       "allow": [

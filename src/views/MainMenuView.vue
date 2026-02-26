@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getCurrentWindow } from "@tauri-apps/api/window";
+import { invoke } from "@tauri-apps/api/core";
 import { computed, onMounted, onUnmounted } from "vue";
 import { useI18n } from "vue-i18n";
 import BarButton from "../components/BarButton.vue";
@@ -7,11 +7,13 @@ import MenuButton from "../components/MenuButton.vue";
 import router from "../router";
 import { useMediaStore } from "../stores/media";
 import { useSaveStore } from "../stores/save";
+import { toStreamUrl } from "../utils/streamUrl";
 
 const { t } = useI18n(); // t 用于获取单条文本翻译
 const mediaStore = useMediaStore();
 const saveStore = useSaveStore();
 const appVersion = computed(() => `v${import.meta.env.VITE_APP_VERSION} | ${t("bottomBar.demo")}`);
+const mainVideoUrl = toStreamUrl("/common/videos/main.mp4");
 
 onMounted(async () => {
   try {
@@ -49,7 +51,7 @@ async function navigateTo(path: string) {
 
 async function exitGame() {
   if ((window as any).__TAURI_INTERNALS__) {
-    await getCurrentWindow().close();
+    await invoke("exit_app");
   } else {
     window.close();
   }
@@ -58,7 +60,7 @@ async function exitGame() {
 <template>
   <div class="container">
     <!-- 背景视频 -->
-    <video class="video" src="/common/videos/main.mp4" autoplay muted loop></video>
+    <video class="video" :src="mainVideoUrl" autoplay muted loop></video>
 
     <div class="overlay">
       <!-- 左侧菜单按钮 -->

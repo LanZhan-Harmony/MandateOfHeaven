@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { computed, ref, watch } from "vue";
+import { toStreamUrl } from "../utils/streamUrl";
 
 export const useMediaStore = defineStore("media", () => {
   const bgmAudio = new Audio();
@@ -52,7 +53,7 @@ export const useMediaStore = defineStore("media", () => {
       return;
     }
     bgmAudio.pause();
-    bgmAudio.src = `/common/musics/${name}.opus`;
+    bgmAudio.src = toStreamUrl(`/common/musics/${name}.opus`);
     bgmAudio.currentTime = startSeconds;
     bgmAudio.loop = true;
     bgmAudio.volume = actualBgmVolume.value;
@@ -79,24 +80,12 @@ export const useMediaStore = defineStore("media", () => {
     }
   }
 
-  function pauseLoopAudio() {
-    if (!loopAudio.paused) {
-      loopAudio.pause();
-    }
-  }
-
-  async function resumeLoopAudioAsync() {
-    if (loopAudio.paused) {
-      await loopAudio.play();
-    }
-  }
-
   /**
    * 播放音效
    * @param name 音效文件名（不含扩展名）
    */
   async function setEffectAudioAsync(name: string) {
-    const effectAudio = new Audio(`/common/musics/${name}.opus`);
+    const effectAudio = new Audio(toStreamUrl(`/common/musics/${name}.opus`));
     effectAudio.volume = actualEffectVolume.value;
     // 播放结束后立即释放资源，避免 Audio 对象泄漏
     effectAudio.onended = () => {
@@ -111,9 +100,14 @@ export const useMediaStore = defineStore("media", () => {
     }
   }
 
+  /**
+   * 播放循环音频
+   * @param chapterId 章节 ID
+   * @param videoId 视频 ID
+   */
   async function setLoopAudioAsync(chapterId: number, videoId: string) {
     loopAudio.pause();
-    loopAudio.src = `/chapters/loop_audios/chapter${chapterId}/${videoId}.opus`;
+    loopAudio.src = toStreamUrl(`/chapters/loop_audios/chapter${chapterId}/${videoId}.opus`);
     loopAudio.loop = true;
     loopAudio.volume = actualPlayerVolume.value;
     try {
@@ -124,6 +118,39 @@ export const useMediaStore = defineStore("media", () => {
       }
     }
   }
+
+  /**
+   * 暂停循环音频
+   */
+  function pauseLoopAudio() {
+    if (!loopAudio.paused) {
+      loopAudio.pause();
+    }
+  }
+
+  /**
+   * 恢复播放循环音频
+   */
+  async function resumeLoopAudioAsync() {
+    if (loopAudio.paused) {
+      await loopAudio.play();
+    }
+  }
+
+  // ── 后台/锁屏暂停 ──
+  let bgmWasPlaying = false;
+  let loopWasPlaying = false;
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      bgmWasPlaying = !bgmAudio.paused;
+      loopWasPlaying = !loopAudio.paused;
+      if (bgmWasPlaying) bgmAudio.pause();
+      if (loopWasPlaying) loopAudio.pause();
+    } else {
+      if (bgmWasPlaying) bgmAudio.play().catch(() => {});
+      if (loopWasPlaying) loopAudio.play().catch(() => {});
+    }
+  });
 
   return {
     loopAudio,

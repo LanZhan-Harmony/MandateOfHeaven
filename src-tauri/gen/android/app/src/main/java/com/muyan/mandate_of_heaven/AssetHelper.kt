@@ -2,81 +2,83 @@ package com.muyan.mandate_of_heaven
 
 import android.content.Context
 import android.content.res.AssetManager
+import android.util.Log
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import java.io.ByteArrayInputStream
 
 /**
- * 从 APK assets/ 目录提供静态资源，支持 HTTP Range 请求（视频 seek 必须）。
+ * 从 APK assets/ 目录提供静态资源（HTML、CSS、JS、图片、字体、字幕等）。
+ *
+ * 视频/音频等大文件由 LocalMediaServer (NanoHTTPD) 通过标准 HTTP 提供，
+ * 彻底绕过 shouldInterceptRequest 的同步 I/O 限制。
+ *
  * 此文件不在 generated/ 目录中，不会被 tauri android build 覆盖。
  */
 object AssetHelper {
 
+    private const val TAG = "AssetHelper"
+
+    private const val MAX_CACHE_ENTRIES = 32
+    private const val MAX_CACHEABLE_SIZE = 2L * 1024 * 1024  // 2 MB
+
+    private class CachedAsset(val bytes: ByteArray, val mimeType: String)
+
+    private val cache = object : LinkedHashMap<String, CachedAsset>(32, 0.75f, true) {
+        override fun removeEldestEntry(eldest: MutableMap.MutableEntry<String, CachedAsset>?): Boolean {
+            return size > MAX_CACHE_ENTRIES
+        }
+    }
+
+    private val CORS_HEADERS = mapOf(
+        "Access-Control-Allow-Origin" to "*"
+    )
+
     fun serveFromAssets(context: Context, request: WebResourceRequest): WebResourceResponse? {
+        // 不拦截发往本地媒体服务器的请求（让它走 TCP 到 NanoHTTPD）
+        val host = request.url.host
+        if (host == "127.0.0.1" || host == "localhost") return null
+
         val path = request.url.path?.trimStart('/') ?: return null
         if (path.isEmpty()) return null
 
-        val assetManager = context.applicationContext.assets
-
-        // 读取整个文件到内存
-        val allBytes: ByteArray
-        try {
-            allBytes = assetManager.open(path, AssetManager.ACCESS_RANDOM).use { it.readBytes() }
-        } catch (e: Exception) {
-            return null // 文件不存在
-        }
-
-        val fileLength = allBytes.size.toLong()
         val mimeType = guessMimeType(path)
-        val rangeHeader = request.requestHeaders["Range"]
 
-        if (rangeHeader != null && rangeHeader.startsWith("bytes=")) {
-            val rangeSpec = rangeHeader.removePrefix("bytes=")
-            val parts = rangeSpec.split("-", limit = 2)
-            val start = parts[0].toLongOrNull() ?: 0L
-            val end = if (parts.size > 1 && parts[1].isNotEmpty())
-                parts[1].toLongOrNull() ?: (fileLength - 1)
-            else
-                fileLength - 1
-
-            if (start >= fileLength || end >= fileLength || start > end) {
-                val headers = mapOf(
-                    "Content-Range" to "bytes */$fileLength",
-                    "Access-Control-Allow-Origin" to "*"
-                )
-                return WebResourceResponse(
-                    mimeType, null, 416, "Range Not Satisfiable",
-                    headers, ByteArrayInputStream(ByteArray(0))
-                )
-            }
-
-            val contentLength = end - start + 1
-            val rangeBytes = allBytes.copyOfRange(start.toInt(), (end + 1).toInt())
-
-            val headers = mapOf(
-                "Content-Type" to mimeType,
-                "Content-Range" to "bytes $start-$end/$fileLength",
-                "Content-Length" to "$contentLength",
-                "Accept-Ranges" to "bytes",
-                "Access-Control-Allow-Origin" to "*",
-                "Access-Control-Expose-Headers" to "content-range"
-            )
-            return WebResourceResponse(
-                mimeType, null, 206, "Partial Content",
-                headers, ByteArrayInputStream(rangeBytes)
-            )
-        } else {
-            val headers = mapOf(
-                "Content-Type" to mimeType,
-                "Content-Length" to "$fileLength",
-                "Accept-Ranges" to "bytes",
-                "Access-Control-Allow-Origin" to "*"
-            )
-            return WebResourceResponse(
-                mimeType, null, 200, "OK",
-                headers, ByteArrayInputStream(allBytes)
-            )
+        // LRU 缓存命中 → 直接返回
+        val cached = synchronized(cache) { cache[path]?.bytes }
+        if (cached != null) {
+            return serve200(cached, mimeType)
         }
+
+        // 从 assets/ 读取
+        val bytes = try {
+            context.applicationContext.assets
+                .open(path, AssetManager.ACCESS_STREAMING)
+                .use { it.readBytes() }
+        } catch (e: Exception) {
+            Log.w(TAG, "Asset not found: $path (${e.message})")
+            return null
+        }
+
+        // 缓存小文件
+        if (bytes.size <= MAX_CACHEABLE_SIZE) {
+            synchronized(cache) {
+                cache[path] = CachedAsset(bytes, mimeType)
+            }
+        }
+
+        return serve200(bytes, mimeType)
+    }
+
+    private fun serve200(bytes: ByteArray, mimeType: String): WebResourceResponse {
+        return WebResourceResponse(
+            mimeType, null, 200, "OK",
+            mapOf(
+                "Content-Type" to mimeType,
+                "Content-Length" to "${bytes.size}",
+            ) + CORS_HEADERS,
+            ByteArrayInputStream(bytes)
+        )
     }
 
     private fun guessMimeType(path: String): String {

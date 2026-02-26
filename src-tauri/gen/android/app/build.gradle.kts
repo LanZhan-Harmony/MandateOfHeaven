@@ -53,6 +53,7 @@ android {
       }
     }
     getByName("release") {
+      manifestPlaceholders["usesCleartextTraffic"] = "true"
       isMinifyEnabled = true
       proguardFiles(
         *fileTree(".") { include("**/*.pro") }
@@ -72,6 +73,16 @@ android {
   buildFeatures {
     buildConfig = true
   }
+  // 禁止 AAPT 压缩媒体/字体等已压缩格式，这样 AssetManager 可以直接读取而非先解压
+  aaptOptions {
+    noCompress += listOf(
+      "mp4", "webm",                           // 视频
+      "mp3", "ogg", "opus", "wav",              // 音频
+      "webp", "png", "jpg", "jpeg", "gif",      // 图片
+      "svg", "vtt", "json",                     // 文本数据
+      "woff", "woff2", "ttf", "otf"             // 字体
+    )
+  }
 }
 
 rust {
@@ -81,6 +92,7 @@ rust {
 dependencies {
   implementation("androidx.webkit:webkit:1.15.0")
   implementation("androidx.appcompat:appcompat:1.7.1")
+  implementation("org.nanohttpd:nanohttpd:2.3.1")
   implementation("androidx.activity:activity-ktx:1.12.2")
   implementation("com.google.android.material:material:1.13.0")
   testImplementation("junit:junit:4.13.2")
@@ -92,7 +104,7 @@ apply(from = "tauri.build.gradle.kts")
 
 // ─── 自动 patch 自动生成的 RustWebViewClient.kt ───
 // tauri android build 每次都会覆盖 generated/ 目录下的文件，
-// 所以在 Kotlin 编译前自动注入 AssetHelper 回退逻辑。
+// 所以在 Kotlin 编译前自动注入 AssetHelper 回退逻辑 + 错误日志。
 val patchGeneratedFiles by tasks.registering {
   val generatedFile = file("src/main/java/com/muyan/mandate_of_heaven/generated/RustWebViewClient.kt")
   doLast {
@@ -101,7 +113,13 @@ val patchGeneratedFiles by tasks.registering {
     // 幂等：已 patch 则跳过
     if (text.contains("AssetHelper")) return@doLast
 
-    // 策略：先查 assets/，有就直接返回（Rust 找不到文件会返回 404 响应而非 null，所以回退策略无效）
+    // ─ Patch 1: 注入 import ─
+    text = text.replace(
+      "import android.webkit.*",
+      "import android.webkit.*\nimport android.util.Log"
+    )
+
+    // ─ Patch 2: assets-first 策略 ─
     text = text.replace(
       """            val rustWebview = view as RustWebView;
             val response = handleRequest(rustWebview.id, request, rustWebview.isDocumentStartScriptEnabled)
@@ -119,8 +137,16 @@ val patchGeneratedFiles by tasks.registering {
             interceptedState[request.url.toString()] = response != null
             return response"""
     )
+
+    // ─ Patch 3: 增强 onReceivedError 日志 ─
+    text = text.replace(
+      "super.onReceivedError(view, request, error)",
+      """Log.e("WebViewClient", "onReceivedError: url=${'$'}{request.url} code=${'$'}{error.errorCode} desc=${'$'}{error.description}")
+            super.onReceivedError(view, request, error)"""
+    )
+
     generatedFile.writeText(text)
-    println("✅ Patched RustWebViewClient.kt: assets-first strategy")
+    println("✅ Patched RustWebViewClient.kt: assets-first + error logging")
   }
 }
 

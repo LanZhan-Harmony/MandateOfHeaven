@@ -363,6 +363,9 @@ onMounted(() => {
   player.on("seeked", handleSeeked);
   player.on("error", handleError);
   player.on("texttrackchange", handleTextTrackChange);
+  player.on("playing", () => {
+    errorRetryCount = 0; // 成功播放后重置重试计数
+  });
 
   // Android WebView 中 video.js 会拦截 touch 事件导致 @click 不冒泡，
   // 通过 video.js API 直接监听 touchend 来触发控制栏切换
@@ -384,6 +387,7 @@ onMounted(() => {
 
   // 监听视频源变化（指令切换时更新 src）
   watch(videoUrl, (newUrl) => {
+    errorRetryCount = 0;
     player.src([{ src: newUrl, type: "video/mp4" }]);
   });
 
@@ -532,23 +536,42 @@ function handleSeeked() {
   }, SEEK_DEBOUNCE_DELAY);
 }
 
+const MAX_ERROR_RETRIES = 3;
+let errorRetryCount = 0;
+
 /**
  * 播放错误处理
+ * - code 2: 网络错误
+ * - code 3: 解码错误
+ * - code 4: 源不支持（实际常因加载超时/数据不完整触发）
  */
 function handleError(_event: unknown) {
   if (!playerRef.value) return;
 
   const currentTime = playerRef.value.currentTime();
+  const error = playerRef.value.error();
+  const errorCode = error?.code;
+  const errorMsg = error?.message || "unknown";
 
-  const errorCode = playerRef.value.error()?.code;
+  console.error(
+    `[Player] Video error: code=${errorCode} msg=${errorMsg} retry=${errorRetryCount}/${MAX_ERROR_RETRIES}`,
+  );
 
-  // 网络错误(2) 或 解码错误(3) 时尝试重新加载
-  if (errorCode === 2 || errorCode === 3) {
-    playerRef.value.error(undefined);
+  // 可重试的错误码（2=网络, 3=解码, 4=源不支持/加载失败）
+  if ((errorCode === 2 || errorCode === 3 || errorCode === 4) && errorRetryCount < MAX_ERROR_RETRIES) {
+    errorRetryCount++;
+    playerRef.value.error(undefined as any);
     playerRef.value.pause();
-    playerRef.value.load();
-    playerRef.value.currentTime(currentTime);
-    playerRef.value.play();
+
+    // 指数退避：500ms, 1000ms, 1500ms
+    const delay = 500 * errorRetryCount;
+    console.log(`[Player] Retrying in ${delay}ms...`);
+    setTimeout(() => {
+      if (!playerRef.value) return;
+      playerRef.value.load();
+      playerRef.value.currentTime(currentTime);
+      playerRef.value.play();
+    }, delay);
   }
 }
 

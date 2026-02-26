@@ -9,9 +9,9 @@ export function toStreamUrl(path: string): string {
     return path;
   }
 
-  // Android: WebView 直接从 assets/ 提供文件，不需要 stream 协议
+  // Android: 通过本地 HTTP 服务器提供视频/音频，彻底绕过 shouldInterceptRequest 对大文件的限制
   if (/android/i.test(navigator.userAgent)) {
-    return path;
+    return `http://127.0.0.1:18765${path}`;
   }
 
   // Desktop Tauri production:

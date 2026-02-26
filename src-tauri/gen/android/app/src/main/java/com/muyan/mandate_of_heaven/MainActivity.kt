@@ -10,6 +10,13 @@ class MainActivity : TauriActivity() {
     enableEdgeToEdge()
     super.onCreate(savedInstanceState)
     hideSystemUI()
+    // 启动本地 HTTP 媒体服务器（绕过 shouldInterceptRequest 的视频流限制）
+    LocalMediaServer.start(this)
+  }
+
+  override fun onDestroy() {
+    LocalMediaServer.stop()
+    super.onDestroy()
   }
 
   override fun onWindowFocusChanged(hasFocus: Boolean) {

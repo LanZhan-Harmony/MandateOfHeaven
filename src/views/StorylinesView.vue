@@ -28,7 +28,7 @@ import { DragZoomController } from "../utils/dragZoomController";
 const svgCache = new Map<number, string>();
 const domParser = new DOMParser();
 
-const { t, tm } = useI18n();
+const { tm } = useI18n();
 const mediaStore = useMediaStore();
 const saveStore = useSaveStore();
 const playerStore = usePlayerStore();
@@ -90,21 +90,40 @@ const GRADIENT_STYLE =
   "fill:none;fill-rule:nonzero;stroke:url(#possibleTimelineLineGradient);stroke-width:2px;filter:drop-shadow(0 0 5px #edb26b);";
 
 /**
- * 获取 SVG 文本（优先从缓存读取）
+ * 获取 SVG 文本（优先从缓存读取，带重试和超时）
  */
-async function fetchSvgText(chapterId: number): Promise<string | null> {
+async function fetchSvgText(chapterId: number): Promise<string> {
   if (svgCache.has(chapterId)) {
+    console.log(`[Storyline] SVG cache hit: chapter ${chapterId}`);
     return svgCache.get(chapterId)!;
   }
   const svgUrl = `/storylines/${chapterId}-流程.svg`;
-  const response = await fetch(svgUrl);
-  if (!response.ok) {
-    console.error(`Failed to fetch ${svgUrl}: ${response.status} ${response.statusText}`);
-    return null;
+  const MAX_RETRIES = 3;
+  const TIMEOUT_MS = 10000;
+
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      console.log(`[Storyline] Fetching SVG (attempt ${attempt}/${MAX_RETRIES}): ${svgUrl}`);
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
+      const response = await fetch(svgUrl, { signal: controller.signal });
+      clearTimeout(timer);
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status} ${response.statusText}`);
+      }
+      const text = await response.text();
+      console.log(`[Storyline] SVG loaded: ${text.length} chars`);
+      svgCache.set(chapterId, text);
+      return text;
+    } catch (error) {
+      console.error(`[Storyline] SVG fetch attempt ${attempt} failed:`, error);
+      if (attempt < MAX_RETRIES) {
+        await new Promise((r) => setTimeout(r, 500 * attempt));
+      }
+    }
   }
-  const text = await response.text();
-  svgCache.set(chapterId, text);
-  return text;
+  throw new Error(`[Storyline] Failed to fetch SVG after ${MAX_RETRIES} attempts: ${svgUrl}`);
 }
 
 /**
@@ -117,8 +136,9 @@ async function loadStoryline(chapterId: number) {
   // 并行启动：SVG 预取 + BGM 切换，与淡出动画（300ms）同步进行
   const bgmKey = chapterId <= 2 ? "chapter012_bgm" : chapterId <= 5 ? "chapter345_bgm" : "chapter67_bgm";
   const svgTextPromise = fetchSvgText(chapterId);
-  const bgmPromise = mediaStore.setBGMAudioAsync(bgmKey);
-  console.log(`Started loading storyline ${chapterId}: SVG fetch and BGM switch in progress`);
+  // BGM 加载失败不应阻塞地图渲染
+  mediaStore.setBGMAudioAsync(bgmKey).catch((e) => console.warn("[Storyline] BGM load failed (non-critical):", e));
+  console.log(`[Storyline] Loading chapter ${chapterId}...`);
 
   // 等待淡出过渡完成，同时以上请求已在后台运行
   await nextTick();
@@ -128,14 +148,12 @@ async function loadStoryline(chapterId: number) {
   releaseResources();
 
   if (!boundingBoxRef.value || !storylineRef.value || !nodesRef.value || !backgroundRef.value) {
-    throw new Error("refs not ready");
+    console.error("[Storyline] DOM refs not ready, aborting");
+    return;
   }
 
-  // 等待 SVG 文本（大概率已就绪）
+  // 等待 SVG 文本（带重试，不会静默返回 null）
   const svgText = await svgTextPromise;
-  if (!svgText) return;
-
-  await bgmPromise;
 
   const svgDoc = domParser.parseFromString(svgText, "image/svg+xml");
 
@@ -517,13 +535,21 @@ watch(
   () => selectedChapterId.value,
   async (newVal, oldVal) => {
     if (newVal !== oldVal) {
-      await loadStoryline(newVal);
+      try {
+        await loadStoryline(newVal);
+      } catch (e) {
+        console.error("[Storyline] loadStoryline failed on chapter switch:", e);
+      }
     }
   },
 );
 
 onMounted(async () => {
-  await loadStoryline(selectedChapterId.value);
+  try {
+    await loadStoryline(selectedChapterId.value);
+  } catch (e) {
+    console.error("[Storyline] loadStoryline failed on mount:", e);
+  }
 });
 
 onUnmounted(() => {

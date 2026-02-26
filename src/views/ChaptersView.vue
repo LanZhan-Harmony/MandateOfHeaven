@@ -9,6 +9,7 @@ import router from "../router";
 import { useMediaStore } from "../stores/media";
 import { useSaveStore } from "../stores/save";
 import type { chapterType } from "../types/chapterType";
+import { toStreamUrl } from "../utils/streamUrl";
 
 const { tm } = useI18n();
 const mediaStore = useMediaStore();
@@ -18,7 +19,7 @@ const chapters = computed(() => tm("chapters") as chapterType[]);
 const { selectedChapterId } = storeToRefs(saveStore);
 
 const videoSrc = computed(() => {
-  return `/chapters/introductions/chapter${selectedChapterId.value}/章节图.webm`;
+  return toStreamUrl(`/chapters/introductions/chapter${selectedChapterId.value}/章节图.webm`);
 });
 
 const chapterIcons = [

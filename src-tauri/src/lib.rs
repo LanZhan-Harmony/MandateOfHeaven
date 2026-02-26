@@ -1,5 +1,8 @@
+#[cfg(desktop)]
 use http_range::HttpRange;
+#[cfg(desktop)]
 use std::collections::HashMap;
+#[cfg(desktop)]
 use std::sync::{Arc, Mutex};
 use tauri::http::Response;
 
@@ -7,12 +10,14 @@ use tauri::http::Response;
 use tauri::Manager;
 
 /// 已加载资源的缓存条目
+#[cfg(desktop)]
 struct CachedAsset {
   bytes: Arc<Vec<u8>>,
   mime: String,
 }
 
 /// 根据文件扩展名猜测 MIME 类型（避免引入额外依赖）
+#[cfg(desktop)]
 fn mime_from_ext(path: &str) -> &'static str {
   match path.rsplit('.').next().unwrap_or("").to_lowercase().as_str() {
     "mp4" => "video/mp4",
@@ -32,14 +37,21 @@ fn mime_from_ext(path: &str) -> &'static str {
   }
 }
 
+#[tauri::command]
+fn exit_app(app_handle: tauri::AppHandle) {
+  app_handle.exit(0);
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
   // 缓存：避免每次 Range 请求都重新解压/加载整个文件
   // key = 路径, value = (字节数据, MIME 类型)
+  #[cfg(desktop)]
   let asset_cache: Arc<Mutex<HashMap<String, CachedAsset>>> = Arc::default();
 
   tauri::Builder::default()
     .plugin(tauri_plugin_http::init())
+    .invoke_handler(tauri::generate_handler![exit_app])
     .register_uri_scheme_protocol("stream", move |ctx, request| {
       let uri_path = request.uri().path();
       let path = uri_path.to_string();
@@ -173,13 +185,19 @@ pub fn run() {
       }
     })
     .setup(|app| {
-      if cfg!(debug_assertions) {
-        app.handle().plugin(
-          tauri_plugin_log::Builder::default()
-            .level(log::LevelFilter::Info)
-            .build(),
-        )?;
-      }
+      // 日志始终开启（Stdout → logcat + LogDir → 文件），方便 Android 排查问题
+      app.handle().plugin(
+        tauri_plugin_log::Builder::default()
+          .level(log::LevelFilter::Debug)
+          .targets([
+            tauri_plugin_log::Target::new(tauri_plugin_log::TargetKind::Stdout),
+            tauri_plugin_log::Target::new(tauri_plugin_log::TargetKind::LogDir {
+              file_name: None,
+            }),
+          ])
+          .max_file_size(5_000_000) // 5 MB 日志轮转
+          .build(),
+      )?;
       Ok(())
     })
     .run(tauri::generate_context!())
