@@ -394,14 +394,18 @@ export const useSaveStore = defineStore("save", () => {
       switch (ffiType) {
         case "possibility_trigger":
           // 概率触发：20% 成功概率
-          await commitSaveAction(randomChance(0.2) ? "success" : "failure", pendingActions);
+          // 一定要在事件循环后执行，确保先处理完当前时间线事件再处理结果
+          setTimeout(() => commitSaveAction(randomChance(0.2) ? "success" : "failure", pendingActions), 0);
           newSave.timeline.actions = [];
           break;
 
         case "count_trigger":
           // 计数触发：累计 3 次后触发
           playerStore.specialCounter += 1;
-          await commitSaveAction(playerStore.specialCounter >= 3 ? "enough" : "not_enough", pendingActions);
+          setTimeout(
+            () => commitSaveAction(playerStore.specialCounter >= 3 ? "enough" : "not_enough", pendingActions),
+            0,
+          );
           newSave.timeline.actions = [];
           break;
 
@@ -436,7 +440,7 @@ export const useSaveStore = defineStore("save", () => {
     if (newSave.timeline.actions.length > 0) {
       if (playerStore.playerInstructions.length === 0) {
         // 有动作但无视频可挂载，强制执行第一个动作跳过
-        await commitSaveAction(0);
+        setTimeout(() => commitSaveAction(0), 0);
         return;
       }
 

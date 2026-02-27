@@ -90,7 +90,7 @@ async function enterChapter() {
 }
 .intro-video {
   position: absolute;
-  right: -10%;
+  right: -15%;
   top: -15%;
   width: 100%;
   z-index: 0;

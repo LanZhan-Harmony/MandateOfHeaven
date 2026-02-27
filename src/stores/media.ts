@@ -4,7 +4,34 @@ import { toStreamUrl } from "../utils/streamUrl";
 
 export const useMediaStore = defineStore("media", () => {
   const bgmAudio = new Audio();
-  const loopAudio = new Audio();
+
+  // ── Web Audio API：用于循环音频的无缝循环 ──
+  // HTMLAudioElement.loop 在循环衔接处有约 0.3s 间隔（解码器开销），
+  // AudioBufferSourceNode.loop 在样本级别循环，真正零间隔。
+  let loopAudioCtx: AudioContext | null = null;
+  let loopGainNode: GainNode | null = null;
+  let loopSourceNode: AudioBufferSourceNode | null = null;
+  let _loopContextManuallySuspended = false;
+  // 每次调用 setLoopAudioAsync 递增，用于取消过期的异步请求
+  let _loopRequestId = 0;
+
+  /** 停止并断开一个 AudioBufferSourceNode（忽略已停止时的异常） */
+  function stopAndDisconnect(node: AudioBufferSourceNode) {
+    try {
+      node.stop();
+    } catch {}
+    node.disconnect();
+  }
+
+  function ensureLoopAudioContext(): AudioContext {
+    if (!loopAudioCtx) {
+      loopAudioCtx = new AudioContext();
+      loopGainNode = loopAudioCtx.createGain();
+      loopGainNode.gain.value = actualPlayerVolume.value;
+      loopGainNode.connect(loopAudioCtx.destination);
+    }
+    return loopAudioCtx;
+  }
 
   // 辅助函数：从 localStorage 获取数字
   const getStoredNum = (key: string, defaultValue: number) => {
@@ -37,7 +64,9 @@ export const useMediaStore = defineStore("media", () => {
     bgmAudio.volume = newVolume;
   });
   watch(actualPlayerVolume, (newVolume: number) => {
-    loopAudio.volume = newVolume;
+    if (loopGainNode) {
+      loopGainNode.gain.value = newVolume;
+    }
   });
 
   /**
@@ -101,17 +130,48 @@ export const useMediaStore = defineStore("media", () => {
   }
 
   /**
-   * 播放循环音频
+   * 播放循环音频（使用 Web Audio API 实现无缝循环）
    * @param chapterId 章节 ID
    * @param videoId 视频 ID
    */
   async function setLoopAudioAsync(chapterId: number, videoId: string) {
-    loopAudio.pause();
-    loopAudio.src = toStreamUrl(`/chapters/loop_audios/chapter${chapterId}/${videoId}.opus`);
-    loopAudio.loop = true;
-    loopAudio.volume = actualPlayerVolume.value;
+    // 递增请求 ID，使所有正在进行的旧请求在完成后失效
+    const requestId = ++_loopRequestId;
+
+    // 立即停止并断开当前正在播放的 source
+    if (loopSourceNode) {
+      stopAndDisconnect(loopSourceNode);
+      loopSourceNode = null;
+    }
+
+    const ctx = ensureLoopAudioContext();
+    // 如果 context 因自动播放策略或后台切换而暂停，先恢复
+    if (ctx.state === "suspended") {
+      await ctx.resume();
+      _loopContextManuallySuspended = false;
+    }
+
+    const url = toStreamUrl(`/chapters/loop_audios/chapter${chapterId}/${videoId}.opus`);
     try {
-      await loopAudio.play();
+      const response = await fetch(url);
+      const arrayBuffer = await response.arrayBuffer();
+      const buffer = await ctx.decodeAudioData(arrayBuffer);
+
+      // 异步操作完成后检查请求是否仍有效（是否被更新的调用取代）
+      if (requestId !== _loopRequestId) return;
+
+      // 停止可能在等待期间由其他调用创建的节点
+      const staleNode = loopSourceNode as AudioBufferSourceNode | null;
+      loopSourceNode = null;
+      if (staleNode) stopAndDisconnect(staleNode);
+
+      loopSourceNode = ctx.createBufferSource();
+      loopSourceNode.buffer = buffer;
+      loopSourceNode.loop = true;
+      // 注意：始终以 1× 速度播放，避免 AudioBufferSourceNode 重采样导致音调变化
+      loopSourceNode.playbackRate.value = 1.0;
+      loopSourceNode.connect(loopGainNode!);
+      loopSourceNode.start();
     } catch (error) {
       if (!(error instanceof DOMException && error.name === "AbortError")) {
         console.error("无法播放循环音频:", error);
@@ -123,8 +183,9 @@ export const useMediaStore = defineStore("media", () => {
    * 暂停循环音频
    */
   function pauseLoopAudio() {
-    if (!loopAudio.paused) {
-      loopAudio.pause();
+    if (loopAudioCtx && loopAudioCtx.state === "running") {
+      loopAudioCtx.suspend();
+      _loopContextManuallySuspended = true;
     }
   }
 
@@ -132,28 +193,30 @@ export const useMediaStore = defineStore("media", () => {
    * 恢复播放循环音频
    */
   async function resumeLoopAudioAsync() {
-    if (loopAudio.paused) {
-      await loopAudio.play();
+    if (loopAudioCtx && loopAudioCtx.state === "suspended") {
+      await loopAudioCtx.resume();
+      _loopContextManuallySuspended = false;
     }
   }
 
   // ── 后台/锁屏暂停 ──
   let bgmWasPlaying = false;
-  let loopWasPlaying = false;
+  let loopWasPlayingBeforeHide = false;
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) {
       bgmWasPlaying = !bgmAudio.paused;
-      loopWasPlaying = !loopAudio.paused;
+      // loop 正在运行（context running 且未被手动暂停）则记录并挂起
+      loopWasPlayingBeforeHide =
+        !!loopAudioCtx && loopAudioCtx.state === "running" && !_loopContextManuallySuspended && loopSourceNode !== null;
       if (bgmWasPlaying) bgmAudio.pause();
-      if (loopWasPlaying) loopAudio.pause();
+      if (loopWasPlayingBeforeHide) loopAudioCtx!.suspend();
     } else {
       if (bgmWasPlaying) bgmAudio.play().catch(() => {});
-      if (loopWasPlaying) loopAudio.play().catch(() => {});
+      if (loopWasPlayingBeforeHide) loopAudioCtx!.resume().catch(() => {});
     }
   });
 
   return {
-    loopAudio,
     mainVolume,
     playerVolume,
     bgmVolume,

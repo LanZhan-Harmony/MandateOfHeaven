@@ -31,7 +31,7 @@ const progressWidth = computed(() => {
   position: relative;
   flex-grow: 1;
   height: 100%;
-  margin: 0 250px 0 -25px;
+  margin: 0 250px 0 0;
 }
 .dynamic {
   position: absolute;
@@ -55,8 +55,9 @@ const progressWidth = computed(() => {
 }
 .tail {
   height: 100%;
+  width: 100%;
   position: absolute;
-  right: 0;
+  left: 0;
 }
 .progress-text {
   font-size: 22px;

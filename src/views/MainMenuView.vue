@@ -8,6 +8,7 @@ import router from "../router";
 import { useMediaStore } from "../stores/media";
 import { useSaveStore } from "../stores/save";
 import { toStreamUrl } from "../utils/streamUrl";
+import { sleep } from "@/utils/sleep";
 
 const { t } = useI18n(); // t 用于获取单条文本翻译
 const mediaStore = useMediaStore();
@@ -50,6 +51,8 @@ async function navigateTo(path: string) {
 }
 
 async function exitGame() {
+  await mediaStore.setEffectAudioAsync("音效1");
+  await sleep(1000);
   if ((window as any).__TAURI_INTERNALS__) {
     await invoke("exit_app");
   } else {

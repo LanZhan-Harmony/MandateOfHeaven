@@ -38,7 +38,7 @@ watch(
       <img class="chapter-name-pic" :src="chapterNamePicSrc" />
     </div>
     <div ref="descriptionRef" class="description-text">{{ props.description }}</div>
-    <ChapterProgressBar :progress="progress" />
+    <ChapterProgressBar :progress="progress" class="progress" />
     <ArrowButton :text="$t('chapter.enterChapter')" class="enter-btn" direction="right" @click="$emit('click')" />
   </div>
 </template>
@@ -62,16 +62,15 @@ watch(
   z-index: 100;
 }
 .description-text {
-  font-size: 16px;
-  line-height: 20px;
+  font-size: 20px;
+  line-height: 25px;
   height: 100%;
   overflow-y: auto;
   text-indent: 2em;
   white-space: pre-wrap;
 }
 .progress {
-  left: 6%;
-  width: 60%;
+  margin-top: 5px;
 }
 .enter-btn {
   position: absolute;
@@ -96,6 +95,7 @@ watch(
 @media (max-height: 500px) {
   .description-text {
     font-size: 14px;
+    line-height: 18px;
   }
 }
 </style>

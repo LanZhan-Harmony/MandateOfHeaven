@@ -103,7 +103,6 @@ async function fetchSvgText(chapterId: number): Promise<string> {
 
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
-      console.log(`[Storyline] Fetching SVG (attempt ${attempt}/${MAX_RETRIES}): ${svgUrl}`);
       const controller = new AbortController();
       const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
       const response = await fetch(svgUrl, { signal: controller.signal });
@@ -113,7 +112,6 @@ async function fetchSvgText(chapterId: number): Promise<string> {
         throw new Error(`HTTP ${response.status} ${response.statusText}`);
       }
       const text = await response.text();
-      console.log(`[Storyline] SVG loaded: ${text.length} chars`);
       svgCache.set(chapterId, text);
       return text;
     } catch (error) {

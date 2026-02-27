@@ -64,7 +64,7 @@ const emit = defineEmits<{
 }
 
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.1);

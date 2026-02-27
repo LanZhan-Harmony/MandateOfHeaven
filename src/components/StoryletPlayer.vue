@@ -418,10 +418,8 @@ onMounted(() => {
 
   // 初始化时应用已保存的播放速度
   player.playbackRate(currentPlaybackRate.value);
-  mediaStore.loopAudio.playbackRate = currentPlaybackRate.value;
   watch(currentPlaybackRate, (rate) => {
     player.playbackRate(rate);
-    mediaStore.loopAudio.playbackRate = rate;
   });
 
   // 配置字幕显示样式（通过 video.js textTrackSettings 子组件）
@@ -703,7 +701,6 @@ async function handleDone() {
 function cyclePlaybackRate() {
   uiStore.playbackRateIndex = (uiStore.playbackRateIndex + 1) % PLAYBACK_RATES.length;
   playerRef.value?.playbackRate(currentPlaybackRate.value);
-  mediaStore.loopAudio.playbackRate = currentPlaybackRate.value;
 }
 
 /**
@@ -1347,7 +1344,6 @@ watch(
   white-space: pre-wrap;
   max-width: 300px;
   font-size: 20px;
-  font-weight: 600;
   line-height: 150%;
 }
 
