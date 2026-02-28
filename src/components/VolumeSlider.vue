@@ -10,10 +10,15 @@ const emit = defineEmits<{
 }>();
 
 const modelValue = useModel(props, "modelValue");
+
+function onInput(e: Event) {
+  const target = e.target as HTMLInputElement;
+  modelValue.value = parseFloat(target.value);
+}
 </script>
 
 <template>
-  <input class="slider" type="range" min="0" max="1" step="0.01" v-model="modelValue" />
+  <input class="slider" type="range" min="0" max="1" step="0.01" :value="modelValue" @input="onInput" />
 </template>
 
 <style scoped>
