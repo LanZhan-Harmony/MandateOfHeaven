@@ -439,6 +439,7 @@ export const useSaveStore = defineStore("save", () => {
     // 处理普通 UI 按钮动作
     if (newSave.timeline.actions.length > 0) {
       if (playerStore.playerInstructions.length === 0) {
+        console.log("检测到有待处理动作但没有视频可挂载，强制执行第一个动作跳过");
         // 有动作但无视频可挂载，强制执行第一个动作跳过
         setTimeout(() => commitSaveAction(0), 0);
         return;

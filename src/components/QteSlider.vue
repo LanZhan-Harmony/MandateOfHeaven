@@ -221,10 +221,10 @@ function handlePointerUp() {
 useEventListener(rootRef, "mousedown", handlePointerDown);
 useEventListener(rootRef, "mousemove", handlePointerMove);
 useEventListener(rootRef, "mouseup", handlePointerUp);
-useEventListener(rootRef, "touchstart", handlePointerDown);
-useEventListener(rootRef, "touchmove", handlePointerMove);
-useEventListener(rootRef, "touchend", handlePointerUp);
-useEventListener(rootRef, "touchcancel", handlePointerUp);
+useEventListener(rootRef, "touchstart", handlePointerDown, { passive: true });
+useEventListener(rootRef, "touchmove", handlePointerMove, { passive: true });
+useEventListener(rootRef, "touchend", handlePointerUp, { passive: true });
+useEventListener(rootRef, "touchcancel", handlePointerUp, { passive: true });
 
 /** 进度达到 95% 触发成功 */
 watch(progress, (value) => {

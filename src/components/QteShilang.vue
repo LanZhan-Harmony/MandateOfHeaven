@@ -31,6 +31,9 @@ const mediaStore = useMediaStore();
 /** 每个 QTE 的完成状态 */
 const completed = ref(Array(10).fill(false));
 
+/** 防止重复统计结果 */
+const hasEmitted = ref(false);
+
 /** 各阶段的触发时间窗口与贝塞尔曲线路径 */
 const qteConfigs = [
   { startMs: 64000, endMs: 66000, path: [895, 730, 896, 731, 1567, 732, 1567, 732] },
@@ -50,11 +53,12 @@ async function handleSlideSuccess(index: number) {
   completed.value = completed.value.map((v, i) => (i === index ? true : v));
 }
 
-/** 到达判定时刻后统计结果 */
+/** 到达判定时刻后统计结果（提前到 139500ms，预留同步缓冲） */
 watch(
   () => props.elapsedMs,
   (ms) => {
-    if (ms >= 140360) {
+    if (ms >= 139500 && !hasEmitted.value) {
+      hasEmitted.value = true;
       const doneCount = completed.value.filter(Boolean).length;
       if (doneCount >= 6) {
         emit("success");

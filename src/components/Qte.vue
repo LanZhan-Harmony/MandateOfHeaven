@@ -9,7 +9,7 @@
     - QteHoldCharge: 长按蓄力
     - QteSlider:     沿贝塞尔曲线滑动
     - QteTimedClick: 限时点击
-    - QteShilang:    石狼舞剑（10 连滑动）
+    - QteShilang:    石狼特殊QTE（10 连滑动）
 -->
 <script setup lang="ts">
 import { ref } from "vue";

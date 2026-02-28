@@ -474,14 +474,15 @@ async function handleVideoEnded() {
   if (!props.instruction.loop && !hasSelectedOption.value) {
     // QTE超时，选择失败选项
     const hasQte = props.instruction.actionGroups.some((g) => g.type === "qte");
-    if (hasQte) {
-      await handleSelectOption(1); // 失败选项
-    }
 
     // 特殊视频 04_025_005B032033034035：处理QTE超时后直接返回，
     // 不处理 timeLimitedAction 也不进入结束画面
     if (props.instruction.videoId === "04_025_005B032033034035") {
       return;
+    }
+
+    if (hasQte) {
+      await handleSelectOption(1); // 失败选项
     }
 
     // 限时选项超时
@@ -889,7 +890,7 @@ watch(
     <!-- 自定义控制层 -->
     <div
       v-show="showControlsOverlay && !showEndScreen"
-      :class="['custom-controls ui-font', { 'top-half': showQteOverlay }]"
+      :class="['custom-controls', { 'top-half': showQteOverlay }]"
       @click="toggleControls"
       @mousemove="handleMouseMove">
       <!-- 顶部导航 -->

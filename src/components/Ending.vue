@@ -116,7 +116,7 @@ watch(
 
 // 入场：播放音效 + 3.5秒后显示内容
 onMounted(async () => {
-  await mediaStore.setEffectAudioAsync("be界面音效");
+  await mediaStore.setEffectAudioAsync("BE界面音效");
   setTimeout(() => {
     showContent.value = true;
   }, 3500);

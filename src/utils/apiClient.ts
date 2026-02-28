@@ -161,8 +161,8 @@ class APIClient {
    * @param gameId 要复制的存档ID
    * @returns 新存档信息
    */
-  public async copyArchive(gameId: number) {
-    return await this.request("POST", `/api/games/${gameId}/copy`);
+  public async copyArchive(gameId: number): Promise<archiveType> {
+    return (await this.request("POST", `/api/games/${gameId}/copy`)).game as archiveType;
   }
 
   /**
