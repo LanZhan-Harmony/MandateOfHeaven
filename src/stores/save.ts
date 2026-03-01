@@ -521,8 +521,6 @@ export const useSaveStore = defineStore("save", () => {
       // 本地无存档 ID 或存档 ID 不存在于服务器列表，创建新存档
       saveData = await apiClient.createArchive();
       saveId.value = saveData.id;
-      // 再执行一次，让别人用同一账号玩时能看到新存档
-      await apiClient.createArchive();
     } else {
       // 步骤 3：加载存档详情
       saveData = await apiClient.getArchive(saveId.value);
