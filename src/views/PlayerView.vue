@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useMagicKeys } from "@vueuse/core";
 import { storeToRefs } from "pinia";
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, onMounted, onUnmounted, ref, watch } from "vue";
 import LoadingOverlay from "../components/LoadingOverlay.vue";
 import MenuButton from "../components/MenuButton.vue";
 import PageNavButton from "../components/PageNavButton.vue";
@@ -19,6 +19,49 @@ const { playerInstructions } = storeToRefs(playerStore);
 // 仅取前 N 条指令参与渲染（Android 硬件解码器有限，只保留 1 个以避免 MEDIA_ERR_DECODE）
 const isAndroid = /android/i.test(navigator.userAgent);
 const visibleInstructions = computed(() => playerInstructions.value.slice(0, isAndroid ? 1 : 3));
+const transitionFrame = ref<string | null>(null);
+let transitionFrameTimer: number | null = null;
+const PLAYER_BASE_WIDTH = 1920;
+const PLAYER_BASE_HEIGHT = 1080;
+const scale = ref(1);
+
+function updateScale() {
+  const scaleW = window.innerWidth / PLAYER_BASE_WIDTH;
+  const scaleH = window.innerHeight / PLAYER_BASE_HEIGHT;
+  scale.value = Math.min(scaleW, scaleH);
+}
+
+const transitionFreezeStyle = computed(() => ({
+  transform: `translate(-50%, -50%) scale(${scale.value})`,
+  width: `${PLAYER_BASE_WIDTH}px`,
+  height: `${PLAYER_BASE_HEIGHT}px`,
+  position: "absolute" as const,
+  top: "50%",
+  left: "50%",
+  transformOrigin: "center center",
+}));
+
+function handleFrameCapture(dataUrl: string) {
+  if (transitionFrameTimer) {
+    clearTimeout(transitionFrameTimer);
+    transitionFrameTimer = null;
+  }
+  transitionFrame.value = dataUrl;
+  transitionFrameTimer = window.setTimeout(() => {
+    transitionFrame.value = null;
+    transitionFrameTimer = null;
+  }, 1500);
+}
+
+function handlePlayerPlaying() {
+  if (transitionFrameTimer) {
+    clearTimeout(transitionFrameTimer);
+    transitionFrameTimer = null;
+  }
+  if (transitionFrame.value) {
+    transitionFrame.value = null;
+  }
+}
 
 const isPaused = ref(false);
 const { escape } = useMagicKeys();
@@ -52,8 +95,18 @@ async function handleToSettings() {
 }
 
 onMounted(async () => {
+  updateScale();
+  window.addEventListener("resize", updateScale);
   mediaStore.pauseBGMAudio();
   await saveStore.startVideo();
+});
+
+onUnmounted(() => {
+  if (transitionFrameTimer) {
+    clearTimeout(transitionFrameTimer);
+    transitionFrameTimer = null;
+  }
+  window.removeEventListener("resize", updateScale);
 });
 </script>
 <template>
@@ -69,8 +122,16 @@ onMounted(async () => {
       :show-controls="true"
       :show-video-js-controls="false"
       :play="index === 0"
+      :prewarm="index > 0"
       :pause="isPaused"
-      @done="handleDone" />
+      @done="handleDone"
+      @frame-capture="handleFrameCapture"
+      @playing="handlePlayerPlaying"
+    />
+
+    <div v-if="transitionFrame" class="transition-freeze" :style="transitionFreezeStyle" aria-hidden="true">
+      <img :src="transitionFrame" alt="" />
+    </div>
 
     <div v-if="isPaused" class="pause-menu">
       <MenuButton :text="$t('esc.continueStory')" @click="handleContinue" />
@@ -102,5 +163,18 @@ onMounted(async () => {
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.transition-freeze {
+  position: absolute;
+  z-index: 95;
+  pointer-events: none;
+}
+
+.transition-freeze img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
 }
 </style>

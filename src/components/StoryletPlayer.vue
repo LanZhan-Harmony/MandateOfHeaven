@@ -28,6 +28,7 @@ const props = defineProps<{
   instruction: playerInstructionType;
   play?: boolean;
   pause?: boolean;
+  prewarm?: boolean;
   showControls?: boolean;
   showVideoJsControls?: boolean;
 }>();
@@ -35,10 +36,13 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: "done"): void;
   (e: "back"): void;
+  (e: "frame-capture", dataUrl: string): void;
+  (e: "playing"): void;
 }>();
 
 const showControls = props.showControls ?? true;
 const showVideoJsControls = props.showVideoJsControls ?? false;
+const prewarm = computed(() => props.prewarm ?? false);
 
 const { tm } = useI18n();
 const mediaStore = useMediaStore();
@@ -53,14 +57,15 @@ const playerReadyPromise = new Promise<void>((r) => {
   playerReadyResolve = r;
 });
 
+const PLAYER_BASE_WIDTH = 1920;
+const PLAYER_BASE_HEIGHT = 1080;
+
 const scale = ref(1);
 function updateScale() {
   const w = window.innerWidth;
   const h = window.innerHeight;
-  const targetW = 1920;
-  const targetH = 1080;
-  const scaleW = w / targetW;
-  const scaleH = h / targetH;
+  const scaleW = w / PLAYER_BASE_WIDTH;
+  const scaleH = h / PLAYER_BASE_HEIGHT;
   scale.value = Math.min(scaleW, scaleH);
 }
 
@@ -93,6 +98,7 @@ const currentPlaybackRate = computed(() => PLAYBACK_RATES[uiStore.playbackRateIn
 // 控制条显示延时
 const CONTROLS_SHOW_DELAY = 3000;
 const SEEK_DEBOUNCE_DELAY = 250;
+const AUTO_ADVANCE_EARLY_SECONDS = 0.12;
 
 const introductions = computed(() => tm("introductions") as introductionType[]);
 const valueChanges = computed(() => tm("valueChanges") as valueChangeType[]);
@@ -120,6 +126,9 @@ const showControlsOverlay = ref(false);
 const showMouseCursor = ref(isLoopVideo.value);
 const seekingTime = ref<number | null>(null);
 const showEndScreen = ref(false);
+const hasDoneEmitted = ref(false);
+const prewarmed = ref(false);
+let prewarmToken = 0;
 
 // 监听进入循环视频，确保鼠标指针显示
 watch(isLoopVideo, (isLoop) => {
@@ -218,6 +227,13 @@ const valueChangeInfo = computed(() => {
  * 根据当前视频和播放时间判断是否显示
  */
 const characterIntro = computed(() => {
+  console.log(introductions.value.forEach((intro) => {
+    console.log(
+      intro.videoId,
+      intro.time,
+      intro.duration,
+    );
+  }));
   return introductions.value.find(
     (intro) =>
       intro.videoId === props.instruction.videoId &&
@@ -291,8 +307,8 @@ const selectedActionInHistory = computed(() => {
 
 const containerStyle = computed(() => ({
   transform: `translate(-50%, -50%) scale(${scale.value})`,
-  width: "1920px",
-  height: "1080px",
+  width: `${PLAYER_BASE_WIDTH}px`,
+  height: `${PLAYER_BASE_HEIGHT}px`,
   position: "absolute" as const,
   top: "50%",
   left: "50%",
@@ -319,6 +335,7 @@ onMounted(() => {
   // 初始化 video.js 播放器
   const player = videojs(videoEl.value, {
     controls: showVideoJsControls,
+    preload: "auto",
     loop: isLoopVideo.value && props.instruction.videoId !== "04_022_005",
     language: uiStore.locale,
     languages: uiStore.allLocales,
@@ -362,6 +379,9 @@ onMounted(() => {
   player.on("texttrackchange", handleTextTrackChange);
   player.on("playing", () => {
     errorRetryCount = 0; // 成功播放后重置重试计数
+    if (props.play) {
+      emit("playing");
+    }
   });
 
   // Android WebView 中 video.js 会拦截 touch 事件导致 @click 不冒泡，
@@ -385,8 +405,20 @@ onMounted(() => {
   // 监听视频源变化（指令切换时更新 src）
   watch(videoUrl, (newUrl) => {
     errorRetryCount = 0;
+    hasDoneEmitted.value = false;
+    prewarmed.value = false;
+    prewarmToken += 1;
     player.src([{ src: newUrl, type: "video/mp4" }]);
   });
+
+  watch(
+    prewarm,
+    async (shouldPrewarm) => {
+      if (!shouldPrewarm || prewarmed.value || props.play) return;
+      await prewarmPlayback();
+    },
+    { immediate: true },
+  );
 
   // 监听播放/暂停状态
   watch(
@@ -463,6 +495,7 @@ function handleTextTrackChange() {
  * 视频播放结束
  */
 async function handleVideoEnded() {
+  if (hasDoneEmitted.value) return;
   playerStore.setVideoWatched(props.instruction.videoId);
 
   // 特殊视频处理
@@ -575,6 +608,20 @@ function handleError(_event: unknown) {
  * 时间更新（用于记录观看进度）
  */
 function handleTimeUpdate() {
+  if (
+    !hasDoneEmitted.value &&
+    !props.instruction.loop &&
+    hasNoActions.value &&
+    playerState.value?.duration &&
+    playerState.value?.currentTime
+  ) {
+    const remaining = playerState.value.duration - playerState.value.currentTime;
+    if (remaining <= AUTO_ADVANCE_EARLY_SECONDS) {
+      void handleDone();
+      return;
+    }
+  }
+
   // 接近结尾时标记为已观看
   if (playerState.value?.duration && playerState.value?.currentTime) {
     if (playerState.value.duration - playerState.value.currentTime < 5) {
@@ -587,6 +634,7 @@ function handleTimeUpdate() {
  */
 async function startPlayback() {
   if (playerState.value?.playing === true) return;
+  prewarmToken += 1;
 
   mediaStore.pauseLoopAudio();
   // 等待播放器就绪（首次挂载时需要，后续调用 promise 已 resolved，不会阻塞）
@@ -623,6 +671,35 @@ async function startPlayback() {
     } catch (e) {
       console.debug("Error starting loop audio:", e);
     }
+  }
+}
+
+/**
+ * 后台预热下一段视频：静音短暂播放后停回起点，尽量把首帧提前解码。
+ */
+async function prewarmPlayback() {
+  const token = ++prewarmToken;
+  await playerReadyPromise;
+  const player = playerRef.value;
+  if (!player || props.play || prewarmed.value || token !== prewarmToken) return;
+
+  try {
+    const wasMuted = player.muted();
+    player.muted(true);
+    await player.play();
+    await sleep(40);
+
+    if (token !== prewarmToken || props.play) {
+      player.muted(wasMuted);
+      return;
+    }
+
+    player.pause();
+    player.currentTime(0);
+    player.muted(wasMuted);
+    prewarmed.value = true;
+  } catch (e) {
+    console.debug("Error prewarming video track:", e);
   }
 }
 
@@ -691,9 +768,46 @@ async function handleQteClick() {
  * 完成当前视频
  */
 async function handleDone() {
+  if (hasDoneEmitted.value) return;
+
+  const frame = captureCurrentFrame();
+  if (frame) {
+    emit("frame-capture", frame);
+  }
+
+  hasDoneEmitted.value = true;
   playerStore.setVideoWatched(props.instruction.videoId);
   emit("done");
   await pausePlayback();
+}
+
+function captureCurrentFrame(): string | null {
+  const video = videoEl.value;
+  if (!video) return null;
+  if (!video.videoWidth || !video.videoHeight) return null;
+
+  try {
+    const canvas = document.createElement("canvas");
+    canvas.width = PLAYER_BASE_WIDTH;
+    canvas.height = PLAYER_BASE_HEIGHT;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return null;
+
+    const srcW = video.videoWidth;
+    const srcH = video.videoHeight;
+    const destW = canvas.width;
+    const destH = canvas.height;
+    const scale = Math.max(destW / srcW, destH / srcH);
+    const drawW = srcW * scale;
+    const drawH = srcH * scale;
+    const dx = (destW - drawW) / 2;
+    const dy = (destH - drawH) / 2;
+
+    ctx.drawImage(video, dx, dy, drawW, drawH);
+    return canvas.toDataURL("image/jpeg", 0.9);
+  } catch (_e) {
+    return null;
+  }
 }
 
 /**
@@ -868,7 +982,7 @@ watch(
 );
 </script>
 <template>
-  <div v-show="isVisible" class="storylet-player" :style="containerStyle">
+  <div :class="['storylet-player', { active: isVisible }]" :style="containerStyle">
     <!-- Video.js 视频播放器（直接使用 video.js，不经过包装组件） -->
     <div
       id="player"
@@ -883,7 +997,8 @@ watch(
       :data-playing-status="playerState?.playing"
       style="width: 100%; height: 100%"
       @click="toggleControls"
-      @mousemove="handleMouseMove">
+      @mousemove="handleMouseMove"
+    >
       <video ref="videoEl" class="video-js" crossorigin="anonymous" playsinline />
     </div>
 
@@ -892,7 +1007,8 @@ watch(
       v-show="showControlsOverlay && !showEndScreen"
       :class="['custom-controls', { 'top-half': showQteOverlay }]"
       @click="toggleControls"
-      @mousemove="handleMouseMove">
+      @mousemove="handleMouseMove"
+    >
       <!-- 顶部导航 -->
       <PageNavButton class="nav" @click="emit('back')" />
 
@@ -925,7 +1041,8 @@ watch(
             :max="playerState?.duration"
             :value="displayTime"
             step="0.1"
-            @input="handleSeek" />
+            @input="handleSeek"
+          />
         </div>
       </div>
     </div>
@@ -948,7 +1065,8 @@ watch(
             :left="action.index % 2 === 0"
             :in-history="selectedActionInHistory === action"
             @click="handleLoopButtonClick(action.index)"
-            @pointerenter="mediaStore.setEffectAudioAsync('音效11')">
+            @pointerenter="mediaStore.setEffectAudioAsync('音效11')"
+          >
             {{ action.prompt }}
           </LoopButton>
         </div>
@@ -961,7 +1079,8 @@ watch(
           leave-active-class="transition-opacity"
           enter-from-class="opacity-0"
           leave-to-class="opacity-0"
-          :duration="{ enter: 100, leave: 100 }">
+          :duration="{ enter: 100, leave: 100 }"
+        >
           <Qte
             v-if="actionGroup.type === 'qte'"
             v-show="play"
@@ -970,7 +1089,8 @@ watch(
             :video-id="actionGroup.id"
             :elapsed-ms="(playerState?.currentTime ?? 0) * 1000"
             @click="handleQteClick"
-            @select-option="handleQteSelectOption" />
+            @select-option="handleQteSelectOption"
+          />
         </Transition>
 
         <!-- 章节动画类型 -->
@@ -982,7 +1102,8 @@ watch(
             :ending="true"
             :show-button="showEndScreen"
             :no-further-chapters="convertToChapterId(instruction.storyletId) + 1 > 7"
-            @click="handleDone" />
+            @click="handleDone"
+          />
         </Transition>
 
         <!-- 结局类型 -->
@@ -994,14 +1115,15 @@ watch(
             :type="endingType"
             :video-url="endingVideoUrl"
             :chapter-id="convertToChapterId(instruction.videoId)"
-            :ending-id="instruction.storyletId" />
+            :ending-id="instruction.storyletId"
+          />
         </Transition>
       </div>
 
       <!-- 数值变化提示 -->
       <Transition name="data-change-slide" :duration="{ enter: 1000, leave: 1000 }">
         <div v-if="valueChangeInfo" v-show="play" class="data-change-alert">
-          {{ valueChangeInfo.text }} {{ valueChangeInfo.type }}
+          {{ valueChangeInfo.text }}&ensp;{{ valueChangeInfo.type }}
         </div>
       </Transition>
 
@@ -1039,6 +1161,15 @@ watch(
 /* 容器裁剪溢出内容（数值变化提示、角色介绍等） */
 .storylet-player {
   overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.storylet-player.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 /* 播放器内所有直接子元素铺满 */
@@ -1281,7 +1412,7 @@ watch(
   background: linear-gradient(#0f0f0f00, #41332477 50%, #918375 100%);
   border-radius: 10px 0 0 10px;
   padding: 10px 30px;
-  font-size: 30px;
+  font-size: 40px;
   position: absolute;
   top: 10%;
   right: 0;
@@ -1306,7 +1437,7 @@ watch(
 .character-intro {
   color: #e2c697;
   z-index: 100;
-  background: #00000026;
+  background: #00000050;
   border: 1px solid #f5ca9552;
   flex-direction: row;
   justify-content: center;
@@ -1329,7 +1460,7 @@ watch(
 }
 
 .character-intro .name {
-  font-size: 30px;
+  font-size: 35px;
   font-weight: 700;
 }
 
@@ -1343,8 +1474,8 @@ watch(
 .character-intro .description {
   text-align: left;
   white-space: pre-wrap;
-  max-width: 300px;
-  font-size: 20px;
+  max-width: 400px;
+  font-size: 25px;
   line-height: 150%;
 }
 
