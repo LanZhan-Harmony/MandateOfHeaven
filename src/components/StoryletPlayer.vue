@@ -227,13 +227,6 @@ const valueChangeInfo = computed(() => {
  * 根据当前视频和播放时间判断是否显示
  */
 const characterIntro = computed(() => {
-  console.log(introductions.value.forEach((intro) => {
-    console.log(
-      intro.videoId,
-      intro.time,
-      intro.duration,
-    );
-  }));
   return introductions.value.find(
     (intro) =>
       intro.videoId === props.instruction.videoId &&
@@ -594,7 +587,7 @@ function handleError(_event: unknown) {
 
     // 指数退避：500ms, 1000ms, 1500ms
     const delay = 500 * errorRetryCount;
-    console.log(`[Player] Retrying in ${delay}ms...`);
+    console.debug(`[Player] Retrying in ${delay}ms...`);
     setTimeout(() => {
       if (!playerRef.value) return;
       playerRef.value.load();

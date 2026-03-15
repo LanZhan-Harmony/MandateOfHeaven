@@ -94,7 +94,7 @@ const GRADIENT_STYLE =
  */
 async function fetchSvgText(chapterId: number): Promise<string> {
   if (svgCache.has(chapterId)) {
-    console.log(`[Storyline] SVG cache hit: chapter ${chapterId}`);
+    console.debug(`[Storyline] SVG cache hit: chapter ${chapterId}`);
     return svgCache.get(chapterId)!;
   }
   const svgUrl = `/storylines/${chapterId}-流程.svg`;

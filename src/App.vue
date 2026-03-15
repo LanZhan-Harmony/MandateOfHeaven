@@ -16,7 +16,7 @@ function tryEnterFullscreen() {
   if (!document.fullscreenElement) {
     document.documentElement.requestFullscreen().catch((err) => {
       // 全屏请求失败通常是因为没有用户交互，或者用户拒绝了
-      console.log(`全屏请求失败: ${err.message}`);
+      console.debug(`全屏请求失败: ${err.message}`);
     });
   }
 }

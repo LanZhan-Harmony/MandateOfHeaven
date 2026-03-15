@@ -121,7 +121,7 @@ class APIClient {
     this.updateCookieFromResponse(response);
 
     if (response.status === 401) {
-      console.log("401 Unauthorized - Cookie已过期或无效");
+      console.error("401 Unauthorized - Cookie已过期或无效");
       throw new Error("Unauthorized");
     }
 
