@@ -513,6 +513,7 @@ export const useSaveStore = defineStore("save", () => {
   async function fullSyncSave(): Promise<void> {
     // 步骤 1：获取存档列表
     const savesList = await apiClient.getAllArchives();
+    console.log("服务器存档列表：", savesList);
 
     let saveData: archiveType;
 
