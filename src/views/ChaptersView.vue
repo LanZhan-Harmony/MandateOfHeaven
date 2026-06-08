@@ -15,7 +15,7 @@ const { tm } = useI18n();
 const mediaStore = useMediaStore();
 const saveStore = useSaveStore();
 
-const chapters = computed(() => tm("chapters") as chapterType[]);
+const chapters = computed(() => (tm("chapters") as chapterType[]).slice(0, 1));
 const { selectedChapterId } = storeToRefs(saveStore);
 
 const videoSrc = computed(() => {
@@ -58,7 +58,8 @@ async function enterChapter() {
         :title="chapter.title"
         :selected="index === selectedChapterId"
         :locked="saveStore.chapterUnlocked[index] === false"
-        @click="handleClick(index)" />
+        @click="handleClick(index)"
+      />
     </div>
 
     <video :src="videoSrc" autoplay loop muted class="intro-video" />
@@ -67,7 +68,8 @@ async function enterChapter() {
       :chapterId="selectedChapterId"
       :description="chapters[selectedChapterId]!.description"
       :progress="saveStore.chapterProgress[selectedChapterId] || 0"
-      @click="enterChapter" />
+      @click="enterChapter"
+    />
   </div>
 </template>
 <style scoped>

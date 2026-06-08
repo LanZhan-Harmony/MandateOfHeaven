@@ -406,6 +406,7 @@ async function handleAnchorHover() {
  * ========== 点击锚点处理 ==========
  */
 async function handleAnchorClick(anchorId: string) {
+  if (anchorId.startsWith("chapter")) return;
   if (isDragging.value) return;
 
   // 播放点击音效
@@ -491,7 +492,7 @@ function getAnchorIcon(icon: string): string {
       return "/common/images/金色.webp";
     case "chapter-in":
     case "chapter-out":
-      return "/common/images/chapter_jump.webp";
+      return "";
     default:
       return "/common/images/角标.svg";
   }
@@ -507,7 +508,7 @@ function getAnchorIconHighlight(icon: string): string {
       return "/common/images/金色.webp";
     case "chapter-in":
     case "chapter-out":
-      return "/common/images/chapter_jump_highlighted.webp";
+      return "";
     default:
       return "/common/images/角标.svg";
   }

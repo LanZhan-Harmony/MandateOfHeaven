@@ -4,6 +4,7 @@ import type Player from "video.js/dist/types/player";
 import { computed, onMounted, onUnmounted, reactive, ref, shallowRef, watch } from "vue";
 import { useI18n } from "vue-i18n";
 import { videoAchievements } from "../assets/data/videoAchievements";
+import router from "../router";
 import { useAchievementStore } from "../stores/achievement";
 import { useMediaStore } from "../stores/media";
 import { usePlayerStore } from "../stores/player";
@@ -973,6 +974,11 @@ watch(
   },
   { immediate: true },
 );
+
+async function handleFinished() {
+  await mediaStore.setEffectAudioAsync("音效3");
+  await router.push("/storylines");
+}
 </script>
 <template>
   <div :class="['storylet-player', { active: isVisible }]" :style="containerStyle">
@@ -990,7 +996,8 @@ watch(
       :data-playing-status="playerState?.playing"
       style="width: 100%; height: 100%"
       @click="toggleControls"
-      @mousemove="handleMouseMove">
+      @mousemove="handleMouseMove"
+    >
       <video ref="videoEl" class="video-js" crossorigin="anonymous" playsinline />
     </div>
 
@@ -999,7 +1006,8 @@ watch(
       v-show="showControlsOverlay && !showEndScreen"
       :class="['custom-controls', { 'top-half': showQteOverlay }]"
       @click="toggleControls"
-      @mousemove="handleMouseMove">
+      @mousemove="handleMouseMove"
+    >
       <!-- 顶部导航 -->
       <PageNavButton class="nav" @click="emit('back')" />
 
@@ -1032,7 +1040,8 @@ watch(
             :max="playerState?.duration"
             :value="displayTime"
             step="0.1"
-            @input="handleSeek" />
+            @input="handleSeek"
+          />
         </div>
       </div>
     </div>
@@ -1055,7 +1064,8 @@ watch(
             :left="action.index % 2 === 0"
             :in-history="selectedActionInHistory === action"
             @click="handleLoopButtonClick(action.index)"
-            @pointerenter="mediaStore.setEffectAudioAsync('音效11')">
+            @pointerenter="mediaStore.setEffectAudioAsync('音效11')"
+          >
             {{ action.prompt }}
           </LoopButton>
         </div>
@@ -1068,7 +1078,8 @@ watch(
           leave-active-class="transition-opacity"
           enter-from-class="opacity-0"
           leave-to-class="opacity-0"
-          :duration="{ enter: 100, leave: 100 }">
+          :duration="{ enter: 100, leave: 100 }"
+        >
           <Qte
             v-if="actionGroup.type === 'qte'"
             v-show="play"
@@ -1077,7 +1088,8 @@ watch(
             :video-id="actionGroup.id"
             :elapsed-ms="(playerState?.currentTime ?? 0) * 1000"
             @click="handleQteClick"
-            @select-option="handleQteSelectOption" />
+            @select-option="handleQteSelectOption"
+          />
         </Transition>
 
         <!-- 章节动画类型 -->
@@ -1088,8 +1100,9 @@ watch(
             :chapter="actionGroup.actions[0]!.index"
             :ending="true"
             :show-button="showEndScreen"
-            :no-further-chapters="convertToChapterId(instruction.storyletId) + 1 > 7"
-            @click="handleDone" />
+            :no-further-chapters="convertToChapterId(instruction.storyletId) + 1 > 0"
+            @click="handleFinished"
+          />
         </Transition>
 
         <!-- 结局类型 -->
@@ -1101,7 +1114,8 @@ watch(
             :type="endingType"
             :video-url="endingVideoUrl"
             :chapter-id="convertToChapterId(instruction.videoId)"
-            :ending-id="instruction.storyletId" />
+            :ending-id="instruction.storyletId"
+          />
         </Transition>
       </div>
 
