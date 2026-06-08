@@ -23,7 +23,10 @@
         "videoVolume": "视频音量",
         "bgmVolume": "背景音乐音量",
         "effectsVolume": "音效音量",
-        "language": "界面语言"
+        "language": "界面语言",
+        "fullscreen": "显示模式",
+        "fullscreenOn": "全屏",
+        "fullscreenOff": "窗口化"
     },
     "chapter": {
         "enterChapter": "进入章节"
@@ -55,7 +58,7 @@
         "creators": "主创",
         "productionUnits": "出品单位",
         "castList": "演员表",
-        "developer": "网页端及移动端制作",
+        "developer": "第三方客户端制作",
         "viewProject": "查看开源项目"
     },
     "dialog": {

@@ -23,7 +23,10 @@
         "videoVolume": "Video Volume",
         "bgmVolume": "Background Music Volume",
         "effectsVolume": "Effects Volume",
-        "language": "Language"
+        "language": "Language",
+        "fullscreen": "Display Mode",
+        "fullscreenOn": "Fullscreen",
+        "fullscreenOff": "Windowed"
     },
     "chapter": {
         "enterChapter": "Enter Chapter"
@@ -55,7 +58,7 @@
         "creators": "Main Creators",
         "productionUnits": "Production Units",
         "castList": "Cast List",
-        "developer": "Web and Mobile Development",
+        "developer": "Third-Party Client Development",
         "viewProject": "View Open Source Project"
     },
     "dialog": {

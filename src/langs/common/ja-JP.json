@@ -23,7 +23,10 @@
         "videoVolume": "動画音量",
         "bgmVolume": "BGM音量",
         "effectsVolume": "効果音音量",
-        "language": "インターフェース言語"
+        "language": "インターフェース言語",
+        "fullscreen": "表示モード",
+        "fullscreenOn": "全画面",
+        "fullscreenOff": "ウィンドウモード"
     },
     "chapter": {
         "enterChapter": "章に入る"
@@ -55,7 +58,7 @@
         "creators": "主なクリエイター",
         "productionUnits": "制作ユニット",
         "castList": "キャストリスト",
-        "developer": "ウェブ端末およびモバイル端末制作",
+        "developer": "サードパーティクライアント開発",
         "viewProject": "オープンソースプロジェクトを表示"
     },
     "dialog": {

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { open } from "@tauri-apps/plugin-shell";
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 import ImageButton from "../components/ImageButton.vue";
@@ -17,6 +18,15 @@ async function handleBack() {
   await mediaStore.setEffectAudioAsync("音效7");
   router.back();
 }
+
+async function openProjectLink() {
+  const GITHUB_URL = "https://github.com/LanZhan-Harmony/MandateOfHeaven";
+  if ((window as any).__TAURI_INTERNALS__) {
+    await open(GITHUB_URL);
+  } else {
+    window.open(GITHUB_URL, "_blank");
+  }
+}
 </script>
 <template>
   <div class="container">
@@ -28,7 +38,8 @@ async function handleBack() {
         highlight-icon="/common/images/关闭高亮.webp"
         :side-length="40"
         :mobile-side-length="24"
-        @click="handleBack" />
+        @click="handleBack"
+      />
     </div>
     <div class="content">
       <div class="scroll-container">
@@ -64,11 +75,7 @@ async function handleBack() {
             <div class="credit-item">
               <span class="names">LanZhan-Harmony</span>
             </div>
-            <a
-              href="https://github.com/LanZhan-Harmony/MandateOfHeaven"
-              target="_blank"
-              class="project-link"
-              :title="$t('credit.viewProject')">
+            <a href="#" class="project-link" :title="$t('credit.viewProject')" @click.prevent="openProjectLink">
               <span>{{ $t("credit.viewProject") }}</span>
             </a>
           </section>
@@ -106,11 +113,7 @@ async function handleBack() {
             <div class="credit-item">
               <span class="names">LanZhan-Harmony</span>
             </div>
-            <a
-              href="https://github.com/LanZhan-Harmony/MandateOfHeaven"
-              target="_blank"
-              class="project-link"
-              :title="$t('credit.viewProject')">
+            <a href="#" class="project-link" :title="$t('credit.viewProject')" @click.prevent="openProjectLink">
               <span>{{ $t("credit.viewProject") }}</span>
             </a>
           </section>

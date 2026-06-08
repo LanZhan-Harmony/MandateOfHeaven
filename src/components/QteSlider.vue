@@ -20,10 +20,8 @@
 import { useEventListener } from "@vueuse/core";
 import { computed, ref, watch } from "vue";
 
-/** 尾部图片资源 */
-import tailImageUrl from "/common/images/qte_slide_tail.png";
-/** 箭头图片资源 */
-import arrowImageUrl from "/common/images/qte_slide_arrow.png";
+const tailUrl = "/common/images/qte_slide_tail.png";
+const arrowUrl = "/common/images/qte_slide_arrow.png";
 
 const props = defineProps<{
   bezierPath: number[];
@@ -278,7 +276,7 @@ watch(progress, (value) => {
 
     <!-- 终点尾部图片 -->
     <image
-      :href="tailImageUrl"
+      :href="tailUrl"
       width="256"
       height="256"
       :x="endPoint.x - 128"
@@ -289,7 +287,7 @@ watch(progress, (value) => {
     <image
       v-for="arrow in arrowMarkers"
       :key="arrow.id"
-      :href="arrowImageUrl"
+      :href="arrowUrl"
       width="64"
       height="64"
       :x="arrow.x - 32"

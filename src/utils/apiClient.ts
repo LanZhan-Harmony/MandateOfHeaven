@@ -1,3 +1,4 @@
+import type { sessionType } from "@/types/sessionType";
 import { fetch as tauriFetch } from "@tauri-apps/plugin-http";
 import type { archiveType } from "../types/archiveType";
 import type { briefArchiveType } from "../types/briefArchiveType";
@@ -33,6 +34,8 @@ class APIClient {
     return this._instance;
   }
 
+  private sessionPromise: Promise<string> | null = null;
+
   private constructor() {
     let foundCookie = null;
     if (typeof document !== "undefined") {
@@ -42,9 +45,7 @@ class APIClient {
       }
     }
 
-    this.sessionCookie =
-      foundCookie ||
-      "YRcpNIAkTjPAojEvg88OIrqxZYZDeq2m8KseH1nANh8WuqYpy8rLc0d7923kUTmTo1nwRwPdzUY%2Br7CM5gjrgSI57jMfTn%2BAFgFVaYAQDupD3xeKfBHY0bt%2FIiqlF9NVtCag94nQdWJTHefxOIDW1IZJOIbU3Mu0R8uRpywgL7tjmx6jd%2BkE%2FiczOCMiQDXqIpuJvfChzmO%2FW2jgAeVAPEL2wf94BIJd0x0%3D--piTBOgrR59b2thRo--ARKOM8RWhbrAeqHe93a3Mw%3D%3D";
+    this.sessionCookie = foundCookie;
   }
 
   /**
@@ -56,6 +57,37 @@ class APIClient {
       return tauriFetch;
     }
     return window.fetch.bind(window);
+  }
+
+  /**
+   * 从本地 session 服务获取初始 cookie（仅首次请求前调用一次）
+   */
+  private async fetchInitialSession(): Promise<string> {
+    const isDev = import.meta.env.DEV && !(window as any).__TAURI_INTERNALS__;
+    // dev 模式走 Vite 代理绕过 CORS，其他环境直连
+    const sessionUrl = isDev ? "/session" : "http://untamed.qzz.io:5152/session";
+    const activeFetch = await this.getFetch();
+    const response = await activeFetch(sessionUrl);
+    if (!response.ok) {
+      throw new Error(`获取初始 session 失败: HTTP ${response.status}`);
+    }
+    this.sessionCookie = ((await response.json()) as sessionType).sessionCookie;
+    if (typeof document !== "undefined") {
+      document.cookie = `_session=${this.sessionCookie}; path=/; SameSite=Lax`;
+    }
+    return this.sessionCookie;
+  }
+
+  /**
+   * 确保已持有有效 session（懒加载，并发安全）
+   */
+  private async ensureSession(): Promise<string> {
+    if (this.sessionCookie) return this.sessionCookie;
+    if (!this.sessionPromise) {
+      this.sessionPromise = this.fetchInitialSession();
+    }
+    this.sessionCookie = await this.sessionPromise;
+    return this.sessionCookie;
   }
 
   /**
@@ -84,6 +116,9 @@ class APIClient {
    * 执行HTTP请求
    */
   private async request(method: string, path: string, body: any = null) {
+    // 首次请求前从本地 session 服务获取 cookie（后续请求复用，服务器 set-cookie 自动轮转）
+    await this.ensureSession();
+
     const isTauri = !!(window as any).__TAURI_INTERNALS__;
     const isDev = import.meta.env.DEV && !isTauri;
 

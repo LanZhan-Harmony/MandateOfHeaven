@@ -23,7 +23,10 @@
         "videoVolume": "視頻音量",
         "bgmVolume": "背景音樂音量",
         "effectsVolume": "音效音量",
-        "language": "介面語言"
+        "language": "介面語言",
+        "fullscreen": "顯示模式",
+        "fullscreenOn": "全螢幕",
+        "fullscreenOff": "視窗化"
     },
     "chapter": {
         "enterChapter": "進入章節"
@@ -55,7 +58,7 @@
         "creators": "主創",
         "productionUnits": "出品單位",
         "castList": "演員表",
-        "developer": "網頁端及移動端製作",
+        "developer": "第三方客戶端製作",
         "viewProject": "查看開源項目"
     },
     "dialog": {

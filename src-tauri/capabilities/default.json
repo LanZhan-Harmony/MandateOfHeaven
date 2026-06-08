@@ -8,12 +8,18 @@
   "permissions": [
     "core:default",
     "core:window:allow-close",
+    "core:window:allow-set-fullscreen",
+    "core:window:allow-is-fullscreen",
     "log:default",
+    "shell:allow-open",
     {
       "identifier": "http:allow-fetch",
       "allow": [
         {
           "url": "https://prod.beifa.shyingyou.cn/*"
+        },
+        {
+          "url": "http://untamed.qzz.io:5152/**"
         }
       ]
     },
@@ -22,6 +28,9 @@
       "allow": [
         {
           "url": "https://prod.beifa.shyingyou.cn/*"
+        },
+        {
+          "url": "http://untamed.qzz.io:5152/**"
         }
       ]
     },
@@ -30,6 +39,9 @@
       "allow": [
         {
           "url": "https://prod.beifa.shyingyou.cn/*"
+        },
+        {
+          "url": "http://untamed.qzz.io:5152/**"
         }
       ]
     }

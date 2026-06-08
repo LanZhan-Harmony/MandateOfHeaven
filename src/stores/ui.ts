@@ -1,3 +1,4 @@
+import { getCurrentWindow } from "@tauri-apps/api/window";
 import { defineStore } from "pinia";
 import { ref, watch } from "vue";
 import i18n from "../langs";
@@ -18,9 +19,35 @@ export const useUIStore = defineStore("ui", () => {
   const playbackRateIndex = ref(storedSpeedIndex !== null ? parseInt(storedSpeedIndex, 10) : 1);
   watch(playbackRateIndex, (val) => localStorage.setItem("playbackRateIndex", val.toString()));
 
+  // ── 全屏模式 ──────────────────────────────────────────────────────────
+  const storedFullscreen = localStorage.getItem("fullscreen");
+  const fullscreen = ref(storedFullscreen !== null ? storedFullscreen === "true" : true);
+
+  watch(fullscreen, (val) => localStorage.setItem("fullscreen", val.toString()));
+
+  /** 应用全屏状态 */
+  async function applyFullscreen(enabled: boolean) {
+    if ((window as any).__TAURI_INTERNALS__) {
+      await getCurrentWindow().setFullscreen(enabled);
+    } else if (enabled) {
+      await document.documentElement.requestFullscreen().catch(() => {});
+    } else if (document.fullscreenElement) {
+      await document.exitFullscreen();
+    }
+    fullscreen.value = enabled;
+  }
+
+  /** 切换全屏状态 */
+  async function toggleFullscreen() {
+    await applyFullscreen(!fullscreen.value);
+  }
+
   return {
     locale,
     allLocales,
     playbackRateIndex,
+    fullscreen,
+    applyFullscreen,
+    toggleFullscreen,
   };
 });

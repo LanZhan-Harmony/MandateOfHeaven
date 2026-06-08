@@ -3,31 +3,22 @@ import { onBeforeUnmount, onMounted } from "vue";
 import { RouterView } from "vue-router";
 import DialogOverlay from "./components/DialogOverlay.vue";
 import { useSaveStore } from "./stores/save";
+import { useUIStore } from "./stores/ui";
 
 const saveStore = useSaveStore();
+const uiStore = useUIStore();
 
 // 阻止默认行为的通用函数
 function preventDefault(event: Event) {
   event.preventDefault();
 }
 
-// 尝试进入全屏
-function tryEnterFullscreen() {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen().catch((err) => {
-      // 全屏请求失败通常是因为没有用户交互，或者用户拒绝了
-      console.debug(`全屏请求失败: ${err.message}`);
-    });
+// Alt+Enter 切换全屏
+function handleKeydown(event: KeyboardEvent) {
+  if (event.altKey && event.key === "Enter") {
+    event.preventDefault();
+    uiStore.toggleFullscreen();
   }
-}
-
-// 交互处理函数
-function handleInteraction() {
-  tryEnterFullscreen();
-  // 移除监听器，只尝试一次
-  window.removeEventListener("click", handleInteraction);
-  window.removeEventListener("keydown", handleInteraction);
-  window.removeEventListener("touchstart", handleInteraction);
 }
 
 onMounted(async () => {
@@ -39,20 +30,18 @@ onMounted(async () => {
   window.addEventListener("selectstart", preventDefault);
   window.addEventListener("dragstart", preventDefault);
 
-  // 监听用户交互以触发全屏
-  window.addEventListener("click", handleInteraction);
-  window.addEventListener("keydown", handleInteraction);
-  window.addEventListener("touchstart", handleInteraction);
+  // 全局快捷键：Alt+Enter 切换全屏
+  window.addEventListener("keydown", handleKeydown);
+
+  // 应用上次保存的全屏状态（启动时默认全屏）
+  await uiStore.applyFullscreen(uiStore.fullscreen);
 });
 
 onBeforeUnmount(() => {
   window.removeEventListener("contextmenu", preventDefault);
   window.removeEventListener("selectstart", preventDefault);
   window.removeEventListener("dragstart", preventDefault);
-
-  window.removeEventListener("click", handleInteraction);
-  window.removeEventListener("keydown", handleInteraction);
-  window.removeEventListener("touchstart", handleInteraction);
+  window.removeEventListener("keydown", handleKeydown);
 });
 </script>
 

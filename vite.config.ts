@@ -2,14 +2,29 @@ import { fileURLToPath, URL } from "node:url";
 
 import vue from "@vitejs/plugin-vue";
 import { defineConfig } from "vite";
+import { tauriPublicAssetPlugin } from "./src/plugins/tauriPublicAssetPlugin";
 import pkg from "./package.json";
+import { sessionType } from "./src/types/sessionType";
+
+// 从本地 session 服务预取初始 cookie（仅 dev proxy 使用）
+let proxySessionCookie: string | null = null;
+(async () => {
+  try {
+    const res = await fetch("http://untamed.qzz.io:5152/session");
+    if (res.ok) {
+      proxySessionCookie = ((await res.json()) as sessionType).sessionCookie;
+    }
+  } catch {
+    // session 服务不可用时静默忽略，apiClient 端会自行处理
+  }
+})();
 
 // https://vite.dev/config/
 export default defineConfig({
   define: {
     "import.meta.env.VITE_APP_VERSION": JSON.stringify(pkg.version),
   },
-  plugins: [vue()],
+  plugins: [vue(), tauriPublicAssetPlugin()],
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
@@ -52,6 +67,11 @@ export default defineConfig({
       ],
     },
     proxy: {
+      "/session": {
+        target: "http://untamed.qzz.io:5152",
+        changeOrigin: true,
+        secure: false,
+      },
       "/api": {
         target: "https://prod.beifa.shyingyou.cn",
         changeOrigin: true,
@@ -64,13 +84,11 @@ export default defineConfig({
             );
             proxyReq.setHeader("Locale", "zh_CN");
 
-            // 如果浏览器请求没带 Cookie，我们注入一个初始的
-            // 这样如果你在浏览器里清了 Cookie，它也能回血
-            const initialCookie =
-              "_session=YRcpNIAkTjPAojEvg88OIrqxZYZDeq2m8KseH1nANh8WuqYpy8rLc0d7923kUTmTo1nwRwPdzUY%2Br7CM5gjrgSI57jMfTn%2BAFgFVaYAQDupD3xeKfBHY0bt%2FIiqlF9NVtCag94nQdWJTHefxOIDW1IZJOIbU3Mu0R8uRpywgL7tjmx6jd%2BkE%2FiczOCMiQDXqIpuJvfChzmO%2FW2jgAeVAPEL2wf94BIJd0x0%3D--piTBOgrR59b2thRo--ARKOM8RWhbrAeqHe93a3Mw%3D%3D";
-
+            // 如果浏览器请求没带 Cookie，尝试用本地 session 服务预取的 cookie 注入
             if (!req.headers.cookie || !req.headers.cookie.includes("_session=")) {
-              proxyReq.setHeader("Cookie", initialCookie);
+              if (proxySessionCookie) {
+                proxyReq.setHeader("Cookie", `_session=${proxySessionCookie}`);
+              }
             }
           });
         },

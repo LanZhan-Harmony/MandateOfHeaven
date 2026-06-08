@@ -9,7 +9,12 @@ const mediaStore = useMediaStore();
 const { mainVolume, playerVolume, bgmVolume, effectVolume } = storeToRefs(mediaStore);
 
 const uiStore = useUIStore();
-const { locale } = storeToRefs(uiStore);
+const { locale, fullscreen } = storeToRefs(uiStore);
+
+function handleFullscreenChange(event: Event) {
+  const value = (event.target as HTMLSelectElement).value;
+  uiStore.applyFullscreen(value === "true");
+}
 </script>
 
 <template>
@@ -73,6 +78,19 @@ const { locale } = storeToRefs(uiStore);
                 <option value="ja-JP">日本語</option>
                 <option value="ko-KR">한국어</option>
                 <option value="ru-RU">Русский</option>
+              </select>
+            </td>
+          </tr>
+
+          <!-- 全屏模式 -->
+          <tr>
+            <td>
+              <label class="fullscreen-label">{{ $t("setting.fullscreen") }}</label>
+            </td>
+            <td>
+              <select :value="fullscreen" @change="handleFullscreenChange">
+                <option :value="true">{{ $t("setting.fullscreenOn") }}</option>
+                <option :value="false">{{ $t("setting.fullscreenOff") }}</option>
               </select>
             </td>
           </tr>

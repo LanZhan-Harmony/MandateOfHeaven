@@ -51,10 +51,13 @@ pub fn run() {
 
   tauri::Builder::default()
     .plugin(tauri_plugin_http::init())
+    .plugin(tauri_plugin_shell::init())
     .invoke_handler(tauri::generate_handler![exit_app])
     .register_uri_scheme_protocol("stream", move |ctx, request| {
       let uri_path = request.uri().path();
-      let path = uri_path.to_string();
+      let path = percent_encoding::percent_decode_str(uri_path)
+        .decode_utf8_lossy()
+        .to_string();
 
       // ── 移动端 ────────────────────────────────────────────────────────────
       // 媒体资产不再嵌入 APK native binary（否则链接器 OOM）。
@@ -112,11 +115,12 @@ pub fn run() {
           let bytes = Arc::new(data);
           let mime = mime_from_ext(&path).to_string();
 
-          // IO 完成后再短暂持锁写入缓存
-          {
+          // 仅缓存小文件（图片/字体/字幕等 < 2MB）；
+          // 大文件（视频/音频）不缓存以避免内存膨胀。
+          if bytes.len() < 2 * 1024 * 1024 {
             let mut cache = asset_cache.lock().unwrap();
-            // 限制缓存大小（最多保留 3 个文件，与前端预加载数量一致）
-            while cache.len() >= 3 {
+            // 限制缓存条目数，防止内存无限增长
+            while cache.len() >= 50 {
               if let Some(key) = cache.keys().next().cloned() {
                 cache.remove(&key);
               }

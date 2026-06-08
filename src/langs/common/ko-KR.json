@@ -23,7 +23,10 @@
         "videoVolume": "영상 음량",
         "bgmVolume": "BGM 음량",
         "effectsVolume": "효과음 음량",
-        "language": "인터페이스 언어"
+        "language": "인터페이스 언어",
+        "fullscreen": "화면 모드",
+        "fullscreenOn": "전체 화면",
+        "fullscreenOff": "창 모드"
     },
     "chapter": {
         "enterChapter": "챕터 입장"
@@ -55,7 +58,7 @@
         "creators": "주요 제작진",
         "productionUnits": "제작 단위",
         "castList": "배우 목록",
-        "developer": "웹 및 모바일 제작",
+        "developer": "서드파티 클라이언트 개발",
         "viewProject": "오픈소스 프로젝트 보기"
     },
     "dialog": {

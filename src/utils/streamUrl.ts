@@ -9,16 +9,29 @@ export function toStreamUrl(path: string): string {
     return path;
   }
 
+  let cleanPath = path;
+  if (path.startsWith("http://stream.localhost")) {
+    cleanPath = path.substring("http://stream.localhost".length);
+  } else if (path.startsWith("stream://localhost")) {
+    cleanPath = path.substring("stream://localhost".length);
+  } else if (path.startsWith("http://127.0.0.1:18765")) {
+    cleanPath = path.substring("http://127.0.0.1:18765".length);
+  }
+
+  if (cleanPath && !cleanPath.startsWith("/")) {
+    cleanPath = "/" + cleanPath;
+  }
+
   // Android: 通过本地 HTTP 服务器提供视频/音频，彻底绕过 shouldInterceptRequest 对大文件的限制
   if (/android/i.test(navigator.userAgent)) {
-    return `http://127.0.0.1:18765${path}`;
+    return `http://127.0.0.1:18765${cleanPath}`;
   }
 
   // Desktop Tauri production:
   // - Windows: http://<scheme>.localhost/
   // - macOS / Linux: <scheme>://localhost/
   if (window.location.protocol === "http:" || window.location.protocol === "https:") {
-    return `http://stream.localhost${path}`;
+    return `http://stream.localhost${cleanPath}`;
   }
-  return `stream://localhost${path}`;
+  return `stream://localhost${cleanPath}`;
 }

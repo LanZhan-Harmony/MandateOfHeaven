@@ -139,7 +139,7 @@ watch(isLoopVideo, (isLoop) => {
 });
 
 // 控制条自动隐藏定时器
-let controlsHideTimer: number | null = null;
+let controlsHideTimer: NodeJS.Timeout | null = null;
 
 /**
  * 启动控制条自动隐藏倒计时
